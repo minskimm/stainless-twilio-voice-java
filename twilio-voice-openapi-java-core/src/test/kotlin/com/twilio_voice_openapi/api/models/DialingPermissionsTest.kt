@@ -6,18 +6,18 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
-class VoiceDialingPermissionsTest {
+class DialingPermissionsTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun createVoiceDialingPermissions() {
-        val voiceDialingPermissions =
-            VoiceDialingPermissions.builder()
+    fun createDialingPermissions() {
+        val dialingPermissions =
+            DialingPermissions.builder()
                 .dialingPermissionsInheritance(true)
                 .url("https://example.com")
                 .build()
-        assertThat(voiceDialingPermissions).isNotNull
-        assertThat(voiceDialingPermissions.dialingPermissionsInheritance()).contains(true)
-        assertThat(voiceDialingPermissions.url()).contains("https://example.com")
+        assertThat(dialingPermissions).isNotNull
+        assertThat(dialingPermissions.dialingPermissionsInheritance()).contains(true)
+        assertThat(dialingPermissions.url()).contains("https://example.com")
     }
 }

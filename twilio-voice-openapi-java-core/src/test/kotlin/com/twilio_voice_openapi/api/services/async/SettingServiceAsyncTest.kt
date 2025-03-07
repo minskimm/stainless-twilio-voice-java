@@ -23,10 +23,10 @@ class SettingServiceAsyncTest {
                 .build()
         val settingServiceAsync = client.settings()
 
-        val voiceDialingPermissionsFuture = settingServiceAsync.retrieve()
+        val dialingPermissionsFuture = settingServiceAsync.retrieve()
 
-        val voiceDialingPermissions = voiceDialingPermissionsFuture.get()
-        voiceDialingPermissions.validate()
+        val dialingPermissions = dialingPermissionsFuture.get()
+        dialingPermissions.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
@@ -40,12 +40,12 @@ class SettingServiceAsyncTest {
                 .build()
         val settingServiceAsync = client.settings()
 
-        val voiceDialingPermissionsFuture =
+        val dialingPermissionsFuture =
             settingServiceAsync.update(
                 SettingUpdateParams.builder().dialingPermissionsInheritance(true).build()
             )
 
-        val voiceDialingPermissions = voiceDialingPermissionsFuture.get()
-        voiceDialingPermissions.validate()
+        val dialingPermissions = dialingPermissionsFuture.get()
+        dialingPermissions.validate()
     }
 }

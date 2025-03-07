@@ -7,9 +7,9 @@ package com.twilio_voice_openapi.api.services.blocking
 import com.google.errorprone.annotations.MustBeClosed
 import com.twilio_voice_openapi.api.core.RequestOptions
 import com.twilio_voice_openapi.api.core.http.HttpResponseFor
+import com.twilio_voice_openapi.api.models.DialingPermissions
 import com.twilio_voice_openapi.api.models.SettingRetrieveParams
 import com.twilio_voice_openapi.api.models.SettingUpdateParams
-import com.twilio_voice_openapi.api.models.VoiceDialingPermissions
 
 interface SettingService {
 
@@ -23,10 +23,10 @@ interface SettingService {
     fun retrieve(
         params: SettingRetrieveParams = SettingRetrieveParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
-    ): VoiceDialingPermissions
+    ): DialingPermissions
 
     /** Retrieve voice dialing permissions inheritance for the sub-account */
-    fun retrieve(requestOptions: RequestOptions): VoiceDialingPermissions =
+    fun retrieve(requestOptions: RequestOptions): DialingPermissions =
         retrieve(SettingRetrieveParams.none(), requestOptions)
 
     /** Update voice dialing permissions inheritance for the sub-account */
@@ -34,10 +34,10 @@ interface SettingService {
     fun update(
         params: SettingUpdateParams = SettingUpdateParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
-    ): VoiceDialingPermissions
+    ): DialingPermissions
 
     /** Update voice dialing permissions inheritance for the sub-account */
-    fun update(requestOptions: RequestOptions): VoiceDialingPermissions =
+    fun update(requestOptions: RequestOptions): DialingPermissions =
         update(SettingUpdateParams.none(), requestOptions)
 
     /** A view of [SettingService] that provides access to raw HTTP responses for each method. */
@@ -52,14 +52,14 @@ interface SettingService {
         fun retrieve(
             params: SettingRetrieveParams = SettingRetrieveParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<VoiceDialingPermissions>
+        ): HttpResponseFor<DialingPermissions>
 
         /**
          * Returns a raw HTTP response for `get /v1/Settings`, but is otherwise the same as
          * [SettingService.retrieve].
          */
         @MustBeClosed
-        fun retrieve(requestOptions: RequestOptions): HttpResponseFor<VoiceDialingPermissions> =
+        fun retrieve(requestOptions: RequestOptions): HttpResponseFor<DialingPermissions> =
             retrieve(SettingRetrieveParams.none(), requestOptions)
 
         /**
@@ -71,14 +71,14 @@ interface SettingService {
         fun update(
             params: SettingUpdateParams = SettingUpdateParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<VoiceDialingPermissions>
+        ): HttpResponseFor<DialingPermissions>
 
         /**
          * Returns a raw HTTP response for `post /v1/Settings`, but is otherwise the same as
          * [SettingService.update].
          */
         @MustBeClosed
-        fun update(requestOptions: RequestOptions): HttpResponseFor<VoiceDialingPermissions> =
+        fun update(requestOptions: RequestOptions): HttpResponseFor<DialingPermissions> =
             update(SettingUpdateParams.none(), requestOptions)
     }
 }
