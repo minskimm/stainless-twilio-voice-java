@@ -15,9 +15,9 @@ import com.twilio_voice_openapi.api.core.http.json
 import com.twilio_voice_openapi.api.core.http.parseable
 import com.twilio_voice_openapi.api.core.prepare
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIError
+import com.twilio_voice_openapi.api.models.DialingPermissions
 import com.twilio_voice_openapi.api.models.SettingRetrieveParams
 import com.twilio_voice_openapi.api.models.SettingUpdateParams
-import com.twilio_voice_openapi.api.models.VoiceDialingPermissions
 
 class SettingServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     SettingService {
@@ -31,14 +31,14 @@ class SettingServiceImpl internal constructor(private val clientOptions: ClientO
     override fun retrieve(
         params: SettingRetrieveParams,
         requestOptions: RequestOptions,
-    ): VoiceDialingPermissions =
+    ): DialingPermissions =
         // get /v1/Settings
         withRawResponse().retrieve(params, requestOptions).parse()
 
     override fun update(
         params: SettingUpdateParams,
         requestOptions: RequestOptions,
-    ): VoiceDialingPermissions =
+    ): DialingPermissions =
         // post /v1/Settings
         withRawResponse().update(params, requestOptions).parse()
 
@@ -48,14 +48,13 @@ class SettingServiceImpl internal constructor(private val clientOptions: ClientO
         private val errorHandler: Handler<TwilioVoiceOpenAPIError> =
             errorHandler(clientOptions.jsonMapper)
 
-        private val retrieveHandler: Handler<VoiceDialingPermissions> =
-            jsonHandler<VoiceDialingPermissions>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
+        private val retrieveHandler: Handler<DialingPermissions> =
+            jsonHandler<DialingPermissions>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
         override fun retrieve(
             params: SettingRetrieveParams,
             requestOptions: RequestOptions,
-        ): HttpResponseFor<VoiceDialingPermissions> {
+        ): HttpResponseFor<DialingPermissions> {
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -75,14 +74,13 @@ class SettingServiceImpl internal constructor(private val clientOptions: ClientO
             }
         }
 
-        private val updateHandler: Handler<VoiceDialingPermissions> =
-            jsonHandler<VoiceDialingPermissions>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
+        private val updateHandler: Handler<DialingPermissions> =
+            jsonHandler<DialingPermissions>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
         override fun update(
             params: SettingUpdateParams,
             requestOptions: RequestOptions,
-        ): HttpResponseFor<VoiceDialingPermissions> {
+        ): HttpResponseFor<DialingPermissions> {
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
