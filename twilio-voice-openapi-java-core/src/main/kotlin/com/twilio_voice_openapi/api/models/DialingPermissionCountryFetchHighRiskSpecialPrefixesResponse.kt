@@ -16,6 +16,7 @@ import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
 import java.util.Objects
 import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 @NoAutoDetect
 class DialingPermissionCountryFetchHighRiskSpecialPrefixesResponse
@@ -205,7 +206,7 @@ private constructor(
              * `+1510720` written like `+1(510) 720` matches all numbers inclusive from `+1(510)
              * 720-0000` to `+1(510) 720-9999`.
              */
-            fun prefix(prefix: Optional<String>) = prefix(prefix.orElse(null))
+            fun prefix(prefix: Optional<String>) = prefix(prefix.getOrNull())
 
             /**
              * A prefix is a contiguous number range for a block of E.164 numbers that includes the
@@ -380,7 +381,7 @@ private constructor(
 
             fun nextPageUrl(nextPageUrl: String?) = nextPageUrl(JsonField.ofNullable(nextPageUrl))
 
-            fun nextPageUrl(nextPageUrl: Optional<String>) = nextPageUrl(nextPageUrl.orElse(null))
+            fun nextPageUrl(nextPageUrl: Optional<String>) = nextPageUrl(nextPageUrl.getOrNull())
 
             fun nextPageUrl(nextPageUrl: JsonField<String>) = apply {
                 this.nextPageUrl = nextPageUrl
@@ -398,7 +399,7 @@ private constructor(
                 previousPageUrl(JsonField.ofNullable(previousPageUrl))
 
             fun previousPageUrl(previousPageUrl: Optional<String>) =
-                previousPageUrl(previousPageUrl.orElse(null))
+                previousPageUrl(previousPageUrl.getOrNull())
 
             fun previousPageUrl(previousPageUrl: JsonField<String>) = apply {
                 this.previousPageUrl = previousPageUrl

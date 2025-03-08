@@ -8,6 +8,7 @@ import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
 import java.util.Objects
 import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 /** Retrieve all voice dialing country permissions for this account */
 class DialingPermissionCountryListParams
@@ -151,7 +152,7 @@ private constructor(
         fun continent(continent: String?) = apply { this.continent = continent }
 
         /** Filter to retrieve the country permissions by specifying the continent */
-        fun continent(continent: Optional<String>) = continent(continent.orElse(null))
+        fun continent(continent: Optional<String>) = continent(continent.getOrNull())
 
         /**
          * Filter the results by specified
@@ -163,7 +164,7 @@ private constructor(
          * Filter the results by specified
          * [country codes](https://www.itu.int/itudoc/itu-t/ob-lists/icc/e164_763.html)
          */
-        fun countryCode(countryCode: Optional<String>) = countryCode(countryCode.orElse(null))
+        fun countryCode(countryCode: Optional<String>) = countryCode(countryCode.getOrNull())
 
         /**
          * Filter to retrieve the country permissions with dialing to high-risk special service
@@ -184,9 +185,8 @@ private constructor(
          * Filter to retrieve the country permissions with dialing to high-risk special service
          * numbers enabled. Can be: `true` or `false`
          */
-        @Suppress("USELESS_CAST") // See https://youtrack.jetbrains.com/issue/KT-74228
         fun highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled: Optional<Boolean>) =
-            highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled.orElse(null) as Boolean?)
+            highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled.getOrNull())
 
         /**
          * Filter to retrieve the country permissions with dialing to high-risk
@@ -210,11 +210,8 @@ private constructor(
          * [toll fraud](https://www.twilio.com/blog/how-to-protect-your-account-from-toll-fraud-with-voice-dialing-geo-permissions-html)
          * numbers enabled. Can be: `true` or `false`.
          */
-        @Suppress("USELESS_CAST") // See https://youtrack.jetbrains.com/issue/KT-74228
         fun highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled: Optional<Boolean>) =
-            highRiskTollfraudNumbersEnabled(
-                highRiskTollfraudNumbersEnabled.orElse(null) as Boolean?
-            )
+            highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled.getOrNull())
 
         /**
          * Filter to retrieve the country permissions by specifying the
@@ -226,7 +223,7 @@ private constructor(
          * Filter to retrieve the country permissions by specifying the
          * [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
          */
-        fun isoCode(isoCode: Optional<String>) = isoCode(isoCode.orElse(null))
+        fun isoCode(isoCode: Optional<String>) = isoCode(isoCode.getOrNull())
 
         /**
          * Filter to retrieve the country permissions with dialing to low-risk numbers enabled. Can
@@ -247,9 +244,8 @@ private constructor(
          * Filter to retrieve the country permissions with dialing to low-risk numbers enabled. Can
          * be: `true` or `false`.
          */
-        @Suppress("USELESS_CAST") // See https://youtrack.jetbrains.com/issue/KT-74228
         fun lowRiskNumbersEnabled(lowRiskNumbersEnabled: Optional<Boolean>) =
-            lowRiskNumbersEnabled(lowRiskNumbersEnabled.orElse(null) as Boolean?)
+            lowRiskNumbersEnabled(lowRiskNumbersEnabled.getOrNull())
 
         /** The page index. This value is simply for client state. */
         fun page(page: Long?) = apply { this.page = page }
@@ -258,8 +254,7 @@ private constructor(
         fun page(page: Long) = page(page as Long?)
 
         /** The page index. This value is simply for client state. */
-        @Suppress("USELESS_CAST") // See https://youtrack.jetbrains.com/issue/KT-74228
-        fun page(page: Optional<Long>) = page(page.orElse(null) as Long?)
+        fun page(page: Optional<Long>) = page(page.getOrNull())
 
         /**
          * How many resources to return in each list page. The default is 50, and the maximum
@@ -277,14 +272,13 @@ private constructor(
          * How many resources to return in each list page. The default is 50, and the maximum
          * is 1000.
          */
-        @Suppress("USELESS_CAST") // See https://youtrack.jetbrains.com/issue/KT-74228
-        fun pageSize(pageSize: Optional<Long>) = pageSize(pageSize.orElse(null) as Long?)
+        fun pageSize(pageSize: Optional<Long>) = pageSize(pageSize.getOrNull())
 
         /** The page token. This is provided by the API. */
         fun pageToken(pageToken: String?) = apply { this.pageToken = pageToken }
 
         /** The page token. This is provided by the API. */
-        fun pageToken(pageToken: Optional<String>) = pageToken(pageToken.orElse(null))
+        fun pageToken(pageToken: Optional<String>) = pageToken(pageToken.getOrNull())
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()

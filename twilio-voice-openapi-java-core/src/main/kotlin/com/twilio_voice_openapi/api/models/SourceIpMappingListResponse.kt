@@ -16,6 +16,7 @@ import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
 import java.util.Objects
 import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 @NoAutoDetect
 class SourceIpMappingListResponse
@@ -250,7 +251,7 @@ private constructor(
 
             fun nextPageUrl(nextPageUrl: String?) = nextPageUrl(JsonField.ofNullable(nextPageUrl))
 
-            fun nextPageUrl(nextPageUrl: Optional<String>) = nextPageUrl(nextPageUrl.orElse(null))
+            fun nextPageUrl(nextPageUrl: Optional<String>) = nextPageUrl(nextPageUrl.getOrNull())
 
             fun nextPageUrl(nextPageUrl: JsonField<String>) = apply {
                 this.nextPageUrl = nextPageUrl
@@ -268,7 +269,7 @@ private constructor(
                 previousPageUrl(JsonField.ofNullable(previousPageUrl))
 
             fun previousPageUrl(previousPageUrl: Optional<String>) =
-                previousPageUrl(previousPageUrl.orElse(null))
+                previousPageUrl(previousPageUrl.getOrNull())
 
             fun previousPageUrl(previousPageUrl: JsonField<String>) = apply {
                 this.previousPageUrl = previousPageUrl

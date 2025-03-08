@@ -16,6 +16,7 @@ import com.twilio_voice_openapi.api.core.toImmutable
 import java.time.OffsetDateTime
 import java.util.Objects
 import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 @NoAutoDetect
 class ConnectionPolicy
@@ -167,7 +168,7 @@ private constructor(
          * The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the
          * Connection Policy resource.
          */
-        fun accountSid(accountSid: Optional<String>) = accountSid(accountSid.orElse(null))
+        fun accountSid(accountSid: Optional<String>) = accountSid(accountSid.getOrNull())
 
         /**
          * The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the
@@ -187,7 +188,7 @@ private constructor(
          * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
          */
         fun dateCreated(dateCreated: Optional<OffsetDateTime>) =
-            dateCreated(dateCreated.orElse(null))
+            dateCreated(dateCreated.getOrNull())
 
         /**
          * The date and time in GMT when the resource was created specified in
@@ -209,7 +210,7 @@ private constructor(
          * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
          */
         fun dateUpdated(dateUpdated: Optional<OffsetDateTime>) =
-            dateUpdated(dateUpdated.orElse(null))
+            dateUpdated(dateUpdated.getOrNull())
 
         /**
          * The date and time in GMT when the resource was last updated specified in
@@ -223,7 +224,7 @@ private constructor(
         fun friendlyName(friendlyName: String?) = friendlyName(JsonField.ofNullable(friendlyName))
 
         /** The string that you assigned to describe the resource. */
-        fun friendlyName(friendlyName: Optional<String>) = friendlyName(friendlyName.orElse(null))
+        fun friendlyName(friendlyName: Optional<String>) = friendlyName(friendlyName.getOrNull())
 
         /** The string that you assigned to describe the resource. */
         fun friendlyName(friendlyName: JsonField<String>) = apply {
@@ -237,7 +238,7 @@ private constructor(
         fun sid(sid: String?) = sid(JsonField.ofNullable(sid))
 
         /** The unique string that we created to identify the Connection Policy resource. */
-        fun sid(sid: Optional<String>) = sid(sid.orElse(null))
+        fun sid(sid: Optional<String>) = sid(sid.getOrNull())
 
         /** The unique string that we created to identify the Connection Policy resource. */
         fun sid(sid: JsonField<String>) = apply { this.sid = sid }
@@ -246,7 +247,7 @@ private constructor(
         fun url(url: String?) = url(JsonField.ofNullable(url))
 
         /** The absolute URL of the resource. */
-        fun url(url: Optional<String>) = url(url.orElse(null))
+        fun url(url: Optional<String>) = url(url.getOrNull())
 
         /** The absolute URL of the resource. */
         fun url(url: JsonField<String>) = apply { this.url = url }

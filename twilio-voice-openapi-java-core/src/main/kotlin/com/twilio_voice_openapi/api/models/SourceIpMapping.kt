@@ -16,6 +16,7 @@ import com.twilio_voice_openapi.api.core.toImmutable
 import java.time.OffsetDateTime
 import java.util.Objects
 import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 @NoAutoDetect
 class SourceIpMapping
@@ -160,7 +161,7 @@ private constructor(
          * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
          */
         fun dateCreated(dateCreated: Optional<OffsetDateTime>) =
-            dateCreated(dateCreated.orElse(null))
+            dateCreated(dateCreated.getOrNull())
 
         /**
          * The date and time in GMT that the resource was created specified in
@@ -182,7 +183,7 @@ private constructor(
          * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
          */
         fun dateUpdated(dateUpdated: Optional<OffsetDateTime>) =
-            dateUpdated(dateUpdated.orElse(null))
+            dateUpdated(dateUpdated.getOrNull())
 
         /**
          * The date and time in GMT that the resource was last updated specified in
@@ -200,7 +201,7 @@ private constructor(
         /**
          * The Twilio-provided string that uniquely identifies the IP Record resource to map from.
          */
-        fun ipRecordSid(ipRecordSid: Optional<String>) = ipRecordSid(ipRecordSid.orElse(null))
+        fun ipRecordSid(ipRecordSid: Optional<String>) = ipRecordSid(ipRecordSid.getOrNull())
 
         /**
          * The Twilio-provided string that uniquely identifies the IP Record resource to map from.
@@ -211,7 +212,7 @@ private constructor(
         fun sid(sid: String?) = sid(JsonField.ofNullable(sid))
 
         /** The unique string that we created to identify the IP Record resource. */
-        fun sid(sid: Optional<String>) = sid(sid.orElse(null))
+        fun sid(sid: Optional<String>) = sid(sid.getOrNull())
 
         /** The unique string that we created to identify the IP Record resource. */
         fun sid(sid: JsonField<String>) = apply { this.sid = sid }
@@ -220,7 +221,7 @@ private constructor(
         fun sipDomainSid(sipDomainSid: String?) = sipDomainSid(JsonField.ofNullable(sipDomainSid))
 
         /** The SID of the SIP Domain that the IP Record is mapped to. */
-        fun sipDomainSid(sipDomainSid: Optional<String>) = sipDomainSid(sipDomainSid.orElse(null))
+        fun sipDomainSid(sipDomainSid: Optional<String>) = sipDomainSid(sipDomainSid.getOrNull())
 
         /** The SID of the SIP Domain that the IP Record is mapped to. */
         fun sipDomainSid(sipDomainSid: JsonField<String>) = apply {
@@ -231,7 +232,7 @@ private constructor(
         fun url(url: String?) = url(JsonField.ofNullable(url))
 
         /** The absolute URL of the resource. */
-        fun url(url: Optional<String>) = url(url.orElse(null))
+        fun url(url: Optional<String>) = url(url.getOrNull())
 
         /** The absolute URL of the resource. */
         fun url(url: JsonField<String>) = apply { this.url = url }

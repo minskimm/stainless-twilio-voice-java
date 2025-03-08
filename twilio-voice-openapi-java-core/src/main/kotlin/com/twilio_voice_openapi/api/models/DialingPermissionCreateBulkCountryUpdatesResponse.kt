@@ -15,6 +15,7 @@ import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
 import java.util.Objects
 import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 @NoAutoDetect
 class DialingPermissionCreateBulkCountryUpdatesResponse
@@ -122,7 +123,7 @@ private constructor(
          * "high_risk_tollfraud_numbers_enabled": "false" } ]`
          */
         fun updateRequest(updateRequest: Optional<String>) =
-            updateRequest(updateRequest.orElse(null))
+            updateRequest(updateRequest.getOrNull())
 
         /**
          * A bulk update request to change voice dialing country permissions stored as a
