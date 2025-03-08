@@ -9,6 +9,7 @@ import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
 import java.util.Objects
 import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 class ConnectionPolicyTargetListParams
 private constructor(
@@ -105,8 +106,7 @@ private constructor(
         fun page(page: Long) = page(page as Long?)
 
         /** The page index. This value is simply for client state. */
-        @Suppress("USELESS_CAST") // See https://youtrack.jetbrains.com/issue/KT-74228
-        fun page(page: Optional<Long>) = page(page.orElse(null) as Long?)
+        fun page(page: Optional<Long>) = page(page.getOrNull())
 
         /**
          * How many resources to return in each list page. The default is 50, and the maximum
@@ -124,14 +124,13 @@ private constructor(
          * How many resources to return in each list page. The default is 50, and the maximum
          * is 1000.
          */
-        @Suppress("USELESS_CAST") // See https://youtrack.jetbrains.com/issue/KT-74228
-        fun pageSize(pageSize: Optional<Long>) = pageSize(pageSize.orElse(null) as Long?)
+        fun pageSize(pageSize: Optional<Long>) = pageSize(pageSize.getOrNull())
 
         /** The page token. This is provided by the API. */
         fun pageToken(pageToken: String?) = apply { this.pageToken = pageToken }
 
         /** The page token. This is provided by the API. */
-        fun pageToken(pageToken: Optional<String>) = pageToken(pageToken.orElse(null))
+        fun pageToken(pageToken: Optional<String>) = pageToken(pageToken.getOrNull())
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()

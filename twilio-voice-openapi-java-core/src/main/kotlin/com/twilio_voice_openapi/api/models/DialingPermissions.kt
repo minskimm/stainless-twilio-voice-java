@@ -15,6 +15,7 @@ import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
 import java.util.Objects
 import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 @NoAutoDetect
 class DialingPermissions
@@ -106,9 +107,8 @@ private constructor(
          * `true` if the sub-account will inherit voice dialing permissions from the Master Project;
          * otherwise `false`.
          */
-        @Suppress("USELESS_CAST") // See https://youtrack.jetbrains.com/issue/KT-74228
         fun dialingPermissionsInheritance(dialingPermissionsInheritance: Optional<Boolean>) =
-            dialingPermissionsInheritance(dialingPermissionsInheritance.orElse(null) as Boolean?)
+            dialingPermissionsInheritance(dialingPermissionsInheritance.getOrNull())
 
         /**
          * `true` if the sub-account will inherit voice dialing permissions from the Master Project;
@@ -123,7 +123,7 @@ private constructor(
         fun url(url: String?) = url(JsonField.ofNullable(url))
 
         /** The absolute URL of this resource. */
-        fun url(url: Optional<String>) = url(url.orElse(null))
+        fun url(url: Optional<String>) = url(url.getOrNull())
 
         /** The absolute URL of this resource. */
         fun url(url: JsonField<String>) = apply { this.url = url }

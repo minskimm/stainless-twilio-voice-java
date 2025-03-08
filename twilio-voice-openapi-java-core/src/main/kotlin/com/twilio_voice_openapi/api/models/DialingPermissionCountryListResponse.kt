@@ -16,6 +16,7 @@ import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
 import java.util.Objects
 import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 @NoAutoDetect
 class DialingPermissionCountryListResponse
@@ -314,7 +315,7 @@ private constructor(
             fun continent(continent: String?) = continent(JsonField.ofNullable(continent))
 
             /** The name of the continent in which the country is located. */
-            fun continent(continent: Optional<String>) = continent(continent.orElse(null))
+            fun continent(continent: Optional<String>) = continent(continent.getOrNull())
 
             /** The name of the continent in which the country is located. */
             fun continent(continent: JsonField<String>) = apply { this.continent = continent }
@@ -331,7 +332,7 @@ private constructor(
              * [country codes(s)](https://www.itu.int/itudoc/itu-t/ob-lists/icc/e164_763.html)
              */
             fun countryCodes(countryCodes: Optional<List<String>>) =
-                countryCodes(countryCodes.orElse(null))
+                countryCodes(countryCodes.getOrNull())
 
             /**
              * The E.164 assigned
@@ -373,11 +374,8 @@ private constructor(
              * include number ranges allocated by the country and include premium numbers, special
              * services, shared cost, and others
              */
-            @Suppress("USELESS_CAST") // See https://youtrack.jetbrains.com/issue/KT-74228
             fun highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled: Optional<Boolean>) =
-                highRiskSpecialNumbersEnabled(
-                    highRiskSpecialNumbersEnabled.orElse(null) as Boolean?
-                )
+                highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled.getOrNull())
 
             /**
              * Whether dialing to high-risk special services numbers is enabled. These prefixes
@@ -427,13 +425,9 @@ private constructor(
              * calls on our network. These prefixes are not available for download and are updated
              * frequently
              */
-            @Suppress("USELESS_CAST") // See https://youtrack.jetbrains.com/issue/KT-74228
             fun highRiskTollfraudNumbersEnabled(
                 highRiskTollfraudNumbersEnabled: Optional<Boolean>
-            ) =
-                highRiskTollfraudNumbersEnabled(
-                    highRiskTollfraudNumbersEnabled.orElse(null) as Boolean?
-                )
+            ) = highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled.getOrNull())
 
             /**
              * Whether dialing to high-risk
@@ -453,7 +447,7 @@ private constructor(
             fun isoCode(isoCode: String?) = isoCode(JsonField.ofNullable(isoCode))
 
             /** The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). */
-            fun isoCode(isoCode: Optional<String>) = isoCode(isoCode.orElse(null))
+            fun isoCode(isoCode: Optional<String>) = isoCode(isoCode.getOrNull())
 
             /** The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). */
             fun isoCode(isoCode: JsonField<String>) = apply { this.isoCode = isoCode }
@@ -470,9 +464,8 @@ private constructor(
                 lowRiskNumbersEnabled(lowRiskNumbersEnabled as Boolean?)
 
             /** Whether dialing to low-risk numbers is enabled. */
-            @Suppress("USELESS_CAST") // See https://youtrack.jetbrains.com/issue/KT-74228
             fun lowRiskNumbersEnabled(lowRiskNumbersEnabled: Optional<Boolean>) =
-                lowRiskNumbersEnabled(lowRiskNumbersEnabled.orElse(null) as Boolean?)
+                lowRiskNumbersEnabled(lowRiskNumbersEnabled.getOrNull())
 
             /** Whether dialing to low-risk numbers is enabled. */
             fun lowRiskNumbersEnabled(lowRiskNumbersEnabled: JsonField<Boolean>) = apply {
@@ -483,7 +476,7 @@ private constructor(
             fun name(name: String?) = name(JsonField.ofNullable(name))
 
             /** The name of the country. */
-            fun name(name: Optional<String>) = name(name.orElse(null))
+            fun name(name: Optional<String>) = name(name.getOrNull())
 
             /** The name of the country. */
             fun name(name: JsonField<String>) = apply { this.name = name }
@@ -492,7 +485,7 @@ private constructor(
             fun url(url: String?) = url(JsonField.ofNullable(url))
 
             /** The absolute URL of this resource. */
-            fun url(url: Optional<String>) = url(url.orElse(null))
+            fun url(url: Optional<String>) = url(url.getOrNull())
 
             /** The absolute URL of this resource. */
             fun url(url: JsonField<String>) = apply { this.url = url }
@@ -674,7 +667,7 @@ private constructor(
 
             fun nextPageUrl(nextPageUrl: String?) = nextPageUrl(JsonField.ofNullable(nextPageUrl))
 
-            fun nextPageUrl(nextPageUrl: Optional<String>) = nextPageUrl(nextPageUrl.orElse(null))
+            fun nextPageUrl(nextPageUrl: Optional<String>) = nextPageUrl(nextPageUrl.getOrNull())
 
             fun nextPageUrl(nextPageUrl: JsonField<String>) = apply {
                 this.nextPageUrl = nextPageUrl
@@ -692,7 +685,7 @@ private constructor(
                 previousPageUrl(JsonField.ofNullable(previousPageUrl))
 
             fun previousPageUrl(previousPageUrl: Optional<String>) =
-                previousPageUrl(previousPageUrl.orElse(null))
+                previousPageUrl(previousPageUrl.getOrNull())
 
             fun previousPageUrl(previousPageUrl: JsonField<String>) = apply {
                 this.previousPageUrl = previousPageUrl
