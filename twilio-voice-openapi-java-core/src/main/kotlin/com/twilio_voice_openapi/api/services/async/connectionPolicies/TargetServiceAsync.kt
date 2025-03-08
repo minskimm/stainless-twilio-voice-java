@@ -1,7 +1,5 @@
 // File generated from our OpenAPI spec by Stainless.
 
-@file:Suppress("OVERLOADS_INTERFACE") // See https://youtrack.jetbrains.com/issue/KT-36102
-
 package com.twilio_voice_openapi.api.services.async.connectionPolicies
 
 import com.google.errorprone.annotations.MustBeClosed
@@ -24,31 +22,50 @@ interface TargetServiceAsync {
      */
     fun withRawResponse(): WithRawResponse
 
-    @JvmOverloads
+    fun create(
+        params: ConnectionPolicyTargetCreateParams
+    ): CompletableFuture<ConnectionPolicyTarget> = create(params, RequestOptions.none())
+
+    /** @see [create] */
     fun create(
         params: ConnectionPolicyTargetCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<ConnectionPolicyTarget>
 
-    @JvmOverloads
+    fun retrieve(
+        params: ConnectionPolicyTargetRetrieveParams
+    ): CompletableFuture<ConnectionPolicyTarget> = retrieve(params, RequestOptions.none())
+
+    /** @see [retrieve] */
     fun retrieve(
         params: ConnectionPolicyTargetRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<ConnectionPolicyTarget>
 
-    @JvmOverloads
+    fun update(
+        params: ConnectionPolicyTargetUpdateParams
+    ): CompletableFuture<ConnectionPolicyTarget> = update(params, RequestOptions.none())
+
+    /** @see [update] */
     fun update(
         params: ConnectionPolicyTargetUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<ConnectionPolicyTarget>
 
-    @JvmOverloads
+    fun list(
+        params: ConnectionPolicyTargetListParams
+    ): CompletableFuture<ConnectionPolicyTargetListResponse> = list(params, RequestOptions.none())
+
+    /** @see [list] */
     fun list(
         params: ConnectionPolicyTargetListParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<ConnectionPolicyTargetListResponse>
 
-    @JvmOverloads
+    fun delete(params: ConnectionPolicyTargetDeleteParams): CompletableFuture<Void?> =
+        delete(params, RequestOptions.none())
+
+    /** @see [delete] */
     fun delete(
         params: ConnectionPolicyTargetDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -64,7 +81,13 @@ interface TargetServiceAsync {
          * /v1/ConnectionPolicies/{ConnectionPolicySid}/Targets`, but is otherwise the same as
          * [TargetServiceAsync.create].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun create(
+            params: ConnectionPolicyTargetCreateParams
+        ): CompletableFuture<HttpResponseFor<ConnectionPolicyTarget>> =
+            create(params, RequestOptions.none())
+
+        /** @see [create] */
         @MustBeClosed
         fun create(
             params: ConnectionPolicyTargetCreateParams,
@@ -76,7 +99,13 @@ interface TargetServiceAsync {
          * /v1/ConnectionPolicies/{ConnectionPolicySid}/Targets/{Sid}`, but is otherwise the same as
          * [TargetServiceAsync.retrieve].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun retrieve(
+            params: ConnectionPolicyTargetRetrieveParams
+        ): CompletableFuture<HttpResponseFor<ConnectionPolicyTarget>> =
+            retrieve(params, RequestOptions.none())
+
+        /** @see [retrieve] */
         @MustBeClosed
         fun retrieve(
             params: ConnectionPolicyTargetRetrieveParams,
@@ -88,7 +117,13 @@ interface TargetServiceAsync {
          * /v1/ConnectionPolicies/{ConnectionPolicySid}/Targets/{Sid}`, but is otherwise the same as
          * [TargetServiceAsync.update].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun update(
+            params: ConnectionPolicyTargetUpdateParams
+        ): CompletableFuture<HttpResponseFor<ConnectionPolicyTarget>> =
+            update(params, RequestOptions.none())
+
+        /** @see [update] */
         @MustBeClosed
         fun update(
             params: ConnectionPolicyTargetUpdateParams,
@@ -100,7 +135,13 @@ interface TargetServiceAsync {
          * /v1/ConnectionPolicies/{ConnectionPolicySid}/Targets`, but is otherwise the same as
          * [TargetServiceAsync.list].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun list(
+            params: ConnectionPolicyTargetListParams
+        ): CompletableFuture<HttpResponseFor<ConnectionPolicyTargetListResponse>> =
+            list(params, RequestOptions.none())
+
+        /** @see [list] */
         @MustBeClosed
         fun list(
             params: ConnectionPolicyTargetListParams,
@@ -112,7 +153,11 @@ interface TargetServiceAsync {
          * /v1/ConnectionPolicies/{ConnectionPolicySid}/Targets/{Sid}`, but is otherwise the same as
          * [TargetServiceAsync.delete].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun delete(params: ConnectionPolicyTargetDeleteParams): CompletableFuture<HttpResponse> =
+            delete(params, RequestOptions.none())
+
+        /** @see [delete] */
         @MustBeClosed
         fun delete(
             params: ConnectionPolicyTargetDeleteParams,

@@ -1,7 +1,5 @@
 // File generated from our OpenAPI spec by Stainless.
 
-@file:Suppress("OVERLOADS_INTERFACE") // See https://youtrack.jetbrains.com/issue/KT-36102
-
 package com.twilio_voice_openapi.api.services.async
 
 import com.google.errorprone.annotations.MustBeClosed
@@ -24,34 +22,55 @@ interface SourceIpMappingServiceAsync {
      */
     fun withRawResponse(): WithRawResponse
 
-    @JvmOverloads
+    fun create(params: SourceIpMappingCreateParams): CompletableFuture<SourceIpMapping> =
+        create(params, RequestOptions.none())
+
+    /** @see [create] */
     fun create(
         params: SourceIpMappingCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<SourceIpMapping>
 
-    @JvmOverloads
+    fun retrieve(params: SourceIpMappingRetrieveParams): CompletableFuture<SourceIpMapping> =
+        retrieve(params, RequestOptions.none())
+
+    /** @see [retrieve] */
     fun retrieve(
         params: SourceIpMappingRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<SourceIpMapping>
 
-    @JvmOverloads
+    fun update(params: SourceIpMappingUpdateParams): CompletableFuture<SourceIpMapping> =
+        update(params, RequestOptions.none())
+
+    /** @see [update] */
     fun update(
         params: SourceIpMappingUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<SourceIpMapping>
 
-    @JvmOverloads
+    fun list(): CompletableFuture<SourceIpMappingListResponse> =
+        list(SourceIpMappingListParams.none())
+
+    /** @see [list] */
     fun list(
         params: SourceIpMappingListParams = SourceIpMappingListParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<SourceIpMappingListResponse>
 
+    /** @see [list] */
+    fun list(
+        params: SourceIpMappingListParams = SourceIpMappingListParams.none()
+    ): CompletableFuture<SourceIpMappingListResponse> = list(params, RequestOptions.none())
+
+    /** @see [list] */
     fun list(requestOptions: RequestOptions): CompletableFuture<SourceIpMappingListResponse> =
         list(SourceIpMappingListParams.none(), requestOptions)
 
-    @JvmOverloads
+    fun delete(params: SourceIpMappingDeleteParams): CompletableFuture<Void?> =
+        delete(params, RequestOptions.none())
+
+    /** @see [delete] */
     fun delete(
         params: SourceIpMappingDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -67,7 +86,13 @@ interface SourceIpMappingServiceAsync {
          * Returns a raw HTTP response for `post /v1/SourceIpMappings`, but is otherwise the same as
          * [SourceIpMappingServiceAsync.create].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun create(
+            params: SourceIpMappingCreateParams
+        ): CompletableFuture<HttpResponseFor<SourceIpMapping>> =
+            create(params, RequestOptions.none())
+
+        /** @see [create] */
         @MustBeClosed
         fun create(
             params: SourceIpMappingCreateParams,
@@ -78,7 +103,13 @@ interface SourceIpMappingServiceAsync {
          * Returns a raw HTTP response for `get /v1/SourceIpMappings/{Sid}`, but is otherwise the
          * same as [SourceIpMappingServiceAsync.retrieve].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun retrieve(
+            params: SourceIpMappingRetrieveParams
+        ): CompletableFuture<HttpResponseFor<SourceIpMapping>> =
+            retrieve(params, RequestOptions.none())
+
+        /** @see [retrieve] */
         @MustBeClosed
         fun retrieve(
             params: SourceIpMappingRetrieveParams,
@@ -89,7 +120,13 @@ interface SourceIpMappingServiceAsync {
          * Returns a raw HTTP response for `post /v1/SourceIpMappings/{Sid}`, but is otherwise the
          * same as [SourceIpMappingServiceAsync.update].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun update(
+            params: SourceIpMappingUpdateParams
+        ): CompletableFuture<HttpResponseFor<SourceIpMapping>> =
+            update(params, RequestOptions.none())
+
+        /** @see [update] */
         @MustBeClosed
         fun update(
             params: SourceIpMappingUpdateParams,
@@ -100,17 +137,25 @@ interface SourceIpMappingServiceAsync {
          * Returns a raw HTTP response for `get /v1/SourceIpMappings`, but is otherwise the same as
          * [SourceIpMappingServiceAsync.list].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun list(): CompletableFuture<HttpResponseFor<SourceIpMappingListResponse>> =
+            list(SourceIpMappingListParams.none())
+
+        /** @see [list] */
         @MustBeClosed
         fun list(
             params: SourceIpMappingListParams = SourceIpMappingListParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponseFor<SourceIpMappingListResponse>>
 
-        /**
-         * Returns a raw HTTP response for `get /v1/SourceIpMappings`, but is otherwise the same as
-         * [SourceIpMappingServiceAsync.list].
-         */
+        /** @see [list] */
+        @MustBeClosed
+        fun list(
+            params: SourceIpMappingListParams = SourceIpMappingListParams.none()
+        ): CompletableFuture<HttpResponseFor<SourceIpMappingListResponse>> =
+            list(params, RequestOptions.none())
+
+        /** @see [list] */
         @MustBeClosed
         fun list(
             requestOptions: RequestOptions
@@ -121,7 +166,11 @@ interface SourceIpMappingServiceAsync {
          * Returns a raw HTTP response for `delete /v1/SourceIpMappings/{Sid}`, but is otherwise the
          * same as [SourceIpMappingServiceAsync.delete].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun delete(params: SourceIpMappingDeleteParams): CompletableFuture<HttpResponse> =
+            delete(params, RequestOptions.none())
+
+        /** @see [delete] */
         @MustBeClosed
         fun delete(
             params: SourceIpMappingDeleteParams,

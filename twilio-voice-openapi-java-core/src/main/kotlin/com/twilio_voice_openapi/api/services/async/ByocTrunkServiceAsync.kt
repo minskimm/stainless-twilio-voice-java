@@ -1,7 +1,5 @@
 // File generated from our OpenAPI spec by Stainless.
 
-@file:Suppress("OVERLOADS_INTERFACE") // See https://youtrack.jetbrains.com/issue/KT-36102
-
 package com.twilio_voice_openapi.api.services.async
 
 import com.google.errorprone.annotations.MustBeClosed
@@ -24,37 +22,62 @@ interface ByocTrunkServiceAsync {
      */
     fun withRawResponse(): WithRawResponse
 
-    @JvmOverloads
+    fun create(): CompletableFuture<ByocTrunk> = create(ByocTrunkCreateParams.none())
+
+    /** @see [create] */
     fun create(
         params: ByocTrunkCreateParams = ByocTrunkCreateParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<ByocTrunk>
 
+    /** @see [create] */
+    fun create(
+        params: ByocTrunkCreateParams = ByocTrunkCreateParams.none()
+    ): CompletableFuture<ByocTrunk> = create(params, RequestOptions.none())
+
+    /** @see [create] */
     fun create(requestOptions: RequestOptions): CompletableFuture<ByocTrunk> =
         create(ByocTrunkCreateParams.none(), requestOptions)
 
-    @JvmOverloads
+    fun retrieve(params: ByocTrunkRetrieveParams): CompletableFuture<ByocTrunk> =
+        retrieve(params, RequestOptions.none())
+
+    /** @see [retrieve] */
     fun retrieve(
         params: ByocTrunkRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<ByocTrunk>
 
-    @JvmOverloads
+    fun update(params: ByocTrunkUpdateParams): CompletableFuture<ByocTrunk> =
+        update(params, RequestOptions.none())
+
+    /** @see [update] */
     fun update(
         params: ByocTrunkUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<ByocTrunk>
 
-    @JvmOverloads
+    fun list(): CompletableFuture<ByocTrunkListResponse> = list(ByocTrunkListParams.none())
+
+    /** @see [list] */
     fun list(
         params: ByocTrunkListParams = ByocTrunkListParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<ByocTrunkListResponse>
 
+    /** @see [list] */
+    fun list(
+        params: ByocTrunkListParams = ByocTrunkListParams.none()
+    ): CompletableFuture<ByocTrunkListResponse> = list(params, RequestOptions.none())
+
+    /** @see [list] */
     fun list(requestOptions: RequestOptions): CompletableFuture<ByocTrunkListResponse> =
         list(ByocTrunkListParams.none(), requestOptions)
 
-    @JvmOverloads
+    fun delete(params: ByocTrunkDeleteParams): CompletableFuture<Void?> =
+        delete(params, RequestOptions.none())
+
+    /** @see [delete] */
     fun delete(
         params: ByocTrunkDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -69,17 +92,24 @@ interface ByocTrunkServiceAsync {
          * Returns a raw HTTP response for `post /v1/ByocTrunks`, but is otherwise the same as
          * [ByocTrunkServiceAsync.create].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun create(): CompletableFuture<HttpResponseFor<ByocTrunk>> =
+            create(ByocTrunkCreateParams.none())
+
+        /** @see [create] */
         @MustBeClosed
         fun create(
             params: ByocTrunkCreateParams = ByocTrunkCreateParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponseFor<ByocTrunk>>
 
-        /**
-         * Returns a raw HTTP response for `post /v1/ByocTrunks`, but is otherwise the same as
-         * [ByocTrunkServiceAsync.create].
-         */
+        /** @see [create] */
+        @MustBeClosed
+        fun create(
+            params: ByocTrunkCreateParams = ByocTrunkCreateParams.none()
+        ): CompletableFuture<HttpResponseFor<ByocTrunk>> = create(params, RequestOptions.none())
+
+        /** @see [create] */
         @MustBeClosed
         fun create(requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<ByocTrunk>> =
             create(ByocTrunkCreateParams.none(), requestOptions)
@@ -88,7 +118,12 @@ interface ByocTrunkServiceAsync {
          * Returns a raw HTTP response for `get /v1/ByocTrunks/{Sid}`, but is otherwise the same as
          * [ByocTrunkServiceAsync.retrieve].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun retrieve(
+            params: ByocTrunkRetrieveParams
+        ): CompletableFuture<HttpResponseFor<ByocTrunk>> = retrieve(params, RequestOptions.none())
+
+        /** @see [retrieve] */
         @MustBeClosed
         fun retrieve(
             params: ByocTrunkRetrieveParams,
@@ -99,7 +134,11 @@ interface ByocTrunkServiceAsync {
          * Returns a raw HTTP response for `post /v1/ByocTrunks/{Sid}`, but is otherwise the same as
          * [ByocTrunkServiceAsync.update].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun update(params: ByocTrunkUpdateParams): CompletableFuture<HttpResponseFor<ByocTrunk>> =
+            update(params, RequestOptions.none())
+
+        /** @see [update] */
         @MustBeClosed
         fun update(
             params: ByocTrunkUpdateParams,
@@ -110,17 +149,25 @@ interface ByocTrunkServiceAsync {
          * Returns a raw HTTP response for `get /v1/ByocTrunks`, but is otherwise the same as
          * [ByocTrunkServiceAsync.list].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun list(): CompletableFuture<HttpResponseFor<ByocTrunkListResponse>> =
+            list(ByocTrunkListParams.none())
+
+        /** @see [list] */
         @MustBeClosed
         fun list(
             params: ByocTrunkListParams = ByocTrunkListParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponseFor<ByocTrunkListResponse>>
 
-        /**
-         * Returns a raw HTTP response for `get /v1/ByocTrunks`, but is otherwise the same as
-         * [ByocTrunkServiceAsync.list].
-         */
+        /** @see [list] */
+        @MustBeClosed
+        fun list(
+            params: ByocTrunkListParams = ByocTrunkListParams.none()
+        ): CompletableFuture<HttpResponseFor<ByocTrunkListResponse>> =
+            list(params, RequestOptions.none())
+
+        /** @see [list] */
         @MustBeClosed
         fun list(
             requestOptions: RequestOptions
@@ -131,7 +178,11 @@ interface ByocTrunkServiceAsync {
          * Returns a raw HTTP response for `delete /v1/ByocTrunks/{Sid}`, but is otherwise the same
          * as [ByocTrunkServiceAsync.delete].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun delete(params: ByocTrunkDeleteParams): CompletableFuture<HttpResponse> =
+            delete(params, RequestOptions.none())
+
+        /** @see [delete] */
         @MustBeClosed
         fun delete(
             params: ByocTrunkDeleteParams,

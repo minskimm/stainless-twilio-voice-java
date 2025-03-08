@@ -1,7 +1,5 @@
 // File generated from our OpenAPI spec by Stainless.
 
-@file:Suppress("OVERLOADS_INTERFACE") // See https://youtrack.jetbrains.com/issue/KT-36102
-
 package com.twilio_voice_openapi.api.services.async
 
 import com.google.errorprone.annotations.MustBeClosed
@@ -24,34 +22,54 @@ interface IpRecordServiceAsync {
      */
     fun withRawResponse(): WithRawResponse
 
-    @JvmOverloads
+    fun create(params: IpRecordCreateParams): CompletableFuture<IpRecord> =
+        create(params, RequestOptions.none())
+
+    /** @see [create] */
     fun create(
         params: IpRecordCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<IpRecord>
 
-    @JvmOverloads
+    fun retrieve(params: IpRecordRetrieveParams): CompletableFuture<IpRecord> =
+        retrieve(params, RequestOptions.none())
+
+    /** @see [retrieve] */
     fun retrieve(
         params: IpRecordRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<IpRecord>
 
-    @JvmOverloads
+    fun update(params: IpRecordUpdateParams): CompletableFuture<IpRecord> =
+        update(params, RequestOptions.none())
+
+    /** @see [update] */
     fun update(
         params: IpRecordUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<IpRecord>
 
-    @JvmOverloads
+    fun list(): CompletableFuture<IpRecordListResponse> = list(IpRecordListParams.none())
+
+    /** @see [list] */
     fun list(
         params: IpRecordListParams = IpRecordListParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<IpRecordListResponse>
 
+    /** @see [list] */
+    fun list(
+        params: IpRecordListParams = IpRecordListParams.none()
+    ): CompletableFuture<IpRecordListResponse> = list(params, RequestOptions.none())
+
+    /** @see [list] */
     fun list(requestOptions: RequestOptions): CompletableFuture<IpRecordListResponse> =
         list(IpRecordListParams.none(), requestOptions)
 
-    @JvmOverloads
+    fun delete(params: IpRecordDeleteParams): CompletableFuture<Void?> =
+        delete(params, RequestOptions.none())
+
+    /** @see [delete] */
     fun delete(
         params: IpRecordDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -66,7 +84,11 @@ interface IpRecordServiceAsync {
          * Returns a raw HTTP response for `post /v1/IpRecords`, but is otherwise the same as
          * [IpRecordServiceAsync.create].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun create(params: IpRecordCreateParams): CompletableFuture<HttpResponseFor<IpRecord>> =
+            create(params, RequestOptions.none())
+
+        /** @see [create] */
         @MustBeClosed
         fun create(
             params: IpRecordCreateParams,
@@ -77,7 +99,11 @@ interface IpRecordServiceAsync {
          * Returns a raw HTTP response for `get /v1/IpRecords/{Sid}`, but is otherwise the same as
          * [IpRecordServiceAsync.retrieve].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun retrieve(params: IpRecordRetrieveParams): CompletableFuture<HttpResponseFor<IpRecord>> =
+            retrieve(params, RequestOptions.none())
+
+        /** @see [retrieve] */
         @MustBeClosed
         fun retrieve(
             params: IpRecordRetrieveParams,
@@ -88,7 +114,11 @@ interface IpRecordServiceAsync {
          * Returns a raw HTTP response for `post /v1/IpRecords/{Sid}`, but is otherwise the same as
          * [IpRecordServiceAsync.update].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun update(params: IpRecordUpdateParams): CompletableFuture<HttpResponseFor<IpRecord>> =
+            update(params, RequestOptions.none())
+
+        /** @see [update] */
         @MustBeClosed
         fun update(
             params: IpRecordUpdateParams,
@@ -99,17 +129,25 @@ interface IpRecordServiceAsync {
          * Returns a raw HTTP response for `get /v1/IpRecords`, but is otherwise the same as
          * [IpRecordServiceAsync.list].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun list(): CompletableFuture<HttpResponseFor<IpRecordListResponse>> =
+            list(IpRecordListParams.none())
+
+        /** @see [list] */
         @MustBeClosed
         fun list(
             params: IpRecordListParams = IpRecordListParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponseFor<IpRecordListResponse>>
 
-        /**
-         * Returns a raw HTTP response for `get /v1/IpRecords`, but is otherwise the same as
-         * [IpRecordServiceAsync.list].
-         */
+        /** @see [list] */
+        @MustBeClosed
+        fun list(
+            params: IpRecordListParams = IpRecordListParams.none()
+        ): CompletableFuture<HttpResponseFor<IpRecordListResponse>> =
+            list(params, RequestOptions.none())
+
+        /** @see [list] */
         @MustBeClosed
         fun list(
             requestOptions: RequestOptions
@@ -120,7 +158,11 @@ interface IpRecordServiceAsync {
          * Returns a raw HTTP response for `delete /v1/IpRecords/{Sid}`, but is otherwise the same
          * as [IpRecordServiceAsync.delete].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun delete(params: IpRecordDeleteParams): CompletableFuture<HttpResponse> =
+            delete(params, RequestOptions.none())
+
+        /** @see [delete] */
         @MustBeClosed
         fun delete(
             params: IpRecordDeleteParams,

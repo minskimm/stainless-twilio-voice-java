@@ -1,7 +1,5 @@
 // File generated from our OpenAPI spec by Stainless.
 
-@file:Suppress("OVERLOADS_INTERFACE") // See https://youtrack.jetbrains.com/issue/KT-36102
-
 package com.twilio_voice_openapi.api.services.blocking
 
 import com.google.errorprone.annotations.MustBeClosed
@@ -23,37 +21,58 @@ interface ByocTrunkService {
      */
     fun withRawResponse(): WithRawResponse
 
-    @JvmOverloads
+    fun create(): ByocTrunk = create(ByocTrunkCreateParams.none())
+
+    /** @see [create] */
     fun create(
         params: ByocTrunkCreateParams = ByocTrunkCreateParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ByocTrunk
 
+    /** @see [create] */
+    fun create(params: ByocTrunkCreateParams = ByocTrunkCreateParams.none()): ByocTrunk =
+        create(params, RequestOptions.none())
+
+    /** @see [create] */
     fun create(requestOptions: RequestOptions): ByocTrunk =
         create(ByocTrunkCreateParams.none(), requestOptions)
 
-    @JvmOverloads
+    fun retrieve(params: ByocTrunkRetrieveParams): ByocTrunk =
+        retrieve(params, RequestOptions.none())
+
+    /** @see [retrieve] */
     fun retrieve(
         params: ByocTrunkRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ByocTrunk
 
-    @JvmOverloads
+    fun update(params: ByocTrunkUpdateParams): ByocTrunk = update(params, RequestOptions.none())
+
+    /** @see [update] */
     fun update(
         params: ByocTrunkUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ByocTrunk
 
-    @JvmOverloads
+    fun list(): ByocTrunkListResponse = list(ByocTrunkListParams.none())
+
+    /** @see [list] */
     fun list(
         params: ByocTrunkListParams = ByocTrunkListParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ByocTrunkListResponse
 
+    /** @see [list] */
+    fun list(params: ByocTrunkListParams = ByocTrunkListParams.none()): ByocTrunkListResponse =
+        list(params, RequestOptions.none())
+
+    /** @see [list] */
     fun list(requestOptions: RequestOptions): ByocTrunkListResponse =
         list(ByocTrunkListParams.none(), requestOptions)
 
-    @JvmOverloads
+    fun delete(params: ByocTrunkDeleteParams) = delete(params, RequestOptions.none())
+
+    /** @see [delete] */
     fun delete(
         params: ByocTrunkDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -66,17 +85,23 @@ interface ByocTrunkService {
          * Returns a raw HTTP response for `post /v1/ByocTrunks`, but is otherwise the same as
          * [ByocTrunkService.create].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun create(): HttpResponseFor<ByocTrunk> = create(ByocTrunkCreateParams.none())
+
+        /** @see [create] */
         @MustBeClosed
         fun create(
             params: ByocTrunkCreateParams = ByocTrunkCreateParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ByocTrunk>
 
-        /**
-         * Returns a raw HTTP response for `post /v1/ByocTrunks`, but is otherwise the same as
-         * [ByocTrunkService.create].
-         */
+        /** @see [create] */
+        @MustBeClosed
+        fun create(
+            params: ByocTrunkCreateParams = ByocTrunkCreateParams.none()
+        ): HttpResponseFor<ByocTrunk> = create(params, RequestOptions.none())
+
+        /** @see [create] */
         @MustBeClosed
         fun create(requestOptions: RequestOptions): HttpResponseFor<ByocTrunk> =
             create(ByocTrunkCreateParams.none(), requestOptions)
@@ -85,7 +110,11 @@ interface ByocTrunkService {
          * Returns a raw HTTP response for `get /v1/ByocTrunks/{Sid}`, but is otherwise the same as
          * [ByocTrunkService.retrieve].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun retrieve(params: ByocTrunkRetrieveParams): HttpResponseFor<ByocTrunk> =
+            retrieve(params, RequestOptions.none())
+
+        /** @see [retrieve] */
         @MustBeClosed
         fun retrieve(
             params: ByocTrunkRetrieveParams,
@@ -96,7 +125,11 @@ interface ByocTrunkService {
          * Returns a raw HTTP response for `post /v1/ByocTrunks/{Sid}`, but is otherwise the same as
          * [ByocTrunkService.update].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun update(params: ByocTrunkUpdateParams): HttpResponseFor<ByocTrunk> =
+            update(params, RequestOptions.none())
+
+        /** @see [update] */
         @MustBeClosed
         fun update(
             params: ByocTrunkUpdateParams,
@@ -107,17 +140,23 @@ interface ByocTrunkService {
          * Returns a raw HTTP response for `get /v1/ByocTrunks`, but is otherwise the same as
          * [ByocTrunkService.list].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun list(): HttpResponseFor<ByocTrunkListResponse> = list(ByocTrunkListParams.none())
+
+        /** @see [list] */
         @MustBeClosed
         fun list(
             params: ByocTrunkListParams = ByocTrunkListParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ByocTrunkListResponse>
 
-        /**
-         * Returns a raw HTTP response for `get /v1/ByocTrunks`, but is otherwise the same as
-         * [ByocTrunkService.list].
-         */
+        /** @see [list] */
+        @MustBeClosed
+        fun list(
+            params: ByocTrunkListParams = ByocTrunkListParams.none()
+        ): HttpResponseFor<ByocTrunkListResponse> = list(params, RequestOptions.none())
+
+        /** @see [list] */
         @MustBeClosed
         fun list(requestOptions: RequestOptions): HttpResponseFor<ByocTrunkListResponse> =
             list(ByocTrunkListParams.none(), requestOptions)
@@ -126,7 +165,11 @@ interface ByocTrunkService {
          * Returns a raw HTTP response for `delete /v1/ByocTrunks/{Sid}`, but is otherwise the same
          * as [ByocTrunkService.delete].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun delete(params: ByocTrunkDeleteParams): HttpResponse =
+            delete(params, RequestOptions.none())
+
+        /** @see [delete] */
         @MustBeClosed
         fun delete(
             params: ByocTrunkDeleteParams,
