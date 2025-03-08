@@ -1,7 +1,5 @@
 // File generated from our OpenAPI spec by Stainless.
 
-@file:Suppress("OVERLOADS_INTERFACE") // See https://youtrack.jetbrains.com/issue/KT-36102
-
 package com.twilio_voice_openapi.api.services.blocking
 
 import com.google.errorprone.annotations.MustBeClosed
@@ -23,34 +21,49 @@ interface IpRecordService {
      */
     fun withRawResponse(): WithRawResponse
 
-    @JvmOverloads
+    fun create(params: IpRecordCreateParams): IpRecord = create(params, RequestOptions.none())
+
+    /** @see [create] */
     fun create(
         params: IpRecordCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): IpRecord
 
-    @JvmOverloads
+    fun retrieve(params: IpRecordRetrieveParams): IpRecord = retrieve(params, RequestOptions.none())
+
+    /** @see [retrieve] */
     fun retrieve(
         params: IpRecordRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): IpRecord
 
-    @JvmOverloads
+    fun update(params: IpRecordUpdateParams): IpRecord = update(params, RequestOptions.none())
+
+    /** @see [update] */
     fun update(
         params: IpRecordUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): IpRecord
 
-    @JvmOverloads
+    fun list(): IpRecordListResponse = list(IpRecordListParams.none())
+
+    /** @see [list] */
     fun list(
         params: IpRecordListParams = IpRecordListParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): IpRecordListResponse
 
+    /** @see [list] */
+    fun list(params: IpRecordListParams = IpRecordListParams.none()): IpRecordListResponse =
+        list(params, RequestOptions.none())
+
+    /** @see [list] */
     fun list(requestOptions: RequestOptions): IpRecordListResponse =
         list(IpRecordListParams.none(), requestOptions)
 
-    @JvmOverloads
+    fun delete(params: IpRecordDeleteParams) = delete(params, RequestOptions.none())
+
+    /** @see [delete] */
     fun delete(params: IpRecordDeleteParams, requestOptions: RequestOptions = RequestOptions.none())
 
     /** A view of [IpRecordService] that provides access to raw HTTP responses for each method. */
@@ -60,7 +73,11 @@ interface IpRecordService {
          * Returns a raw HTTP response for `post /v1/IpRecords`, but is otherwise the same as
          * [IpRecordService.create].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun create(params: IpRecordCreateParams): HttpResponseFor<IpRecord> =
+            create(params, RequestOptions.none())
+
+        /** @see [create] */
         @MustBeClosed
         fun create(
             params: IpRecordCreateParams,
@@ -71,7 +88,11 @@ interface IpRecordService {
          * Returns a raw HTTP response for `get /v1/IpRecords/{Sid}`, but is otherwise the same as
          * [IpRecordService.retrieve].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun retrieve(params: IpRecordRetrieveParams): HttpResponseFor<IpRecord> =
+            retrieve(params, RequestOptions.none())
+
+        /** @see [retrieve] */
         @MustBeClosed
         fun retrieve(
             params: IpRecordRetrieveParams,
@@ -82,7 +103,11 @@ interface IpRecordService {
          * Returns a raw HTTP response for `post /v1/IpRecords/{Sid}`, but is otherwise the same as
          * [IpRecordService.update].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun update(params: IpRecordUpdateParams): HttpResponseFor<IpRecord> =
+            update(params, RequestOptions.none())
+
+        /** @see [update] */
         @MustBeClosed
         fun update(
             params: IpRecordUpdateParams,
@@ -93,17 +118,23 @@ interface IpRecordService {
          * Returns a raw HTTP response for `get /v1/IpRecords`, but is otherwise the same as
          * [IpRecordService.list].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun list(): HttpResponseFor<IpRecordListResponse> = list(IpRecordListParams.none())
+
+        /** @see [list] */
         @MustBeClosed
         fun list(
             params: IpRecordListParams = IpRecordListParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<IpRecordListResponse>
 
-        /**
-         * Returns a raw HTTP response for `get /v1/IpRecords`, but is otherwise the same as
-         * [IpRecordService.list].
-         */
+        /** @see [list] */
+        @MustBeClosed
+        fun list(
+            params: IpRecordListParams = IpRecordListParams.none()
+        ): HttpResponseFor<IpRecordListResponse> = list(params, RequestOptions.none())
+
+        /** @see [list] */
         @MustBeClosed
         fun list(requestOptions: RequestOptions): HttpResponseFor<IpRecordListResponse> =
             list(IpRecordListParams.none(), requestOptions)
@@ -112,7 +143,11 @@ interface IpRecordService {
          * Returns a raw HTTP response for `delete /v1/IpRecords/{Sid}`, but is otherwise the same
          * as [IpRecordService.delete].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun delete(params: IpRecordDeleteParams): HttpResponse =
+            delete(params, RequestOptions.none())
+
+        /** @see [delete] */
         @MustBeClosed
         fun delete(
             params: IpRecordDeleteParams,

@@ -1,7 +1,5 @@
 // File generated from our OpenAPI spec by Stainless.
 
-@file:Suppress("OVERLOADS_INTERFACE") // See https://youtrack.jetbrains.com/issue/KT-36102
-
 package com.twilio_voice_openapi.api.services.blocking.connectionPolicies
 
 import com.google.errorprone.annotations.MustBeClosed
@@ -23,31 +21,45 @@ interface TargetService {
      */
     fun withRawResponse(): WithRawResponse
 
-    @JvmOverloads
+    fun create(params: ConnectionPolicyTargetCreateParams): ConnectionPolicyTarget =
+        create(params, RequestOptions.none())
+
+    /** @see [create] */
     fun create(
         params: ConnectionPolicyTargetCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ConnectionPolicyTarget
 
-    @JvmOverloads
+    fun retrieve(params: ConnectionPolicyTargetRetrieveParams): ConnectionPolicyTarget =
+        retrieve(params, RequestOptions.none())
+
+    /** @see [retrieve] */
     fun retrieve(
         params: ConnectionPolicyTargetRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ConnectionPolicyTarget
 
-    @JvmOverloads
+    fun update(params: ConnectionPolicyTargetUpdateParams): ConnectionPolicyTarget =
+        update(params, RequestOptions.none())
+
+    /** @see [update] */
     fun update(
         params: ConnectionPolicyTargetUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ConnectionPolicyTarget
 
-    @JvmOverloads
+    fun list(params: ConnectionPolicyTargetListParams): ConnectionPolicyTargetListResponse =
+        list(params, RequestOptions.none())
+
+    /** @see [list] */
     fun list(
         params: ConnectionPolicyTargetListParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ConnectionPolicyTargetListResponse
 
-    @JvmOverloads
+    fun delete(params: ConnectionPolicyTargetDeleteParams) = delete(params, RequestOptions.none())
+
+    /** @see [delete] */
     fun delete(
         params: ConnectionPolicyTargetDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -61,7 +73,12 @@ interface TargetService {
          * /v1/ConnectionPolicies/{ConnectionPolicySid}/Targets`, but is otherwise the same as
          * [TargetService.create].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun create(
+            params: ConnectionPolicyTargetCreateParams
+        ): HttpResponseFor<ConnectionPolicyTarget> = create(params, RequestOptions.none())
+
+        /** @see [create] */
         @MustBeClosed
         fun create(
             params: ConnectionPolicyTargetCreateParams,
@@ -73,7 +90,12 @@ interface TargetService {
          * /v1/ConnectionPolicies/{ConnectionPolicySid}/Targets/{Sid}`, but is otherwise the same as
          * [TargetService.retrieve].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun retrieve(
+            params: ConnectionPolicyTargetRetrieveParams
+        ): HttpResponseFor<ConnectionPolicyTarget> = retrieve(params, RequestOptions.none())
+
+        /** @see [retrieve] */
         @MustBeClosed
         fun retrieve(
             params: ConnectionPolicyTargetRetrieveParams,
@@ -85,7 +107,12 @@ interface TargetService {
          * /v1/ConnectionPolicies/{ConnectionPolicySid}/Targets/{Sid}`, but is otherwise the same as
          * [TargetService.update].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun update(
+            params: ConnectionPolicyTargetUpdateParams
+        ): HttpResponseFor<ConnectionPolicyTarget> = update(params, RequestOptions.none())
+
+        /** @see [update] */
         @MustBeClosed
         fun update(
             params: ConnectionPolicyTargetUpdateParams,
@@ -97,7 +124,12 @@ interface TargetService {
          * /v1/ConnectionPolicies/{ConnectionPolicySid}/Targets`, but is otherwise the same as
          * [TargetService.list].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun list(
+            params: ConnectionPolicyTargetListParams
+        ): HttpResponseFor<ConnectionPolicyTargetListResponse> = list(params, RequestOptions.none())
+
+        /** @see [list] */
         @MustBeClosed
         fun list(
             params: ConnectionPolicyTargetListParams,
@@ -109,7 +141,11 @@ interface TargetService {
          * /v1/ConnectionPolicies/{ConnectionPolicySid}/Targets/{Sid}`, but is otherwise the same as
          * [TargetService.delete].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun delete(params: ConnectionPolicyTargetDeleteParams): HttpResponse =
+            delete(params, RequestOptions.none())
+
+        /** @see [delete] */
         @MustBeClosed
         fun delete(
             params: ConnectionPolicyTargetDeleteParams,

@@ -1,7 +1,5 @@
 // File generated from our OpenAPI spec by Stainless.
 
-@file:Suppress("OVERLOADS_INTERFACE") // See https://youtrack.jetbrains.com/issue/KT-36102
-
 package com.twilio_voice_openapi.api.services.async
 
 import com.google.errorprone.annotations.MustBeClosed
@@ -21,7 +19,10 @@ interface ArchiveServiceAsync {
      * Delete an archived call record from Bulk Export. Note: this does not also delete the record
      * from the Voice API.
      */
-    @JvmOverloads
+    fun deleteCall(params: ArchiveDeleteCallParams): CompletableFuture<Void?> =
+        deleteCall(params, RequestOptions.none())
+
+    /** @see [deleteCall] */
     fun deleteCall(
         params: ArchiveDeleteCallParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -36,7 +37,11 @@ interface ArchiveServiceAsync {
          * Returns a raw HTTP response for `delete /v1/Archives/{Date}/Calls/{Sid}`, but is
          * otherwise the same as [ArchiveServiceAsync.deleteCall].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun deleteCall(params: ArchiveDeleteCallParams): CompletableFuture<HttpResponse> =
+            deleteCall(params, RequestOptions.none())
+
+        /** @see [deleteCall] */
         @MustBeClosed
         fun deleteCall(
             params: ArchiveDeleteCallParams,

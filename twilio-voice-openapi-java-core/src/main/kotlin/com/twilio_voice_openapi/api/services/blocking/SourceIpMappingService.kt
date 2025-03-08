@@ -1,7 +1,5 @@
 // File generated from our OpenAPI spec by Stainless.
 
-@file:Suppress("OVERLOADS_INTERFACE") // See https://youtrack.jetbrains.com/issue/KT-36102
-
 package com.twilio_voice_openapi.api.services.blocking
 
 import com.google.errorprone.annotations.MustBeClosed
@@ -23,34 +21,53 @@ interface SourceIpMappingService {
      */
     fun withRawResponse(): WithRawResponse
 
-    @JvmOverloads
+    fun create(params: SourceIpMappingCreateParams): SourceIpMapping =
+        create(params, RequestOptions.none())
+
+    /** @see [create] */
     fun create(
         params: SourceIpMappingCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): SourceIpMapping
 
-    @JvmOverloads
+    fun retrieve(params: SourceIpMappingRetrieveParams): SourceIpMapping =
+        retrieve(params, RequestOptions.none())
+
+    /** @see [retrieve] */
     fun retrieve(
         params: SourceIpMappingRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): SourceIpMapping
 
-    @JvmOverloads
+    fun update(params: SourceIpMappingUpdateParams): SourceIpMapping =
+        update(params, RequestOptions.none())
+
+    /** @see [update] */
     fun update(
         params: SourceIpMappingUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): SourceIpMapping
 
-    @JvmOverloads
+    fun list(): SourceIpMappingListResponse = list(SourceIpMappingListParams.none())
+
+    /** @see [list] */
     fun list(
         params: SourceIpMappingListParams = SourceIpMappingListParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): SourceIpMappingListResponse
 
+    /** @see [list] */
+    fun list(
+        params: SourceIpMappingListParams = SourceIpMappingListParams.none()
+    ): SourceIpMappingListResponse = list(params, RequestOptions.none())
+
+    /** @see [list] */
     fun list(requestOptions: RequestOptions): SourceIpMappingListResponse =
         list(SourceIpMappingListParams.none(), requestOptions)
 
-    @JvmOverloads
+    fun delete(params: SourceIpMappingDeleteParams) = delete(params, RequestOptions.none())
+
+    /** @see [delete] */
     fun delete(
         params: SourceIpMappingDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -66,7 +83,11 @@ interface SourceIpMappingService {
          * Returns a raw HTTP response for `post /v1/SourceIpMappings`, but is otherwise the same as
          * [SourceIpMappingService.create].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun create(params: SourceIpMappingCreateParams): HttpResponseFor<SourceIpMapping> =
+            create(params, RequestOptions.none())
+
+        /** @see [create] */
         @MustBeClosed
         fun create(
             params: SourceIpMappingCreateParams,
@@ -77,7 +98,11 @@ interface SourceIpMappingService {
          * Returns a raw HTTP response for `get /v1/SourceIpMappings/{Sid}`, but is otherwise the
          * same as [SourceIpMappingService.retrieve].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun retrieve(params: SourceIpMappingRetrieveParams): HttpResponseFor<SourceIpMapping> =
+            retrieve(params, RequestOptions.none())
+
+        /** @see [retrieve] */
         @MustBeClosed
         fun retrieve(
             params: SourceIpMappingRetrieveParams,
@@ -88,7 +113,11 @@ interface SourceIpMappingService {
          * Returns a raw HTTP response for `post /v1/SourceIpMappings/{Sid}`, but is otherwise the
          * same as [SourceIpMappingService.update].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun update(params: SourceIpMappingUpdateParams): HttpResponseFor<SourceIpMapping> =
+            update(params, RequestOptions.none())
+
+        /** @see [update] */
         @MustBeClosed
         fun update(
             params: SourceIpMappingUpdateParams,
@@ -99,17 +128,24 @@ interface SourceIpMappingService {
          * Returns a raw HTTP response for `get /v1/SourceIpMappings`, but is otherwise the same as
          * [SourceIpMappingService.list].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun list(): HttpResponseFor<SourceIpMappingListResponse> =
+            list(SourceIpMappingListParams.none())
+
+        /** @see [list] */
         @MustBeClosed
         fun list(
             params: SourceIpMappingListParams = SourceIpMappingListParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<SourceIpMappingListResponse>
 
-        /**
-         * Returns a raw HTTP response for `get /v1/SourceIpMappings`, but is otherwise the same as
-         * [SourceIpMappingService.list].
-         */
+        /** @see [list] */
+        @MustBeClosed
+        fun list(
+            params: SourceIpMappingListParams = SourceIpMappingListParams.none()
+        ): HttpResponseFor<SourceIpMappingListResponse> = list(params, RequestOptions.none())
+
+        /** @see [list] */
         @MustBeClosed
         fun list(requestOptions: RequestOptions): HttpResponseFor<SourceIpMappingListResponse> =
             list(SourceIpMappingListParams.none(), requestOptions)
@@ -118,7 +154,11 @@ interface SourceIpMappingService {
          * Returns a raw HTTP response for `delete /v1/SourceIpMappings/{Sid}`, but is otherwise the
          * same as [SourceIpMappingService.delete].
          */
-        @JvmOverloads
+        @MustBeClosed
+        fun delete(params: SourceIpMappingDeleteParams): HttpResponse =
+            delete(params, RequestOptions.none())
+
+        /** @see [delete] */
         @MustBeClosed
         fun delete(
             params: SourceIpMappingDeleteParams,
