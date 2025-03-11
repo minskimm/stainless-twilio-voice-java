@@ -4,11 +4,11 @@ package com.twilio_voice_openapi.api.services.blocking
 
 import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient
-import com.twilio_voice_openapi.api.models.SourceIpMappingCreateParams
-import com.twilio_voice_openapi.api.models.SourceIpMappingDeleteParams
-import com.twilio_voice_openapi.api.models.SourceIpMappingListParams
-import com.twilio_voice_openapi.api.models.SourceIpMappingRetrieveParams
-import com.twilio_voice_openapi.api.models.SourceIpMappingUpdateParams
+import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingCreateParams
+import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingDeleteParams
+import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingListParams
+import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingRetrieveParams
+import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

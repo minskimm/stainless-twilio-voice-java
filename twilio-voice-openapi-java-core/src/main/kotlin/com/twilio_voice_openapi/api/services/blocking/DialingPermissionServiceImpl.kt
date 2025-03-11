@@ -15,10 +15,10 @@ import com.twilio_voice_openapi.api.core.http.json
 import com.twilio_voice_openapi.api.core.http.parseable
 import com.twilio_voice_openapi.api.core.prepare
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIError
-import com.twilio_voice_openapi.api.models.DialingPermissionCreateBulkCountryUpdatesParams
-import com.twilio_voice_openapi.api.models.DialingPermissionCreateBulkCountryUpdatesResponse
-import com.twilio_voice_openapi.api.services.blocking.dialingPermissions.CountryService
-import com.twilio_voice_openapi.api.services.blocking.dialingPermissions.CountryServiceImpl
+import com.twilio_voice_openapi.api.models.dialingpermissions.DialingPermissionCreateBulkCountryUpdatesParams
+import com.twilio_voice_openapi.api.models.dialingpermissions.DialingPermissionCreateBulkCountryUpdatesResponse
+import com.twilio_voice_openapi.api.services.blocking.dialingpermissions.CountryService
+import com.twilio_voice_openapi.api.services.blocking.dialingpermissions.CountryServiceImpl
 
 class DialingPermissionServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     DialingPermissionService {

@@ -4,7 +4,7 @@ package com.twilio_voice_openapi.api.services.async
 
 import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClientAsync
-import com.twilio_voice_openapi.api.models.DialingPermissionCreateBulkCountryUpdatesParams
+import com.twilio_voice_openapi.api.models.dialingpermissions.DialingPermissionCreateBulkCountryUpdatesParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

@@ -5,9 +5,9 @@ package com.twilio_voice_openapi.api.services.blocking
 import com.google.errorprone.annotations.MustBeClosed
 import com.twilio_voice_openapi.api.core.RequestOptions
 import com.twilio_voice_openapi.api.core.http.HttpResponseFor
-import com.twilio_voice_openapi.api.models.DialingPermissions
-import com.twilio_voice_openapi.api.models.SettingRetrieveParams
-import com.twilio_voice_openapi.api.models.SettingUpdateParams
+import com.twilio_voice_openapi.api.models.settings.DialingPermissions
+import com.twilio_voice_openapi.api.models.settings.SettingRetrieveParams
+import com.twilio_voice_openapi.api.models.settings.SettingUpdateParams
 
 interface SettingService {
 

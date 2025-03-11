@@ -4,11 +4,11 @@ package com.twilio_voice_openapi.api.services.async
 
 import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClientAsync
-import com.twilio_voice_openapi.api.models.IpRecordCreateParams
-import com.twilio_voice_openapi.api.models.IpRecordDeleteParams
-import com.twilio_voice_openapi.api.models.IpRecordListParams
-import com.twilio_voice_openapi.api.models.IpRecordRetrieveParams
-import com.twilio_voice_openapi.api.models.IpRecordUpdateParams
+import com.twilio_voice_openapi.api.models.iprecords.IpRecordCreateParams
+import com.twilio_voice_openapi.api.models.iprecords.IpRecordDeleteParams
+import com.twilio_voice_openapi.api.models.iprecords.IpRecordListParams
+import com.twilio_voice_openapi.api.models.iprecords.IpRecordRetrieveParams
+import com.twilio_voice_openapi.api.models.iprecords.IpRecordUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

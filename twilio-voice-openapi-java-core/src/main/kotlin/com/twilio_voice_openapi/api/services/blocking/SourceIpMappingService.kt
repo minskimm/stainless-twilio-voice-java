@@ -6,13 +6,13 @@ import com.google.errorprone.annotations.MustBeClosed
 import com.twilio_voice_openapi.api.core.RequestOptions
 import com.twilio_voice_openapi.api.core.http.HttpResponse
 import com.twilio_voice_openapi.api.core.http.HttpResponseFor
-import com.twilio_voice_openapi.api.models.SourceIpMapping
-import com.twilio_voice_openapi.api.models.SourceIpMappingCreateParams
-import com.twilio_voice_openapi.api.models.SourceIpMappingDeleteParams
-import com.twilio_voice_openapi.api.models.SourceIpMappingListParams
-import com.twilio_voice_openapi.api.models.SourceIpMappingListResponse
-import com.twilio_voice_openapi.api.models.SourceIpMappingRetrieveParams
-import com.twilio_voice_openapi.api.models.SourceIpMappingUpdateParams
+import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMapping
+import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingCreateParams
+import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingDeleteParams
+import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingListParams
+import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingListResponse
+import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingRetrieveParams
+import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingUpdateParams
 
 interface SourceIpMappingService {
 

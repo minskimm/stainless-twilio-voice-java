@@ -15,9 +15,9 @@ import com.twilio_voice_openapi.api.core.http.json
 import com.twilio_voice_openapi.api.core.http.parseable
 import com.twilio_voice_openapi.api.core.prepare
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIError
-import com.twilio_voice_openapi.api.models.DialingPermissions
-import com.twilio_voice_openapi.api.models.SettingRetrieveParams
-import com.twilio_voice_openapi.api.models.SettingUpdateParams
+import com.twilio_voice_openapi.api.models.settings.DialingPermissions
+import com.twilio_voice_openapi.api.models.settings.SettingRetrieveParams
+import com.twilio_voice_openapi.api.models.settings.SettingUpdateParams
 
 class SettingServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     SettingService {

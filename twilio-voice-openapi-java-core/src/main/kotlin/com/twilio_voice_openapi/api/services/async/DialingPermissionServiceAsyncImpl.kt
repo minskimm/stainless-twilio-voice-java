@@ -15,10 +15,10 @@ import com.twilio_voice_openapi.api.core.http.json
 import com.twilio_voice_openapi.api.core.http.parseable
 import com.twilio_voice_openapi.api.core.prepareAsync
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIError
-import com.twilio_voice_openapi.api.models.DialingPermissionCreateBulkCountryUpdatesParams
-import com.twilio_voice_openapi.api.models.DialingPermissionCreateBulkCountryUpdatesResponse
-import com.twilio_voice_openapi.api.services.async.dialingPermissions.CountryServiceAsync
-import com.twilio_voice_openapi.api.services.async.dialingPermissions.CountryServiceAsyncImpl
+import com.twilio_voice_openapi.api.models.dialingpermissions.DialingPermissionCreateBulkCountryUpdatesParams
+import com.twilio_voice_openapi.api.models.dialingpermissions.DialingPermissionCreateBulkCountryUpdatesResponse
+import com.twilio_voice_openapi.api.services.async.dialingpermissions.CountryServiceAsync
+import com.twilio_voice_openapi.api.services.async.dialingpermissions.CountryServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
 
 class DialingPermissionServiceAsyncImpl

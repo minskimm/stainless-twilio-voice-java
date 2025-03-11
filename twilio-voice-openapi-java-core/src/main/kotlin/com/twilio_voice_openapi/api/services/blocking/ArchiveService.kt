@@ -5,7 +5,7 @@ package com.twilio_voice_openapi.api.services.blocking
 import com.google.errorprone.annotations.MustBeClosed
 import com.twilio_voice_openapi.api.core.RequestOptions
 import com.twilio_voice_openapi.api.core.http.HttpResponse
-import com.twilio_voice_openapi.api.models.ArchiveDeleteCallParams
+import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams
 
 interface ArchiveService {
 

@@ -22,7 +22,7 @@ import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIError
 import com.twilio_voice_openapi.api.errors.UnauthorizedException
 import com.twilio_voice_openapi.api.errors.UnexpectedStatusCodeException
 import com.twilio_voice_openapi.api.errors.UnprocessableEntityException
-import com.twilio_voice_openapi.api.models.ArchiveDeleteCallParams
+import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams
 import java.time.LocalDate
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.entry

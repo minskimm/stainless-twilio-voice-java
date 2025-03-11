@@ -6,13 +6,13 @@ import com.google.errorprone.annotations.MustBeClosed
 import com.twilio_voice_openapi.api.core.RequestOptions
 import com.twilio_voice_openapi.api.core.http.HttpResponse
 import com.twilio_voice_openapi.api.core.http.HttpResponseFor
-import com.twilio_voice_openapi.api.models.ByocTrunk
-import com.twilio_voice_openapi.api.models.ByocTrunkCreateParams
-import com.twilio_voice_openapi.api.models.ByocTrunkDeleteParams
-import com.twilio_voice_openapi.api.models.ByocTrunkListParams
-import com.twilio_voice_openapi.api.models.ByocTrunkListResponse
-import com.twilio_voice_openapi.api.models.ByocTrunkRetrieveParams
-import com.twilio_voice_openapi.api.models.ByocTrunkUpdateParams
+import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunk
+import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkCreateParams
+import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkDeleteParams
+import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkListParams
+import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkListResponse
+import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkRetrieveParams
+import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkUpdateParams
 
 interface ByocTrunkService {
 

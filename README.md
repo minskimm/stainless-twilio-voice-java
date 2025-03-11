@@ -36,7 +36,7 @@ This library requires Java 8 or later.
 ```java
 import com.twilio_voice_openapi.api.client.TwilioVoiceOpenAPIClient;
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient;
-import com.twilio_voice_openapi.api.models.ArchiveDeleteCallParams;
+import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 import java.time.LocalDate;
 
 // Configures using the `TWILIO_VOICE_OPENAPI_USERNAME` and `TWILIO_VOICE_OPENAPI_PASSWORD` environment variables
@@ -118,7 +118,7 @@ The default client is synchronous. To switch to asynchronous execution, call the
 ```java
 import com.twilio_voice_openapi.api.client.TwilioVoiceOpenAPIClient;
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient;
-import com.twilio_voice_openapi.api.models.ArchiveDeleteCallParams;
+import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 import java.time.LocalDate;
 import java.util.concurrent.CompletableFuture;
 
@@ -137,7 +137,7 @@ Or create an asynchronous client from the beginning:
 ```java
 import com.twilio_voice_openapi.api.client.TwilioVoiceOpenAPIClientAsync;
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClientAsync;
-import com.twilio_voice_openapi.api.models.ArchiveDeleteCallParams;
+import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 import java.time.LocalDate;
 import java.util.concurrent.CompletableFuture;
 
@@ -162,7 +162,7 @@ To access this data, prefix any HTTP method call on a client or service with `wi
 ```java
 import com.twilio_voice_openapi.api.core.http.Headers;
 import com.twilio_voice_openapi.api.core.http.HttpResponse;
-import com.twilio_voice_openapi.api.models.ArchiveDeleteCallParams;
+import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 import java.time.LocalDate;
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
@@ -249,7 +249,7 @@ Requests time out after 1 minute by default.
 To set a custom timeout, configure the method call using the `timeout` method:
 
 ```java
-import com.twilio_voice_openapi.api.models.ArchiveDeleteCallParams;
+import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 import java.time.LocalDate;
 
 client.archives().deleteCall(
@@ -300,7 +300,7 @@ To set undocumented parameters, call the `putAdditionalHeader`, `putAdditionalQu
 
 ```java
 import com.twilio_voice_openapi.api.core.JsonValue;
-import com.twilio_voice_openapi.api.models.ArchiveDeleteCallParams;
+import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
     .putAdditionalHeader("Secret-Header", "42")
@@ -314,7 +314,7 @@ These can be accessed on the built object later using the `_additionalHeaders()`
 To set a documented parameter or property to an undocumented or not yet supported _value_, pass a [`JsonValue`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/core/Values.kt) object to its setter:
 
 ```java
-import com.twilio_voice_openapi.api.models.ArchiveDeleteCallParams;
+import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 import java.time.LocalDate;
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
@@ -425,7 +425,7 @@ By default, the SDK will not throw an exception in this case. It will throw [`Tw
 If you would prefer to check that the response is completely well-typed upfront, then either call `validate()`:
 
 ```java
-import com.twilio_voice_openapi.api.models.ByocTrunk;
+import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunk;
 
 ByocTrunk byocTrunk = client.byocTrunks().create(params).validate();
 ```
@@ -433,7 +433,7 @@ ByocTrunk byocTrunk = client.byocTrunks().create(params).validate();
 Or configure the method call to validate the response using the `responseValidation` method:
 
 ```java
-import com.twilio_voice_openapi.api.models.ArchiveDeleteCallParams;
+import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 import java.time.LocalDate;
 
 client.archives().deleteCall(
