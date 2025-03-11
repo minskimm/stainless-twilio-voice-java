@@ -15,7 +15,7 @@ import com.twilio_voice_openapi.api.core.http.json
 import com.twilio_voice_openapi.api.core.http.parseable
 import com.twilio_voice_openapi.api.core.prepare
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIError
-import com.twilio_voice_openapi.api.models.ArchiveDeleteCallParams
+import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams
 
 class ArchiveServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     ArchiveService {

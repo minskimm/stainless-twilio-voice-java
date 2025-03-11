@@ -5,9 +5,9 @@ package com.twilio_voice_openapi.api.services.blocking
 import com.google.errorprone.annotations.MustBeClosed
 import com.twilio_voice_openapi.api.core.RequestOptions
 import com.twilio_voice_openapi.api.core.http.HttpResponseFor
-import com.twilio_voice_openapi.api.models.DialingPermissionCreateBulkCountryUpdatesParams
-import com.twilio_voice_openapi.api.models.DialingPermissionCreateBulkCountryUpdatesResponse
-import com.twilio_voice_openapi.api.services.blocking.dialingPermissions.CountryService
+import com.twilio_voice_openapi.api.models.dialingpermissions.DialingPermissionCreateBulkCountryUpdatesParams
+import com.twilio_voice_openapi.api.models.dialingpermissions.DialingPermissionCreateBulkCountryUpdatesResponse
+import com.twilio_voice_openapi.api.services.blocking.dialingpermissions.CountryService
 
 interface DialingPermissionService {
 

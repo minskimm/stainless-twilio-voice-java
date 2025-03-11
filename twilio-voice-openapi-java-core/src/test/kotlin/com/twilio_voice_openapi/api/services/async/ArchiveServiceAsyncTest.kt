@@ -4,7 +4,7 @@ package com.twilio_voice_openapi.api.services.async
 
 import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClientAsync
-import com.twilio_voice_openapi.api.models.ArchiveDeleteCallParams
+import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams
 import java.time.LocalDate
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test

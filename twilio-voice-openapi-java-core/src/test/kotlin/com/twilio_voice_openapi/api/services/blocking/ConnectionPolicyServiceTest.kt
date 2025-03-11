@@ -4,11 +4,11 @@ package com.twilio_voice_openapi.api.services.blocking
 
 import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient
-import com.twilio_voice_openapi.api.models.ConnectionPolicyCreateParams
-import com.twilio_voice_openapi.api.models.ConnectionPolicyDeleteParams
-import com.twilio_voice_openapi.api.models.ConnectionPolicyListParams
-import com.twilio_voice_openapi.api.models.ConnectionPolicyRetrieveParams
-import com.twilio_voice_openapi.api.models.ConnectionPolicyUpdateParams
+import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyCreateParams
+import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyDeleteParams
+import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyListParams
+import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyRetrieveParams
+import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

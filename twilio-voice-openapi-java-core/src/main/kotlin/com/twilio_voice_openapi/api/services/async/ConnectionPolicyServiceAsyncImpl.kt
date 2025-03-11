@@ -17,15 +17,15 @@ import com.twilio_voice_openapi.api.core.http.json
 import com.twilio_voice_openapi.api.core.http.parseable
 import com.twilio_voice_openapi.api.core.prepareAsync
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIError
-import com.twilio_voice_openapi.api.models.ConnectionPolicy
-import com.twilio_voice_openapi.api.models.ConnectionPolicyCreateParams
-import com.twilio_voice_openapi.api.models.ConnectionPolicyDeleteParams
-import com.twilio_voice_openapi.api.models.ConnectionPolicyListParams
-import com.twilio_voice_openapi.api.models.ConnectionPolicyListResponse
-import com.twilio_voice_openapi.api.models.ConnectionPolicyRetrieveParams
-import com.twilio_voice_openapi.api.models.ConnectionPolicyUpdateParams
-import com.twilio_voice_openapi.api.services.async.connectionPolicies.TargetServiceAsync
-import com.twilio_voice_openapi.api.services.async.connectionPolicies.TargetServiceAsyncImpl
+import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicy
+import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyCreateParams
+import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyDeleteParams
+import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyListParams
+import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyListResponse
+import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyRetrieveParams
+import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyUpdateParams
+import com.twilio_voice_openapi.api.services.async.connectionpolicies.TargetServiceAsync
+import com.twilio_voice_openapi.api.services.async.connectionpolicies.TargetServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
 
 class ConnectionPolicyServiceAsyncImpl

@@ -5,9 +5,9 @@ package com.twilio_voice_openapi.api.services.async
 import com.google.errorprone.annotations.MustBeClosed
 import com.twilio_voice_openapi.api.core.RequestOptions
 import com.twilio_voice_openapi.api.core.http.HttpResponseFor
-import com.twilio_voice_openapi.api.models.DialingPermissionCreateBulkCountryUpdatesParams
-import com.twilio_voice_openapi.api.models.DialingPermissionCreateBulkCountryUpdatesResponse
-import com.twilio_voice_openapi.api.services.async.dialingPermissions.CountryServiceAsync
+import com.twilio_voice_openapi.api.models.dialingpermissions.DialingPermissionCreateBulkCountryUpdatesParams
+import com.twilio_voice_openapi.api.models.dialingpermissions.DialingPermissionCreateBulkCountryUpdatesResponse
+import com.twilio_voice_openapi.api.services.async.dialingpermissions.CountryServiceAsync
 import java.util.concurrent.CompletableFuture
 
 interface DialingPermissionServiceAsync {

@@ -4,7 +4,7 @@ package com.twilio_voice_openapi.api.services.blocking
 
 import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient
-import com.twilio_voice_openapi.api.models.SettingUpdateParams
+import com.twilio_voice_openapi.api.models.settings.SettingUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

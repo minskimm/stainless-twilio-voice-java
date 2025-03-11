@@ -17,13 +17,13 @@ import com.twilio_voice_openapi.api.core.http.json
 import com.twilio_voice_openapi.api.core.http.parseable
 import com.twilio_voice_openapi.api.core.prepare
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIError
-import com.twilio_voice_openapi.api.models.IpRecord
-import com.twilio_voice_openapi.api.models.IpRecordCreateParams
-import com.twilio_voice_openapi.api.models.IpRecordDeleteParams
-import com.twilio_voice_openapi.api.models.IpRecordListParams
-import com.twilio_voice_openapi.api.models.IpRecordListResponse
-import com.twilio_voice_openapi.api.models.IpRecordRetrieveParams
-import com.twilio_voice_openapi.api.models.IpRecordUpdateParams
+import com.twilio_voice_openapi.api.models.iprecords.IpRecord
+import com.twilio_voice_openapi.api.models.iprecords.IpRecordCreateParams
+import com.twilio_voice_openapi.api.models.iprecords.IpRecordDeleteParams
+import com.twilio_voice_openapi.api.models.iprecords.IpRecordListParams
+import com.twilio_voice_openapi.api.models.iprecords.IpRecordListResponse
+import com.twilio_voice_openapi.api.models.iprecords.IpRecordRetrieveParams
+import com.twilio_voice_openapi.api.models.iprecords.IpRecordUpdateParams
 
 class IpRecordServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     IpRecordService {

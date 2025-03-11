@@ -15,7 +15,7 @@ import com.github.tomakehurst.wiremock.junit5.WireMockTest
 import com.twilio_voice_openapi.api.client.TwilioVoiceOpenAPIClient
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient
 import com.twilio_voice_openapi.api.core.JsonValue
-import com.twilio_voice_openapi.api.models.ArchiveDeleteCallParams
+import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams
 import java.time.LocalDate
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Disabled

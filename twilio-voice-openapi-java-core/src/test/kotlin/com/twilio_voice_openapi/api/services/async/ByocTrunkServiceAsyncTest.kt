@@ -4,11 +4,11 @@ package com.twilio_voice_openapi.api.services.async
 
 import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClientAsync
-import com.twilio_voice_openapi.api.models.ByocTrunkCreateParams
-import com.twilio_voice_openapi.api.models.ByocTrunkDeleteParams
-import com.twilio_voice_openapi.api.models.ByocTrunkListParams
-import com.twilio_voice_openapi.api.models.ByocTrunkRetrieveParams
-import com.twilio_voice_openapi.api.models.ByocTrunkUpdateParams
+import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkCreateParams
+import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkDeleteParams
+import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkListParams
+import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkRetrieveParams
+import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
