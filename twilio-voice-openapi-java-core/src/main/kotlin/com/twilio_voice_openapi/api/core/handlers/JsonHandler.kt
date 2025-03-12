@@ -7,7 +7,6 @@ import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import com.twilio_voice_openapi.api.core.enhanceJacksonException
 import com.twilio_voice_openapi.api.core.http.HttpResponse
 import com.twilio_voice_openapi.api.core.http.HttpResponse.Handler
-import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIException
 
 @JvmSynthetic
 internal inline fun <reified T> jsonHandler(jsonMapper: JsonMapper): Handler<T> =

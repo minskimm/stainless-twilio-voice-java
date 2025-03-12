@@ -10,6 +10,6 @@ class SettingRetrieveParamsTest {
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
-      SettingRetrieveParams.builder().build()
+        SettingRetrieveParams.builder().build()
     }
 }
