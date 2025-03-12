@@ -18,38 +18,32 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 @NoAutoDetect
-class DialingPermissionCreateBulkCountryUpdatesResponse
-@JsonCreator
-private constructor(
-    @JsonProperty("update_count")
-    @ExcludeMissing
-    private val updateCount: JsonField<Long> = JsonMissing.of(),
-    @JsonProperty("update_request")
-    @ExcludeMissing
-    private val updateRequest: JsonField<String> = JsonMissing.of(),
+class DialingPermissionCreateBulkCountryUpdatesResponse @JsonCreator private constructor(
+    @JsonProperty("update_count") @ExcludeMissing private val updateCount: JsonField<Long> = JsonMissing.of(),
+    @JsonProperty("update_request") @ExcludeMissing private val updateRequest: JsonField<String> = JsonMissing.of(),
     @JsonAnySetter private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
+
 ) {
 
     /** The number of countries updated */
     fun updateCount(): Optional<Long> = Optional.ofNullable(updateCount.getNullable("update_count"))
 
     /**
-     * A bulk update request to change voice dialing country permissions stored as a URL-encoded,
-     * JSON array of update objects. For example : `[ { "iso_code": "GB",
-     * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
-     * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+     * A bulk update request to change voice dialing country permissions stored as a
+     * URL-encoded, JSON array of update objects. For example :
+     * `[ { "iso_code": "GB", "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true", "high_risk_tollfraud_numbers_enabled": "false" } ]`
      */
-    fun updateRequest(): Optional<String> =
-        Optional.ofNullable(updateRequest.getNullable("update_request"))
+    fun updateRequest(): Optional<String> = Optional.ofNullable(updateRequest.getNullable("update_request"))
 
     /** The number of countries updated */
-    @JsonProperty("update_count") @ExcludeMissing fun _updateCount(): JsonField<Long> = updateCount
+    @JsonProperty("update_count")
+    @ExcludeMissing
+    fun _updateCount(): JsonField<Long> = updateCount
 
     /**
-     * A bulk update request to change voice dialing country permissions stored as a URL-encoded,
-     * JSON array of update objects. For example : `[ { "iso_code": "GB",
-     * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
-     * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+     * A bulk update request to change voice dialing country permissions stored as a
+     * URL-encoded, JSON array of update objects. For example :
+     * `[ { "iso_code": "GB", "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true", "high_risk_tollfraud_numbers_enabled": "false" } ]`
      */
     @JsonProperty("update_request")
     @ExcludeMissing
@@ -61,15 +55,16 @@ private constructor(
 
     private var validated: Boolean = false
 
-    fun validate(): DialingPermissionCreateBulkCountryUpdatesResponse = apply {
-        if (validated) {
-            return@apply
-        }
+    fun validate(): DialingPermissionCreateBulkCountryUpdatesResponse =
+        apply {
+            if (validated) {
+              return@apply
+            }
 
-        updateCount()
-        updateRequest()
-        validated = true
-    }
+            updateCount()
+            updateRequest()
+            validated = true
+        }
 
     fun toBuilder() = Builder().from(this)
 
@@ -79,7 +74,8 @@ private constructor(
          * Returns a mutable builder for constructing an instance of
          * [DialingPermissionCreateBulkCountryUpdatesResponse].
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [DialingPermissionCreateBulkCountryUpdatesResponse]. */
@@ -90,84 +86,86 @@ private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(
-            dialingPermissionCreateBulkCountryUpdatesResponse:
-                DialingPermissionCreateBulkCountryUpdatesResponse
-        ) = apply {
-            updateCount = dialingPermissionCreateBulkCountryUpdatesResponse.updateCount
-            updateRequest = dialingPermissionCreateBulkCountryUpdatesResponse.updateRequest
-            additionalProperties =
-                dialingPermissionCreateBulkCountryUpdatesResponse.additionalProperties
-                    .toMutableMap()
-        }
+        internal fun from(dialingPermissionCreateBulkCountryUpdatesResponse: DialingPermissionCreateBulkCountryUpdatesResponse) =
+            apply {
+                updateCount = dialingPermissionCreateBulkCountryUpdatesResponse.updateCount
+                updateRequest = dialingPermissionCreateBulkCountryUpdatesResponse.updateRequest
+                additionalProperties = dialingPermissionCreateBulkCountryUpdatesResponse.additionalProperties.toMutableMap()
+            }
 
         /** The number of countries updated */
         fun updateCount(updateCount: Long) = updateCount(JsonField.of(updateCount))
 
         /** The number of countries updated */
-        fun updateCount(updateCount: JsonField<Long>) = apply { this.updateCount = updateCount }
+        fun updateCount(updateCount: JsonField<Long>) =
+            apply {
+                this.updateCount = updateCount
+            }
 
         /**
          * A bulk update request to change voice dialing country permissions stored as a
-         * URL-encoded, JSON array of update objects. For example : `[ { "iso_code": "GB",
-         * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
-         * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+         * URL-encoded, JSON array of update objects. For example :
+         * `[ { "iso_code": "GB", "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true", "high_risk_tollfraud_numbers_enabled": "false" } ]`
          */
-        fun updateRequest(updateRequest: String?) =
-            updateRequest(JsonField.ofNullable(updateRequest))
+        fun updateRequest(updateRequest: String?) = updateRequest(JsonField.ofNullable(updateRequest))
 
         /**
          * A bulk update request to change voice dialing country permissions stored as a
-         * URL-encoded, JSON array of update objects. For example : `[ { "iso_code": "GB",
-         * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
-         * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+         * URL-encoded, JSON array of update objects. For example :
+         * `[ { "iso_code": "GB", "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true", "high_risk_tollfraud_numbers_enabled": "false" } ]`
          */
-        fun updateRequest(updateRequest: Optional<String>) =
-            updateRequest(updateRequest.getOrNull())
+        fun updateRequest(updateRequest: Optional<String>) = updateRequest(updateRequest.getOrNull())
 
         /**
          * A bulk update request to change voice dialing country permissions stored as a
-         * URL-encoded, JSON array of update objects. For example : `[ { "iso_code": "GB",
-         * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
-         * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+         * URL-encoded, JSON array of update objects. For example :
+         * `[ { "iso_code": "GB", "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true", "high_risk_tollfraud_numbers_enabled": "false" } ]`
          */
-        fun updateRequest(updateRequest: JsonField<String>) = apply {
-            this.updateRequest = updateRequest
-        }
+        fun updateRequest(updateRequest: JsonField<String>) =
+            apply {
+                this.updateRequest = updateRequest
+            }
 
-        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-            this.additionalProperties.clear()
-            putAllAdditionalProperties(additionalProperties)
-        }
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
+            apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
 
-        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-            additionalProperties.put(key, value)
-        }
+        fun putAdditionalProperty(key: String, value: JsonValue) =
+            apply {
+                additionalProperties.put(key, value)
+            }
 
-        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-            this.additionalProperties.putAll(additionalProperties)
-        }
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
+            apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
 
-        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+        fun removeAdditionalProperty(key: String) =
+            apply {
+                additionalProperties.remove(key)
+            }
 
-        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-            keys.forEach(::removeAdditionalProperty)
-        }
+        fun removeAllAdditionalProperties(keys: Set<String>) =
+            apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
 
         fun build(): DialingPermissionCreateBulkCountryUpdatesResponse =
             DialingPermissionCreateBulkCountryUpdatesResponse(
-                updateCount,
-                updateRequest,
-                additionalProperties.toImmutable(),
+              updateCount,
+              updateRequest,
+              additionalProperties.toImmutable(),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is DialingPermissionCreateBulkCountryUpdatesResponse && updateCount == other.updateCount && updateRequest == other.updateRequest && additionalProperties == other.additionalProperties /* spotless:on */
+      return /* spotless:off */ other is DialingPermissionCreateBulkCountryUpdatesResponse && updateCount == other.updateCount && updateRequest == other.updateRequest && additionalProperties == other.additionalProperties /* spotless:on */
     }
 
     /* spotless:off */
@@ -176,6 +174,5 @@ private constructor(
 
     override fun hashCode(): Int = hashCode
 
-    override fun toString() =
-        "DialingPermissionCreateBulkCountryUpdatesResponse{updateCount=$updateCount, updateRequest=$updateRequest, additionalProperties=$additionalProperties}"
+    override fun toString() = "DialingPermissionCreateBulkCountryUpdatesResponse{updateCount=$updateCount, updateRequest=$updateRequest, additionalProperties=$additionalProperties}"
 }

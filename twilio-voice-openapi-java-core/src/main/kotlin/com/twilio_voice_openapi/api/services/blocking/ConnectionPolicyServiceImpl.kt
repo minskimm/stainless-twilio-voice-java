@@ -27,12 +27,12 @@ import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyUp
 import com.twilio_voice_openapi.api.services.blocking.connectionpolicies.TargetService
 import com.twilio_voice_openapi.api.services.blocking.connectionpolicies.TargetServiceImpl
 
-class ConnectionPolicyServiceImpl internal constructor(private val clientOptions: ClientOptions) :
-    ConnectionPolicyService {
+class ConnectionPolicyServiceImpl internal constructor(
+    private val clientOptions: ClientOptions,
 
-    private val withRawResponse: ConnectionPolicyService.WithRawResponse by lazy {
-        WithRawResponseImpl(clientOptions)
-    }
+) : ConnectionPolicyService {
+
+    private val withRawResponse: ConnectionPolicyService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
 
     private val targets: TargetService by lazy { TargetServiceImpl(clientOptions) }
 
@@ -40,174 +40,159 @@ class ConnectionPolicyServiceImpl internal constructor(private val clientOptions
 
     override fun targets(): TargetService = targets
 
-    override fun create(
-        params: ConnectionPolicyCreateParams,
-        requestOptions: RequestOptions,
-    ): ConnectionPolicy =
+    override fun create(params: ConnectionPolicyCreateParams, requestOptions: RequestOptions): ConnectionPolicy =
         // post /v1/ConnectionPolicies
         withRawResponse().create(params, requestOptions).parse()
 
-    override fun retrieve(
-        params: ConnectionPolicyRetrieveParams,
-        requestOptions: RequestOptions,
-    ): ConnectionPolicy =
+    override fun retrieve(params: ConnectionPolicyRetrieveParams, requestOptions: RequestOptions): ConnectionPolicy =
         // get /v1/ConnectionPolicies/{Sid}
         withRawResponse().retrieve(params, requestOptions).parse()
 
-    override fun update(
-        params: ConnectionPolicyUpdateParams,
-        requestOptions: RequestOptions,
-    ): ConnectionPolicy =
+    override fun update(params: ConnectionPolicyUpdateParams, requestOptions: RequestOptions): ConnectionPolicy =
         // post /v1/ConnectionPolicies/{Sid}
         withRawResponse().update(params, requestOptions).parse()
 
-    override fun list(
-        params: ConnectionPolicyListParams,
-        requestOptions: RequestOptions,
-    ): ConnectionPolicyListResponse =
+    override fun list(params: ConnectionPolicyListParams, requestOptions: RequestOptions): ConnectionPolicyListResponse =
         // get /v1/ConnectionPolicies
         withRawResponse().list(params, requestOptions).parse()
 
     override fun delete(params: ConnectionPolicyDeleteParams, requestOptions: RequestOptions) {
-        // delete /v1/ConnectionPolicies/{Sid}
-        withRawResponse().delete(params, requestOptions)
+      // delete /v1/ConnectionPolicies/{Sid}
+      withRawResponse().delete(params, requestOptions)
     }
 
-    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        ConnectionPolicyService.WithRawResponse {
+    class WithRawResponseImpl internal constructor(
+        private val clientOptions: ClientOptions,
 
-        private val errorHandler: Handler<TwilioVoiceOpenAPIError> =
-            errorHandler(clientOptions.jsonMapper)
+    ) : ConnectionPolicyService.WithRawResponse {
 
-        private val targets: TargetService.WithRawResponse by lazy {
-            TargetServiceImpl.WithRawResponseImpl(clientOptions)
-        }
+        private val errorHandler: Handler<TwilioVoiceOpenAPIError> = errorHandler(clientOptions.jsonMapper)
+
+        private val targets: TargetService.WithRawResponse by lazy { TargetServiceImpl.WithRawResponseImpl(clientOptions) }
 
         override fun targets(): TargetService.WithRawResponse = targets
 
-        private val createHandler: Handler<ConnectionPolicy> =
-            jsonHandler<ConnectionPolicy>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+        private val createHandler: Handler<ConnectionPolicy> = jsonHandler<ConnectionPolicy>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
-        override fun create(
-            params: ConnectionPolicyCreateParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<ConnectionPolicy> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.POST)
-                    .addPathSegments("v1", "ConnectionPolicies")
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
-                response
-                    .use { createHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.validate()
-                        }
-                    }
-            }
+        override fun create(params: ConnectionPolicyCreateParams, requestOptions: RequestOptions): HttpResponseFor<ConnectionPolicy> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.POST)
+            .addPathSegments("v1", "ConnectionPolicies")
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return response.parseable {
+              response.use {
+                  createHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          }
         }
 
-        private val retrieveHandler: Handler<ConnectionPolicy> =
-            jsonHandler<ConnectionPolicy>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+        private val retrieveHandler: Handler<ConnectionPolicy> = jsonHandler<ConnectionPolicy>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
-        override fun retrieve(
-            params: ConnectionPolicyRetrieveParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<ConnectionPolicy> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .addPathSegments("v1", "ConnectionPolicies", params.getPathParam(0))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
-                response
-                    .use { retrieveHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.validate()
-                        }
-                    }
-            }
+        override fun retrieve(params: ConnectionPolicyRetrieveParams, requestOptions: RequestOptions): HttpResponseFor<ConnectionPolicy> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .addPathSegments("v1", "ConnectionPolicies", params.getPathParam(0))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return response.parseable {
+              response.use {
+                  retrieveHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          }
         }
 
-        private val updateHandler: Handler<ConnectionPolicy> =
-            jsonHandler<ConnectionPolicy>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+        private val updateHandler: Handler<ConnectionPolicy> = jsonHandler<ConnectionPolicy>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
-        override fun update(
-            params: ConnectionPolicyUpdateParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<ConnectionPolicy> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.POST)
-                    .addPathSegments("v1", "ConnectionPolicies", params.getPathParam(0))
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
-                response
-                    .use { updateHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.validate()
-                        }
-                    }
-            }
+        override fun update(params: ConnectionPolicyUpdateParams, requestOptions: RequestOptions): HttpResponseFor<ConnectionPolicy> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.POST)
+            .addPathSegments("v1", "ConnectionPolicies", params.getPathParam(0))
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return response.parseable {
+              response.use {
+                  updateHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          }
         }
 
-        private val listHandler: Handler<ConnectionPolicyListResponse> =
-            jsonHandler<ConnectionPolicyListResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
+        private val listHandler: Handler<ConnectionPolicyListResponse> = jsonHandler<ConnectionPolicyListResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
-        override fun list(
-            params: ConnectionPolicyListParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<ConnectionPolicyListResponse> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .addPathSegments("v1", "ConnectionPolicies")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
-                response
-                    .use { listHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.validate()
-                        }
-                    }
-            }
+        override fun list(params: ConnectionPolicyListParams, requestOptions: RequestOptions): HttpResponseFor<ConnectionPolicyListResponse> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .addPathSegments("v1", "ConnectionPolicies")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return response.parseable {
+              response.use {
+                  listHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          }
         }
 
         private val deleteHandler: Handler<Void?> = emptyHandler().withErrorHandler(errorHandler)
 
-        override fun delete(
-            params: ConnectionPolicyDeleteParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.DELETE)
-                    .addPathSegments("v1", "ConnectionPolicies", params.getPathParam(0))
-                    .apply { params._body().ifPresent { body(json(clientOptions.jsonMapper, it)) } }
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable { response.use { deleteHandler.handle(it) } }
+        override fun delete(params: ConnectionPolicyDeleteParams, requestOptions: RequestOptions): HttpResponse {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.DELETE)
+            .addPathSegments("v1", "ConnectionPolicies", params.getPathParam(0))
+            .apply { params._body().ifPresent{ body(json(clientOptions.jsonMapper, it)) } }
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return response.parseable {
+              response.use {
+                  deleteHandler.handle(it)
+              }
+          }
         }
     }
 }
