@@ -18,54 +18,44 @@ import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIError
 import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams
 import java.util.concurrent.CompletableFuture
 
-class ArchiveServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
-    ArchiveServiceAsync {
+class ArchiveServiceAsyncImpl internal constructor(
+    private val clientOptions: ClientOptions,
 
-    private val withRawResponse: ArchiveServiceAsync.WithRawResponse by lazy {
-        WithRawResponseImpl(clientOptions)
-    }
+) : ArchiveServiceAsync {
+
+    private val withRawResponse: ArchiveServiceAsync.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
 
     override fun withRawResponse(): ArchiveServiceAsync.WithRawResponse = withRawResponse
 
-    override fun deleteCall(
-        params: ArchiveDeleteCallParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<Void?> =
+    override fun deleteCall(params: ArchiveDeleteCallParams, requestOptions: RequestOptions): CompletableFuture<Void?> =
         // delete /v1/Archives/{Date}/Calls/{Sid}
         withRawResponse().deleteCall(params, requestOptions).thenAccept {}
 
-    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        ArchiveServiceAsync.WithRawResponse {
+    class WithRawResponseImpl internal constructor(
+        private val clientOptions: ClientOptions,
 
-        private val errorHandler: Handler<TwilioVoiceOpenAPIError> =
-            errorHandler(clientOptions.jsonMapper)
+    ) : ArchiveServiceAsync.WithRawResponse {
 
-        private val deleteCallHandler: Handler<Void?> =
-            emptyHandler().withErrorHandler(errorHandler)
+        private val errorHandler: Handler<TwilioVoiceOpenAPIError> = errorHandler(clientOptions.jsonMapper)
 
-        override fun deleteCall(
-            params: ArchiveDeleteCallParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponse> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.DELETE)
-                    .addPathSegments(
-                        "v1",
-                        "Archives",
-                        params.getPathParam(0),
-                        "Calls",
-                        params.getPathParam(1),
-                    )
-                    .apply { params._body().ifPresent { body(json(clientOptions.jsonMapper, it)) } }
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    response.parseable { response.use { deleteCallHandler.handle(it) } }
-                }
+        private val deleteCallHandler: Handler<Void?> = emptyHandler().withErrorHandler(errorHandler)
+
+        override fun deleteCall(params: ArchiveDeleteCallParams, requestOptions: RequestOptions): CompletableFuture<HttpResponse> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.DELETE)
+            .addPathSegments("v1", "Archives", params.getPathParam(0), "Calls", params.getPathParam(1))
+            .apply { params._body().ifPresent{ body(json(clientOptions.jsonMapper, it)) } }
+            .build()
+            .prepareAsync(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          return request.thenComposeAsync { clientOptions.httpClient.executeAsync(
+            it, requestOptions
+          ) }.thenApply { response -> response.parseable {
+              response.use {
+                  deleteCallHandler.handle(it)
+              }
+          } }
         }
     }
 }

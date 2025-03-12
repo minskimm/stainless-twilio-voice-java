@@ -13,51 +13,47 @@ import java.util.concurrent.CompletableFuture
 interface DialingPermissionServiceAsync {
 
     /**
-     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     * Returns a view of this service that provides access to raw HTTP responses for
+     * each method.
      */
     fun withRawResponse(): WithRawResponse
 
     fun countries(): CountryServiceAsync
 
     /**
-     * Create a bulk update request to change voice dialing country permissions of one or more
-     * countries identified by the corresponding
+     * Create a bulk update request to change voice dialing country permissions of one
+     * or more countries identified by the corresponding
      * [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
      */
-    fun createBulkCountryUpdates(
-        params: DialingPermissionCreateBulkCountryUpdatesParams
-    ): CompletableFuture<DialingPermissionCreateBulkCountryUpdatesResponse> =
-        createBulkCountryUpdates(params, RequestOptions.none())
+    fun createBulkCountryUpdates(params: DialingPermissionCreateBulkCountryUpdatesParams): CompletableFuture<DialingPermissionCreateBulkCountryUpdatesResponse> =
+        createBulkCountryUpdates(
+          params, RequestOptions.none()
+        )
 
     /** @see [createBulkCountryUpdates] */
-    fun createBulkCountryUpdates(
-        params: DialingPermissionCreateBulkCountryUpdatesParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<DialingPermissionCreateBulkCountryUpdatesResponse>
+    fun createBulkCountryUpdates(params: DialingPermissionCreateBulkCountryUpdatesParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<DialingPermissionCreateBulkCountryUpdatesResponse>
 
     /**
-     * A view of [DialingPermissionServiceAsync] that provides access to raw HTTP responses for each
-     * method.
+     * A view of [DialingPermissionServiceAsync] that provides access to raw HTTP
+     * responses for each method.
      */
     interface WithRawResponse {
 
         fun countries(): CountryServiceAsync.WithRawResponse
 
         /**
-         * Returns a raw HTTP response for `post /v1/DialingPermissions/BulkCountryUpdates`, but is
-         * otherwise the same as [DialingPermissionServiceAsync.createBulkCountryUpdates].
+         * Returns a raw HTTP response for
+         * `post /v1/DialingPermissions/BulkCountryUpdates`, but is otherwise the same as
+         * [DialingPermissionServiceAsync.createBulkCountryUpdates].
          */
         @MustBeClosed
-        fun createBulkCountryUpdates(
-            params: DialingPermissionCreateBulkCountryUpdatesParams
-        ): CompletableFuture<HttpResponseFor<DialingPermissionCreateBulkCountryUpdatesResponse>> =
-            createBulkCountryUpdates(params, RequestOptions.none())
+        fun createBulkCountryUpdates(params: DialingPermissionCreateBulkCountryUpdatesParams): CompletableFuture<HttpResponseFor<DialingPermissionCreateBulkCountryUpdatesResponse>> =
+            createBulkCountryUpdates(
+              params, RequestOptions.none()
+            )
 
         /** @see [createBulkCountryUpdates] */
         @MustBeClosed
-        fun createBulkCountryUpdates(
-            params: DialingPermissionCreateBulkCountryUpdatesParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<DialingPermissionCreateBulkCountryUpdatesResponse>>
+        fun createBulkCountryUpdates(params: DialingPermissionCreateBulkCountryUpdatesParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<DialingPermissionCreateBulkCountryUpdatesResponse>>
     }
 }

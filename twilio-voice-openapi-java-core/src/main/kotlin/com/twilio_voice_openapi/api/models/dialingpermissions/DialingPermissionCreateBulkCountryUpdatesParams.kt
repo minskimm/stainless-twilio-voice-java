@@ -20,28 +20,26 @@ import com.twilio_voice_openapi.api.core.toImmutable
 import java.util.Objects
 
 /**
- * Create a bulk update request to change voice dialing country permissions of one or more countries
- * identified by the corresponding
+ * Create a bulk update request to change voice dialing country permissions of one
+ * or more countries identified by the corresponding
  * [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
  */
-class DialingPermissionCreateBulkCountryUpdatesParams
-private constructor(
+class DialingPermissionCreateBulkCountryUpdatesParams private constructor(
     private val body: Body,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
+
 ) : Params {
 
     /**
-     * URL encoded JSON array of update objects. example : `[ { "iso_code": "GB",
-     * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
-     * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+     * URL encoded JSON array of update objects. example :
+     * `[ { "iso_code": "GB", "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true", "high_risk_tollfraud_numbers_enabled": "false" } ]`
      */
     fun updateRequest(): String = body.updateRequest()
 
     /**
-     * URL encoded JSON array of update objects. example : `[ { "iso_code": "GB",
-     * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
-     * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+     * URL encoded JSON array of update objects. example :
+     * `[ { "iso_code": "GB", "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true", "high_risk_tollfraud_numbers_enabled": "false" } ]`
      */
     fun _updateRequest(): JsonField<String> = body._updateRequest()
 
@@ -51,34 +49,29 @@ private constructor(
 
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
-    @JvmSynthetic internal fun _body(): Body = body
+    @JvmSynthetic
+    internal fun _body(): Body = body
 
     override fun _headers(): Headers = additionalHeaders
 
     override fun _queryParams(): QueryParams = additionalQueryParams
 
     @NoAutoDetect
-    class Body
-    @JsonCreator
-    private constructor(
-        @JsonProperty("UpdateRequest")
-        @ExcludeMissing
-        private val updateRequest: JsonField<String> = JsonMissing.of(),
-        @JsonAnySetter
-        private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
+    class Body @JsonCreator private constructor(
+        @JsonProperty("UpdateRequest") @ExcludeMissing private val updateRequest: JsonField<String> = JsonMissing.of(),
+        @JsonAnySetter private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
+
     ) {
 
         /**
-         * URL encoded JSON array of update objects. example : `[ { "iso_code": "GB",
-         * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
-         * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+         * URL encoded JSON array of update objects. example :
+         * `[ { "iso_code": "GB", "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true", "high_risk_tollfraud_numbers_enabled": "false" } ]`
          */
         fun updateRequest(): String = updateRequest.getRequired("UpdateRequest")
 
         /**
-         * URL encoded JSON array of update objects. example : `[ { "iso_code": "GB",
-         * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
-         * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+         * URL encoded JSON array of update objects. example :
+         * `[ { "iso_code": "GB", "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true", "high_risk_tollfraud_numbers_enabled": "false" } ]`
          */
         @JsonProperty("UpdateRequest")
         @ExcludeMissing
@@ -90,14 +83,15 @@ private constructor(
 
         private var validated: Boolean = false
 
-        fun validate(): Body = apply {
-            if (validated) {
-                return@apply
-            }
+        fun validate(): Body =
+            apply {
+                if (validated) {
+                  return@apply
+                }
 
-            updateRequest()
-            validated = true
-        }
+                updateRequest()
+                validated = true
+            }
 
         fun toBuilder() = Builder().from(this)
 
@@ -107,11 +101,13 @@ private constructor(
              * Returns a mutable builder for constructing an instance of [Body].
              *
              * The following fields are required:
+             *
              * ```java
              * .updateRequest()
              * ```
              */
-            @JvmStatic fun builder() = Builder()
+            @JvmStatic
+            fun builder() = Builder()
         }
 
         /** A builder for [Body]. */
@@ -121,59 +117,67 @@ private constructor(
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
-            internal fun from(body: Body) = apply {
-                updateRequest = body.updateRequest
-                additionalProperties = body.additionalProperties.toMutableMap()
-            }
+            internal fun from(body: Body) =
+                apply {
+                    updateRequest = body.updateRequest
+                    additionalProperties = body.additionalProperties.toMutableMap()
+                }
 
             /**
-             * URL encoded JSON array of update objects. example : `[ { "iso_code": "GB",
-             * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
-             * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+             * URL encoded JSON array of update objects. example :
+             * `[ { "iso_code": "GB", "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true", "high_risk_tollfraud_numbers_enabled": "false" } ]`
              */
             fun updateRequest(updateRequest: String) = updateRequest(JsonField.of(updateRequest))
 
             /**
-             * URL encoded JSON array of update objects. example : `[ { "iso_code": "GB",
-             * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
-             * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+             * URL encoded JSON array of update objects. example :
+             * `[ { "iso_code": "GB", "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true", "high_risk_tollfraud_numbers_enabled": "false" } ]`
              */
-            fun updateRequest(updateRequest: JsonField<String>) = apply {
-                this.updateRequest = updateRequest
-            }
+            fun updateRequest(updateRequest: JsonField<String>) =
+                apply {
+                    this.updateRequest = updateRequest
+                }
 
-            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
+                apply {
+                    this.additionalProperties.clear()
+                    putAllAdditionalProperties(additionalProperties)
+                }
 
-            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-                additionalProperties.put(key, value)
-            }
+            fun putAdditionalProperty(key: String, value: JsonValue) =
+                apply {
+                    additionalProperties.put(key, value)
+                }
 
-            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
+                apply {
+                    this.additionalProperties.putAll(additionalProperties)
+                }
 
-            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+            fun removeAdditionalProperty(key: String) =
+                apply {
+                    additionalProperties.remove(key)
+                }
 
-            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
+            fun removeAllAdditionalProperties(keys: Set<String>) =
+                apply {
+                    keys.forEach(::removeAdditionalProperty)
+                }
 
             fun build(): Body =
                 Body(
-                    checkRequired("updateRequest", updateRequest),
-                    additionalProperties.toImmutable(),
+                  checkRequired(
+                    "updateRequest", updateRequest
+                  ), additionalProperties.toImmutable()
                 )
         }
 
         override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
+          if (this === other) {
+              return true
+          }
 
-            return /* spotless:off */ other is Body && updateRequest == other.updateRequest && additionalProperties == other.additionalProperties /* spotless:on */
+          return /* spotless:off */ other is Body && updateRequest == other.updateRequest && additionalProperties == other.additionalProperties /* spotless:on */
         }
 
         /* spotless:off */
@@ -182,8 +186,7 @@ private constructor(
 
         override fun hashCode(): Int = hashCode
 
-        override fun toString() =
-            "Body{updateRequest=$updateRequest, additionalProperties=$additionalProperties}"
+        override fun toString() = "Body{updateRequest=$updateRequest, additionalProperties=$additionalProperties}"
     }
 
     fun toBuilder() = Builder().from(this)
@@ -195,11 +198,13 @@ private constructor(
          * [DialingPermissionCreateBulkCountryUpdatesParams].
          *
          * The following fields are required:
+         *
          * ```java
          * .updateRequest()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [DialingPermissionCreateBulkCountryUpdatesParams]. */
@@ -211,168 +216,199 @@ private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(
-            dialingPermissionCreateBulkCountryUpdatesParams:
-                DialingPermissionCreateBulkCountryUpdatesParams
-        ) = apply {
-            body = dialingPermissionCreateBulkCountryUpdatesParams.body.toBuilder()
-            additionalHeaders =
-                dialingPermissionCreateBulkCountryUpdatesParams.additionalHeaders.toBuilder()
-            additionalQueryParams =
-                dialingPermissionCreateBulkCountryUpdatesParams.additionalQueryParams.toBuilder()
-        }
+        internal fun from(dialingPermissionCreateBulkCountryUpdatesParams: DialingPermissionCreateBulkCountryUpdatesParams) =
+            apply {
+                body = dialingPermissionCreateBulkCountryUpdatesParams.body.toBuilder()
+                additionalHeaders = dialingPermissionCreateBulkCountryUpdatesParams.additionalHeaders.toBuilder()
+                additionalQueryParams = dialingPermissionCreateBulkCountryUpdatesParams.additionalQueryParams.toBuilder()
+            }
 
         /**
-         * URL encoded JSON array of update objects. example : `[ { "iso_code": "GB",
-         * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
-         * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+         * URL encoded JSON array of update objects. example :
+         * `[ { "iso_code": "GB", "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true", "high_risk_tollfraud_numbers_enabled": "false" } ]`
          */
-        fun updateRequest(updateRequest: String) = apply { body.updateRequest(updateRequest) }
+        fun updateRequest(updateRequest: String) =
+            apply {
+                body.updateRequest(updateRequest)
+            }
 
         /**
-         * URL encoded JSON array of update objects. example : `[ { "iso_code": "GB",
-         * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
-         * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+         * URL encoded JSON array of update objects. example :
+         * `[ { "iso_code": "GB", "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true", "high_risk_tollfraud_numbers_enabled": "false" } ]`
          */
-        fun updateRequest(updateRequest: JsonField<String>) = apply {
-            body.updateRequest(updateRequest)
-        }
+        fun updateRequest(updateRequest: JsonField<String>) =
+            apply {
+                body.updateRequest(updateRequest)
+            }
 
-        fun additionalBodyProperties(additionalBodyProperties: Map<String, JsonValue>) = apply {
-            body.additionalProperties(additionalBodyProperties)
-        }
+        fun additionalBodyProperties(additionalBodyProperties: Map<String, JsonValue>) =
+            apply {
+                body.additionalProperties(additionalBodyProperties)
+            }
 
-        fun putAdditionalBodyProperty(key: String, value: JsonValue) = apply {
-            body.putAdditionalProperty(key, value)
-        }
+        fun putAdditionalBodyProperty(key: String, value: JsonValue) =
+            apply {
+                body.putAdditionalProperty(
+                  key, value
+                )
+            }
 
         fun putAllAdditionalBodyProperties(additionalBodyProperties: Map<String, JsonValue>) =
             apply {
                 body.putAllAdditionalProperties(additionalBodyProperties)
             }
 
-        fun removeAdditionalBodyProperty(key: String) = apply { body.removeAdditionalProperty(key) }
+        fun removeAdditionalBodyProperty(key: String) =
+            apply {
+                body.removeAdditionalProperty(key)
+            }
 
-        fun removeAllAdditionalBodyProperties(keys: Set<String>) = apply {
-            body.removeAllAdditionalProperties(keys)
-        }
+        fun removeAllAdditionalBodyProperties(keys: Set<String>) =
+            apply {
+                body.removeAllAdditionalProperties(keys)
+            }
 
-        fun additionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun putAdditionalHeader(name: String, value: String) = apply {
-            additionalHeaders.put(name, value)
-        }
+        fun putAdditionalHeader(name: String, value: String) =
+            apply {
+                additionalHeaders.put(name, value)
+            }
 
-        fun putAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.put(name, values)
-        }
+        fun putAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.put(name, values)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun replaceAdditionalHeaders(name: String, value: String) = apply {
-            additionalHeaders.replace(name, value)
-        }
+        fun replaceAdditionalHeaders(name: String, value: String) =
+            apply {
+                additionalHeaders.replace(name, value)
+            }
 
-        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.replace(name, values)
-        }
+        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.replace(name, values)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun removeAdditionalHeaders(name: String) = apply { additionalHeaders.remove(name) }
+        fun removeAdditionalHeaders(name: String) =
+            apply {
+                additionalHeaders.remove(name)
+            }
 
-        fun removeAllAdditionalHeaders(names: Set<String>) = apply {
-            additionalHeaders.removeAll(names)
-        }
+        fun removeAllAdditionalHeaders(names: Set<String>) =
+            apply {
+                additionalHeaders.removeAll(names)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun putAdditionalQueryParam(key: String, value: String) = apply {
-            additionalQueryParams.put(key, value)
-        }
+        fun putAdditionalQueryParam(key: String, value: String) =
+            apply {
+                additionalQueryParams.put(key, value)
+            }
 
-        fun putAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.put(key, values)
-        }
+        fun putAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.put(key, values)
+            }
 
-        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.putAll(additionalQueryParams)
-        }
+        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.putAll(additionalQueryParams)
+            }
 
         fun putAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.putAll(additionalQueryParams)
             }
 
-        fun replaceAdditionalQueryParams(key: String, value: String) = apply {
-            additionalQueryParams.replace(key, value)
-        }
+        fun replaceAdditionalQueryParams(key: String, value: String) =
+            apply {
+                additionalQueryParams.replace(key, value)
+            }
 
-        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.replace(key, values)
-        }
+        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.replace(key, values)
+            }
 
-        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.replaceAll(additionalQueryParams)
-        }
+        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.replaceAll(additionalQueryParams)
+            }
 
         fun replaceAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.replaceAll(additionalQueryParams)
             }
 
-        fun removeAdditionalQueryParams(key: String) = apply { additionalQueryParams.remove(key) }
+        fun removeAdditionalQueryParams(key: String) =
+            apply {
+                additionalQueryParams.remove(key)
+            }
 
-        fun removeAllAdditionalQueryParams(keys: Set<String>) = apply {
-            additionalQueryParams.removeAll(keys)
-        }
+        fun removeAllAdditionalQueryParams(keys: Set<String>) =
+            apply {
+                additionalQueryParams.removeAll(keys)
+            }
 
         fun build(): DialingPermissionCreateBulkCountryUpdatesParams =
             DialingPermissionCreateBulkCountryUpdatesParams(
-                body.build(),
-                additionalHeaders.build(),
-                additionalQueryParams.build(),
+              body.build(),
+              additionalHeaders.build(),
+              additionalQueryParams.build(),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is DialingPermissionCreateBulkCountryUpdatesParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+      return /* spotless:off */ other is DialingPermissionCreateBulkCountryUpdatesParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
 
-    override fun toString() =
-        "DialingPermissionCreateBulkCountryUpdatesParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+    override fun toString() = "DialingPermissionCreateBulkCountryUpdatesParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

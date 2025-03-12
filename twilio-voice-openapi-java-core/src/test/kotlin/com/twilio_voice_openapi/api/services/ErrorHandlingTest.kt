@@ -36,10 +36,9 @@ class ErrorHandlingTest {
 
     companion object {
 
-        private val ERROR: TwilioVoiceOpenAPIError =
-            TwilioVoiceOpenAPIError.builder()
-                .putAdditionalProperty("errorProperty", JsonValue.from("42"))
-                .build()
+        private val ERROR: TwilioVoiceOpenAPIError = TwilioVoiceOpenAPIError.builder()
+            .putAdditionalProperty("errorProperty", JsonValue.from("42"))
+            .build()
 
         private val ERROR_JSON: ByteArray = jsonMapper().writeValueAsBytes(ERROR)
 
@@ -54,204 +53,219 @@ class ErrorHandlingTest {
 
     @BeforeEach
     fun beforeEach(wmRuntimeInfo: WireMockRuntimeInfo) {
-        client =
-            TwilioVoiceOpenAPIOkHttpClient.builder()
-                .baseUrl(wmRuntimeInfo.httpBaseUrl)
-                .username("My Username")
-                .password("My Password")
-                .build()
+      client = TwilioVoiceOpenAPIOkHttpClient.builder()
+          .baseUrl(wmRuntimeInfo.httpBaseUrl)
+          .username("My Username")
+          .password("My Password")
+          .build()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun archivesDeleteCall400() {
-        val archiveService = client.archives()
-        stubFor(
-            delete(anyUrl())
-                .willReturn(status(400).withHeader(HEADER_NAME, HEADER_VALUE).withBody(ERROR_JSON))
-        )
+      val archiveService = client.archives()
+      stubFor(
+          delete(anyUrl()).willReturn(
+              status(400)
+                  .withHeader(HEADER_NAME, HEADER_VALUE)
+                  .withBody(ERROR_JSON)
+          )
+      )
 
-        val e =
-            assertThrows<BadRequestException> {
-                archiveService.deleteCall(
-                    ArchiveDeleteCallParams.builder()
-                        .date(LocalDate.parse("2019-12-27"))
-                        .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                        .build()
-                )
-            }
+      val e = assertThrows<BadRequestException> {
+          archiveService.deleteCall(ArchiveDeleteCallParams.builder()
+              .date(LocalDate.parse("2019-12-27"))
+              .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+              .build())
+      }
 
-        assertThat(e.statusCode()).isEqualTo(400)
-        assertThat(e.error()).isEqualTo(ERROR)
-        assertThat(e.headers().toMap()).contains(entry(HEADER_NAME, listOf(HEADER_VALUE)))
+      assertThat(e.statusCode()).isEqualTo(400)
+      assertThat(e.error()).isEqualTo(ERROR)
+      assertThat(e.headers().toMap()).contains(
+                        entry(HEADER_NAME, listOf(HEADER_VALUE))
+                    )
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun archivesDeleteCall401() {
-        val archiveService = client.archives()
-        stubFor(
-            delete(anyUrl())
-                .willReturn(status(401).withHeader(HEADER_NAME, HEADER_VALUE).withBody(ERROR_JSON))
-        )
+      val archiveService = client.archives()
+      stubFor(
+          delete(anyUrl()).willReturn(
+              status(401)
+                  .withHeader(HEADER_NAME, HEADER_VALUE)
+                  .withBody(ERROR_JSON)
+          )
+      )
 
-        val e =
-            assertThrows<UnauthorizedException> {
-                archiveService.deleteCall(
-                    ArchiveDeleteCallParams.builder()
-                        .date(LocalDate.parse("2019-12-27"))
-                        .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                        .build()
-                )
-            }
+      val e = assertThrows<UnauthorizedException> {
+          archiveService.deleteCall(ArchiveDeleteCallParams.builder()
+              .date(LocalDate.parse("2019-12-27"))
+              .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+              .build())
+      }
 
-        assertThat(e.statusCode()).isEqualTo(401)
-        assertThat(e.error()).isEqualTo(ERROR)
-        assertThat(e.headers().toMap()).contains(entry(HEADER_NAME, listOf(HEADER_VALUE)))
+      assertThat(e.statusCode()).isEqualTo(401)
+      assertThat(e.error()).isEqualTo(ERROR)
+      assertThat(e.headers().toMap()).contains(
+                        entry(HEADER_NAME, listOf(HEADER_VALUE))
+                    )
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun archivesDeleteCall403() {
-        val archiveService = client.archives()
-        stubFor(
-            delete(anyUrl())
-                .willReturn(status(403).withHeader(HEADER_NAME, HEADER_VALUE).withBody(ERROR_JSON))
-        )
+      val archiveService = client.archives()
+      stubFor(
+          delete(anyUrl()).willReturn(
+              status(403)
+                  .withHeader(HEADER_NAME, HEADER_VALUE)
+                  .withBody(ERROR_JSON)
+          )
+      )
 
-        val e =
-            assertThrows<PermissionDeniedException> {
-                archiveService.deleteCall(
-                    ArchiveDeleteCallParams.builder()
-                        .date(LocalDate.parse("2019-12-27"))
-                        .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                        .build()
-                )
-            }
+      val e = assertThrows<PermissionDeniedException> {
+          archiveService.deleteCall(ArchiveDeleteCallParams.builder()
+              .date(LocalDate.parse("2019-12-27"))
+              .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+              .build())
+      }
 
-        assertThat(e.statusCode()).isEqualTo(403)
-        assertThat(e.error()).isEqualTo(ERROR)
-        assertThat(e.headers().toMap()).contains(entry(HEADER_NAME, listOf(HEADER_VALUE)))
+      assertThat(e.statusCode()).isEqualTo(403)
+      assertThat(e.error()).isEqualTo(ERROR)
+      assertThat(e.headers().toMap()).contains(
+                        entry(HEADER_NAME, listOf(HEADER_VALUE))
+                    )
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun archivesDeleteCall404() {
-        val archiveService = client.archives()
-        stubFor(
-            delete(anyUrl())
-                .willReturn(status(404).withHeader(HEADER_NAME, HEADER_VALUE).withBody(ERROR_JSON))
-        )
+      val archiveService = client.archives()
+      stubFor(
+          delete(anyUrl()).willReturn(
+              status(404)
+                  .withHeader(HEADER_NAME, HEADER_VALUE)
+                  .withBody(ERROR_JSON)
+          )
+      )
 
-        val e =
-            assertThrows<NotFoundException> {
-                archiveService.deleteCall(
-                    ArchiveDeleteCallParams.builder()
-                        .date(LocalDate.parse("2019-12-27"))
-                        .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                        .build()
-                )
-            }
+      val e = assertThrows<NotFoundException> {
+          archiveService.deleteCall(ArchiveDeleteCallParams.builder()
+              .date(LocalDate.parse("2019-12-27"))
+              .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+              .build())
+      }
 
-        assertThat(e.statusCode()).isEqualTo(404)
-        assertThat(e.error()).isEqualTo(ERROR)
-        assertThat(e.headers().toMap()).contains(entry(HEADER_NAME, listOf(HEADER_VALUE)))
+      assertThat(e.statusCode()).isEqualTo(404)
+      assertThat(e.error()).isEqualTo(ERROR)
+      assertThat(e.headers().toMap()).contains(
+                        entry(HEADER_NAME, listOf(HEADER_VALUE))
+                    )
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun archivesDeleteCall422() {
-        val archiveService = client.archives()
-        stubFor(
-            delete(anyUrl())
-                .willReturn(status(422).withHeader(HEADER_NAME, HEADER_VALUE).withBody(ERROR_JSON))
-        )
+      val archiveService = client.archives()
+      stubFor(
+          delete(anyUrl()).willReturn(
+              status(422)
+                  .withHeader(HEADER_NAME, HEADER_VALUE)
+                  .withBody(ERROR_JSON)
+          )
+      )
 
-        val e =
-            assertThrows<UnprocessableEntityException> {
-                archiveService.deleteCall(
-                    ArchiveDeleteCallParams.builder()
-                        .date(LocalDate.parse("2019-12-27"))
-                        .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                        .build()
-                )
-            }
+      val e = assertThrows<UnprocessableEntityException> {
+          archiveService.deleteCall(ArchiveDeleteCallParams.builder()
+              .date(LocalDate.parse("2019-12-27"))
+              .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+              .build())
+      }
 
-        assertThat(e.statusCode()).isEqualTo(422)
-        assertThat(e.error()).isEqualTo(ERROR)
-        assertThat(e.headers().toMap()).contains(entry(HEADER_NAME, listOf(HEADER_VALUE)))
+      assertThat(e.statusCode()).isEqualTo(422)
+      assertThat(e.error()).isEqualTo(ERROR)
+      assertThat(e.headers().toMap()).contains(
+                        entry(HEADER_NAME, listOf(HEADER_VALUE))
+                    )
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun archivesDeleteCall429() {
-        val archiveService = client.archives()
-        stubFor(
-            delete(anyUrl())
-                .willReturn(status(429).withHeader(HEADER_NAME, HEADER_VALUE).withBody(ERROR_JSON))
-        )
+      val archiveService = client.archives()
+      stubFor(
+          delete(anyUrl()).willReturn(
+              status(429)
+                  .withHeader(HEADER_NAME, HEADER_VALUE)
+                  .withBody(ERROR_JSON)
+          )
+      )
 
-        val e =
-            assertThrows<RateLimitException> {
-                archiveService.deleteCall(
-                    ArchiveDeleteCallParams.builder()
-                        .date(LocalDate.parse("2019-12-27"))
-                        .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                        .build()
-                )
-            }
+      val e = assertThrows<RateLimitException> {
+          archiveService.deleteCall(ArchiveDeleteCallParams.builder()
+              .date(LocalDate.parse("2019-12-27"))
+              .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+              .build())
+      }
 
-        assertThat(e.statusCode()).isEqualTo(429)
-        assertThat(e.error()).isEqualTo(ERROR)
-        assertThat(e.headers().toMap()).contains(entry(HEADER_NAME, listOf(HEADER_VALUE)))
+      assertThat(e.statusCode()).isEqualTo(429)
+      assertThat(e.error()).isEqualTo(ERROR)
+      assertThat(e.headers().toMap()).contains(
+                        entry(HEADER_NAME, listOf(HEADER_VALUE))
+                    )
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun archivesDeleteCall500() {
-        val archiveService = client.archives()
-        stubFor(
-            delete(anyUrl())
-                .willReturn(status(500).withHeader(HEADER_NAME, HEADER_VALUE).withBody(ERROR_JSON))
-        )
+      val archiveService = client.archives()
+      stubFor(
+          delete(anyUrl()).willReturn(
+              status(500)
+                  .withHeader(HEADER_NAME, HEADER_VALUE)
+                  .withBody(ERROR_JSON)
+          )
+      )
 
-        val e =
-            assertThrows<InternalServerException> {
-                archiveService.deleteCall(
-                    ArchiveDeleteCallParams.builder()
-                        .date(LocalDate.parse("2019-12-27"))
-                        .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                        .build()
-                )
-            }
+      val e = assertThrows<InternalServerException> {
+          archiveService.deleteCall(ArchiveDeleteCallParams.builder()
+              .date(LocalDate.parse("2019-12-27"))
+              .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+              .build())
+      }
 
-        assertThat(e.statusCode()).isEqualTo(500)
-        assertThat(e.error()).isEqualTo(ERROR)
-        assertThat(e.headers().toMap()).contains(entry(HEADER_NAME, listOf(HEADER_VALUE)))
+      assertThat(e.statusCode()).isEqualTo(500)
+      assertThat(e.error()).isEqualTo(ERROR)
+      assertThat(e.headers().toMap()).contains(
+                        entry(HEADER_NAME, listOf(HEADER_VALUE))
+                    )
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun archivesDeleteCall999() {
-        val archiveService = client.archives()
-        stubFor(
-            delete(anyUrl())
-                .willReturn(status(999).withHeader(HEADER_NAME, HEADER_VALUE).withBody(ERROR_JSON))
-        )
+      val archiveService = client.archives()
+      stubFor(
+          delete(anyUrl()).willReturn(
+              status(999)
+                  .withHeader(HEADER_NAME, HEADER_VALUE)
+                  .withBody(ERROR_JSON)
+          )
+      )
 
-        val e =
-            assertThrows<UnexpectedStatusCodeException> {
-                archiveService.deleteCall(
-                    ArchiveDeleteCallParams.builder()
-                        .date(LocalDate.parse("2019-12-27"))
-                        .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                        .build()
-                )
-            }
+      val e = assertThrows<UnexpectedStatusCodeException> {
+          archiveService.deleteCall(ArchiveDeleteCallParams.builder()
+              .date(LocalDate.parse("2019-12-27"))
+              .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+              .build())
+      }
 
-        assertThat(e.statusCode()).isEqualTo(999)
-        assertThat(e.error()).isEqualTo(ERROR)
-        assertThat(e.headers().toMap()).contains(entry(HEADER_NAME, listOf(HEADER_VALUE)))
+      assertThat(e.statusCode()).isEqualTo(999)
+      assertThat(e.error()).isEqualTo(ERROR)
+      assertThat(e.headers().toMap()).contains(
+                        entry(HEADER_NAME, listOf(HEADER_VALUE))
+                    )
     }
 
     private fun Headers.toMap(): Map<String, List<String>> =
