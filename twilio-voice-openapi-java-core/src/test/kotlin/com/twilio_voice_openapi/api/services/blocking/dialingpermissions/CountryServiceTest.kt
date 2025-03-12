@@ -17,62 +17,70 @@ class CountryServiceTest {
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun retrieve() {
-      val client = TwilioVoiceOpenAPIOkHttpClient.builder()
-          .baseUrl(TestServerExtension.BASE_URL)
-          .username("My Username")
-          .password("My Password")
-          .build()
-      val countryService = client.dialingPermissions().countries()
+        val client =
+            TwilioVoiceOpenAPIOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .username("My Username")
+                .password("My Password")
+                .build()
+        val countryService = client.dialingPermissions().countries()
 
-      val country = countryService.retrieve(CountryRetrieveParams.builder()
-          .isoCode("IsoCode")
-          .build())
+        val country =
+            countryService.retrieve(CountryRetrieveParams.builder().isoCode("IsoCode").build())
 
-      country.validate()
+        country.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun list() {
-      val client = TwilioVoiceOpenAPIOkHttpClient.builder()
-          .baseUrl(TestServerExtension.BASE_URL)
-          .username("My Username")
-          .password("My Password")
-          .build()
-      val countryService = client.dialingPermissions().countries()
+        val client =
+            TwilioVoiceOpenAPIOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .username("My Username")
+                .password("My Password")
+                .build()
+        val countryService = client.dialingPermissions().countries()
 
-      val country = countryService.list(CountryListParams.builder()
-          .continent("Continent")
-          .countryCode("CountryCode")
-          .highRiskSpecialNumbersEnabled(true)
-          .highRiskTollfraudNumbersEnabled(true)
-          .isoCode("IsoCode")
-          .lowRiskNumbersEnabled(true)
-          .page(0L)
-          .pageSize(1L)
-          .pageToken("PageToken")
-          .build())
+        val country =
+            countryService.list(
+                CountryListParams.builder()
+                    .continent("Continent")
+                    .countryCode("CountryCode")
+                    .highRiskSpecialNumbersEnabled(true)
+                    .highRiskTollfraudNumbersEnabled(true)
+                    .isoCode("IsoCode")
+                    .lowRiskNumbersEnabled(true)
+                    .page(0L)
+                    .pageSize(1L)
+                    .pageToken("PageToken")
+                    .build()
+            )
 
-      country.validate()
+        country.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun fetchHighRiskSpecialPrefixes() {
-      val client = TwilioVoiceOpenAPIOkHttpClient.builder()
-          .baseUrl(TestServerExtension.BASE_URL)
-          .username("My Username")
-          .password("My Password")
-          .build()
-      val countryService = client.dialingPermissions().countries()
+        val client =
+            TwilioVoiceOpenAPIOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .username("My Username")
+                .password("My Password")
+                .build()
+        val countryService = client.dialingPermissions().countries()
 
-      val response = countryService.fetchHighRiskSpecialPrefixes(CountryFetchHighRiskSpecialPrefixesParams.builder()
-          .isoCode("IsoCode")
-          .page(0L)
-          .pageSize(1L)
-          .pageToken("PageToken")
-          .build())
+        val response =
+            countryService.fetchHighRiskSpecialPrefixes(
+                CountryFetchHighRiskSpecialPrefixesParams.builder()
+                    .isoCode("IsoCode")
+                    .page(0L)
+                    .pageSize(1L)
+                    .pageToken("PageToken")
+                    .build()
+            )
 
-      response.validate()
+        response.validate()
     }
 }

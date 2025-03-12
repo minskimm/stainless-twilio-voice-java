@@ -12,31 +12,27 @@ class ConnectionPolicyCreateParamsTest {
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
-      ConnectionPolicyCreateParams.builder()
-          .friendlyName("friendly_name")
-          .build()
+        ConnectionPolicyCreateParams.builder().friendlyName("friendly_name").build()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun body() {
-      val params = ConnectionPolicyCreateParams.builder()
-          .friendlyName("friendly_name")
-          .build()
+        val params = ConnectionPolicyCreateParams.builder().friendlyName("friendly_name").build()
 
-      val body = params._body()
+        val body = params._body()
 
-      assertNotNull(body)
-      assertThat(body.friendlyName()).contains("friendly_name")
+        assertNotNull(body)
+        assertThat(body.friendlyName()).contains("friendly_name")
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun bodyWithoutOptionalFields() {
-      val params = ConnectionPolicyCreateParams.builder().build()
+        val params = ConnectionPolicyCreateParams.builder().build()
 
-      val body = params._body()
+        val body = params._body()
 
-      assertNotNull(body)
+        assertNotNull(body)
     }
 }
