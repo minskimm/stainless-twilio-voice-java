@@ -11,12 +11,14 @@ class DialingPermissionCreateBulkCountryUpdatesResponseTest {
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun createDialingPermissionCreateBulkCountryUpdatesResponse() {
-      val dialingPermissionCreateBulkCountryUpdatesResponse = DialingPermissionCreateBulkCountryUpdatesResponse.builder()
-          .updateCount(0L)
-          .updateRequest("update_request")
-          .build()
-      assertThat(dialingPermissionCreateBulkCountryUpdatesResponse).isNotNull
-      assertThat(dialingPermissionCreateBulkCountryUpdatesResponse.updateCount()).contains(0L)
-      assertThat(dialingPermissionCreateBulkCountryUpdatesResponse.updateRequest()).contains("update_request")
+        val dialingPermissionCreateBulkCountryUpdatesResponse =
+            DialingPermissionCreateBulkCountryUpdatesResponse.builder()
+                .updateCount(0L)
+                .updateRequest("update_request")
+                .build()
+        assertThat(dialingPermissionCreateBulkCountryUpdatesResponse).isNotNull
+        assertThat(dialingPermissionCreateBulkCountryUpdatesResponse.updateCount()).contains(0L)
+        assertThat(dialingPermissionCreateBulkCountryUpdatesResponse.updateRequest())
+            .contains("update_request")
     }
 }

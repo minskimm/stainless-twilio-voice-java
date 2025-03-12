@@ -12,31 +12,27 @@ class SettingUpdateParamsTest {
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
-      SettingUpdateParams.builder()
-          .dialingPermissionsInheritance(true)
-          .build()
+        SettingUpdateParams.builder().dialingPermissionsInheritance(true).build()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun body() {
-      val params = SettingUpdateParams.builder()
-          .dialingPermissionsInheritance(true)
-          .build()
+        val params = SettingUpdateParams.builder().dialingPermissionsInheritance(true).build()
 
-      val body = params._body()
+        val body = params._body()
 
-      assertNotNull(body)
-      assertThat(body.dialingPermissionsInheritance()).contains(true)
+        assertNotNull(body)
+        assertThat(body.dialingPermissionsInheritance()).contains(true)
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun bodyWithoutOptionalFields() {
-      val params = SettingUpdateParams.builder().build()
+        val params = SettingUpdateParams.builder().build()
 
-      val body = params._body()
+        val body = params._body()
 
-      assertNotNull(body)
+        assertNotNull(body)
     }
 }
