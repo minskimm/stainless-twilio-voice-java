@@ -11,21 +11,17 @@ class CountryRetrieveParamsTest {
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
-      CountryRetrieveParams.builder()
-          .isoCode("IsoCode")
-          .build()
+        CountryRetrieveParams.builder().isoCode("IsoCode").build()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun getPathParam() {
-      val params = CountryRetrieveParams.builder()
-          .isoCode("IsoCode")
-          .build()
-      assertThat(params).isNotNull
-      // path param "isoCode"
-      assertThat(params.getPathParam(0)).isEqualTo("IsoCode")
-      // out-of-bound path param
-      assertThat(params.getPathParam(1)).isEqualTo("")
+        val params = CountryRetrieveParams.builder().isoCode("IsoCode").build()
+        assertThat(params).isNotNull
+        // path param "isoCode"
+        assertThat(params.getPathParam(0)).isEqualTo("IsoCode")
+        // out-of-bound path param
+        assertThat(params.getPathParam(1)).isEqualTo("")
     }
 }
