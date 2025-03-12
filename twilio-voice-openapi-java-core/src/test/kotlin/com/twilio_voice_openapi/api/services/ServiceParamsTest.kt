@@ -28,32 +28,35 @@ internal class ServiceParamsTest {
 
     @BeforeEach
     fun beforeEach(wmRuntimeInfo: WireMockRuntimeInfo) {
-      client = TwilioVoiceOpenAPIOkHttpClient.builder()
-          .baseUrl(wmRuntimeInfo.httpBaseUrl)
-          .username("My Username")
-          .password("My Password")
-          .build()
+        client =
+            TwilioVoiceOpenAPIOkHttpClient.builder()
+                .baseUrl(wmRuntimeInfo.httpBaseUrl)
+                .username("My Username")
+                .password("My Password")
+                .build()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun deleteCall() {
-      val archiveService = client.archives()
-      stubFor(delete(anyUrl()).willReturn(ok("{}")))
+        val archiveService = client.archives()
+        stubFor(delete(anyUrl()).willReturn(ok("{}")))
 
-      archiveService.deleteCall(ArchiveDeleteCallParams.builder()
-          .date(LocalDate.parse("2019-12-27"))
-          .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-          .putAdditionalHeader("Secret-Header", "42")
-          .putAdditionalQueryParam("secret_query_param", "42")
-          .putAdditionalBodyProperty("secretProperty", JsonValue.from("42"))
-          .build())
+        archiveService.deleteCall(
+            ArchiveDeleteCallParams.builder()
+                .date(LocalDate.parse("2019-12-27"))
+                .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+                .putAdditionalHeader("Secret-Header", "42")
+                .putAdditionalQueryParam("secret_query_param", "42")
+                .putAdditionalBodyProperty("secretProperty", JsonValue.from("42"))
+                .build()
+        )
 
-      verify(
-          deleteRequestedFor(anyUrl())
-              .withHeader("Secret-Header", equalTo("42"))
-              .withQueryParam("secret_query_param", equalTo("42"))
-              .withRequestBody(matchingJsonPath("$.secretProperty", equalTo("42")))
-      )
+        verify(
+            deleteRequestedFor(anyUrl())
+                .withHeader("Secret-Header", equalTo("42"))
+                .withQueryParam("secret_query_param", equalTo("42"))
+                .withRequestBody(matchingJsonPath("$.secretProperty", equalTo("42")))
+        )
     }
 }
