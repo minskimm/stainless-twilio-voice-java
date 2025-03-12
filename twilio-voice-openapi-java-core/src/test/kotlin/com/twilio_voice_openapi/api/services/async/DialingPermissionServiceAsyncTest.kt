@@ -15,18 +15,24 @@ class DialingPermissionServiceAsyncTest {
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun createBulkCountryUpdates() {
-      val client = TwilioVoiceOpenAPIOkHttpClientAsync.builder()
-          .baseUrl(TestServerExtension.BASE_URL)
-          .username("My Username")
-          .password("My Password")
-          .build()
-      val dialingPermissionServiceAsync = client.dialingPermissions()
+        val client =
+            TwilioVoiceOpenAPIOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .username("My Username")
+                .password("My Password")
+                .build()
+        val dialingPermissionServiceAsync = client.dialingPermissions()
 
-      val responseFuture = dialingPermissionServiceAsync.createBulkCountryUpdates(DialingPermissionCreateBulkCountryUpdatesParams.builder()
-          .updateRequest("[ { \"iso_code\": \"GB\", \"low_risk_numbers\": \"Enabled\", \"high_risk_special_numbers\":\"Enabled\", \"high_risk_irsf_numbers\": \"Enabled\" } ]")
-          .build())
+        val responseFuture =
+            dialingPermissionServiceAsync.createBulkCountryUpdates(
+                DialingPermissionCreateBulkCountryUpdatesParams.builder()
+                    .updateRequest(
+                        "[ { \"iso_code\": \"GB\", \"low_risk_numbers\": \"Enabled\", \"high_risk_special_numbers\":\"Enabled\", \"high_risk_irsf_numbers\": \"Enabled\" } ]"
+                    )
+                    .build()
+            )
 
-      val response = responseFuture.get()
-      response.validate()
+        val response = responseFuture.get()
+        response.validate()
     }
 }

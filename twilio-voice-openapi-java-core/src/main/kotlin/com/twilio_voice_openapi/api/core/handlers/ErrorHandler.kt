@@ -12,7 +12,6 @@ import com.twilio_voice_openapi.api.errors.NotFoundException
 import com.twilio_voice_openapi.api.errors.PermissionDeniedException
 import com.twilio_voice_openapi.api.errors.RateLimitException
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIError
-import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIException
 import com.twilio_voice_openapi.api.errors.UnauthorizedException
 import com.twilio_voice_openapi.api.errors.UnexpectedStatusCodeException
 import com.twilio_voice_openapi.api.errors.UnprocessableEntityException
@@ -34,7 +33,9 @@ internal fun errorHandler(jsonMapper: JsonMapper): Handler<TwilioVoiceOpenAPIErr
 }
 
 @JvmSynthetic
-internal fun <T> Handler<T>.withErrorHandler(errorHandler: Handler<TwilioVoiceOpenAPIError>): Handler<T> =
+internal fun <T> Handler<T>.withErrorHandler(
+    errorHandler: Handler<TwilioVoiceOpenAPIError>
+): Handler<T> =
     object : Handler<T> {
         override fun handle(response: HttpResponse): T {
             when (val statusCode = response.statusCode()) {
