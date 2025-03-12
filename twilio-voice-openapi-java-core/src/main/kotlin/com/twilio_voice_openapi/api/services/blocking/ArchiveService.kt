@@ -10,23 +10,27 @@ import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams
 interface ArchiveService {
 
     /**
-     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     * Returns a view of this service that provides access to raw HTTP responses for
+     * each method.
      */
     fun withRawResponse(): WithRawResponse
 
     /**
-     * Delete an archived call record from Bulk Export. Note: this does not also delete the record
-     * from the Voice API.
+     * Delete an archived call record from Bulk Export. Note: this does not also delete
+     * the record from the Voice API.
      */
-    fun deleteCall(params: ArchiveDeleteCallParams) = deleteCall(params, RequestOptions.none())
+    fun deleteCall(params: ArchiveDeleteCallParams) =
+        deleteCall(
+          params, RequestOptions.none()
+        )
 
     /** @see [deleteCall] */
-    fun deleteCall(
-        params: ArchiveDeleteCallParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    )
+    fun deleteCall(params: ArchiveDeleteCallParams, requestOptions: RequestOptions = RequestOptions.none())
 
-    /** A view of [ArchiveService] that provides access to raw HTTP responses for each method. */
+    /**
+     * A view of [ArchiveService] that provides access to raw HTTP responses for each
+     * method.
+     */
     interface WithRawResponse {
 
         /**
@@ -35,13 +39,12 @@ interface ArchiveService {
          */
         @MustBeClosed
         fun deleteCall(params: ArchiveDeleteCallParams): HttpResponse =
-            deleteCall(params, RequestOptions.none())
+            deleteCall(
+              params, RequestOptions.none()
+            )
 
         /** @see [deleteCall] */
         @MustBeClosed
-        fun deleteCall(
-            params: ArchiveDeleteCallParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponse
+        fun deleteCall(params: ArchiveDeleteCallParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponse
     }
 }
