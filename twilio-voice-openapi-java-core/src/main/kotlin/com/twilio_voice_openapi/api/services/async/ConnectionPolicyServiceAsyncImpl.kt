@@ -28,12 +28,12 @@ import com.twilio_voice_openapi.api.services.async.connectionpolicies.TargetServ
 import com.twilio_voice_openapi.api.services.async.connectionpolicies.TargetServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
 
-class ConnectionPolicyServiceAsyncImpl
-internal constructor(private val clientOptions: ClientOptions) : ConnectionPolicyServiceAsync {
+class ConnectionPolicyServiceAsyncImpl internal constructor(
+    private val clientOptions: ClientOptions,
 
-    private val withRawResponse: ConnectionPolicyServiceAsync.WithRawResponse by lazy {
-        WithRawResponseImpl(clientOptions)
-    }
+) : ConnectionPolicyServiceAsync {
+
+    private val withRawResponse: ConnectionPolicyServiceAsync.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
 
     private val targets: TargetServiceAsync by lazy { TargetServiceAsyncImpl(clientOptions) }
 
@@ -41,191 +41,153 @@ internal constructor(private val clientOptions: ClientOptions) : ConnectionPolic
 
     override fun targets(): TargetServiceAsync = targets
 
-    override fun create(
-        params: ConnectionPolicyCreateParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<ConnectionPolicy> =
+    override fun create(params: ConnectionPolicyCreateParams, requestOptions: RequestOptions): CompletableFuture<ConnectionPolicy> =
         // post /v1/ConnectionPolicies
         withRawResponse().create(params, requestOptions).thenApply { it.parse() }
 
-    override fun retrieve(
-        params: ConnectionPolicyRetrieveParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<ConnectionPolicy> =
+    override fun retrieve(params: ConnectionPolicyRetrieveParams, requestOptions: RequestOptions): CompletableFuture<ConnectionPolicy> =
         // get /v1/ConnectionPolicies/{Sid}
         withRawResponse().retrieve(params, requestOptions).thenApply { it.parse() }
 
-    override fun update(
-        params: ConnectionPolicyUpdateParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<ConnectionPolicy> =
+    override fun update(params: ConnectionPolicyUpdateParams, requestOptions: RequestOptions): CompletableFuture<ConnectionPolicy> =
         // post /v1/ConnectionPolicies/{Sid}
         withRawResponse().update(params, requestOptions).thenApply { it.parse() }
 
-    override fun list(
-        params: ConnectionPolicyListParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<ConnectionPolicyListResponse> =
+    override fun list(params: ConnectionPolicyListParams, requestOptions: RequestOptions): CompletableFuture<ConnectionPolicyListResponse> =
         // get /v1/ConnectionPolicies
         withRawResponse().list(params, requestOptions).thenApply { it.parse() }
 
-    override fun delete(
-        params: ConnectionPolicyDeleteParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<Void?> =
+    override fun delete(params: ConnectionPolicyDeleteParams, requestOptions: RequestOptions): CompletableFuture<Void?> =
         // delete /v1/ConnectionPolicies/{Sid}
         withRawResponse().delete(params, requestOptions).thenAccept {}
 
-    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        ConnectionPolicyServiceAsync.WithRawResponse {
+    class WithRawResponseImpl internal constructor(
+        private val clientOptions: ClientOptions,
 
-        private val errorHandler: Handler<TwilioVoiceOpenAPIError> =
-            errorHandler(clientOptions.jsonMapper)
+    ) : ConnectionPolicyServiceAsync.WithRawResponse {
 
-        private val targets: TargetServiceAsync.WithRawResponse by lazy {
-            TargetServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
+        private val errorHandler: Handler<TwilioVoiceOpenAPIError> = errorHandler(clientOptions.jsonMapper)
+
+        private val targets: TargetServiceAsync.WithRawResponse by lazy { TargetServiceAsyncImpl.WithRawResponseImpl(clientOptions) }
 
         override fun targets(): TargetServiceAsync.WithRawResponse = targets
 
-        private val createHandler: Handler<ConnectionPolicy> =
-            jsonHandler<ConnectionPolicy>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+        private val createHandler: Handler<ConnectionPolicy> = jsonHandler<ConnectionPolicy>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
-        override fun create(
-            params: ConnectionPolicyCreateParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<ConnectionPolicy>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.POST)
-                    .addPathSegments("v1", "ConnectionPolicies")
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    response.parseable {
-                        response
-                            .use { createHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.validate()
-                                }
-                            }
-                    }
-                }
+        override fun create(params: ConnectionPolicyCreateParams, requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<ConnectionPolicy>> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.POST)
+            .addPathSegments("v1", "ConnectionPolicies")
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepareAsync(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          return request.thenComposeAsync { clientOptions.httpClient.executeAsync(
+            it, requestOptions
+          ) }.thenApply { response -> response.parseable {
+              response.use {
+                  createHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          } }
         }
 
-        private val retrieveHandler: Handler<ConnectionPolicy> =
-            jsonHandler<ConnectionPolicy>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+        private val retrieveHandler: Handler<ConnectionPolicy> = jsonHandler<ConnectionPolicy>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
-        override fun retrieve(
-            params: ConnectionPolicyRetrieveParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<ConnectionPolicy>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .addPathSegments("v1", "ConnectionPolicies", params.getPathParam(0))
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    response.parseable {
-                        response
-                            .use { retrieveHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.validate()
-                                }
-                            }
-                    }
-                }
+        override fun retrieve(params: ConnectionPolicyRetrieveParams, requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<ConnectionPolicy>> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .addPathSegments("v1", "ConnectionPolicies", params.getPathParam(0))
+            .build()
+            .prepareAsync(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          return request.thenComposeAsync { clientOptions.httpClient.executeAsync(
+            it, requestOptions
+          ) }.thenApply { response -> response.parseable {
+              response.use {
+                  retrieveHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          } }
         }
 
-        private val updateHandler: Handler<ConnectionPolicy> =
-            jsonHandler<ConnectionPolicy>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+        private val updateHandler: Handler<ConnectionPolicy> = jsonHandler<ConnectionPolicy>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
-        override fun update(
-            params: ConnectionPolicyUpdateParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<ConnectionPolicy>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.POST)
-                    .addPathSegments("v1", "ConnectionPolicies", params.getPathParam(0))
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    response.parseable {
-                        response
-                            .use { updateHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.validate()
-                                }
-                            }
-                    }
-                }
+        override fun update(params: ConnectionPolicyUpdateParams, requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<ConnectionPolicy>> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.POST)
+            .addPathSegments("v1", "ConnectionPolicies", params.getPathParam(0))
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepareAsync(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          return request.thenComposeAsync { clientOptions.httpClient.executeAsync(
+            it, requestOptions
+          ) }.thenApply { response -> response.parseable {
+              response.use {
+                  updateHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          } }
         }
 
-        private val listHandler: Handler<ConnectionPolicyListResponse> =
-            jsonHandler<ConnectionPolicyListResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
+        private val listHandler: Handler<ConnectionPolicyListResponse> = jsonHandler<ConnectionPolicyListResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
-        override fun list(
-            params: ConnectionPolicyListParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<ConnectionPolicyListResponse>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .addPathSegments("v1", "ConnectionPolicies")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    response.parseable {
-                        response
-                            .use { listHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.validate()
-                                }
-                            }
-                    }
-                }
+        override fun list(params: ConnectionPolicyListParams, requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<ConnectionPolicyListResponse>> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .addPathSegments("v1", "ConnectionPolicies")
+            .build()
+            .prepareAsync(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          return request.thenComposeAsync { clientOptions.httpClient.executeAsync(
+            it, requestOptions
+          ) }.thenApply { response -> response.parseable {
+              response.use {
+                  listHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          } }
         }
 
         private val deleteHandler: Handler<Void?> = emptyHandler().withErrorHandler(errorHandler)
 
-        override fun delete(
-            params: ConnectionPolicyDeleteParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponse> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.DELETE)
-                    .addPathSegments("v1", "ConnectionPolicies", params.getPathParam(0))
-                    .apply { params._body().ifPresent { body(json(clientOptions.jsonMapper, it)) } }
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    response.parseable { response.use { deleteHandler.handle(it) } }
-                }
+        override fun delete(params: ConnectionPolicyDeleteParams, requestOptions: RequestOptions): CompletableFuture<HttpResponse> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.DELETE)
+            .addPathSegments("v1", "ConnectionPolicies", params.getPathParam(0))
+            .apply { params._body().ifPresent{ body(json(clientOptions.jsonMapper, it)) } }
+            .build()
+            .prepareAsync(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          return request.thenComposeAsync { clientOptions.httpClient.executeAsync(
+            it, requestOptions
+          ) }.thenApply { response -> response.parseable {
+              response.use {
+                  deleteHandler.handle(it)
+              }
+          } }
         }
     }
 }
