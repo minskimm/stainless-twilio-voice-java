@@ -19,110 +19,92 @@ class ConnectionPolicyServiceAsyncTest {
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
-        val client =
-            TwilioVoiceOpenAPIOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .username("My Username")
-                .password("My Password")
-                .build()
-        val connectionPolicyServiceAsync = client.connectionPolicies()
+      val client = TwilioVoiceOpenAPIOkHttpClientAsync.builder()
+          .baseUrl(TestServerExtension.BASE_URL)
+          .username("My Username")
+          .password("My Password")
+          .build()
+      val connectionPolicyServiceAsync = client.connectionPolicies()
 
-        val connectionPolicyFuture =
-            connectionPolicyServiceAsync.create(
-                ConnectionPolicyCreateParams.builder().friendlyName("friendly_name").build()
-            )
+      val connectionPolicyFuture = connectionPolicyServiceAsync.create(ConnectionPolicyCreateParams.builder()
+          .friendlyName("friendly_name")
+          .build())
 
-        val connectionPolicy = connectionPolicyFuture.get()
-        connectionPolicy.validate()
+      val connectionPolicy = connectionPolicyFuture.get()
+      connectionPolicy.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun retrieve() {
-        val client =
-            TwilioVoiceOpenAPIOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .username("My Username")
-                .password("My Password")
-                .build()
-        val connectionPolicyServiceAsync = client.connectionPolicies()
+      val client = TwilioVoiceOpenAPIOkHttpClientAsync.builder()
+          .baseUrl(TestServerExtension.BASE_URL)
+          .username("My Username")
+          .password("My Password")
+          .build()
+      val connectionPolicyServiceAsync = client.connectionPolicies()
 
-        val connectionPolicyFuture =
-            connectionPolicyServiceAsync.retrieve(
-                ConnectionPolicyRetrieveParams.builder()
-                    .sid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                    .build()
-            )
+      val connectionPolicyFuture = connectionPolicyServiceAsync.retrieve(ConnectionPolicyRetrieveParams.builder()
+          .sid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+          .build())
 
-        val connectionPolicy = connectionPolicyFuture.get()
-        connectionPolicy.validate()
+      val connectionPolicy = connectionPolicyFuture.get()
+      connectionPolicy.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun update() {
-        val client =
-            TwilioVoiceOpenAPIOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .username("My Username")
-                .password("My Password")
-                .build()
-        val connectionPolicyServiceAsync = client.connectionPolicies()
+      val client = TwilioVoiceOpenAPIOkHttpClientAsync.builder()
+          .baseUrl(TestServerExtension.BASE_URL)
+          .username("My Username")
+          .password("My Password")
+          .build()
+      val connectionPolicyServiceAsync = client.connectionPolicies()
 
-        val connectionPolicyFuture =
-            connectionPolicyServiceAsync.update(
-                ConnectionPolicyUpdateParams.builder()
-                    .sid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                    .friendlyName("updated_name")
-                    .build()
-            )
+      val connectionPolicyFuture = connectionPolicyServiceAsync.update(ConnectionPolicyUpdateParams.builder()
+          .sid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+          .friendlyName("updated_name")
+          .build())
 
-        val connectionPolicy = connectionPolicyFuture.get()
-        connectionPolicy.validate()
+      val connectionPolicy = connectionPolicyFuture.get()
+      connectionPolicy.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun list() {
-        val client =
-            TwilioVoiceOpenAPIOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .username("My Username")
-                .password("My Password")
-                .build()
-        val connectionPolicyServiceAsync = client.connectionPolicies()
+      val client = TwilioVoiceOpenAPIOkHttpClientAsync.builder()
+          .baseUrl(TestServerExtension.BASE_URL)
+          .username("My Username")
+          .password("My Password")
+          .build()
+      val connectionPolicyServiceAsync = client.connectionPolicies()
 
-        val connectionPolicyFuture =
-            connectionPolicyServiceAsync.list(
-                ConnectionPolicyListParams.builder()
-                    .page(0L)
-                    .pageSize(1L)
-                    .pageToken("PageToken")
-                    .build()
-            )
+      val connectionPolicyFuture = connectionPolicyServiceAsync.list(ConnectionPolicyListParams.builder()
+          .page(0L)
+          .pageSize(1L)
+          .pageToken("PageToken")
+          .build())
 
-        val connectionPolicy = connectionPolicyFuture.get()
-        connectionPolicy.validate()
+      val connectionPolicy = connectionPolicyFuture.get()
+      connectionPolicy.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun delete() {
-        val client =
-            TwilioVoiceOpenAPIOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .username("My Username")
-                .password("My Password")
-                .build()
-        val connectionPolicyServiceAsync = client.connectionPolicies()
+      val client = TwilioVoiceOpenAPIOkHttpClientAsync.builder()
+          .baseUrl(TestServerExtension.BASE_URL)
+          .username("My Username")
+          .password("My Password")
+          .build()
+      val connectionPolicyServiceAsync = client.connectionPolicies()
 
-        val future =
-            connectionPolicyServiceAsync.delete(
-                ConnectionPolicyDeleteParams.builder()
-                    .sid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                    .build()
-            )
+      val future = connectionPolicyServiceAsync.delete(ConnectionPolicyDeleteParams.builder()
+          .sid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+          .build())
 
-        val response = future.get()
+      val response = future.get()
     }
 }

@@ -19,31 +19,18 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 @NoAutoDetect
-class CountryRetrieveResponse
-@JsonCreator
-private constructor(
-    @JsonProperty("continent")
-    @ExcludeMissing
-    private val continent: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("country_codes")
-    @ExcludeMissing
-    private val countryCodes: JsonField<List<String>> = JsonMissing.of(),
-    @JsonProperty("high_risk_special_numbers_enabled")
-    @ExcludeMissing
-    private val highRiskSpecialNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
-    @JsonProperty("high_risk_tollfraud_numbers_enabled")
-    @ExcludeMissing
-    private val highRiskTollfraudNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
-    @JsonProperty("iso_code")
-    @ExcludeMissing
-    private val isoCode: JsonField<String> = JsonMissing.of(),
+class CountryRetrieveResponse @JsonCreator private constructor(
+    @JsonProperty("continent") @ExcludeMissing private val continent: JsonField<String> = JsonMissing.of(),
+    @JsonProperty("country_codes") @ExcludeMissing private val countryCodes: JsonField<List<String>> = JsonMissing.of(),
+    @JsonProperty("high_risk_special_numbers_enabled") @ExcludeMissing private val highRiskSpecialNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
+    @JsonProperty("high_risk_tollfraud_numbers_enabled") @ExcludeMissing private val highRiskTollfraudNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
+    @JsonProperty("iso_code") @ExcludeMissing private val isoCode: JsonField<String> = JsonMissing.of(),
     @JsonProperty("links") @ExcludeMissing private val links: JsonValue = JsonMissing.of(),
-    @JsonProperty("low_risk_numbers_enabled")
-    @ExcludeMissing
-    private val lowRiskNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
+    @JsonProperty("low_risk_numbers_enabled") @ExcludeMissing private val lowRiskNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
     @JsonProperty("name") @ExcludeMissing private val name: JsonField<String> = JsonMissing.of(),
     @JsonProperty("url") @ExcludeMissing private val url: JsonField<String> = JsonMissing.of(),
     @JsonAnySetter private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
+
 ) {
 
     /** The name of the continent in which the country is located. */
@@ -53,42 +40,37 @@ private constructor(
      * The E.164 assigned
      * [country codes(s)](https://www.itu.int/itudoc/itu-t/ob-lists/icc/e164_763.html)
      */
-    fun countryCodes(): Optional<List<String>> =
-        Optional.ofNullable(countryCodes.getNullable("country_codes"))
+    fun countryCodes(): Optional<List<String>> = Optional.ofNullable(countryCodes.getNullable("country_codes"))
 
     /**
-     * Whether dialing to high-risk special services numbers is enabled. These prefixes include
-     * number ranges allocated by the country and include premium numbers, special services, shared
-     * cost, and others
+     * Whether dialing to high-risk special services numbers is enabled. These prefixes
+     * include number ranges allocated by the country and include premium numbers,
+     * special services, shared cost, and others
      */
-    fun highRiskSpecialNumbersEnabled(): Optional<Boolean> =
-        Optional.ofNullable(
-            highRiskSpecialNumbersEnabled.getNullable("high_risk_special_numbers_enabled")
-        )
+    fun highRiskSpecialNumbersEnabled(): Optional<Boolean> = Optional.ofNullable(highRiskSpecialNumbersEnabled.getNullable("high_risk_special_numbers_enabled"))
 
     /**
      * Whether dialing to high-risk
      * [toll fraud](https://www.twilio.com/blog/how-to-protect-your-account-from-toll-fraud-with-voice-dialing-geo-permissions-html)
-     * numbers is enabled. These prefixes include narrow number ranges that have a high-risk of
-     * international revenue sharing fraud (IRSF) attacks, also known as
+     * numbers is enabled. These prefixes include narrow number ranges that have a
+     * high-risk of international revenue sharing fraud (IRSF) attacks, also known as
      * [toll fraud](https://www.twilio.com/blog/how-to-protect-your-account-from-toll-fraud-with-voice-dialing-geo-permissions-html).
-     * These prefixes are collected from anti-fraud databases and verified by analyzing calls on our
-     * network. These prefixes are not available for download and are updated frequently
+     * These prefixes are collected from anti-fraud databases and verified by analyzing
+     * calls on our network. These prefixes are not available for download and are
+     * updated frequently
      */
-    fun highRiskTollfraudNumbersEnabled(): Optional<Boolean> =
-        Optional.ofNullable(
-            highRiskTollfraudNumbersEnabled.getNullable("high_risk_tollfraud_numbers_enabled")
-        )
+    fun highRiskTollfraudNumbersEnabled(): Optional<Boolean> = Optional.ofNullable(highRiskTollfraudNumbersEnabled.getNullable("high_risk_tollfraud_numbers_enabled"))
 
     /** The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). */
     fun isoCode(): Optional<String> = Optional.ofNullable(isoCode.getNullable("iso_code"))
 
     /** A list of URLs related to this resource. */
-    @JsonProperty("links") @ExcludeMissing fun _links(): JsonValue = links
+    @JsonProperty("links")
+    @ExcludeMissing
+    fun _links(): JsonValue = links
 
     /** Whether dialing to low-risk numbers is enabled. */
-    fun lowRiskNumbersEnabled(): Optional<Boolean> =
-        Optional.ofNullable(lowRiskNumbersEnabled.getNullable("low_risk_numbers_enabled"))
+    fun lowRiskNumbersEnabled(): Optional<Boolean> = Optional.ofNullable(lowRiskNumbersEnabled.getNullable("low_risk_numbers_enabled"))
 
     /** The name of the country. */
     fun name(): Optional<String> = Optional.ofNullable(name.getNullable("name"))
@@ -97,7 +79,9 @@ private constructor(
     fun url(): Optional<String> = Optional.ofNullable(url.getNullable("url"))
 
     /** The name of the continent in which the country is located. */
-    @JsonProperty("continent") @ExcludeMissing fun _continent(): JsonField<String> = continent
+    @JsonProperty("continent")
+    @ExcludeMissing
+    fun _continent(): JsonField<String> = continent
 
     /**
      * The E.164 assigned
@@ -108,9 +92,9 @@ private constructor(
     fun _countryCodes(): JsonField<List<String>> = countryCodes
 
     /**
-     * Whether dialing to high-risk special services numbers is enabled. These prefixes include
-     * number ranges allocated by the country and include premium numbers, special services, shared
-     * cost, and others
+     * Whether dialing to high-risk special services numbers is enabled. These prefixes
+     * include number ranges allocated by the country and include premium numbers,
+     * special services, shared cost, and others
      */
     @JsonProperty("high_risk_special_numbers_enabled")
     @ExcludeMissing
@@ -119,18 +103,21 @@ private constructor(
     /**
      * Whether dialing to high-risk
      * [toll fraud](https://www.twilio.com/blog/how-to-protect-your-account-from-toll-fraud-with-voice-dialing-geo-permissions-html)
-     * numbers is enabled. These prefixes include narrow number ranges that have a high-risk of
-     * international revenue sharing fraud (IRSF) attacks, also known as
+     * numbers is enabled. These prefixes include narrow number ranges that have a
+     * high-risk of international revenue sharing fraud (IRSF) attacks, also known as
      * [toll fraud](https://www.twilio.com/blog/how-to-protect-your-account-from-toll-fraud-with-voice-dialing-geo-permissions-html).
-     * These prefixes are collected from anti-fraud databases and verified by analyzing calls on our
-     * network. These prefixes are not available for download and are updated frequently
+     * These prefixes are collected from anti-fraud databases and verified by analyzing
+     * calls on our network. These prefixes are not available for download and are
+     * updated frequently
      */
     @JsonProperty("high_risk_tollfraud_numbers_enabled")
     @ExcludeMissing
     fun _highRiskTollfraudNumbersEnabled(): JsonField<Boolean> = highRiskTollfraudNumbersEnabled
 
     /** The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). */
-    @JsonProperty("iso_code") @ExcludeMissing fun _isoCode(): JsonField<String> = isoCode
+    @JsonProperty("iso_code")
+    @ExcludeMissing
+    fun _isoCode(): JsonField<String> = isoCode
 
     /** Whether dialing to low-risk numbers is enabled. */
     @JsonProperty("low_risk_numbers_enabled")
@@ -138,10 +125,14 @@ private constructor(
     fun _lowRiskNumbersEnabled(): JsonField<Boolean> = lowRiskNumbersEnabled
 
     /** The name of the country. */
-    @JsonProperty("name") @ExcludeMissing fun _name(): JsonField<String> = name
+    @JsonProperty("name")
+    @ExcludeMissing
+    fun _name(): JsonField<String> = name
 
     /** The absolute URL of this resource. */
-    @JsonProperty("url") @ExcludeMissing fun _url(): JsonField<String> = url
+    @JsonProperty("url")
+    @ExcludeMissing
+    fun _url(): JsonField<String> = url
 
     @JsonAnyGetter
     @ExcludeMissing
@@ -149,28 +140,33 @@ private constructor(
 
     private var validated: Boolean = false
 
-    fun validate(): CountryRetrieveResponse = apply {
-        if (validated) {
-            return@apply
-        }
+    fun validate(): CountryRetrieveResponse =
+        apply {
+            if (validated) {
+              return@apply
+            }
 
-        continent()
-        countryCodes()
-        highRiskSpecialNumbersEnabled()
-        highRiskTollfraudNumbersEnabled()
-        isoCode()
-        lowRiskNumbersEnabled()
-        name()
-        url()
-        validated = true
-    }
+            continent()
+            countryCodes()
+            highRiskSpecialNumbersEnabled()
+            highRiskTollfraudNumbersEnabled()
+            isoCode()
+            lowRiskNumbersEnabled()
+            name()
+            url()
+            validated = true
+        }
 
     fun toBuilder() = Builder().from(this)
 
     companion object {
 
-        /** Returns a mutable builder for constructing an instance of [CountryRetrieveResponse]. */
-        @JvmStatic fun builder() = Builder()
+        /**
+         * Returns a mutable builder for constructing an instance of
+         * [CountryRetrieveResponse].
+         */
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [CountryRetrieveResponse]. */
@@ -188,19 +184,19 @@ private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(countryRetrieveResponse: CountryRetrieveResponse) = apply {
-            continent = countryRetrieveResponse.continent
-            countryCodes = countryRetrieveResponse.countryCodes.map { it.toMutableList() }
-            highRiskSpecialNumbersEnabled = countryRetrieveResponse.highRiskSpecialNumbersEnabled
-            highRiskTollfraudNumbersEnabled =
-                countryRetrieveResponse.highRiskTollfraudNumbersEnabled
-            isoCode = countryRetrieveResponse.isoCode
-            links = countryRetrieveResponse.links
-            lowRiskNumbersEnabled = countryRetrieveResponse.lowRiskNumbersEnabled
-            name = countryRetrieveResponse.name
-            url = countryRetrieveResponse.url
-            additionalProperties = countryRetrieveResponse.additionalProperties.toMutableMap()
-        }
+        internal fun from(countryRetrieveResponse: CountryRetrieveResponse) =
+            apply {
+                continent = countryRetrieveResponse.continent
+                countryCodes = countryRetrieveResponse.countryCodes.map { it.toMutableList() }
+                highRiskSpecialNumbersEnabled = countryRetrieveResponse.highRiskSpecialNumbersEnabled
+                highRiskTollfraudNumbersEnabled = countryRetrieveResponse.highRiskTollfraudNumbersEnabled
+                isoCode = countryRetrieveResponse.isoCode
+                links = countryRetrieveResponse.links
+                lowRiskNumbersEnabled = countryRetrieveResponse.lowRiskNumbersEnabled
+                name = countryRetrieveResponse.name
+                url = countryRetrieveResponse.url
+                additionalProperties = countryRetrieveResponse.additionalProperties.toMutableMap()
+            }
 
         /** The name of the continent in which the country is located. */
         fun continent(continent: String?) = continent(JsonField.ofNullable(continent))
@@ -209,69 +205,68 @@ private constructor(
         fun continent(continent: Optional<String>) = continent(continent.getOrNull())
 
         /** The name of the continent in which the country is located. */
-        fun continent(continent: JsonField<String>) = apply { this.continent = continent }
+        fun continent(continent: JsonField<String>) =
+            apply {
+                this.continent = continent
+            }
 
         /**
          * The E.164 assigned
          * [country codes(s)](https://www.itu.int/itudoc/itu-t/ob-lists/icc/e164_763.html)
          */
-        fun countryCodes(countryCodes: List<String>?) =
-            countryCodes(JsonField.ofNullable(countryCodes))
+        fun countryCodes(countryCodes: List<String>?) = countryCodes(JsonField.ofNullable(countryCodes))
 
         /**
          * The E.164 assigned
          * [country codes(s)](https://www.itu.int/itudoc/itu-t/ob-lists/icc/e164_763.html)
          */
-        fun countryCodes(countryCodes: Optional<List<String>>) =
-            countryCodes(countryCodes.getOrNull())
+        fun countryCodes(countryCodes: Optional<List<String>>) = countryCodes(countryCodes.getOrNull())
 
         /**
          * The E.164 assigned
          * [country codes(s)](https://www.itu.int/itudoc/itu-t/ob-lists/icc/e164_763.html)
          */
-        fun countryCodes(countryCodes: JsonField<List<String>>) = apply {
-            this.countryCodes = countryCodes.map { it.toMutableList() }
-        }
+        fun countryCodes(countryCodes: JsonField<List<String>>) =
+            apply {
+                this.countryCodes = countryCodes.map { it.toMutableList() }
+            }
 
         /**
          * The E.164 assigned
          * [country codes(s)](https://www.itu.int/itudoc/itu-t/ob-lists/icc/e164_763.html)
          */
-        fun addCountryCode(countryCode: String) = apply {
-            countryCodes =
-                (countryCodes ?: JsonField.of(mutableListOf())).also {
+        fun addCountryCode(countryCode: String) =
+            apply {
+                countryCodes = (countryCodes ?: JsonField.of(mutableListOf())).also {
                     checkKnown("countryCodes", it).add(countryCode)
                 }
-        }
+            }
 
         /**
-         * Whether dialing to high-risk special services numbers is enabled. These prefixes include
-         * number ranges allocated by the country and include premium numbers, special services,
-         * shared cost, and others
+         * Whether dialing to high-risk special services numbers is enabled. These prefixes
+         * include number ranges allocated by the country and include premium numbers,
+         * special services, shared cost, and others
          */
-        fun highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled: Boolean?) =
-            highRiskSpecialNumbersEnabled(JsonField.ofNullable(highRiskSpecialNumbersEnabled))
+        fun highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled: Boolean?) = highRiskSpecialNumbersEnabled(JsonField.ofNullable(highRiskSpecialNumbersEnabled))
 
         /**
-         * Whether dialing to high-risk special services numbers is enabled. These prefixes include
-         * number ranges allocated by the country and include premium numbers, special services,
-         * shared cost, and others
+         * Whether dialing to high-risk special services numbers is enabled. These prefixes
+         * include number ranges allocated by the country and include premium numbers,
+         * special services, shared cost, and others
          */
-        fun highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled: Boolean) =
-            highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled as Boolean?)
+        fun highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled: Boolean) = highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled as Boolean?)
 
         /**
-         * Whether dialing to high-risk special services numbers is enabled. These prefixes include
-         * number ranges allocated by the country and include premium numbers, special services,
-         * shared cost, and others
+         * Whether dialing to high-risk special services numbers is enabled. These prefixes
+         * include number ranges allocated by the country and include premium numbers,
+         * special services, shared cost, and others
          */
-        fun highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled: Optional<Boolean>) =
-            highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled.getOrNull())
+        fun highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled: Optional<Boolean>) = highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled.getOrNull())
 
         /**
-         * Whether dialing to high-risk special services numbers is enabled. These prefixes include
-         * number ranges allocated by the country and include premium numbers, special services,
-         * shared cost, and others
+         * Whether dialing to high-risk special services numbers is enabled. These prefixes
+         * include number ranges allocated by the country and include premium numbers,
+         * special services, shared cost, and others
          */
         fun highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled: JsonField<Boolean>) =
             apply {
@@ -281,47 +276,48 @@ private constructor(
         /**
          * Whether dialing to high-risk
          * [toll fraud](https://www.twilio.com/blog/how-to-protect-your-account-from-toll-fraud-with-voice-dialing-geo-permissions-html)
-         * numbers is enabled. These prefixes include narrow number ranges that have a high-risk of
-         * international revenue sharing fraud (IRSF) attacks, also known as
+         * numbers is enabled. These prefixes include narrow number ranges that have a
+         * high-risk of international revenue sharing fraud (IRSF) attacks, also known as
          * [toll fraud](https://www.twilio.com/blog/how-to-protect-your-account-from-toll-fraud-with-voice-dialing-geo-permissions-html).
-         * These prefixes are collected from anti-fraud databases and verified by analyzing calls on
-         * our network. These prefixes are not available for download and are updated frequently
+         * These prefixes are collected from anti-fraud databases and verified by analyzing
+         * calls on our network. These prefixes are not available for download and are
+         * updated frequently
          */
-        fun highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled: Boolean?) =
-            highRiskTollfraudNumbersEnabled(JsonField.ofNullable(highRiskTollfraudNumbersEnabled))
+        fun highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled: Boolean?) = highRiskTollfraudNumbersEnabled(JsonField.ofNullable(highRiskTollfraudNumbersEnabled))
 
         /**
          * Whether dialing to high-risk
          * [toll fraud](https://www.twilio.com/blog/how-to-protect-your-account-from-toll-fraud-with-voice-dialing-geo-permissions-html)
-         * numbers is enabled. These prefixes include narrow number ranges that have a high-risk of
-         * international revenue sharing fraud (IRSF) attacks, also known as
+         * numbers is enabled. These prefixes include narrow number ranges that have a
+         * high-risk of international revenue sharing fraud (IRSF) attacks, also known as
          * [toll fraud](https://www.twilio.com/blog/how-to-protect-your-account-from-toll-fraud-with-voice-dialing-geo-permissions-html).
-         * These prefixes are collected from anti-fraud databases and verified by analyzing calls on
-         * our network. These prefixes are not available for download and are updated frequently
+         * These prefixes are collected from anti-fraud databases and verified by analyzing
+         * calls on our network. These prefixes are not available for download and are
+         * updated frequently
          */
-        fun highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled: Boolean) =
-            highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled as Boolean?)
+        fun highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled: Boolean) = highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled as Boolean?)
 
         /**
          * Whether dialing to high-risk
          * [toll fraud](https://www.twilio.com/blog/how-to-protect-your-account-from-toll-fraud-with-voice-dialing-geo-permissions-html)
-         * numbers is enabled. These prefixes include narrow number ranges that have a high-risk of
-         * international revenue sharing fraud (IRSF) attacks, also known as
+         * numbers is enabled. These prefixes include narrow number ranges that have a
+         * high-risk of international revenue sharing fraud (IRSF) attacks, also known as
          * [toll fraud](https://www.twilio.com/blog/how-to-protect-your-account-from-toll-fraud-with-voice-dialing-geo-permissions-html).
-         * These prefixes are collected from anti-fraud databases and verified by analyzing calls on
-         * our network. These prefixes are not available for download and are updated frequently
+         * These prefixes are collected from anti-fraud databases and verified by analyzing
+         * calls on our network. These prefixes are not available for download and are
+         * updated frequently
          */
-        fun highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled: Optional<Boolean>) =
-            highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled.getOrNull())
+        fun highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled: Optional<Boolean>) = highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled.getOrNull())
 
         /**
          * Whether dialing to high-risk
          * [toll fraud](https://www.twilio.com/blog/how-to-protect-your-account-from-toll-fraud-with-voice-dialing-geo-permissions-html)
-         * numbers is enabled. These prefixes include narrow number ranges that have a high-risk of
-         * international revenue sharing fraud (IRSF) attacks, also known as
+         * numbers is enabled. These prefixes include narrow number ranges that have a
+         * high-risk of international revenue sharing fraud (IRSF) attacks, also known as
          * [toll fraud](https://www.twilio.com/blog/how-to-protect-your-account-from-toll-fraud-with-voice-dialing-geo-permissions-html).
-         * These prefixes are collected from anti-fraud databases and verified by analyzing calls on
-         * our network. These prefixes are not available for download and are updated frequently
+         * These prefixes are collected from anti-fraud databases and verified by analyzing
+         * calls on our network. These prefixes are not available for download and are
+         * updated frequently
          */
         fun highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled: JsonField<Boolean>) =
             apply {
@@ -335,27 +331,31 @@ private constructor(
         fun isoCode(isoCode: Optional<String>) = isoCode(isoCode.getOrNull())
 
         /** The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). */
-        fun isoCode(isoCode: JsonField<String>) = apply { this.isoCode = isoCode }
+        fun isoCode(isoCode: JsonField<String>) =
+            apply {
+                this.isoCode = isoCode
+            }
 
         /** A list of URLs related to this resource. */
-        fun links(links: JsonValue) = apply { this.links = links }
+        fun links(links: JsonValue) =
+            apply {
+                this.links = links
+            }
 
         /** Whether dialing to low-risk numbers is enabled. */
-        fun lowRiskNumbersEnabled(lowRiskNumbersEnabled: Boolean?) =
-            lowRiskNumbersEnabled(JsonField.ofNullable(lowRiskNumbersEnabled))
+        fun lowRiskNumbersEnabled(lowRiskNumbersEnabled: Boolean?) = lowRiskNumbersEnabled(JsonField.ofNullable(lowRiskNumbersEnabled))
 
         /** Whether dialing to low-risk numbers is enabled. */
-        fun lowRiskNumbersEnabled(lowRiskNumbersEnabled: Boolean) =
-            lowRiskNumbersEnabled(lowRiskNumbersEnabled as Boolean?)
+        fun lowRiskNumbersEnabled(lowRiskNumbersEnabled: Boolean) = lowRiskNumbersEnabled(lowRiskNumbersEnabled as Boolean?)
 
         /** Whether dialing to low-risk numbers is enabled. */
-        fun lowRiskNumbersEnabled(lowRiskNumbersEnabled: Optional<Boolean>) =
-            lowRiskNumbersEnabled(lowRiskNumbersEnabled.getOrNull())
+        fun lowRiskNumbersEnabled(lowRiskNumbersEnabled: Optional<Boolean>) = lowRiskNumbersEnabled(lowRiskNumbersEnabled.getOrNull())
 
         /** Whether dialing to low-risk numbers is enabled. */
-        fun lowRiskNumbersEnabled(lowRiskNumbersEnabled: JsonField<Boolean>) = apply {
-            this.lowRiskNumbersEnabled = lowRiskNumbersEnabled
-        }
+        fun lowRiskNumbersEnabled(lowRiskNumbersEnabled: JsonField<Boolean>) =
+            apply {
+                this.lowRiskNumbersEnabled = lowRiskNumbersEnabled
+            }
 
         /** The name of the country. */
         fun name(name: String?) = name(JsonField.ofNullable(name))
@@ -364,7 +364,10 @@ private constructor(
         fun name(name: Optional<String>) = name(name.getOrNull())
 
         /** The name of the country. */
-        fun name(name: JsonField<String>) = apply { this.name = name }
+        fun name(name: JsonField<String>) =
+            apply {
+                this.name = name
+            }
 
         /** The absolute URL of this resource. */
         fun url(url: String?) = url(JsonField.ofNullable(url))
@@ -373,48 +376,58 @@ private constructor(
         fun url(url: Optional<String>) = url(url.getOrNull())
 
         /** The absolute URL of this resource. */
-        fun url(url: JsonField<String>) = apply { this.url = url }
+        fun url(url: JsonField<String>) =
+            apply {
+                this.url = url
+            }
 
-        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-            this.additionalProperties.clear()
-            putAllAdditionalProperties(additionalProperties)
-        }
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
+            apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
 
-        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-            additionalProperties.put(key, value)
-        }
+        fun putAdditionalProperty(key: String, value: JsonValue) =
+            apply {
+                additionalProperties.put(key, value)
+            }
 
-        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-            this.additionalProperties.putAll(additionalProperties)
-        }
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
+            apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
 
-        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+        fun removeAdditionalProperty(key: String) =
+            apply {
+                additionalProperties.remove(key)
+            }
 
-        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-            keys.forEach(::removeAdditionalProperty)
-        }
+        fun removeAllAdditionalProperties(keys: Set<String>) =
+            apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
 
         fun build(): CountryRetrieveResponse =
             CountryRetrieveResponse(
-                continent,
-                (countryCodes ?: JsonMissing.of()).map { it.toImmutable() },
-                highRiskSpecialNumbersEnabled,
-                highRiskTollfraudNumbersEnabled,
-                isoCode,
-                links,
-                lowRiskNumbersEnabled,
-                name,
-                url,
-                additionalProperties.toImmutable(),
+              continent,
+              (countryCodes ?: JsonMissing.of()).map { it.toImmutable() },
+              highRiskSpecialNumbersEnabled,
+              highRiskTollfraudNumbersEnabled,
+              isoCode,
+              links,
+              lowRiskNumbersEnabled,
+              name,
+              url,
+              additionalProperties.toImmutable(),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is CountryRetrieveResponse && continent == other.continent && countryCodes == other.countryCodes && highRiskSpecialNumbersEnabled == other.highRiskSpecialNumbersEnabled && highRiskTollfraudNumbersEnabled == other.highRiskTollfraudNumbersEnabled && isoCode == other.isoCode && links == other.links && lowRiskNumbersEnabled == other.lowRiskNumbersEnabled && name == other.name && url == other.url && additionalProperties == other.additionalProperties /* spotless:on */
+      return /* spotless:off */ other is CountryRetrieveResponse && continent == other.continent && countryCodes == other.countryCodes && highRiskSpecialNumbersEnabled == other.highRiskSpecialNumbersEnabled && highRiskTollfraudNumbersEnabled == other.highRiskTollfraudNumbersEnabled && isoCode == other.isoCode && links == other.links && lowRiskNumbersEnabled == other.lowRiskNumbersEnabled && name == other.name && url == other.url && additionalProperties == other.additionalProperties /* spotless:on */
     }
 
     /* spotless:off */
@@ -423,6 +436,5 @@ private constructor(
 
     override fun hashCode(): Int = hashCode
 
-    override fun toString() =
-        "CountryRetrieveResponse{continent=$continent, countryCodes=$countryCodes, highRiskSpecialNumbersEnabled=$highRiskSpecialNumbersEnabled, highRiskTollfraudNumbersEnabled=$highRiskTollfraudNumbersEnabled, isoCode=$isoCode, links=$links, lowRiskNumbersEnabled=$lowRiskNumbersEnabled, name=$name, url=$url, additionalProperties=$additionalProperties}"
+    override fun toString() = "CountryRetrieveResponse{continent=$continent, countryCodes=$countryCodes, highRiskSpecialNumbersEnabled=$highRiskSpecialNumbersEnabled, highRiskTollfraudNumbersEnabled=$highRiskTollfraudNumbersEnabled, isoCode=$isoCode, links=$links, lowRiskNumbersEnabled=$lowRiskNumbersEnabled, name=$name, url=$url, additionalProperties=$additionalProperties}"
 }

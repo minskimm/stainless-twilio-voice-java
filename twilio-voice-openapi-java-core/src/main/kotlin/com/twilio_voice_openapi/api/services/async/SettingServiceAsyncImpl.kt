@@ -20,92 +20,77 @@ import com.twilio_voice_openapi.api.models.settings.SettingRetrieveParams
 import com.twilio_voice_openapi.api.models.settings.SettingUpdateParams
 import java.util.concurrent.CompletableFuture
 
-class SettingServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
-    SettingServiceAsync {
+class SettingServiceAsyncImpl internal constructor(
+    private val clientOptions: ClientOptions,
 
-    private val withRawResponse: SettingServiceAsync.WithRawResponse by lazy {
-        WithRawResponseImpl(clientOptions)
-    }
+) : SettingServiceAsync {
+
+    private val withRawResponse: SettingServiceAsync.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
 
     override fun withRawResponse(): SettingServiceAsync.WithRawResponse = withRawResponse
 
-    override fun retrieve(
-        params: SettingRetrieveParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<DialingPermissions> =
+    override fun retrieve(params: SettingRetrieveParams, requestOptions: RequestOptions): CompletableFuture<DialingPermissions> =
         // get /v1/Settings
         withRawResponse().retrieve(params, requestOptions).thenApply { it.parse() }
 
-    override fun update(
-        params: SettingUpdateParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<DialingPermissions> =
+    override fun update(params: SettingUpdateParams, requestOptions: RequestOptions): CompletableFuture<DialingPermissions> =
         // post /v1/Settings
         withRawResponse().update(params, requestOptions).thenApply { it.parse() }
 
-    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        SettingServiceAsync.WithRawResponse {
+    class WithRawResponseImpl internal constructor(
+        private val clientOptions: ClientOptions,
 
-        private val errorHandler: Handler<TwilioVoiceOpenAPIError> =
-            errorHandler(clientOptions.jsonMapper)
+    ) : SettingServiceAsync.WithRawResponse {
 
-        private val retrieveHandler: Handler<DialingPermissions> =
-            jsonHandler<DialingPermissions>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+        private val errorHandler: Handler<TwilioVoiceOpenAPIError> = errorHandler(clientOptions.jsonMapper)
 
-        override fun retrieve(
-            params: SettingRetrieveParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<DialingPermissions>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .addPathSegments("v1", "Settings")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    response.parseable {
-                        response
-                            .use { retrieveHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.validate()
-                                }
-                            }
-                    }
-                }
+        private val retrieveHandler: Handler<DialingPermissions> = jsonHandler<DialingPermissions>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+
+        override fun retrieve(params: SettingRetrieveParams, requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<DialingPermissions>> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .addPathSegments("v1", "Settings")
+            .build()
+            .prepareAsync(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          return request.thenComposeAsync { clientOptions.httpClient.executeAsync(
+            it, requestOptions
+          ) }.thenApply { response -> response.parseable {
+              response.use {
+                  retrieveHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          } }
         }
 
-        private val updateHandler: Handler<DialingPermissions> =
-            jsonHandler<DialingPermissions>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+        private val updateHandler: Handler<DialingPermissions> = jsonHandler<DialingPermissions>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
-        override fun update(
-            params: SettingUpdateParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<DialingPermissions>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.POST)
-                    .addPathSegments("v1", "Settings")
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    response.parseable {
-                        response
-                            .use { updateHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.validate()
-                                }
-                            }
-                    }
-                }
+        override fun update(params: SettingUpdateParams, requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<DialingPermissions>> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.POST)
+            .addPathSegments("v1", "Settings")
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepareAsync(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          return request.thenComposeAsync { clientOptions.httpClient.executeAsync(
+            it, requestOptions
+          ) }.thenApply { response -> response.parseable {
+              response.use {
+                  updateHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          } }
         }
     }
 }
