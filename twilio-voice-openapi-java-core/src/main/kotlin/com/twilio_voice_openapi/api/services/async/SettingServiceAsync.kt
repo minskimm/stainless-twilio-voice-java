@@ -13,8 +13,7 @@ import java.util.concurrent.CompletableFuture
 interface SettingServiceAsync {
 
     /**
-     * Returns a view of this service that provides access to raw HTTP responses for
-     * each method.
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
 
@@ -22,35 +21,40 @@ interface SettingServiceAsync {
     fun retrieve(): CompletableFuture<DialingPermissions> = retrieve(SettingRetrieveParams.none())
 
     /** @see [retrieve] */
-    fun retrieve(params: SettingRetrieveParams = SettingRetrieveParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<DialingPermissions>
+    fun retrieve(
+        params: SettingRetrieveParams = SettingRetrieveParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<DialingPermissions>
 
     /** @see [retrieve] */
-    fun retrieve(params: SettingRetrieveParams = SettingRetrieveParams.none()): CompletableFuture<DialingPermissions> =
-        retrieve(
-          params, RequestOptions.none()
-        )
+    fun retrieve(
+        params: SettingRetrieveParams = SettingRetrieveParams.none()
+    ): CompletableFuture<DialingPermissions> = retrieve(params, RequestOptions.none())
 
     /** @see [retrieve] */
-    fun retrieve(requestOptions: RequestOptions): CompletableFuture<DialingPermissions> = retrieve(SettingRetrieveParams.none(), requestOptions)
+    fun retrieve(requestOptions: RequestOptions): CompletableFuture<DialingPermissions> =
+        retrieve(SettingRetrieveParams.none(), requestOptions)
 
     /** Update voice dialing permissions inheritance for the sub-account */
     fun update(): CompletableFuture<DialingPermissions> = update(SettingUpdateParams.none())
 
     /** @see [update] */
-    fun update(params: SettingUpdateParams = SettingUpdateParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<DialingPermissions>
+    fun update(
+        params: SettingUpdateParams = SettingUpdateParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<DialingPermissions>
 
     /** @see [update] */
-    fun update(params: SettingUpdateParams = SettingUpdateParams.none()): CompletableFuture<DialingPermissions> =
-        update(
-          params, RequestOptions.none()
-        )
+    fun update(
+        params: SettingUpdateParams = SettingUpdateParams.none()
+    ): CompletableFuture<DialingPermissions> = update(params, RequestOptions.none())
 
     /** @see [update] */
-    fun update(requestOptions: RequestOptions): CompletableFuture<DialingPermissions> = update(SettingUpdateParams.none(), requestOptions)
+    fun update(requestOptions: RequestOptions): CompletableFuture<DialingPermissions> =
+        update(SettingUpdateParams.none(), requestOptions)
 
     /**
-     * A view of [SettingServiceAsync] that provides access to raw HTTP responses for
-     * each method.
+     * A view of [SettingServiceAsync] that provides access to raw HTTP responses for each method.
      */
     interface WithRawResponse {
 
@@ -59,43 +63,57 @@ interface SettingServiceAsync {
          * [SettingServiceAsync.retrieve].
          */
         @MustBeClosed
-        fun retrieve(): CompletableFuture<HttpResponseFor<DialingPermissions>> = retrieve(SettingRetrieveParams.none())
+        fun retrieve(): CompletableFuture<HttpResponseFor<DialingPermissions>> =
+            retrieve(SettingRetrieveParams.none())
 
         /** @see [retrieve] */
         @MustBeClosed
-        fun retrieve(params: SettingRetrieveParams = SettingRetrieveParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<DialingPermissions>>
+        fun retrieve(
+            params: SettingRetrieveParams = SettingRetrieveParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<DialingPermissions>>
 
         /** @see [retrieve] */
         @MustBeClosed
-        fun retrieve(params: SettingRetrieveParams = SettingRetrieveParams.none()): CompletableFuture<HttpResponseFor<DialingPermissions>> =
-            retrieve(
-              params, RequestOptions.none()
-            )
+        fun retrieve(
+            params: SettingRetrieveParams = SettingRetrieveParams.none()
+        ): CompletableFuture<HttpResponseFor<DialingPermissions>> =
+            retrieve(params, RequestOptions.none())
 
         /** @see [retrieve] */
         @MustBeClosed
-        fun retrieve(requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<DialingPermissions>> = retrieve(SettingRetrieveParams.none(), requestOptions)
+        fun retrieve(
+            requestOptions: RequestOptions
+        ): CompletableFuture<HttpResponseFor<DialingPermissions>> =
+            retrieve(SettingRetrieveParams.none(), requestOptions)
 
         /**
-         * Returns a raw HTTP response for `post /v1/Settings`, but is otherwise the same
-         * as [SettingServiceAsync.update].
+         * Returns a raw HTTP response for `post /v1/Settings`, but is otherwise the same as
+         * [SettingServiceAsync.update].
          */
         @MustBeClosed
-        fun update(): CompletableFuture<HttpResponseFor<DialingPermissions>> = update(SettingUpdateParams.none())
+        fun update(): CompletableFuture<HttpResponseFor<DialingPermissions>> =
+            update(SettingUpdateParams.none())
 
         /** @see [update] */
         @MustBeClosed
-        fun update(params: SettingUpdateParams = SettingUpdateParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<DialingPermissions>>
+        fun update(
+            params: SettingUpdateParams = SettingUpdateParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<DialingPermissions>>
 
         /** @see [update] */
         @MustBeClosed
-        fun update(params: SettingUpdateParams = SettingUpdateParams.none()): CompletableFuture<HttpResponseFor<DialingPermissions>> =
-            update(
-              params, RequestOptions.none()
-            )
+        fun update(
+            params: SettingUpdateParams = SettingUpdateParams.none()
+        ): CompletableFuture<HttpResponseFor<DialingPermissions>> =
+            update(params, RequestOptions.none())
 
         /** @see [update] */
         @MustBeClosed
-        fun update(requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<DialingPermissions>> = update(SettingUpdateParams.none(), requestOptions)
+        fun update(
+            requestOptions: RequestOptions
+        ): CompletableFuture<HttpResponseFor<DialingPermissions>> =
+            update(SettingUpdateParams.none(), requestOptions)
     }
 }

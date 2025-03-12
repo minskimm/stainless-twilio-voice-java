@@ -11,12 +11,13 @@ class DialingPermissionsTest {
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun createDialingPermissions() {
-      val dialingPermissions = DialingPermissions.builder()
-          .dialingPermissionsInheritance(true)
-          .url("https://example.com")
-          .build()
-      assertThat(dialingPermissions).isNotNull
-      assertThat(dialingPermissions.dialingPermissionsInheritance()).contains(true)
-      assertThat(dialingPermissions.url()).contains("https://example.com")
+        val dialingPermissions =
+            DialingPermissions.builder()
+                .dialingPermissionsInheritance(true)
+                .url("https://example.com")
+                .build()
+        assertThat(dialingPermissions).isNotNull
+        assertThat(dialingPermissions.dialingPermissionsInheritance()).contains(true)
+        assertThat(dialingPermissions.url()).contains("https://example.com")
     }
 }

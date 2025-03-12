@@ -19,88 +19,99 @@ class IpRecordServiceTest {
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
-      val client = TwilioVoiceOpenAPIOkHttpClient.builder()
-          .baseUrl(TestServerExtension.BASE_URL)
-          .username("My Username")
-          .password("My Password")
-          .build()
-      val ipRecordService = client.ipRecords()
+        val client =
+            TwilioVoiceOpenAPIOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .username("My Username")
+                .password("My Password")
+                .build()
+        val ipRecordService = client.ipRecords()
 
-      val ipRecord = ipRecordService.create(IpRecordCreateParams.builder()
-          .ipAddress("10.2.3.4")
-          .cidrPrefixLength(30L)
-          .friendlyName("friendly_name")
-          .build())
+        val ipRecord =
+            ipRecordService.create(
+                IpRecordCreateParams.builder()
+                    .ipAddress("10.2.3.4")
+                    .cidrPrefixLength(30L)
+                    .friendlyName("friendly_name")
+                    .build()
+            )
 
-      ipRecord.validate()
+        ipRecord.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun retrieve() {
-      val client = TwilioVoiceOpenAPIOkHttpClient.builder()
-          .baseUrl(TestServerExtension.BASE_URL)
-          .username("My Username")
-          .password("My Password")
-          .build()
-      val ipRecordService = client.ipRecords()
+        val client =
+            TwilioVoiceOpenAPIOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .username("My Username")
+                .password("My Password")
+                .build()
+        val ipRecordService = client.ipRecords()
 
-      val ipRecord = ipRecordService.retrieve(IpRecordRetrieveParams.builder()
-          .sid("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-          .build())
+        val ipRecord =
+            ipRecordService.retrieve(
+                IpRecordRetrieveParams.builder().sid("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
+            )
 
-      ipRecord.validate()
+        ipRecord.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun update() {
-      val client = TwilioVoiceOpenAPIOkHttpClient.builder()
-          .baseUrl(TestServerExtension.BASE_URL)
-          .username("My Username")
-          .password("My Password")
-          .build()
-      val ipRecordService = client.ipRecords()
+        val client =
+            TwilioVoiceOpenAPIOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .username("My Username")
+                .password("My Password")
+                .build()
+        val ipRecordService = client.ipRecords()
 
-      val ipRecord = ipRecordService.update(IpRecordUpdateParams.builder()
-          .sid("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-          .friendlyName("update_name")
-          .build())
+        val ipRecord =
+            ipRecordService.update(
+                IpRecordUpdateParams.builder()
+                    .sid("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+                    .friendlyName("update_name")
+                    .build()
+            )
 
-      ipRecord.validate()
+        ipRecord.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun list() {
-      val client = TwilioVoiceOpenAPIOkHttpClient.builder()
-          .baseUrl(TestServerExtension.BASE_URL)
-          .username("My Username")
-          .password("My Password")
-          .build()
-      val ipRecordService = client.ipRecords()
+        val client =
+            TwilioVoiceOpenAPIOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .username("My Username")
+                .password("My Password")
+                .build()
+        val ipRecordService = client.ipRecords()
 
-      val ipRecord = ipRecordService.list(IpRecordListParams.builder()
-          .page(0L)
-          .pageSize(1L)
-          .pageToken("PageToken")
-          .build())
+        val ipRecord =
+            ipRecordService.list(
+                IpRecordListParams.builder().page(0L).pageSize(1L).pageToken("PageToken").build()
+            )
 
-      ipRecord.validate()
+        ipRecord.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun delete() {
-      val client = TwilioVoiceOpenAPIOkHttpClient.builder()
-          .baseUrl(TestServerExtension.BASE_URL)
-          .username("My Username")
-          .password("My Password")
-          .build()
-      val ipRecordService = client.ipRecords()
+        val client =
+            TwilioVoiceOpenAPIOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .username("My Username")
+                .password("My Password")
+                .build()
+        val ipRecordService = client.ipRecords()
 
-      ipRecordService.delete(IpRecordDeleteParams.builder()
-          .sid("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-          .build())
+        ipRecordService.delete(
+            IpRecordDeleteParams.builder().sid("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
+        )
     }
 }
