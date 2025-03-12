@@ -16,19 +16,16 @@ class ArchiveServiceTest {
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun deleteCall() {
-        val client =
-            TwilioVoiceOpenAPIOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .username("My Username")
-                .password("My Password")
-                .build()
-        val archiveService = client.archives()
+      val client = TwilioVoiceOpenAPIOkHttpClient.builder()
+          .baseUrl(TestServerExtension.BASE_URL)
+          .username("My Username")
+          .password("My Password")
+          .build()
+      val archiveService = client.archives()
 
-        archiveService.deleteCall(
-            ArchiveDeleteCallParams.builder()
-                .date(LocalDate.parse("2019-12-27"))
-                .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                .build()
-        )
+      archiveService.deleteCall(ArchiveDeleteCallParams.builder()
+          .date(LocalDate.parse("2019-12-27"))
+          .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+          .build())
     }
 }
