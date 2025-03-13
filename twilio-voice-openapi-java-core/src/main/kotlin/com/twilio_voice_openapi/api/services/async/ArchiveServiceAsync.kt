@@ -11,26 +11,25 @@ import java.util.concurrent.CompletableFuture
 interface ArchiveServiceAsync {
 
     /**
-     * Returns a view of this service that provides access to raw HTTP responses for
-     * each method.
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
 
     /**
-     * Delete an archived call record from Bulk Export. Note: this does not also delete
-     * the record from the Voice API.
+     * Delete an archived call record from Bulk Export. Note: this does not also delete the record
+     * from the Voice API.
      */
     fun deleteCall(params: ArchiveDeleteCallParams): CompletableFuture<Void?> =
-        deleteCall(
-          params, RequestOptions.none()
-        )
+        deleteCall(params, RequestOptions.none())
 
     /** @see [deleteCall] */
-    fun deleteCall(params: ArchiveDeleteCallParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?>
+    fun deleteCall(
+        params: ArchiveDeleteCallParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?>
 
     /**
-     * A view of [ArchiveServiceAsync] that provides access to raw HTTP responses for
-     * each method.
+     * A view of [ArchiveServiceAsync] that provides access to raw HTTP responses for each method.
      */
     interface WithRawResponse {
 
@@ -40,12 +39,13 @@ interface ArchiveServiceAsync {
          */
         @MustBeClosed
         fun deleteCall(params: ArchiveDeleteCallParams): CompletableFuture<HttpResponse> =
-            deleteCall(
-              params, RequestOptions.none()
-            )
+            deleteCall(params, RequestOptions.none())
 
         /** @see [deleteCall] */
         @MustBeClosed
-        fun deleteCall(params: ArchiveDeleteCallParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse>
+        fun deleteCall(
+            params: ArchiveDeleteCallParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse>
     }
 }

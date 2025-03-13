@@ -19,20 +19,22 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 @NoAutoDetect
-class TargetListResponse @JsonCreator private constructor(
+class TargetListResponse
+@JsonCreator
+private constructor(
     @JsonProperty("meta") @ExcludeMissing private val meta: JsonField<Meta> = JsonMissing.of(),
-    @JsonProperty("targets") @ExcludeMissing private val targets: JsonField<List<ConnectionPolicyTarget>> = JsonMissing.of(),
+    @JsonProperty("targets")
+    @ExcludeMissing
+    private val targets: JsonField<List<ConnectionPolicyTarget>> = JsonMissing.of(),
     @JsonAnySetter private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
-
 ) {
 
     fun meta(): Optional<Meta> = Optional.ofNullable(meta.getNullable("meta"))
 
-    fun targets(): Optional<List<ConnectionPolicyTarget>> = Optional.ofNullable(targets.getNullable("targets"))
+    fun targets(): Optional<List<ConnectionPolicyTarget>> =
+        Optional.ofNullable(targets.getNullable("targets"))
 
-    @JsonProperty("meta")
-    @ExcludeMissing
-    fun _meta(): JsonField<Meta> = meta
+    @JsonProperty("meta") @ExcludeMissing fun _meta(): JsonField<Meta> = meta
 
     @JsonProperty("targets")
     @ExcludeMissing
@@ -44,24 +46,22 @@ class TargetListResponse @JsonCreator private constructor(
 
     private var validated: Boolean = false
 
-    fun validate(): TargetListResponse =
-        apply {
-            if (validated) {
-              return@apply
-            }
-
-            meta().ifPresent { it.validate() }
-            targets().ifPresent { it.forEach { it.validate() } }
-            validated = true
+    fun validate(): TargetListResponse = apply {
+        if (validated) {
+            return@apply
         }
+
+        meta().ifPresent { it.validate() }
+        targets().ifPresent { it.forEach { it.validate() } }
+        validated = true
+    }
 
     fun toBuilder() = Builder().from(this)
 
     companion object {
 
         /** Returns a mutable builder for constructing an instance of [TargetListResponse]. */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [TargetListResponse]. */
@@ -72,92 +72,93 @@ class TargetListResponse @JsonCreator private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(targetListResponse: TargetListResponse) =
-            apply {
-                meta = targetListResponse.meta
-                targets = targetListResponse.targets.map { it.toMutableList() }
-                additionalProperties = targetListResponse.additionalProperties.toMutableMap()
-            }
+        internal fun from(targetListResponse: TargetListResponse) = apply {
+            meta = targetListResponse.meta
+            targets = targetListResponse.targets.map { it.toMutableList() }
+            additionalProperties = targetListResponse.additionalProperties.toMutableMap()
+        }
 
         fun meta(meta: Meta) = meta(JsonField.of(meta))
 
-        fun meta(meta: JsonField<Meta>) =
-            apply {
-                this.meta = meta
-            }
+        fun meta(meta: JsonField<Meta>) = apply { this.meta = meta }
 
         fun targets(targets: List<ConnectionPolicyTarget>) = targets(JsonField.of(targets))
 
-        fun targets(targets: JsonField<List<ConnectionPolicyTarget>>) =
-            apply {
-                this.targets = targets.map { it.toMutableList() }
-            }
+        fun targets(targets: JsonField<List<ConnectionPolicyTarget>>) = apply {
+            this.targets = targets.map { it.toMutableList() }
+        }
 
-        fun addTarget(target: ConnectionPolicyTarget) =
-            apply {
-                targets = (targets ?: JsonField.of(mutableListOf())).also {
+        fun addTarget(target: ConnectionPolicyTarget) = apply {
+            targets =
+                (targets ?: JsonField.of(mutableListOf())).also {
                     checkKnown("targets", it).add(target)
                 }
-            }
+        }
 
-        fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.clear()
+            putAllAdditionalProperties(additionalProperties)
+        }
 
-        fun putAdditionalProperty(key: String, value: JsonValue) =
-            apply {
-                additionalProperties.put(key, value)
-            }
+        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+            additionalProperties.put(key, value)
+        }
 
-        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.putAll(additionalProperties)
+        }
 
-        fun removeAdditionalProperty(key: String) =
-            apply {
-                additionalProperties.remove(key)
-            }
+        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
 
-        fun removeAllAdditionalProperties(keys: Set<String>) =
-            apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
+        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+            keys.forEach(::removeAdditionalProperty)
+        }
 
         fun build(): TargetListResponse =
             TargetListResponse(
-              meta,
-              (targets ?: JsonMissing.of()).map { it.toImmutable() },
-              additionalProperties.toImmutable(),
+                meta,
+                (targets ?: JsonMissing.of()).map { it.toImmutable() },
+                additionalProperties.toImmutable(),
             )
     }
 
     @NoAutoDetect
-    class Meta @JsonCreator private constructor(
-        @JsonProperty("first_page_url") @ExcludeMissing private val firstPageUrl: JsonField<String> = JsonMissing.of(),
+    class Meta
+    @JsonCreator
+    private constructor(
+        @JsonProperty("first_page_url")
+        @ExcludeMissing
+        private val firstPageUrl: JsonField<String> = JsonMissing.of(),
         @JsonProperty("key") @ExcludeMissing private val key: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("next_page_url") @ExcludeMissing private val nextPageUrl: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("next_page_url")
+        @ExcludeMissing
+        private val nextPageUrl: JsonField<String> = JsonMissing.of(),
         @JsonProperty("page") @ExcludeMissing private val page: JsonField<Long> = JsonMissing.of(),
-        @JsonProperty("page_size") @ExcludeMissing private val pageSize: JsonField<Long> = JsonMissing.of(),
-        @JsonProperty("previous_page_url") @ExcludeMissing private val previousPageUrl: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("page_size")
+        @ExcludeMissing
+        private val pageSize: JsonField<Long> = JsonMissing.of(),
+        @JsonProperty("previous_page_url")
+        @ExcludeMissing
+        private val previousPageUrl: JsonField<String> = JsonMissing.of(),
         @JsonProperty("url") @ExcludeMissing private val url: JsonField<String> = JsonMissing.of(),
-        @JsonAnySetter private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
-
+        @JsonAnySetter
+        private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
     ) {
 
-        fun firstPageUrl(): Optional<String> = Optional.ofNullable(firstPageUrl.getNullable("first_page_url"))
+        fun firstPageUrl(): Optional<String> =
+            Optional.ofNullable(firstPageUrl.getNullable("first_page_url"))
 
         fun key(): Optional<String> = Optional.ofNullable(key.getNullable("key"))
 
-        fun nextPageUrl(): Optional<String> = Optional.ofNullable(nextPageUrl.getNullable("next_page_url"))
+        fun nextPageUrl(): Optional<String> =
+            Optional.ofNullable(nextPageUrl.getNullable("next_page_url"))
 
         fun page(): Optional<Long> = Optional.ofNullable(page.getNullable("page"))
 
         fun pageSize(): Optional<Long> = Optional.ofNullable(pageSize.getNullable("page_size"))
 
-        fun previousPageUrl(): Optional<String> = Optional.ofNullable(previousPageUrl.getNullable("previous_page_url"))
+        fun previousPageUrl(): Optional<String> =
+            Optional.ofNullable(previousPageUrl.getNullable("previous_page_url"))
 
         fun url(): Optional<String> = Optional.ofNullable(url.getNullable("url"))
 
@@ -165,29 +166,21 @@ class TargetListResponse @JsonCreator private constructor(
         @ExcludeMissing
         fun _firstPageUrl(): JsonField<String> = firstPageUrl
 
-        @JsonProperty("key")
-        @ExcludeMissing
-        fun _key(): JsonField<String> = key
+        @JsonProperty("key") @ExcludeMissing fun _key(): JsonField<String> = key
 
         @JsonProperty("next_page_url")
         @ExcludeMissing
         fun _nextPageUrl(): JsonField<String> = nextPageUrl
 
-        @JsonProperty("page")
-        @ExcludeMissing
-        fun _page(): JsonField<Long> = page
+        @JsonProperty("page") @ExcludeMissing fun _page(): JsonField<Long> = page
 
-        @JsonProperty("page_size")
-        @ExcludeMissing
-        fun _pageSize(): JsonField<Long> = pageSize
+        @JsonProperty("page_size") @ExcludeMissing fun _pageSize(): JsonField<Long> = pageSize
 
         @JsonProperty("previous_page_url")
         @ExcludeMissing
         fun _previousPageUrl(): JsonField<String> = previousPageUrl
 
-        @JsonProperty("url")
-        @ExcludeMissing
-        fun _url(): JsonField<String> = url
+        @JsonProperty("url") @ExcludeMissing fun _url(): JsonField<String> = url
 
         @JsonAnyGetter
         @ExcludeMissing
@@ -195,29 +188,27 @@ class TargetListResponse @JsonCreator private constructor(
 
         private var validated: Boolean = false
 
-        fun validate(): Meta =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                firstPageUrl()
-                key()
-                nextPageUrl()
-                page()
-                pageSize()
-                previousPageUrl()
-                url()
-                validated = true
+        fun validate(): Meta = apply {
+            if (validated) {
+                return@apply
             }
+
+            firstPageUrl()
+            key()
+            nextPageUrl()
+            page()
+            pageSize()
+            previousPageUrl()
+            url()
+            validated = true
+        }
 
         fun toBuilder() = Builder().from(this)
 
         companion object {
 
             /** Returns a mutable builder for constructing an instance of [Meta]. */
-            @JvmStatic
-            fun builder() = Builder()
+            @JvmStatic fun builder() = Builder()
         }
 
         /** A builder for [Meta]. */
@@ -233,116 +224,95 @@ class TargetListResponse @JsonCreator private constructor(
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
-            internal fun from(meta: Meta) =
-                apply {
-                    firstPageUrl = meta.firstPageUrl
-                    key = meta.key
-                    nextPageUrl = meta.nextPageUrl
-                    page = meta.page
-                    pageSize = meta.pageSize
-                    previousPageUrl = meta.previousPageUrl
-                    url = meta.url
-                    additionalProperties = meta.additionalProperties.toMutableMap()
-                }
+            internal fun from(meta: Meta) = apply {
+                firstPageUrl = meta.firstPageUrl
+                key = meta.key
+                nextPageUrl = meta.nextPageUrl
+                page = meta.page
+                pageSize = meta.pageSize
+                previousPageUrl = meta.previousPageUrl
+                url = meta.url
+                additionalProperties = meta.additionalProperties.toMutableMap()
+            }
 
             fun firstPageUrl(firstPageUrl: String) = firstPageUrl(JsonField.of(firstPageUrl))
 
-            fun firstPageUrl(firstPageUrl: JsonField<String>) =
-                apply {
-                    this.firstPageUrl = firstPageUrl
-                }
+            fun firstPageUrl(firstPageUrl: JsonField<String>) = apply {
+                this.firstPageUrl = firstPageUrl
+            }
 
             fun key(key: String) = key(JsonField.of(key))
 
-            fun key(key: JsonField<String>) =
-                apply {
-                    this.key = key
-                }
+            fun key(key: JsonField<String>) = apply { this.key = key }
 
             fun nextPageUrl(nextPageUrl: String?) = nextPageUrl(JsonField.ofNullable(nextPageUrl))
 
             fun nextPageUrl(nextPageUrl: Optional<String>) = nextPageUrl(nextPageUrl.getOrNull())
 
-            fun nextPageUrl(nextPageUrl: JsonField<String>) =
-                apply {
-                    this.nextPageUrl = nextPageUrl
-                }
+            fun nextPageUrl(nextPageUrl: JsonField<String>) = apply {
+                this.nextPageUrl = nextPageUrl
+            }
 
             fun page(page: Long) = page(JsonField.of(page))
 
-            fun page(page: JsonField<Long>) =
-                apply {
-                    this.page = page
-                }
+            fun page(page: JsonField<Long>) = apply { this.page = page }
 
             fun pageSize(pageSize: Long) = pageSize(JsonField.of(pageSize))
 
-            fun pageSize(pageSize: JsonField<Long>) =
-                apply {
-                    this.pageSize = pageSize
-                }
+            fun pageSize(pageSize: JsonField<Long>) = apply { this.pageSize = pageSize }
 
-            fun previousPageUrl(previousPageUrl: String?) = previousPageUrl(JsonField.ofNullable(previousPageUrl))
+            fun previousPageUrl(previousPageUrl: String?) =
+                previousPageUrl(JsonField.ofNullable(previousPageUrl))
 
-            fun previousPageUrl(previousPageUrl: Optional<String>) = previousPageUrl(previousPageUrl.getOrNull())
+            fun previousPageUrl(previousPageUrl: Optional<String>) =
+                previousPageUrl(previousPageUrl.getOrNull())
 
-            fun previousPageUrl(previousPageUrl: JsonField<String>) =
-                apply {
-                    this.previousPageUrl = previousPageUrl
-                }
+            fun previousPageUrl(previousPageUrl: JsonField<String>) = apply {
+                this.previousPageUrl = previousPageUrl
+            }
 
             fun url(url: String) = url(JsonField.of(url))
 
-            fun url(url: JsonField<String>) =
-                apply {
-                    this.url = url
-                }
+            fun url(url: JsonField<String>) = apply { this.url = url }
 
-            fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
-                apply {
-                    this.additionalProperties.clear()
-                    putAllAdditionalProperties(additionalProperties)
-                }
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
 
-            fun putAdditionalProperty(key: String, value: JsonValue) =
-                apply {
-                    additionalProperties.put(key, value)
-                }
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
 
-            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-                apply {
-                    this.additionalProperties.putAll(additionalProperties)
-                }
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
 
-            fun removeAdditionalProperty(key: String) =
-                apply {
-                    additionalProperties.remove(key)
-                }
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
 
-            fun removeAllAdditionalProperties(keys: Set<String>) =
-                apply {
-                    keys.forEach(::removeAdditionalProperty)
-                }
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
 
             fun build(): Meta =
                 Meta(
-                  firstPageUrl,
-                  key,
-                  nextPageUrl,
-                  page,
-                  pageSize,
-                  previousPageUrl,
-                  url,
-                  additionalProperties.toImmutable(),
+                    firstPageUrl,
+                    key,
+                    nextPageUrl,
+                    page,
+                    pageSize,
+                    previousPageUrl,
+                    url,
+                    additionalProperties.toImmutable(),
                 )
         }
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is Meta && firstPageUrl == other.firstPageUrl && key == other.key && nextPageUrl == other.nextPageUrl && page == other.page && pageSize == other.pageSize && previousPageUrl == other.previousPageUrl && url == other.url && additionalProperties == other.additionalProperties /* spotless:on */
+            return /* spotless:off */ other is Meta && firstPageUrl == other.firstPageUrl && key == other.key && nextPageUrl == other.nextPageUrl && page == other.page && pageSize == other.pageSize && previousPageUrl == other.previousPageUrl && url == other.url && additionalProperties == other.additionalProperties /* spotless:on */
         }
 
         /* spotless:off */
@@ -351,15 +321,16 @@ class TargetListResponse @JsonCreator private constructor(
 
         override fun hashCode(): Int = hashCode
 
-        override fun toString() = "Meta{firstPageUrl=$firstPageUrl, key=$key, nextPageUrl=$nextPageUrl, page=$page, pageSize=$pageSize, previousPageUrl=$previousPageUrl, url=$url, additionalProperties=$additionalProperties}"
+        override fun toString() =
+            "Meta{firstPageUrl=$firstPageUrl, key=$key, nextPageUrl=$nextPageUrl, page=$page, pageSize=$pageSize, previousPageUrl=$previousPageUrl, url=$url, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is TargetListResponse && meta == other.meta && targets == other.targets && additionalProperties == other.additionalProperties /* spotless:on */
+        return /* spotless:off */ other is TargetListResponse && meta == other.meta && targets == other.targets && additionalProperties == other.additionalProperties /* spotless:on */
     }
 
     /* spotless:off */
@@ -368,5 +339,6 @@ class TargetListResponse @JsonCreator private constructor(
 
     override fun hashCode(): Int = hashCode
 
-    override fun toString() = "TargetListResponse{meta=$meta, targets=$targets, additionalProperties=$additionalProperties}"
+    override fun toString() =
+        "TargetListResponse{meta=$meta, targets=$targets, additionalProperties=$additionalProperties}"
 }

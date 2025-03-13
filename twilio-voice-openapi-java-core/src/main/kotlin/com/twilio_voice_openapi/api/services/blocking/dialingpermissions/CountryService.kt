@@ -15,107 +15,111 @@ import com.twilio_voice_openapi.api.models.dialingpermissions.countries.CountryR
 interface CountryService {
 
     /**
-     * Returns a view of this service that provides access to raw HTTP responses for
-     * each method.
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
 
-    /**
-     * Retrieve voice dialing country permissions identified by the given ISO country
-     * code
-     */
+    /** Retrieve voice dialing country permissions identified by the given ISO country code */
     fun retrieve(params: CountryRetrieveParams): CountryRetrieveResponse =
-        retrieve(
-          params, RequestOptions.none()
-        )
+        retrieve(params, RequestOptions.none())
 
     /** @see [retrieve] */
-    fun retrieve(params: CountryRetrieveParams, requestOptions: RequestOptions = RequestOptions.none()): CountryRetrieveResponse
+    fun retrieve(
+        params: CountryRetrieveParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CountryRetrieveResponse
 
     /** Retrieve all voice dialing country permissions for this account */
     fun list(): CountryListResponse = list(CountryListParams.none())
 
     /** @see [list] */
-    fun list(params: CountryListParams = CountryListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CountryListResponse
+    fun list(
+        params: CountryListParams = CountryListParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CountryListResponse
 
     /** @see [list] */
     fun list(params: CountryListParams = CountryListParams.none()): CountryListResponse =
-        list(
-          params, RequestOptions.none()
-        )
+        list(params, RequestOptions.none())
 
     /** @see [list] */
-    fun list(requestOptions: RequestOptions): CountryListResponse = list(CountryListParams.none(), requestOptions)
+    fun list(requestOptions: RequestOptions): CountryListResponse =
+        list(CountryListParams.none(), requestOptions)
 
     /**
-     * Fetch the high-risk special services prefixes from the country resource
-     * corresponding to the
+     * Fetch the high-risk special services prefixes from the country resource corresponding to the
      * [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
      */
-    fun fetchHighRiskSpecialPrefixes(params: CountryFetchHighRiskSpecialPrefixesParams): CountryFetchHighRiskSpecialPrefixesResponse =
-        fetchHighRiskSpecialPrefixes(
-          params, RequestOptions.none()
-        )
+    fun fetchHighRiskSpecialPrefixes(
+        params: CountryFetchHighRiskSpecialPrefixesParams
+    ): CountryFetchHighRiskSpecialPrefixesResponse =
+        fetchHighRiskSpecialPrefixes(params, RequestOptions.none())
 
     /** @see [fetchHighRiskSpecialPrefixes] */
-    fun fetchHighRiskSpecialPrefixes(params: CountryFetchHighRiskSpecialPrefixesParams, requestOptions: RequestOptions = RequestOptions.none()): CountryFetchHighRiskSpecialPrefixesResponse
+    fun fetchHighRiskSpecialPrefixes(
+        params: CountryFetchHighRiskSpecialPrefixesParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CountryFetchHighRiskSpecialPrefixesResponse
 
-    /**
-     * A view of [CountryService] that provides access to raw HTTP responses for each
-     * method.
-     */
+    /** A view of [CountryService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
         /**
-         * Returns a raw HTTP response for
-         * `get /v1/DialingPermissions/Countries/{IsoCode}`, but is otherwise the same as
-         * [CountryService.retrieve].
+         * Returns a raw HTTP response for `get /v1/DialingPermissions/Countries/{IsoCode}`, but is
+         * otherwise the same as [CountryService.retrieve].
          */
         @MustBeClosed
         fun retrieve(params: CountryRetrieveParams): HttpResponseFor<CountryRetrieveResponse> =
-            retrieve(
-              params, RequestOptions.none()
-            )
+            retrieve(params, RequestOptions.none())
 
         /** @see [retrieve] */
         @MustBeClosed
-        fun retrieve(params: CountryRetrieveParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<CountryRetrieveResponse>
+        fun retrieve(
+            params: CountryRetrieveParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<CountryRetrieveResponse>
 
         /**
-         * Returns a raw HTTP response for `get /v1/DialingPermissions/Countries`, but is
-         * otherwise the same as [CountryService.list].
+         * Returns a raw HTTP response for `get /v1/DialingPermissions/Countries`, but is otherwise
+         * the same as [CountryService.list].
          */
         @MustBeClosed
         fun list(): HttpResponseFor<CountryListResponse> = list(CountryListParams.none())
 
         /** @see [list] */
         @MustBeClosed
-        fun list(params: CountryListParams = CountryListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<CountryListResponse>
+        fun list(
+            params: CountryListParams = CountryListParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<CountryListResponse>
 
         /** @see [list] */
         @MustBeClosed
-        fun list(params: CountryListParams = CountryListParams.none()): HttpResponseFor<CountryListResponse> =
-            list(
-              params, RequestOptions.none()
-            )
+        fun list(
+            params: CountryListParams = CountryListParams.none()
+        ): HttpResponseFor<CountryListResponse> = list(params, RequestOptions.none())
 
         /** @see [list] */
         @MustBeClosed
-        fun list(requestOptions: RequestOptions): HttpResponseFor<CountryListResponse> = list(CountryListParams.none(), requestOptions)
+        fun list(requestOptions: RequestOptions): HttpResponseFor<CountryListResponse> =
+            list(CountryListParams.none(), requestOptions)
 
         /**
-         * Returns a raw HTTP response for
-         * `get /v1/DialingPermissions/Countries/{IsoCode}/HighRiskSpecialPrefixes`, but is
-         * otherwise the same as [CountryService.fetchHighRiskSpecialPrefixes].
+         * Returns a raw HTTP response for `get
+         * /v1/DialingPermissions/Countries/{IsoCode}/HighRiskSpecialPrefixes`, but is otherwise the
+         * same as [CountryService.fetchHighRiskSpecialPrefixes].
          */
         @MustBeClosed
-        fun fetchHighRiskSpecialPrefixes(params: CountryFetchHighRiskSpecialPrefixesParams): HttpResponseFor<CountryFetchHighRiskSpecialPrefixesResponse> =
-            fetchHighRiskSpecialPrefixes(
-              params, RequestOptions.none()
-            )
+        fun fetchHighRiskSpecialPrefixes(
+            params: CountryFetchHighRiskSpecialPrefixesParams
+        ): HttpResponseFor<CountryFetchHighRiskSpecialPrefixesResponse> =
+            fetchHighRiskSpecialPrefixes(params, RequestOptions.none())
 
         /** @see [fetchHighRiskSpecialPrefixes] */
         @MustBeClosed
-        fun fetchHighRiskSpecialPrefixes(params: CountryFetchHighRiskSpecialPrefixesParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<CountryFetchHighRiskSpecialPrefixesResponse>
+        fun fetchHighRiskSpecialPrefixes(
+            params: CountryFetchHighRiskSpecialPrefixesParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<CountryFetchHighRiskSpecialPrefixesResponse>
     }
 }
