@@ -21,12 +21,12 @@ import com.twilio_voice_openapi.api.services.async.dialingpermissions.CountrySer
 import com.twilio_voice_openapi.api.services.async.dialingpermissions.CountryServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
 
-class DialingPermissionServiceAsyncImpl internal constructor(
-    private val clientOptions: ClientOptions,
+class DialingPermissionServiceAsyncImpl
+internal constructor(private val clientOptions: ClientOptions) : DialingPermissionServiceAsync {
 
-) : DialingPermissionServiceAsync {
-
-    private val withRawResponse: DialingPermissionServiceAsync.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
+    private val withRawResponse: DialingPermissionServiceAsync.WithRawResponse by lazy {
+        WithRawResponseImpl(clientOptions)
+    }
 
     private val countries: CountryServiceAsync by lazy { CountryServiceAsyncImpl(clientOptions) }
 
@@ -34,44 +34,55 @@ class DialingPermissionServiceAsyncImpl internal constructor(
 
     override fun countries(): CountryServiceAsync = countries
 
-    override fun createBulkCountryUpdates(params: DialingPermissionCreateBulkCountryUpdatesParams, requestOptions: RequestOptions): CompletableFuture<DialingPermissionCreateBulkCountryUpdatesResponse> =
+    override fun createBulkCountryUpdates(
+        params: DialingPermissionCreateBulkCountryUpdatesParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<DialingPermissionCreateBulkCountryUpdatesResponse> =
         // post /v1/DialingPermissions/BulkCountryUpdates
         withRawResponse().createBulkCountryUpdates(params, requestOptions).thenApply { it.parse() }
 
-    class WithRawResponseImpl internal constructor(
-        private val clientOptions: ClientOptions,
+    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
+        DialingPermissionServiceAsync.WithRawResponse {
 
-    ) : DialingPermissionServiceAsync.WithRawResponse {
+        private val errorHandler: Handler<TwilioVoiceOpenAPIError> =
+            errorHandler(clientOptions.jsonMapper)
 
-        private val errorHandler: Handler<TwilioVoiceOpenAPIError> = errorHandler(clientOptions.jsonMapper)
-
-        private val countries: CountryServiceAsync.WithRawResponse by lazy { CountryServiceAsyncImpl.WithRawResponseImpl(clientOptions) }
+        private val countries: CountryServiceAsync.WithRawResponse by lazy {
+            CountryServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
 
         override fun countries(): CountryServiceAsync.WithRawResponse = countries
 
-        private val createBulkCountryUpdatesHandler: Handler<DialingPermissionCreateBulkCountryUpdatesResponse> = jsonHandler<DialingPermissionCreateBulkCountryUpdatesResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+        private val createBulkCountryUpdatesHandler:
+            Handler<DialingPermissionCreateBulkCountryUpdatesResponse> =
+            jsonHandler<DialingPermissionCreateBulkCountryUpdatesResponse>(clientOptions.jsonMapper)
+                .withErrorHandler(errorHandler)
 
-        override fun createBulkCountryUpdates(params: DialingPermissionCreateBulkCountryUpdatesParams, requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<DialingPermissionCreateBulkCountryUpdatesResponse>> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.POST)
-            .addPathSegments("v1", "DialingPermissions", "BulkCountryUpdates")
-            .body(json(clientOptions.jsonMapper, params._body()))
-            .build()
-            .prepareAsync(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          return request.thenComposeAsync { clientOptions.httpClient.executeAsync(
-            it, requestOptions
-          ) }.thenApply { response -> response.parseable {
-              response.use {
-                  createBulkCountryUpdatesHandler.handle(it)
-              }
-              .also {
-                  if (requestOptions.responseValidation!!) {
-                    it.validate()
-                  }
-              }
-          } }
+        override fun createBulkCountryUpdates(
+            params: DialingPermissionCreateBulkCountryUpdatesParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<DialingPermissionCreateBulkCountryUpdatesResponse>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.POST)
+                    .addPathSegments("v1", "DialingPermissions", "BulkCountryUpdates")
+                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response ->
+                    response.parseable {
+                        response
+                            .use { createBulkCountryUpdatesHandler.handle(it) }
+                            .also {
+                                if (requestOptions.responseValidation!!) {
+                                    it.validate()
+                                }
+                            }
+                    }
+                }
         }
     }
 }
