@@ -23,9 +23,9 @@ class SettingServiceTest {
                 .build()
         val settingService = client.settings()
 
-        val dialingPermissions = settingService.retrieve()
+        val voiceDialingPermissions = settingService.retrieve()
 
-        dialingPermissions.validate()
+        voiceDialingPermissions.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
@@ -39,11 +39,11 @@ class SettingServiceTest {
                 .build()
         val settingService = client.settings()
 
-        val dialingPermissions =
+        val voiceDialingPermissions =
             settingService.update(
                 SettingUpdateParams.builder().dialingPermissionsInheritance(true).build()
             )
 
-        dialingPermissions.validate()
+        voiceDialingPermissions.validate()
     }
 }
