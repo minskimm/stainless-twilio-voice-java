@@ -15,9 +15,9 @@ import com.twilio_voice_openapi.api.core.http.json
 import com.twilio_voice_openapi.api.core.http.parseable
 import com.twilio_voice_openapi.api.core.prepareAsync
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIError
-import com.twilio_voice_openapi.api.models.settings.DialingPermissions
 import com.twilio_voice_openapi.api.models.settings.SettingRetrieveParams
 import com.twilio_voice_openapi.api.models.settings.SettingUpdateParams
+import com.twilio_voice_openapi.api.models.settings.VoiceDialingPermissions
 import java.util.concurrent.CompletableFuture
 
 class SettingServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
@@ -32,14 +32,14 @@ class SettingServiceAsyncImpl internal constructor(private val clientOptions: Cl
     override fun retrieve(
         params: SettingRetrieveParams,
         requestOptions: RequestOptions,
-    ): CompletableFuture<DialingPermissions> =
+    ): CompletableFuture<VoiceDialingPermissions> =
         // get /v1/Settings
         withRawResponse().retrieve(params, requestOptions).thenApply { it.parse() }
 
     override fun update(
         params: SettingUpdateParams,
         requestOptions: RequestOptions,
-    ): CompletableFuture<DialingPermissions> =
+    ): CompletableFuture<VoiceDialingPermissions> =
         // post /v1/Settings
         withRawResponse().update(params, requestOptions).thenApply { it.parse() }
 
@@ -49,13 +49,14 @@ class SettingServiceAsyncImpl internal constructor(private val clientOptions: Cl
         private val errorHandler: Handler<TwilioVoiceOpenAPIError> =
             errorHandler(clientOptions.jsonMapper)
 
-        private val retrieveHandler: Handler<DialingPermissions> =
-            jsonHandler<DialingPermissions>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+        private val retrieveHandler: Handler<VoiceDialingPermissions> =
+            jsonHandler<VoiceDialingPermissions>(clientOptions.jsonMapper)
+                .withErrorHandler(errorHandler)
 
         override fun retrieve(
             params: SettingRetrieveParams,
             requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<DialingPermissions>> {
+        ): CompletableFuture<HttpResponseFor<VoiceDialingPermissions>> {
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -78,13 +79,14 @@ class SettingServiceAsyncImpl internal constructor(private val clientOptions: Cl
                 }
         }
 
-        private val updateHandler: Handler<DialingPermissions> =
-            jsonHandler<DialingPermissions>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+        private val updateHandler: Handler<VoiceDialingPermissions> =
+            jsonHandler<VoiceDialingPermissions>(clientOptions.jsonMapper)
+                .withErrorHandler(errorHandler)
 
         override fun update(
             params: SettingUpdateParams,
             requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<DialingPermissions>> {
+        ): CompletableFuture<HttpResponseFor<VoiceDialingPermissions>> {
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)

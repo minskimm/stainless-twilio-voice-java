@@ -18,7 +18,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 @NoAutoDetect
-class DialingPermissions
+class VoiceDialingPermissions
 @JsonCreator
 private constructor(
     @JsonProperty("dialing_permissions_inheritance")
@@ -57,7 +57,7 @@ private constructor(
 
     private var validated: Boolean = false
 
-    fun validate(): DialingPermissions = apply {
+    fun validate(): VoiceDialingPermissions = apply {
         if (validated) {
             return@apply
         }
@@ -71,11 +71,11 @@ private constructor(
 
     companion object {
 
-        /** Returns a mutable builder for constructing an instance of [DialingPermissions]. */
+        /** Returns a mutable builder for constructing an instance of [VoiceDialingPermissions]. */
         @JvmStatic fun builder() = Builder()
     }
 
-    /** A builder for [DialingPermissions]. */
+    /** A builder for [VoiceDialingPermissions]. */
     class Builder internal constructor() {
 
         private var dialingPermissionsInheritance: JsonField<Boolean> = JsonMissing.of()
@@ -83,10 +83,10 @@ private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(dialingPermissions: DialingPermissions) = apply {
-            dialingPermissionsInheritance = dialingPermissions.dialingPermissionsInheritance
-            url = dialingPermissions.url
-            additionalProperties = dialingPermissions.additionalProperties.toMutableMap()
+        internal fun from(voiceDialingPermissions: VoiceDialingPermissions) = apply {
+            dialingPermissionsInheritance = voiceDialingPermissions.dialingPermissionsInheritance
+            url = voiceDialingPermissions.url
+            additionalProperties = voiceDialingPermissions.additionalProperties.toMutableMap()
         }
 
         /**
@@ -147,8 +147,8 @@ private constructor(
             keys.forEach(::removeAdditionalProperty)
         }
 
-        fun build(): DialingPermissions =
-            DialingPermissions(
+        fun build(): VoiceDialingPermissions =
+            VoiceDialingPermissions(
                 dialingPermissionsInheritance,
                 url,
                 additionalProperties.toImmutable(),
@@ -160,7 +160,7 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is DialingPermissions && dialingPermissionsInheritance == other.dialingPermissionsInheritance && url == other.url && additionalProperties == other.additionalProperties /* spotless:on */
+        return /* spotless:off */ other is VoiceDialingPermissions && dialingPermissionsInheritance == other.dialingPermissionsInheritance && url == other.url && additionalProperties == other.additionalProperties /* spotless:on */
     }
 
     /* spotless:off */
@@ -170,5 +170,5 @@ private constructor(
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "DialingPermissions{dialingPermissionsInheritance=$dialingPermissionsInheritance, url=$url, additionalProperties=$additionalProperties}"
+        "VoiceDialingPermissions{dialingPermissionsInheritance=$dialingPermissionsInheritance, url=$url, additionalProperties=$additionalProperties}"
 }
