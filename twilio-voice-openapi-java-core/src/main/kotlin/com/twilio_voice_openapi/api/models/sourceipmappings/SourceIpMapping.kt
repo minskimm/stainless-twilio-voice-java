@@ -13,6 +13,7 @@ import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.NoAutoDetect
 import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
+import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
 import java.time.OffsetDateTime
 import java.util.Objects
 import java.util.Optional
@@ -42,6 +43,9 @@ private constructor(
     /**
      * The date and time in GMT that the resource was created specified in
      * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun dateCreated(): Optional<OffsetDateTime> =
         Optional.ofNullable(dateCreated.getNullable("date_created"))
@@ -49,54 +53,95 @@ private constructor(
     /**
      * The date and time in GMT that the resource was last updated specified in
      * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun dateUpdated(): Optional<OffsetDateTime> =
         Optional.ofNullable(dateUpdated.getNullable("date_updated"))
 
-    /** The Twilio-provided string that uniquely identifies the IP Record resource to map from. */
+    /**
+     * The Twilio-provided string that uniquely identifies the IP Record resource to map from.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun ipRecordSid(): Optional<String> =
         Optional.ofNullable(ipRecordSid.getNullable("ip_record_sid"))
 
-    /** The unique string that we created to identify the IP Record resource. */
+    /**
+     * The unique string that we created to identify the IP Record resource.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun sid(): Optional<String> = Optional.ofNullable(sid.getNullable("sid"))
 
-    /** The SID of the SIP Domain that the IP Record is mapped to. */
+    /**
+     * The SID of the SIP Domain that the IP Record is mapped to.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun sipDomainSid(): Optional<String> =
         Optional.ofNullable(sipDomainSid.getNullable("sip_domain_sid"))
 
-    /** The absolute URL of the resource. */
+    /**
+     * The absolute URL of the resource.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun url(): Optional<String> = Optional.ofNullable(url.getNullable("url"))
 
     /**
-     * The date and time in GMT that the resource was created specified in
-     * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+     * Returns the raw JSON value of [dateCreated].
+     *
+     * Unlike [dateCreated], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("date_created")
     @ExcludeMissing
     fun _dateCreated(): JsonField<OffsetDateTime> = dateCreated
 
     /**
-     * The date and time in GMT that the resource was last updated specified in
-     * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+     * Returns the raw JSON value of [dateUpdated].
+     *
+     * Unlike [dateUpdated], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("date_updated")
     @ExcludeMissing
     fun _dateUpdated(): JsonField<OffsetDateTime> = dateUpdated
 
-    /** The Twilio-provided string that uniquely identifies the IP Record resource to map from. */
+    /**
+     * Returns the raw JSON value of [ipRecordSid].
+     *
+     * Unlike [ipRecordSid], this method doesn't throw if the JSON field has an unexpected type.
+     */
     @JsonProperty("ip_record_sid")
     @ExcludeMissing
     fun _ipRecordSid(): JsonField<String> = ipRecordSid
 
-    /** The unique string that we created to identify the IP Record resource. */
+    /**
+     * Returns the raw JSON value of [sid].
+     *
+     * Unlike [sid], this method doesn't throw if the JSON field has an unexpected type.
+     */
     @JsonProperty("sid") @ExcludeMissing fun _sid(): JsonField<String> = sid
 
-    /** The SID of the SIP Domain that the IP Record is mapped to. */
+    /**
+     * Returns the raw JSON value of [sipDomainSid].
+     *
+     * Unlike [sipDomainSid], this method doesn't throw if the JSON field has an unexpected type.
+     */
     @JsonProperty("sip_domain_sid")
     @ExcludeMissing
     fun _sipDomainSid(): JsonField<String> = sipDomainSid
 
-    /** The absolute URL of the resource. */
+    /**
+     * Returns the raw JSON value of [url].
+     *
+     * Unlike [url], this method doesn't throw if the JSON field has an unexpected type.
+     */
     @JsonProperty("url") @ExcludeMissing fun _url(): JsonField<String> = url
 
     @JsonAnyGetter
@@ -156,16 +201,16 @@ private constructor(
         fun dateCreated(dateCreated: OffsetDateTime?) =
             dateCreated(JsonField.ofNullable(dateCreated))
 
-        /**
-         * The date and time in GMT that the resource was created specified in
-         * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
-         */
+        /** Alias for calling [Builder.dateCreated] with `dateCreated.orElse(null)`. */
         fun dateCreated(dateCreated: Optional<OffsetDateTime>) =
             dateCreated(dateCreated.getOrNull())
 
         /**
-         * The date and time in GMT that the resource was created specified in
-         * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+         * Sets [Builder.dateCreated] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.dateCreated] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
         fun dateCreated(dateCreated: JsonField<OffsetDateTime>) = apply {
             this.dateCreated = dateCreated
@@ -178,16 +223,16 @@ private constructor(
         fun dateUpdated(dateUpdated: OffsetDateTime?) =
             dateUpdated(JsonField.ofNullable(dateUpdated))
 
-        /**
-         * The date and time in GMT that the resource was last updated specified in
-         * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
-         */
+        /** Alias for calling [Builder.dateUpdated] with `dateUpdated.orElse(null)`. */
         fun dateUpdated(dateUpdated: Optional<OffsetDateTime>) =
             dateUpdated(dateUpdated.getOrNull())
 
         /**
-         * The date and time in GMT that the resource was last updated specified in
-         * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+         * Sets [Builder.dateUpdated] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.dateUpdated] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
         fun dateUpdated(dateUpdated: JsonField<OffsetDateTime>) = apply {
             this.dateUpdated = dateUpdated
@@ -198,32 +243,45 @@ private constructor(
          */
         fun ipRecordSid(ipRecordSid: String?) = ipRecordSid(JsonField.ofNullable(ipRecordSid))
 
-        /**
-         * The Twilio-provided string that uniquely identifies the IP Record resource to map from.
-         */
+        /** Alias for calling [Builder.ipRecordSid] with `ipRecordSid.orElse(null)`. */
         fun ipRecordSid(ipRecordSid: Optional<String>) = ipRecordSid(ipRecordSid.getOrNull())
 
         /**
-         * The Twilio-provided string that uniquely identifies the IP Record resource to map from.
+         * Sets [Builder.ipRecordSid] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.ipRecordSid] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
         fun ipRecordSid(ipRecordSid: JsonField<String>) = apply { this.ipRecordSid = ipRecordSid }
 
         /** The unique string that we created to identify the IP Record resource. */
         fun sid(sid: String?) = sid(JsonField.ofNullable(sid))
 
-        /** The unique string that we created to identify the IP Record resource. */
+        /** Alias for calling [Builder.sid] with `sid.orElse(null)`. */
         fun sid(sid: Optional<String>) = sid(sid.getOrNull())
 
-        /** The unique string that we created to identify the IP Record resource. */
+        /**
+         * Sets [Builder.sid] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.sid] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
         fun sid(sid: JsonField<String>) = apply { this.sid = sid }
 
         /** The SID of the SIP Domain that the IP Record is mapped to. */
         fun sipDomainSid(sipDomainSid: String?) = sipDomainSid(JsonField.ofNullable(sipDomainSid))
 
-        /** The SID of the SIP Domain that the IP Record is mapped to. */
+        /** Alias for calling [Builder.sipDomainSid] with `sipDomainSid.orElse(null)`. */
         fun sipDomainSid(sipDomainSid: Optional<String>) = sipDomainSid(sipDomainSid.getOrNull())
 
-        /** The SID of the SIP Domain that the IP Record is mapped to. */
+        /**
+         * Sets [Builder.sipDomainSid] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.sipDomainSid] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
         fun sipDomainSid(sipDomainSid: JsonField<String>) = apply {
             this.sipDomainSid = sipDomainSid
         }
@@ -231,10 +289,15 @@ private constructor(
         /** The absolute URL of the resource. */
         fun url(url: String?) = url(JsonField.ofNullable(url))
 
-        /** The absolute URL of the resource. */
+        /** Alias for calling [Builder.url] with `url.orElse(null)`. */
         fun url(url: Optional<String>) = url(url.getOrNull())
 
-        /** The absolute URL of the resource. */
+        /**
+         * Sets [Builder.url] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.url] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
         fun url(url: JsonField<String>) = apply { this.url = url }
 
         fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {

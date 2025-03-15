@@ -99,10 +99,14 @@ private constructor(
         /** The page index. This value is simply for client state. */
         fun page(page: Long?) = apply { this.page = page }
 
-        /** The page index. This value is simply for client state. */
+        /**
+         * Alias for [Builder.page].
+         *
+         * This unboxed primitive overload exists for backwards compatibility.
+         */
         fun page(page: Long) = page(page as Long?)
 
-        /** The page index. This value is simply for client state. */
+        /** Alias for calling [Builder.page] with `page.orElse(null)`. */
         fun page(page: Optional<Long>) = page(page.getOrNull())
 
         /**
@@ -112,21 +116,19 @@ private constructor(
         fun pageSize(pageSize: Long?) = apply { this.pageSize = pageSize }
 
         /**
-         * How many resources to return in each list page. The default is 50, and the maximum
-         * is 1000.
+         * Alias for [Builder.pageSize].
+         *
+         * This unboxed primitive overload exists for backwards compatibility.
          */
         fun pageSize(pageSize: Long) = pageSize(pageSize as Long?)
 
-        /**
-         * How many resources to return in each list page. The default is 50, and the maximum
-         * is 1000.
-         */
+        /** Alias for calling [Builder.pageSize] with `pageSize.orElse(null)`. */
         fun pageSize(pageSize: Optional<Long>) = pageSize(pageSize.getOrNull())
 
         /** The page token. This is provided by the API. */
         fun pageToken(pageToken: String?) = apply { this.pageToken = pageToken }
 
-        /** The page token. This is provided by the API. */
+        /** Alias for calling [Builder.pageToken] with `pageToken.orElse(null)`. */
         fun pageToken(pageToken: Optional<String>) = pageToken(pageToken.getOrNull())
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {

@@ -16,6 +16,7 @@ import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
 import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
+import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
 import java.util.Objects
 import java.util.Optional
 
@@ -29,12 +30,16 @@ private constructor(
     /**
      * A descriptive string that you create to describe the resource. It is not unique and can be up
      * to 255 characters long.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun friendlyName(): Optional<String> = body.friendlyName()
 
     /**
-     * A descriptive string that you create to describe the resource. It is not unique and can be up
-     * to 255 characters long.
+     * Returns the raw JSON value of [friendlyName].
+     *
+     * Unlike [friendlyName], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _friendlyName(): JsonField<String> = body._friendlyName()
 
@@ -64,13 +69,18 @@ private constructor(
         /**
          * A descriptive string that you create to describe the resource. It is not unique and can
          * be up to 255 characters long.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun friendlyName(): Optional<String> =
             Optional.ofNullable(friendlyName.getNullable("FriendlyName"))
 
         /**
-         * A descriptive string that you create to describe the resource. It is not unique and can
-         * be up to 255 characters long.
+         * Returns the raw JSON value of [friendlyName].
+         *
+         * Unlike [friendlyName], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("FriendlyName")
         @ExcludeMissing
@@ -118,8 +128,11 @@ private constructor(
             fun friendlyName(friendlyName: String) = friendlyName(JsonField.of(friendlyName))
 
             /**
-             * A descriptive string that you create to describe the resource. It is not unique and
-             * can be up to 255 characters long.
+             * Sets [Builder.friendlyName] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.friendlyName] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
             fun friendlyName(friendlyName: JsonField<String>) = apply {
                 this.friendlyName = friendlyName
@@ -199,8 +212,11 @@ private constructor(
         fun friendlyName(friendlyName: String) = apply { body.friendlyName(friendlyName) }
 
         /**
-         * A descriptive string that you create to describe the resource. It is not unique and can
-         * be up to 255 characters long.
+         * Sets [Builder.friendlyName] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.friendlyName] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
         fun friendlyName(friendlyName: JsonField<String>) = apply {
             body.friendlyName(friendlyName)

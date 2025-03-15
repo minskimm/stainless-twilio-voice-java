@@ -71,6 +71,9 @@ private constructor(
     /**
      * The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the BYOC
      * Trunk resource.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun accountSid(): Optional<String> = Optional.ofNullable(accountSid.getNullable("account_sid"))
 
@@ -79,6 +82,9 @@ private constructor(
      * to the BYOC Trunk from the United States and Canada automatically perform a CNAM Lookup and
      * display Caller ID data on your phone. See
      * [CNAM Lookups](https://www.twilio.com/docs/sip-trunking#CNAM) for more information.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun cnamLookupEnabled(): Optional<Boolean> =
         Optional.ofNullable(cnamLookupEnabled.getNullable("cnam_lookup_enabled"))
@@ -86,6 +92,9 @@ private constructor(
     /**
      * The SID of the Connection Policy that Twilio will use when routing traffic to your
      * communications infrastructure.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun connectionPolicySid(): Optional<String> =
         Optional.ofNullable(connectionPolicySid.getNullable("connection_policy_sid"))
@@ -93,6 +102,9 @@ private constructor(
     /**
      * The date and time in GMT that the resource was created specified in
      * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun dateCreated(): Optional<OffsetDateTime> =
         Optional.ofNullable(dateCreated.getNullable("date_created"))
@@ -100,11 +112,19 @@ private constructor(
     /**
      * The date and time in GMT that the resource was last updated specified in
      * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun dateUpdated(): Optional<OffsetDateTime> =
         Optional.ofNullable(dateUpdated.getNullable("date_updated"))
 
-    /** The string that you assigned to describe the resource. */
+    /**
+     * The string that you assigned to describe the resource.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun friendlyName(): Optional<String> =
         Optional.ofNullable(friendlyName.getNullable("friendly_name"))
 
@@ -114,133 +134,214 @@ private constructor(
      * incoming call, configure this with a
      * [SIP Domain](https://www.twilio.com/docs/voice/api/sending-sip) to ensure proper routing. If
      * not configured, the from domain will default to "sip.twilio.com".
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun fromDomainSid(): Optional<String> =
         Optional.ofNullable(fromDomainSid.getNullable("from_domain_sid"))
 
-    /** The unique string that that we created to identify the BYOC Trunk resource. */
+    /**
+     * The unique string that that we created to identify the BYOC Trunk resource.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun sid(): Optional<String> = Optional.ofNullable(sid.getNullable("sid"))
 
-    /** The HTTP method we use to call `status_callback_url`. Either `GET` or `POST`. */
+    /**
+     * The HTTP method we use to call `status_callback_url`. Either `GET` or `POST`.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun statusCallbackMethod(): Optional<StatusCallbackMethod> =
         Optional.ofNullable(statusCallbackMethod.getNullable("status_callback_method"))
 
-    /** The URL that we call to pass status parameters (such as call ended) to your application. */
+    /**
+     * The URL that we call to pass status parameters (such as call ended) to your application.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun statusCallbackUrl(): Optional<String> =
         Optional.ofNullable(statusCallbackUrl.getNullable("status_callback_url"))
 
-    /** The absolute URL of the resource. */
+    /**
+     * The absolute URL of the resource.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun url(): Optional<String> = Optional.ofNullable(url.getNullable("url"))
 
-    /** The HTTP method we use to call `voice_fallback_url`. Can be: `GET` or `POST`. */
+    /**
+     * The HTTP method we use to call `voice_fallback_url`. Can be: `GET` or `POST`.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun voiceFallbackMethod(): Optional<VoiceFallbackMethod> =
         Optional.ofNullable(voiceFallbackMethod.getNullable("voice_fallback_method"))
 
     /**
      * The URL that we call when an error occurs while retrieving or executing the TwiML requested
      * from `voice_url`.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun voiceFallbackUrl(): Optional<String> =
         Optional.ofNullable(voiceFallbackUrl.getNullable("voice_fallback_url"))
 
-    /** The HTTP method we use to call `voice_url`. Can be: `GET` or `POST`. */
+    /**
+     * The HTTP method we use to call `voice_url`. Can be: `GET` or `POST`.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun voiceMethod(): Optional<VoiceMethod> =
         Optional.ofNullable(voiceMethod.getNullable("voice_method"))
 
-    /** The URL we call using the `voice_method` when the BYOC Trunk receives a call. */
+    /**
+     * The URL we call using the `voice_method` when the BYOC Trunk receives a call.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun voiceUrl(): Optional<String> = Optional.ofNullable(voiceUrl.getNullable("voice_url"))
 
     /**
-     * The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the BYOC
-     * Trunk resource.
+     * Returns the raw JSON value of [accountSid].
+     *
+     * Unlike [accountSid], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("account_sid") @ExcludeMissing fun _accountSid(): JsonField<String> = accountSid
 
     /**
-     * Whether Caller ID Name (CNAM) lookup is enabled for the trunk. If enabled, all inbound calls
-     * to the BYOC Trunk from the United States and Canada automatically perform a CNAM Lookup and
-     * display Caller ID data on your phone. See
-     * [CNAM Lookups](https://www.twilio.com/docs/sip-trunking#CNAM) for more information.
+     * Returns the raw JSON value of [cnamLookupEnabled].
+     *
+     * Unlike [cnamLookupEnabled], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("cnam_lookup_enabled")
     @ExcludeMissing
     fun _cnamLookupEnabled(): JsonField<Boolean> = cnamLookupEnabled
 
     /**
-     * The SID of the Connection Policy that Twilio will use when routing traffic to your
-     * communications infrastructure.
+     * Returns the raw JSON value of [connectionPolicySid].
+     *
+     * Unlike [connectionPolicySid], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("connection_policy_sid")
     @ExcludeMissing
     fun _connectionPolicySid(): JsonField<String> = connectionPolicySid
 
     /**
-     * The date and time in GMT that the resource was created specified in
-     * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+     * Returns the raw JSON value of [dateCreated].
+     *
+     * Unlike [dateCreated], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("date_created")
     @ExcludeMissing
     fun _dateCreated(): JsonField<OffsetDateTime> = dateCreated
 
     /**
-     * The date and time in GMT that the resource was last updated specified in
-     * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+     * Returns the raw JSON value of [dateUpdated].
+     *
+     * Unlike [dateUpdated], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("date_updated")
     @ExcludeMissing
     fun _dateUpdated(): JsonField<OffsetDateTime> = dateUpdated
 
-    /** The string that you assigned to describe the resource. */
+    /**
+     * Returns the raw JSON value of [friendlyName].
+     *
+     * Unlike [friendlyName], this method doesn't throw if the JSON field has an unexpected type.
+     */
     @JsonProperty("friendly_name")
     @ExcludeMissing
     fun _friendlyName(): JsonField<String> = friendlyName
 
     /**
-     * The SID of the SIP Domain that should be used in the `From` header of originating calls sent
-     * to your SIP infrastructure. If your SIP infrastructure allows users to "call back" an
-     * incoming call, configure this with a
-     * [SIP Domain](https://www.twilio.com/docs/voice/api/sending-sip) to ensure proper routing. If
-     * not configured, the from domain will default to "sip.twilio.com".
+     * Returns the raw JSON value of [fromDomainSid].
+     *
+     * Unlike [fromDomainSid], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("from_domain_sid")
     @ExcludeMissing
     fun _fromDomainSid(): JsonField<String> = fromDomainSid
 
-    /** The unique string that that we created to identify the BYOC Trunk resource. */
+    /**
+     * Returns the raw JSON value of [sid].
+     *
+     * Unlike [sid], this method doesn't throw if the JSON field has an unexpected type.
+     */
     @JsonProperty("sid") @ExcludeMissing fun _sid(): JsonField<String> = sid
 
-    /** The HTTP method we use to call `status_callback_url`. Either `GET` or `POST`. */
+    /**
+     * Returns the raw JSON value of [statusCallbackMethod].
+     *
+     * Unlike [statusCallbackMethod], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
     @JsonProperty("status_callback_method")
     @ExcludeMissing
     fun _statusCallbackMethod(): JsonField<StatusCallbackMethod> = statusCallbackMethod
 
-    /** The URL that we call to pass status parameters (such as call ended) to your application. */
+    /**
+     * Returns the raw JSON value of [statusCallbackUrl].
+     *
+     * Unlike [statusCallbackUrl], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
     @JsonProperty("status_callback_url")
     @ExcludeMissing
     fun _statusCallbackUrl(): JsonField<String> = statusCallbackUrl
 
-    /** The absolute URL of the resource. */
+    /**
+     * Returns the raw JSON value of [url].
+     *
+     * Unlike [url], this method doesn't throw if the JSON field has an unexpected type.
+     */
     @JsonProperty("url") @ExcludeMissing fun _url(): JsonField<String> = url
 
-    /** The HTTP method we use to call `voice_fallback_url`. Can be: `GET` or `POST`. */
+    /**
+     * Returns the raw JSON value of [voiceFallbackMethod].
+     *
+     * Unlike [voiceFallbackMethod], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
     @JsonProperty("voice_fallback_method")
     @ExcludeMissing
     fun _voiceFallbackMethod(): JsonField<VoiceFallbackMethod> = voiceFallbackMethod
 
     /**
-     * The URL that we call when an error occurs while retrieving or executing the TwiML requested
-     * from `voice_url`.
+     * Returns the raw JSON value of [voiceFallbackUrl].
+     *
+     * Unlike [voiceFallbackUrl], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("voice_fallback_url")
     @ExcludeMissing
     fun _voiceFallbackUrl(): JsonField<String> = voiceFallbackUrl
 
-    /** The HTTP method we use to call `voice_url`. Can be: `GET` or `POST`. */
+    /**
+     * Returns the raw JSON value of [voiceMethod].
+     *
+     * Unlike [voiceMethod], this method doesn't throw if the JSON field has an unexpected type.
+     */
     @JsonProperty("voice_method")
     @ExcludeMissing
     fun _voiceMethod(): JsonField<VoiceMethod> = voiceMethod
 
-    /** The URL we call using the `voice_method` when the BYOC Trunk receives a call. */
+    /**
+     * Returns the raw JSON value of [voiceUrl].
+     *
+     * Unlike [voiceUrl], this method doesn't throw if the JSON field has an unexpected type.
+     */
     @JsonProperty("voice_url") @ExcludeMissing fun _voiceUrl(): JsonField<String> = voiceUrl
 
     @JsonAnyGetter
@@ -326,15 +427,15 @@ private constructor(
          */
         fun accountSid(accountSid: String?) = accountSid(JsonField.ofNullable(accountSid))
 
-        /**
-         * The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the
-         * BYOC Trunk resource.
-         */
+        /** Alias for calling [Builder.accountSid] with `accountSid.orElse(null)`. */
         fun accountSid(accountSid: Optional<String>) = accountSid(accountSid.getOrNull())
 
         /**
-         * The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the
-         * BYOC Trunk resource.
+         * Sets [Builder.accountSid] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.accountSid] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
         fun accountSid(accountSid: JsonField<String>) = apply { this.accountSid = accountSid }
 
@@ -348,28 +449,23 @@ private constructor(
             cnamLookupEnabled(JsonField.ofNullable(cnamLookupEnabled))
 
         /**
-         * Whether Caller ID Name (CNAM) lookup is enabled for the trunk. If enabled, all inbound
-         * calls to the BYOC Trunk from the United States and Canada automatically perform a CNAM
-         * Lookup and display Caller ID data on your phone. See
-         * [CNAM Lookups](https://www.twilio.com/docs/sip-trunking#CNAM) for more information.
+         * Alias for [Builder.cnamLookupEnabled].
+         *
+         * This unboxed primitive overload exists for backwards compatibility.
          */
         fun cnamLookupEnabled(cnamLookupEnabled: Boolean) =
             cnamLookupEnabled(cnamLookupEnabled as Boolean?)
 
-        /**
-         * Whether Caller ID Name (CNAM) lookup is enabled for the trunk. If enabled, all inbound
-         * calls to the BYOC Trunk from the United States and Canada automatically perform a CNAM
-         * Lookup and display Caller ID data on your phone. See
-         * [CNAM Lookups](https://www.twilio.com/docs/sip-trunking#CNAM) for more information.
-         */
+        /** Alias for calling [Builder.cnamLookupEnabled] with `cnamLookupEnabled.orElse(null)`. */
         fun cnamLookupEnabled(cnamLookupEnabled: Optional<Boolean>) =
             cnamLookupEnabled(cnamLookupEnabled.getOrNull())
 
         /**
-         * Whether Caller ID Name (CNAM) lookup is enabled for the trunk. If enabled, all inbound
-         * calls to the BYOC Trunk from the United States and Canada automatically perform a CNAM
-         * Lookup and display Caller ID data on your phone. See
-         * [CNAM Lookups](https://www.twilio.com/docs/sip-trunking#CNAM) for more information.
+         * Sets [Builder.cnamLookupEnabled] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.cnamLookupEnabled] with a well-typed [Boolean] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
         fun cnamLookupEnabled(cnamLookupEnabled: JsonField<Boolean>) = apply {
             this.cnamLookupEnabled = cnamLookupEnabled
@@ -383,15 +479,17 @@ private constructor(
             connectionPolicySid(JsonField.ofNullable(connectionPolicySid))
 
         /**
-         * The SID of the Connection Policy that Twilio will use when routing traffic to your
-         * communications infrastructure.
+         * Alias for calling [Builder.connectionPolicySid] with `connectionPolicySid.orElse(null)`.
          */
         fun connectionPolicySid(connectionPolicySid: Optional<String>) =
             connectionPolicySid(connectionPolicySid.getOrNull())
 
         /**
-         * The SID of the Connection Policy that Twilio will use when routing traffic to your
-         * communications infrastructure.
+         * Sets [Builder.connectionPolicySid] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.connectionPolicySid] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
         fun connectionPolicySid(connectionPolicySid: JsonField<String>) = apply {
             this.connectionPolicySid = connectionPolicySid
@@ -404,16 +502,16 @@ private constructor(
         fun dateCreated(dateCreated: OffsetDateTime?) =
             dateCreated(JsonField.ofNullable(dateCreated))
 
-        /**
-         * The date and time in GMT that the resource was created specified in
-         * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
-         */
+        /** Alias for calling [Builder.dateCreated] with `dateCreated.orElse(null)`. */
         fun dateCreated(dateCreated: Optional<OffsetDateTime>) =
             dateCreated(dateCreated.getOrNull())
 
         /**
-         * The date and time in GMT that the resource was created specified in
-         * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+         * Sets [Builder.dateCreated] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.dateCreated] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
         fun dateCreated(dateCreated: JsonField<OffsetDateTime>) = apply {
             this.dateCreated = dateCreated
@@ -426,16 +524,16 @@ private constructor(
         fun dateUpdated(dateUpdated: OffsetDateTime?) =
             dateUpdated(JsonField.ofNullable(dateUpdated))
 
-        /**
-         * The date and time in GMT that the resource was last updated specified in
-         * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
-         */
+        /** Alias for calling [Builder.dateUpdated] with `dateUpdated.orElse(null)`. */
         fun dateUpdated(dateUpdated: Optional<OffsetDateTime>) =
             dateUpdated(dateUpdated.getOrNull())
 
         /**
-         * The date and time in GMT that the resource was last updated specified in
-         * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+         * Sets [Builder.dateUpdated] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.dateUpdated] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
         fun dateUpdated(dateUpdated: JsonField<OffsetDateTime>) = apply {
             this.dateUpdated = dateUpdated
@@ -444,10 +542,16 @@ private constructor(
         /** The string that you assigned to describe the resource. */
         fun friendlyName(friendlyName: String?) = friendlyName(JsonField.ofNullable(friendlyName))
 
-        /** The string that you assigned to describe the resource. */
+        /** Alias for calling [Builder.friendlyName] with `friendlyName.orElse(null)`. */
         fun friendlyName(friendlyName: Optional<String>) = friendlyName(friendlyName.getOrNull())
 
-        /** The string that you assigned to describe the resource. */
+        /**
+         * Sets [Builder.friendlyName] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.friendlyName] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
         fun friendlyName(friendlyName: JsonField<String>) = apply {
             this.friendlyName = friendlyName
         }
@@ -462,22 +566,16 @@ private constructor(
         fun fromDomainSid(fromDomainSid: String?) =
             fromDomainSid(JsonField.ofNullable(fromDomainSid))
 
-        /**
-         * The SID of the SIP Domain that should be used in the `From` header of originating calls
-         * sent to your SIP infrastructure. If your SIP infrastructure allows users to "call back"
-         * an incoming call, configure this with a
-         * [SIP Domain](https://www.twilio.com/docs/voice/api/sending-sip) to ensure proper routing.
-         * If not configured, the from domain will default to "sip.twilio.com".
-         */
+        /** Alias for calling [Builder.fromDomainSid] with `fromDomainSid.orElse(null)`. */
         fun fromDomainSid(fromDomainSid: Optional<String>) =
             fromDomainSid(fromDomainSid.getOrNull())
 
         /**
-         * The SID of the SIP Domain that should be used in the `From` header of originating calls
-         * sent to your SIP infrastructure. If your SIP infrastructure allows users to "call back"
-         * an incoming call, configure this with a
-         * [SIP Domain](https://www.twilio.com/docs/voice/api/sending-sip) to ensure proper routing.
-         * If not configured, the from domain will default to "sip.twilio.com".
+         * Sets [Builder.fromDomainSid] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.fromDomainSid] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
         fun fromDomainSid(fromDomainSid: JsonField<String>) = apply {
             this.fromDomainSid = fromDomainSid
@@ -486,21 +584,35 @@ private constructor(
         /** The unique string that that we created to identify the BYOC Trunk resource. */
         fun sid(sid: String?) = sid(JsonField.ofNullable(sid))
 
-        /** The unique string that that we created to identify the BYOC Trunk resource. */
+        /** Alias for calling [Builder.sid] with `sid.orElse(null)`. */
         fun sid(sid: Optional<String>) = sid(sid.getOrNull())
 
-        /** The unique string that that we created to identify the BYOC Trunk resource. */
+        /**
+         * Sets [Builder.sid] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.sid] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
         fun sid(sid: JsonField<String>) = apply { this.sid = sid }
 
         /** The HTTP method we use to call `status_callback_url`. Either `GET` or `POST`. */
         fun statusCallbackMethod(statusCallbackMethod: StatusCallbackMethod?) =
             statusCallbackMethod(JsonField.ofNullable(statusCallbackMethod))
 
-        /** The HTTP method we use to call `status_callback_url`. Either `GET` or `POST`. */
+        /**
+         * Alias for calling [Builder.statusCallbackMethod] with
+         * `statusCallbackMethod.orElse(null)`.
+         */
         fun statusCallbackMethod(statusCallbackMethod: Optional<StatusCallbackMethod>) =
             statusCallbackMethod(statusCallbackMethod.getOrNull())
 
-        /** The HTTP method we use to call `status_callback_url`. Either `GET` or `POST`. */
+        /**
+         * Sets [Builder.statusCallbackMethod] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.statusCallbackMethod] with a well-typed
+         * [StatusCallbackMethod] value instead. This method is primarily for setting the field to
+         * an undocumented or not yet supported value.
+         */
         fun statusCallbackMethod(statusCallbackMethod: JsonField<StatusCallbackMethod>) = apply {
             this.statusCallbackMethod = statusCallbackMethod
         }
@@ -511,14 +623,16 @@ private constructor(
         fun statusCallbackUrl(statusCallbackUrl: String?) =
             statusCallbackUrl(JsonField.ofNullable(statusCallbackUrl))
 
-        /**
-         * The URL that we call to pass status parameters (such as call ended) to your application.
-         */
+        /** Alias for calling [Builder.statusCallbackUrl] with `statusCallbackUrl.orElse(null)`. */
         fun statusCallbackUrl(statusCallbackUrl: Optional<String>) =
             statusCallbackUrl(statusCallbackUrl.getOrNull())
 
         /**
-         * The URL that we call to pass status parameters (such as call ended) to your application.
+         * Sets [Builder.statusCallbackUrl] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.statusCallbackUrl] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
         fun statusCallbackUrl(statusCallbackUrl: JsonField<String>) = apply {
             this.statusCallbackUrl = statusCallbackUrl
@@ -527,21 +641,34 @@ private constructor(
         /** The absolute URL of the resource. */
         fun url(url: String?) = url(JsonField.ofNullable(url))
 
-        /** The absolute URL of the resource. */
+        /** Alias for calling [Builder.url] with `url.orElse(null)`. */
         fun url(url: Optional<String>) = url(url.getOrNull())
 
-        /** The absolute URL of the resource. */
+        /**
+         * Sets [Builder.url] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.url] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
         fun url(url: JsonField<String>) = apply { this.url = url }
 
         /** The HTTP method we use to call `voice_fallback_url`. Can be: `GET` or `POST`. */
         fun voiceFallbackMethod(voiceFallbackMethod: VoiceFallbackMethod?) =
             voiceFallbackMethod(JsonField.ofNullable(voiceFallbackMethod))
 
-        /** The HTTP method we use to call `voice_fallback_url`. Can be: `GET` or `POST`. */
+        /**
+         * Alias for calling [Builder.voiceFallbackMethod] with `voiceFallbackMethod.orElse(null)`.
+         */
         fun voiceFallbackMethod(voiceFallbackMethod: Optional<VoiceFallbackMethod>) =
             voiceFallbackMethod(voiceFallbackMethod.getOrNull())
 
-        /** The HTTP method we use to call `voice_fallback_url`. Can be: `GET` or `POST`. */
+        /**
+         * Sets [Builder.voiceFallbackMethod] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.voiceFallbackMethod] with a well-typed
+         * [VoiceFallbackMethod] value instead. This method is primarily for setting the field to an
+         * undocumented or not yet supported value.
+         */
         fun voiceFallbackMethod(voiceFallbackMethod: JsonField<VoiceFallbackMethod>) = apply {
             this.voiceFallbackMethod = voiceFallbackMethod
         }
@@ -553,16 +680,16 @@ private constructor(
         fun voiceFallbackUrl(voiceFallbackUrl: String?) =
             voiceFallbackUrl(JsonField.ofNullable(voiceFallbackUrl))
 
-        /**
-         * The URL that we call when an error occurs while retrieving or executing the TwiML
-         * requested from `voice_url`.
-         */
+        /** Alias for calling [Builder.voiceFallbackUrl] with `voiceFallbackUrl.orElse(null)`. */
         fun voiceFallbackUrl(voiceFallbackUrl: Optional<String>) =
             voiceFallbackUrl(voiceFallbackUrl.getOrNull())
 
         /**
-         * The URL that we call when an error occurs while retrieving or executing the TwiML
-         * requested from `voice_url`.
+         * Sets [Builder.voiceFallbackUrl] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.voiceFallbackUrl] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
         fun voiceFallbackUrl(voiceFallbackUrl: JsonField<String>) = apply {
             this.voiceFallbackUrl = voiceFallbackUrl
@@ -571,10 +698,16 @@ private constructor(
         /** The HTTP method we use to call `voice_url`. Can be: `GET` or `POST`. */
         fun voiceMethod(voiceMethod: VoiceMethod?) = voiceMethod(JsonField.ofNullable(voiceMethod))
 
-        /** The HTTP method we use to call `voice_url`. Can be: `GET` or `POST`. */
+        /** Alias for calling [Builder.voiceMethod] with `voiceMethod.orElse(null)`. */
         fun voiceMethod(voiceMethod: Optional<VoiceMethod>) = voiceMethod(voiceMethod.getOrNull())
 
-        /** The HTTP method we use to call `voice_url`. Can be: `GET` or `POST`. */
+        /**
+         * Sets [Builder.voiceMethod] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.voiceMethod] with a well-typed [VoiceMethod] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
         fun voiceMethod(voiceMethod: JsonField<VoiceMethod>) = apply {
             this.voiceMethod = voiceMethod
         }
@@ -582,10 +715,15 @@ private constructor(
         /** The URL we call using the `voice_method` when the BYOC Trunk receives a call. */
         fun voiceUrl(voiceUrl: String?) = voiceUrl(JsonField.ofNullable(voiceUrl))
 
-        /** The URL we call using the `voice_method` when the BYOC Trunk receives a call. */
+        /** Alias for calling [Builder.voiceUrl] with `voiceUrl.orElse(null)`. */
         fun voiceUrl(voiceUrl: Optional<String>) = voiceUrl(voiceUrl.getOrNull())
 
-        /** The URL we call using the `voice_method` when the BYOC Trunk receives a call. */
+        /**
+         * Sets [Builder.voiceUrl] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.voiceUrl] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
         fun voiceUrl(voiceUrl: JsonField<String>) = apply { this.voiceUrl = voiceUrl }
 
         fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {

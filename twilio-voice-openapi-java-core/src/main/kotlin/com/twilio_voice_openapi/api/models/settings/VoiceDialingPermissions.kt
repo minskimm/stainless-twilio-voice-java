@@ -13,6 +13,7 @@ import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.NoAutoDetect
 import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
+import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -31,24 +32,38 @@ private constructor(
     /**
      * `true` if the sub-account will inherit voice dialing permissions from the Master Project;
      * otherwise `false`.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun dialingPermissionsInheritance(): Optional<Boolean> =
         Optional.ofNullable(
             dialingPermissionsInheritance.getNullable("dialing_permissions_inheritance")
         )
 
-    /** The absolute URL of this resource. */
+    /**
+     * The absolute URL of this resource.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun url(): Optional<String> = Optional.ofNullable(url.getNullable("url"))
 
     /**
-     * `true` if the sub-account will inherit voice dialing permissions from the Master Project;
-     * otherwise `false`.
+     * Returns the raw JSON value of [dialingPermissionsInheritance].
+     *
+     * Unlike [dialingPermissionsInheritance], this method doesn't throw if the JSON field has an
+     * unexpected type.
      */
     @JsonProperty("dialing_permissions_inheritance")
     @ExcludeMissing
     fun _dialingPermissionsInheritance(): JsonField<Boolean> = dialingPermissionsInheritance
 
-    /** The absolute URL of this resource. */
+    /**
+     * Returns the raw JSON value of [url].
+     *
+     * Unlike [url], this method doesn't throw if the JSON field has an unexpected type.
+     */
     @JsonProperty("url") @ExcludeMissing fun _url(): JsonField<String> = url
 
     @JsonAnyGetter
@@ -97,22 +112,26 @@ private constructor(
             dialingPermissionsInheritance(JsonField.ofNullable(dialingPermissionsInheritance))
 
         /**
-         * `true` if the sub-account will inherit voice dialing permissions from the Master Project;
-         * otherwise `false`.
+         * Alias for [Builder.dialingPermissionsInheritance].
+         *
+         * This unboxed primitive overload exists for backwards compatibility.
          */
         fun dialingPermissionsInheritance(dialingPermissionsInheritance: Boolean) =
             dialingPermissionsInheritance(dialingPermissionsInheritance as Boolean?)
 
         /**
-         * `true` if the sub-account will inherit voice dialing permissions from the Master Project;
-         * otherwise `false`.
+         * Alias for calling [Builder.dialingPermissionsInheritance] with
+         * `dialingPermissionsInheritance.orElse(null)`.
          */
         fun dialingPermissionsInheritance(dialingPermissionsInheritance: Optional<Boolean>) =
             dialingPermissionsInheritance(dialingPermissionsInheritance.getOrNull())
 
         /**
-         * `true` if the sub-account will inherit voice dialing permissions from the Master Project;
-         * otherwise `false`.
+         * Sets [Builder.dialingPermissionsInheritance] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.dialingPermissionsInheritance] with a well-typed
+         * [Boolean] value instead. This method is primarily for setting the field to an
+         * undocumented or not yet supported value.
          */
         fun dialingPermissionsInheritance(dialingPermissionsInheritance: JsonField<Boolean>) =
             apply {
@@ -122,10 +141,15 @@ private constructor(
         /** The absolute URL of this resource. */
         fun url(url: String?) = url(JsonField.ofNullable(url))
 
-        /** The absolute URL of this resource. */
+        /** Alias for calling [Builder.url] with `url.orElse(null)`. */
         fun url(url: Optional<String>) = url(url.getOrNull())
 
-        /** The absolute URL of this resource. */
+        /**
+         * Sets [Builder.url] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.url] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
         fun url(url: JsonField<String>) = apply { this.url = url }
 
         fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {

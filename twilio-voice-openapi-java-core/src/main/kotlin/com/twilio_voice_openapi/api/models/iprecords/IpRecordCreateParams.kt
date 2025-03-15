@@ -17,6 +17,7 @@ import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
 import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
+import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
 import java.util.Objects
 import java.util.Optional
 
@@ -27,35 +28,52 @@ private constructor(
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    /** An IP address in dotted decimal notation, IPv4 only. */
+    /**
+     * An IP address in dotted decimal notation, IPv4 only.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
     fun ipAddress(): String = body.ipAddress()
 
     /**
      * An integer representing the length of the [CIDR](https://tools.ietf.org/html/rfc4632) prefix
      * to use with this IP address. By default the entire IP address is used, which for IPv4 is
      * value 32.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun cidrPrefixLength(): Optional<Long> = body.cidrPrefixLength()
 
     /**
      * A descriptive string that you create to describe the resource. It is not unique and can be up
      * to 255 characters long.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun friendlyName(): Optional<String> = body.friendlyName()
 
-    /** An IP address in dotted decimal notation, IPv4 only. */
+    /**
+     * Returns the raw JSON value of [ipAddress].
+     *
+     * Unlike [ipAddress], this method doesn't throw if the JSON field has an unexpected type.
+     */
     fun _ipAddress(): JsonField<String> = body._ipAddress()
 
     /**
-     * An integer representing the length of the [CIDR](https://tools.ietf.org/html/rfc4632) prefix
-     * to use with this IP address. By default the entire IP address is used, which for IPv4 is
-     * value 32.
+     * Returns the raw JSON value of [cidrPrefixLength].
+     *
+     * Unlike [cidrPrefixLength], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     fun _cidrPrefixLength(): JsonField<Long> = body._cidrPrefixLength()
 
     /**
-     * A descriptive string that you create to describe the resource. It is not unique and can be up
-     * to 255 characters long.
+     * Returns the raw JSON value of [friendlyName].
+     *
+     * Unlike [friendlyName], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _friendlyName(): JsonField<String> = body._friendlyName()
 
@@ -88,13 +106,22 @@ private constructor(
         private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
     ) {
 
-        /** An IP address in dotted decimal notation, IPv4 only. */
+        /**
+         * An IP address in dotted decimal notation, IPv4 only.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
+         */
         fun ipAddress(): String = ipAddress.getRequired("IpAddress")
 
         /**
          * An integer representing the length of the [CIDR](https://tools.ietf.org/html/rfc4632)
          * prefix to use with this IP address. By default the entire IP address is used, which for
          * IPv4 is value 32.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun cidrPrefixLength(): Optional<Long> =
             Optional.ofNullable(cidrPrefixLength.getNullable("CidrPrefixLength"))
@@ -102,25 +129,35 @@ private constructor(
         /**
          * A descriptive string that you create to describe the resource. It is not unique and can
          * be up to 255 characters long.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun friendlyName(): Optional<String> =
             Optional.ofNullable(friendlyName.getNullable("FriendlyName"))
 
-        /** An IP address in dotted decimal notation, IPv4 only. */
+        /**
+         * Returns the raw JSON value of [ipAddress].
+         *
+         * Unlike [ipAddress], this method doesn't throw if the JSON field has an unexpected type.
+         */
         @JsonProperty("IpAddress") @ExcludeMissing fun _ipAddress(): JsonField<String> = ipAddress
 
         /**
-         * An integer representing the length of the [CIDR](https://tools.ietf.org/html/rfc4632)
-         * prefix to use with this IP address. By default the entire IP address is used, which for
-         * IPv4 is value 32.
+         * Returns the raw JSON value of [cidrPrefixLength].
+         *
+         * Unlike [cidrPrefixLength], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("CidrPrefixLength")
         @ExcludeMissing
         fun _cidrPrefixLength(): JsonField<Long> = cidrPrefixLength
 
         /**
-         * A descriptive string that you create to describe the resource. It is not unique and can
-         * be up to 255 characters long.
+         * Returns the raw JSON value of [friendlyName].
+         *
+         * Unlike [friendlyName], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("FriendlyName")
         @ExcludeMissing
@@ -177,7 +214,13 @@ private constructor(
             /** An IP address in dotted decimal notation, IPv4 only. */
             fun ipAddress(ipAddress: String) = ipAddress(JsonField.of(ipAddress))
 
-            /** An IP address in dotted decimal notation, IPv4 only. */
+            /**
+             * Sets [Builder.ipAddress] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.ipAddress] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
             fun ipAddress(ipAddress: JsonField<String>) = apply { this.ipAddress = ipAddress }
 
             /**
@@ -189,9 +232,11 @@ private constructor(
                 cidrPrefixLength(JsonField.of(cidrPrefixLength))
 
             /**
-             * An integer representing the length of the [CIDR](https://tools.ietf.org/html/rfc4632)
-             * prefix to use with this IP address. By default the entire IP address is used, which
-             * for IPv4 is value 32.
+             * Sets [Builder.cidrPrefixLength] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.cidrPrefixLength] with a well-typed [Long] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
             fun cidrPrefixLength(cidrPrefixLength: JsonField<Long>) = apply {
                 this.cidrPrefixLength = cidrPrefixLength
@@ -204,8 +249,11 @@ private constructor(
             fun friendlyName(friendlyName: String) = friendlyName(JsonField.of(friendlyName))
 
             /**
-             * A descriptive string that you create to describe the resource. It is not unique and
-             * can be up to 255 characters long.
+             * Sets [Builder.friendlyName] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.friendlyName] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
             fun friendlyName(friendlyName: JsonField<String>) = apply {
                 this.friendlyName = friendlyName
@@ -290,7 +338,13 @@ private constructor(
         /** An IP address in dotted decimal notation, IPv4 only. */
         fun ipAddress(ipAddress: String) = apply { body.ipAddress(ipAddress) }
 
-        /** An IP address in dotted decimal notation, IPv4 only. */
+        /**
+         * Sets [Builder.ipAddress] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.ipAddress] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
         fun ipAddress(ipAddress: JsonField<String>) = apply { body.ipAddress(ipAddress) }
 
         /**
@@ -303,9 +357,11 @@ private constructor(
         }
 
         /**
-         * An integer representing the length of the [CIDR](https://tools.ietf.org/html/rfc4632)
-         * prefix to use with this IP address. By default the entire IP address is used, which for
-         * IPv4 is value 32.
+         * Sets [Builder.cidrPrefixLength] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.cidrPrefixLength] with a well-typed [Long] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
         fun cidrPrefixLength(cidrPrefixLength: JsonField<Long>) = apply {
             body.cidrPrefixLength(cidrPrefixLength)
@@ -318,8 +374,11 @@ private constructor(
         fun friendlyName(friendlyName: String) = apply { body.friendlyName(friendlyName) }
 
         /**
-         * A descriptive string that you create to describe the resource. It is not unique and can
-         * be up to 255 characters long.
+         * Sets [Builder.friendlyName] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.friendlyName] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
         fun friendlyName(friendlyName: JsonField<String>) = apply {
             body.friendlyName(friendlyName)
