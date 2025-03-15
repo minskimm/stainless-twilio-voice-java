@@ -16,6 +16,7 @@ import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
 import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
+import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
 import java.util.Objects
 import java.util.Optional
 
@@ -30,12 +31,17 @@ private constructor(
     /**
      * `true` for the sub-account to inherit voice dialing permissions from the Master Project;
      * otherwise `false`.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun dialingPermissionsInheritance(): Optional<Boolean> = body.dialingPermissionsInheritance()
 
     /**
-     * `true` for the sub-account to inherit voice dialing permissions from the Master Project;
-     * otherwise `false`.
+     * Returns the raw JSON value of [dialingPermissionsInheritance].
+     *
+     * Unlike [dialingPermissionsInheritance], this method doesn't throw if the JSON field has an
+     * unexpected type.
      */
     fun _dialingPermissionsInheritance(): JsonField<Boolean> = body._dialingPermissionsInheritance()
 
@@ -65,6 +71,9 @@ private constructor(
         /**
          * `true` for the sub-account to inherit voice dialing permissions from the Master Project;
          * otherwise `false`.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun dialingPermissionsInheritance(): Optional<Boolean> =
             Optional.ofNullable(
@@ -72,8 +81,10 @@ private constructor(
             )
 
         /**
-         * `true` for the sub-account to inherit voice dialing permissions from the Master Project;
-         * otherwise `false`.
+         * Returns the raw JSON value of [dialingPermissionsInheritance].
+         *
+         * Unlike [dialingPermissionsInheritance], this method doesn't throw if the JSON field has
+         * an unexpected type.
          */
         @JsonProperty("DialingPermissionsInheritance")
         @ExcludeMissing
@@ -122,8 +133,11 @@ private constructor(
                 dialingPermissionsInheritance(JsonField.of(dialingPermissionsInheritance))
 
             /**
-             * `true` for the sub-account to inherit voice dialing permissions from the Master
-             * Project; otherwise `false`.
+             * Sets [Builder.dialingPermissionsInheritance] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.dialingPermissionsInheritance] with a well-typed
+             * [Boolean] value instead. This method is primarily for setting the field to an
+             * undocumented or not yet supported value.
              */
             fun dialingPermissionsInheritance(dialingPermissionsInheritance: JsonField<Boolean>) =
                 apply {
@@ -205,8 +219,11 @@ private constructor(
         }
 
         /**
-         * `true` for the sub-account to inherit voice dialing permissions from the Master Project;
-         * otherwise `false`.
+         * Sets [Builder.dialingPermissionsInheritance] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.dialingPermissionsInheritance] with a well-typed
+         * [Boolean] value instead. This method is primarily for setting the field to an
+         * undocumented or not yet supported value.
          */
         fun dialingPermissionsInheritance(dialingPermissionsInheritance: JsonField<Boolean>) =
             apply {

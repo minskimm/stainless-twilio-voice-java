@@ -17,6 +17,7 @@ import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
 import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
+import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
 import java.util.Objects
 
 class SourceIpMappingCreateParams
@@ -26,16 +27,34 @@ private constructor(
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    /** The Twilio-provided string that uniquely identifies the IP Record resource to map from. */
+    /**
+     * The Twilio-provided string that uniquely identifies the IP Record resource to map from.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
     fun ipRecordSid(): String = body.ipRecordSid()
 
-    /** The SID of the SIP Domain that the IP Record should be mapped to. */
+    /**
+     * The SID of the SIP Domain that the IP Record should be mapped to.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
     fun sipDomainSid(): String = body.sipDomainSid()
 
-    /** The Twilio-provided string that uniquely identifies the IP Record resource to map from. */
+    /**
+     * Returns the raw JSON value of [ipRecordSid].
+     *
+     * Unlike [ipRecordSid], this method doesn't throw if the JSON field has an unexpected type.
+     */
     fun _ipRecordSid(): JsonField<String> = body._ipRecordSid()
 
-    /** The SID of the SIP Domain that the IP Record should be mapped to. */
+    /**
+     * Returns the raw JSON value of [sipDomainSid].
+     *
+     * Unlike [sipDomainSid], this method doesn't throw if the JSON field has an unexpected type.
+     */
     fun _sipDomainSid(): JsonField<String> = body._sipDomainSid()
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
@@ -66,20 +85,37 @@ private constructor(
 
         /**
          * The Twilio-provided string that uniquely identifies the IP Record resource to map from.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
         fun ipRecordSid(): String = ipRecordSid.getRequired("IpRecordSid")
 
-        /** The SID of the SIP Domain that the IP Record should be mapped to. */
+        /**
+         * The SID of the SIP Domain that the IP Record should be mapped to.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
+         */
         fun sipDomainSid(): String = sipDomainSid.getRequired("SipDomainSid")
 
         /**
-         * The Twilio-provided string that uniquely identifies the IP Record resource to map from.
+         * Returns the raw JSON value of [ipRecordSid].
+         *
+         * Unlike [ipRecordSid], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("IpRecordSid")
         @ExcludeMissing
         fun _ipRecordSid(): JsonField<String> = ipRecordSid
 
-        /** The SID of the SIP Domain that the IP Record should be mapped to. */
+        /**
+         * Returns the raw JSON value of [sipDomainSid].
+         *
+         * Unlike [sipDomainSid], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
         @JsonProperty("SipDomainSid")
         @ExcludeMissing
         fun _sipDomainSid(): JsonField<String> = sipDomainSid
@@ -137,8 +173,11 @@ private constructor(
             fun ipRecordSid(ipRecordSid: String) = ipRecordSid(JsonField.of(ipRecordSid))
 
             /**
-             * The Twilio-provided string that uniquely identifies the IP Record resource to map
-             * from.
+             * Sets [Builder.ipRecordSid] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.ipRecordSid] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
             fun ipRecordSid(ipRecordSid: JsonField<String>) = apply {
                 this.ipRecordSid = ipRecordSid
@@ -147,7 +186,13 @@ private constructor(
             /** The SID of the SIP Domain that the IP Record should be mapped to. */
             fun sipDomainSid(sipDomainSid: String) = sipDomainSid(JsonField.of(sipDomainSid))
 
-            /** The SID of the SIP Domain that the IP Record should be mapped to. */
+            /**
+             * Sets [Builder.sipDomainSid] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.sipDomainSid] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
             fun sipDomainSid(sipDomainSid: JsonField<String>) = apply {
                 this.sipDomainSid = sipDomainSid
             }
@@ -234,14 +279,24 @@ private constructor(
         fun ipRecordSid(ipRecordSid: String) = apply { body.ipRecordSid(ipRecordSid) }
 
         /**
-         * The Twilio-provided string that uniquely identifies the IP Record resource to map from.
+         * Sets [Builder.ipRecordSid] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.ipRecordSid] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
         fun ipRecordSid(ipRecordSid: JsonField<String>) = apply { body.ipRecordSid(ipRecordSid) }
 
         /** The SID of the SIP Domain that the IP Record should be mapped to. */
         fun sipDomainSid(sipDomainSid: String) = apply { body.sipDomainSid(sipDomainSid) }
 
-        /** The SID of the SIP Domain that the IP Record should be mapped to. */
+        /**
+         * Sets [Builder.sipDomainSid] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.sipDomainSid] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
         fun sipDomainSid(sipDomainSid: JsonField<String>) = apply {
             body.sipDomainSid(sipDomainSid)
         }

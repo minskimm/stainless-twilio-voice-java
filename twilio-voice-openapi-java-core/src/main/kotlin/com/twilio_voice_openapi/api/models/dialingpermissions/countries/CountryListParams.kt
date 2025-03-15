@@ -144,7 +144,7 @@ private constructor(
         /** Filter to retrieve the country permissions by specifying the continent */
         fun continent(continent: String?) = apply { this.continent = continent }
 
-        /** Filter to retrieve the country permissions by specifying the continent */
+        /** Alias for calling [Builder.continent] with `continent.orElse(null)`. */
         fun continent(continent: Optional<String>) = continent(continent.getOrNull())
 
         /**
@@ -153,10 +153,7 @@ private constructor(
          */
         fun countryCode(countryCode: String?) = apply { this.countryCode = countryCode }
 
-        /**
-         * Filter the results by specified
-         * [country codes](https://www.itu.int/itudoc/itu-t/ob-lists/icc/e164_763.html)
-         */
+        /** Alias for calling [Builder.countryCode] with `countryCode.orElse(null)`. */
         fun countryCode(countryCode: Optional<String>) = countryCode(countryCode.getOrNull())
 
         /**
@@ -168,15 +165,16 @@ private constructor(
         }
 
         /**
-         * Filter to retrieve the country permissions with dialing to high-risk special service
-         * numbers enabled. Can be: `true` or `false`
+         * Alias for [Builder.highRiskSpecialNumbersEnabled].
+         *
+         * This unboxed primitive overload exists for backwards compatibility.
          */
         fun highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled: Boolean) =
             highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled as Boolean?)
 
         /**
-         * Filter to retrieve the country permissions with dialing to high-risk special service
-         * numbers enabled. Can be: `true` or `false`
+         * Alias for calling [Builder.highRiskSpecialNumbersEnabled] with
+         * `highRiskSpecialNumbersEnabled.orElse(null)`.
          */
         fun highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled: Optional<Boolean>) =
             highRiskSpecialNumbersEnabled(highRiskSpecialNumbersEnabled.getOrNull())
@@ -191,17 +189,16 @@ private constructor(
         }
 
         /**
-         * Filter to retrieve the country permissions with dialing to high-risk
-         * [toll fraud](https://www.twilio.com/blog/how-to-protect-your-account-from-toll-fraud-with-voice-dialing-geo-permissions-html)
-         * numbers enabled. Can be: `true` or `false`.
+         * Alias for [Builder.highRiskTollfraudNumbersEnabled].
+         *
+         * This unboxed primitive overload exists for backwards compatibility.
          */
         fun highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled: Boolean) =
             highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled as Boolean?)
 
         /**
-         * Filter to retrieve the country permissions with dialing to high-risk
-         * [toll fraud](https://www.twilio.com/blog/how-to-protect-your-account-from-toll-fraud-with-voice-dialing-geo-permissions-html)
-         * numbers enabled. Can be: `true` or `false`.
+         * Alias for calling [Builder.highRiskTollfraudNumbersEnabled] with
+         * `highRiskTollfraudNumbersEnabled.orElse(null)`.
          */
         fun highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled: Optional<Boolean>) =
             highRiskTollfraudNumbersEnabled(highRiskTollfraudNumbersEnabled.getOrNull())
@@ -212,10 +209,7 @@ private constructor(
          */
         fun isoCode(isoCode: String?) = apply { this.isoCode = isoCode }
 
-        /**
-         * Filter to retrieve the country permissions by specifying the
-         * [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-         */
+        /** Alias for calling [Builder.isoCode] with `isoCode.orElse(null)`. */
         fun isoCode(isoCode: Optional<String>) = isoCode(isoCode.getOrNull())
 
         /**
@@ -227,15 +221,16 @@ private constructor(
         }
 
         /**
-         * Filter to retrieve the country permissions with dialing to low-risk numbers enabled. Can
-         * be: `true` or `false`.
+         * Alias for [Builder.lowRiskNumbersEnabled].
+         *
+         * This unboxed primitive overload exists for backwards compatibility.
          */
         fun lowRiskNumbersEnabled(lowRiskNumbersEnabled: Boolean) =
             lowRiskNumbersEnabled(lowRiskNumbersEnabled as Boolean?)
 
         /**
-         * Filter to retrieve the country permissions with dialing to low-risk numbers enabled. Can
-         * be: `true` or `false`.
+         * Alias for calling [Builder.lowRiskNumbersEnabled] with
+         * `lowRiskNumbersEnabled.orElse(null)`.
          */
         fun lowRiskNumbersEnabled(lowRiskNumbersEnabled: Optional<Boolean>) =
             lowRiskNumbersEnabled(lowRiskNumbersEnabled.getOrNull())
@@ -243,10 +238,14 @@ private constructor(
         /** The page index. This value is simply for client state. */
         fun page(page: Long?) = apply { this.page = page }
 
-        /** The page index. This value is simply for client state. */
+        /**
+         * Alias for [Builder.page].
+         *
+         * This unboxed primitive overload exists for backwards compatibility.
+         */
         fun page(page: Long) = page(page as Long?)
 
-        /** The page index. This value is simply for client state. */
+        /** Alias for calling [Builder.page] with `page.orElse(null)`. */
         fun page(page: Optional<Long>) = page(page.getOrNull())
 
         /**
@@ -256,21 +255,19 @@ private constructor(
         fun pageSize(pageSize: Long?) = apply { this.pageSize = pageSize }
 
         /**
-         * How many resources to return in each list page. The default is 50, and the maximum
-         * is 1000.
+         * Alias for [Builder.pageSize].
+         *
+         * This unboxed primitive overload exists for backwards compatibility.
          */
         fun pageSize(pageSize: Long) = pageSize(pageSize as Long?)
 
-        /**
-         * How many resources to return in each list page. The default is 50, and the maximum
-         * is 1000.
-         */
+        /** Alias for calling [Builder.pageSize] with `pageSize.orElse(null)`. */
         fun pageSize(pageSize: Optional<Long>) = pageSize(pageSize.getOrNull())
 
         /** The page token. This is provided by the API. */
         fun pageToken(pageToken: String?) = apply { this.pageToken = pageToken }
 
-        /** The page token. This is provided by the API. */
+        /** Alias for calling [Builder.pageToken] with `pageToken.orElse(null)`. */
         fun pageToken(pageToken: Optional<String>) = pageToken(pageToken.getOrNull())
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {

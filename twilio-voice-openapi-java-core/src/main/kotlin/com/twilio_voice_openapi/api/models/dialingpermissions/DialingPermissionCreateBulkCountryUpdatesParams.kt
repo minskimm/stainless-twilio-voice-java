@@ -17,6 +17,7 @@ import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
 import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
+import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
 import java.util.Objects
 
 /**
@@ -35,13 +36,16 @@ private constructor(
      * URL encoded JSON array of update objects. example : `[ { "iso_code": "GB",
      * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
      * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun updateRequest(): String = body.updateRequest()
 
     /**
-     * URL encoded JSON array of update objects. example : `[ { "iso_code": "GB",
-     * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
-     * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+     * Returns the raw JSON value of [updateRequest].
+     *
+     * Unlike [updateRequest], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _updateRequest(): JsonField<String> = body._updateRequest()
 
@@ -72,13 +76,18 @@ private constructor(
          * URL encoded JSON array of update objects. example : `[ { "iso_code": "GB",
          * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
          * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
         fun updateRequest(): String = updateRequest.getRequired("UpdateRequest")
 
         /**
-         * URL encoded JSON array of update objects. example : `[ { "iso_code": "GB",
-         * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
-         * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+         * Returns the raw JSON value of [updateRequest].
+         *
+         * Unlike [updateRequest], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("UpdateRequest")
         @ExcludeMissing
@@ -134,9 +143,11 @@ private constructor(
             fun updateRequest(updateRequest: String) = updateRequest(JsonField.of(updateRequest))
 
             /**
-             * URL encoded JSON array of update objects. example : `[ { "iso_code": "GB",
-             * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
-             * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+             * Sets [Builder.updateRequest] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.updateRequest] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
             fun updateRequest(updateRequest: JsonField<String>) = apply {
                 this.updateRequest = updateRequest
@@ -230,9 +241,11 @@ private constructor(
         fun updateRequest(updateRequest: String) = apply { body.updateRequest(updateRequest) }
 
         /**
-         * URL encoded JSON array of update objects. example : `[ { "iso_code": "GB",
-         * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
-         * "high_risk_tollfraud_numbers_enabled": "false" } ]`
+         * Sets [Builder.updateRequest] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.updateRequest] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
         fun updateRequest(updateRequest: JsonField<String>) = apply {
             body.updateRequest(updateRequest)

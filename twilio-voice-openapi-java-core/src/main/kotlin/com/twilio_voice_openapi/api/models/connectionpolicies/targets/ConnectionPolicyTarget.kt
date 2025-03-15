@@ -13,6 +13,7 @@ import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.NoAutoDetect
 import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
+import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
 import java.time.OffsetDateTime
 import java.util.Objects
 import java.util.Optional
@@ -55,16 +56,27 @@ private constructor(
     /**
      * The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Target
      * resource.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun accountSid(): Optional<String> = Optional.ofNullable(accountSid.getNullable("account_sid"))
 
-    /** The SID of the Connection Policy that owns the Target. */
+    /**
+     * The SID of the Connection Policy that owns the Target.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun connectionPolicySid(): Optional<String> =
         Optional.ofNullable(connectionPolicySid.getNullable("connection_policy_sid"))
 
     /**
      * The date and time in GMT when the resource was created specified in
      * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun dateCreated(): Optional<OffsetDateTime> =
         Optional.ofNullable(dateCreated.getNullable("date_created"))
@@ -72,33 +84,62 @@ private constructor(
     /**
      * The date and time in GMT when the resource was last updated specified in
      * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun dateUpdated(): Optional<OffsetDateTime> =
         Optional.ofNullable(dateUpdated.getNullable("date_updated"))
 
-    /** Whether the target is enabled. The default is `true`. */
+    /**
+     * Whether the target is enabled. The default is `true`.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun enabled(): Optional<Boolean> = Optional.ofNullable(enabled.getNullable("enabled"))
 
-    /** The string that you assigned to describe the resource. */
+    /**
+     * The string that you assigned to describe the resource.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun friendlyName(): Optional<String> =
         Optional.ofNullable(friendlyName.getNullable("friendly_name"))
 
     /**
      * The relative importance of the target. Can be an integer from 0 to 65535, inclusive, and the
      * default is 10. The lowest number represents the most important target.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun priority(): Optional<Long> = Optional.ofNullable(priority.getNullable("priority"))
 
-    /** The unique string that we created to identify the Target resource. */
+    /**
+     * The unique string that we created to identify the Target resource.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun sid(): Optional<String> = Optional.ofNullable(sid.getNullable("sid"))
 
     /**
      * The SIP address you want Twilio to route your calls to. This must be a `sip:` schema. `sips`
      * is NOT supported.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun target(): Optional<String> = Optional.ofNullable(target.getNullable("target"))
 
-    /** The absolute URL of the resource. */
+    /**
+     * The absolute URL of the resource.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun url(): Optional<String> = Optional.ofNullable(url.getNullable("url"))
 
     /**
@@ -106,67 +147,95 @@ private constructor(
      * to other Targets with the same priority. Can be an integer from 1 to 65535, inclusive, and
      * the default is 10. Targets with higher values receive more load than those with lower ones
      * with the same priority.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun weight(): Optional<Long> = Optional.ofNullable(weight.getNullable("weight"))
 
     /**
-     * The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Target
-     * resource.
+     * Returns the raw JSON value of [accountSid].
+     *
+     * Unlike [accountSid], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("account_sid") @ExcludeMissing fun _accountSid(): JsonField<String> = accountSid
 
-    /** The SID of the Connection Policy that owns the Target. */
+    /**
+     * Returns the raw JSON value of [connectionPolicySid].
+     *
+     * Unlike [connectionPolicySid], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
     @JsonProperty("connection_policy_sid")
     @ExcludeMissing
     fun _connectionPolicySid(): JsonField<String> = connectionPolicySid
 
     /**
-     * The date and time in GMT when the resource was created specified in
-     * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+     * Returns the raw JSON value of [dateCreated].
+     *
+     * Unlike [dateCreated], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("date_created")
     @ExcludeMissing
     fun _dateCreated(): JsonField<OffsetDateTime> = dateCreated
 
     /**
-     * The date and time in GMT when the resource was last updated specified in
-     * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+     * Returns the raw JSON value of [dateUpdated].
+     *
+     * Unlike [dateUpdated], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("date_updated")
     @ExcludeMissing
     fun _dateUpdated(): JsonField<OffsetDateTime> = dateUpdated
 
-    /** Whether the target is enabled. The default is `true`. */
+    /**
+     * Returns the raw JSON value of [enabled].
+     *
+     * Unlike [enabled], this method doesn't throw if the JSON field has an unexpected type.
+     */
     @JsonProperty("enabled") @ExcludeMissing fun _enabled(): JsonField<Boolean> = enabled
 
-    /** The string that you assigned to describe the resource. */
+    /**
+     * Returns the raw JSON value of [friendlyName].
+     *
+     * Unlike [friendlyName], this method doesn't throw if the JSON field has an unexpected type.
+     */
     @JsonProperty("friendly_name")
     @ExcludeMissing
     fun _friendlyName(): JsonField<String> = friendlyName
 
     /**
-     * The relative importance of the target. Can be an integer from 0 to 65535, inclusive, and the
-     * default is 10. The lowest number represents the most important target.
+     * Returns the raw JSON value of [priority].
+     *
+     * Unlike [priority], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("priority") @ExcludeMissing fun _priority(): JsonField<Long> = priority
 
-    /** The unique string that we created to identify the Target resource. */
+    /**
+     * Returns the raw JSON value of [sid].
+     *
+     * Unlike [sid], this method doesn't throw if the JSON field has an unexpected type.
+     */
     @JsonProperty("sid") @ExcludeMissing fun _sid(): JsonField<String> = sid
 
     /**
-     * The SIP address you want Twilio to route your calls to. This must be a `sip:` schema. `sips`
-     * is NOT supported.
+     * Returns the raw JSON value of [target].
+     *
+     * Unlike [target], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("target") @ExcludeMissing fun _target(): JsonField<String> = target
 
-    /** The absolute URL of the resource. */
+    /**
+     * Returns the raw JSON value of [url].
+     *
+     * Unlike [url], this method doesn't throw if the JSON field has an unexpected type.
+     */
     @JsonProperty("url") @ExcludeMissing fun _url(): JsonField<String> = url
 
     /**
-     * The value that determines the relative share of the load the Target should receive compared
-     * to other Targets with the same priority. Can be an integer from 1 to 65535, inclusive, and
-     * the default is 10. Targets with higher values receive more load than those with lower ones
-     * with the same priority.
+     * Returns the raw JSON value of [weight].
+     *
+     * Unlike [weight], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("weight") @ExcludeMissing fun _weight(): JsonField<Long> = weight
 
@@ -241,15 +310,15 @@ private constructor(
          */
         fun accountSid(accountSid: String?) = accountSid(JsonField.ofNullable(accountSid))
 
-        /**
-         * The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the
-         * Target resource.
-         */
+        /** Alias for calling [Builder.accountSid] with `accountSid.orElse(null)`. */
         fun accountSid(accountSid: Optional<String>) = accountSid(accountSid.getOrNull())
 
         /**
-         * The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the
-         * Target resource.
+         * Sets [Builder.accountSid] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.accountSid] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
         fun accountSid(accountSid: JsonField<String>) = apply { this.accountSid = accountSid }
 
@@ -257,11 +326,19 @@ private constructor(
         fun connectionPolicySid(connectionPolicySid: String?) =
             connectionPolicySid(JsonField.ofNullable(connectionPolicySid))
 
-        /** The SID of the Connection Policy that owns the Target. */
+        /**
+         * Alias for calling [Builder.connectionPolicySid] with `connectionPolicySid.orElse(null)`.
+         */
         fun connectionPolicySid(connectionPolicySid: Optional<String>) =
             connectionPolicySid(connectionPolicySid.getOrNull())
 
-        /** The SID of the Connection Policy that owns the Target. */
+        /**
+         * Sets [Builder.connectionPolicySid] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.connectionPolicySid] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
         fun connectionPolicySid(connectionPolicySid: JsonField<String>) = apply {
             this.connectionPolicySid = connectionPolicySid
         }
@@ -273,16 +350,16 @@ private constructor(
         fun dateCreated(dateCreated: OffsetDateTime?) =
             dateCreated(JsonField.ofNullable(dateCreated))
 
-        /**
-         * The date and time in GMT when the resource was created specified in
-         * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
-         */
+        /** Alias for calling [Builder.dateCreated] with `dateCreated.orElse(null)`. */
         fun dateCreated(dateCreated: Optional<OffsetDateTime>) =
             dateCreated(dateCreated.getOrNull())
 
         /**
-         * The date and time in GMT when the resource was created specified in
-         * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+         * Sets [Builder.dateCreated] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.dateCreated] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
         fun dateCreated(dateCreated: JsonField<OffsetDateTime>) = apply {
             this.dateCreated = dateCreated
@@ -295,16 +372,16 @@ private constructor(
         fun dateUpdated(dateUpdated: OffsetDateTime?) =
             dateUpdated(JsonField.ofNullable(dateUpdated))
 
-        /**
-         * The date and time in GMT when the resource was last updated specified in
-         * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
-         */
+        /** Alias for calling [Builder.dateUpdated] with `dateUpdated.orElse(null)`. */
         fun dateUpdated(dateUpdated: Optional<OffsetDateTime>) =
             dateUpdated(dateUpdated.getOrNull())
 
         /**
-         * The date and time in GMT when the resource was last updated specified in
-         * [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
+         * Sets [Builder.dateUpdated] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.dateUpdated] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
         fun dateUpdated(dateUpdated: JsonField<OffsetDateTime>) = apply {
             this.dateUpdated = dateUpdated
@@ -313,22 +390,37 @@ private constructor(
         /** Whether the target is enabled. The default is `true`. */
         fun enabled(enabled: Boolean?) = enabled(JsonField.ofNullable(enabled))
 
-        /** Whether the target is enabled. The default is `true`. */
+        /**
+         * Alias for [Builder.enabled].
+         *
+         * This unboxed primitive overload exists for backwards compatibility.
+         */
         fun enabled(enabled: Boolean) = enabled(enabled as Boolean?)
 
-        /** Whether the target is enabled. The default is `true`. */
+        /** Alias for calling [Builder.enabled] with `enabled.orElse(null)`. */
         fun enabled(enabled: Optional<Boolean>) = enabled(enabled.getOrNull())
 
-        /** Whether the target is enabled. The default is `true`. */
+        /**
+         * Sets [Builder.enabled] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.enabled] with a well-typed [Boolean] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
         fun enabled(enabled: JsonField<Boolean>) = apply { this.enabled = enabled }
 
         /** The string that you assigned to describe the resource. */
         fun friendlyName(friendlyName: String?) = friendlyName(JsonField.ofNullable(friendlyName))
 
-        /** The string that you assigned to describe the resource. */
+        /** Alias for calling [Builder.friendlyName] with `friendlyName.orElse(null)`. */
         fun friendlyName(friendlyName: Optional<String>) = friendlyName(friendlyName.getOrNull())
 
-        /** The string that you assigned to describe the resource. */
+        /**
+         * Sets [Builder.friendlyName] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.friendlyName] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
         fun friendlyName(friendlyName: JsonField<String>) = apply {
             this.friendlyName = friendlyName
         }
@@ -340,18 +432,25 @@ private constructor(
         fun priority(priority: Long) = priority(JsonField.of(priority))
 
         /**
-         * The relative importance of the target. Can be an integer from 0 to 65535, inclusive, and
-         * the default is 10. The lowest number represents the most important target.
+         * Sets [Builder.priority] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.priority] with a well-typed [Long] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun priority(priority: JsonField<Long>) = apply { this.priority = priority }
 
         /** The unique string that we created to identify the Target resource. */
         fun sid(sid: String?) = sid(JsonField.ofNullable(sid))
 
-        /** The unique string that we created to identify the Target resource. */
+        /** Alias for calling [Builder.sid] with `sid.orElse(null)`. */
         fun sid(sid: Optional<String>) = sid(sid.getOrNull())
 
-        /** The unique string that we created to identify the Target resource. */
+        /**
+         * Sets [Builder.sid] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.sid] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
         fun sid(sid: JsonField<String>) = apply { this.sid = sid }
 
         /**
@@ -360,25 +459,29 @@ private constructor(
          */
         fun target(target: String?) = target(JsonField.ofNullable(target))
 
-        /**
-         * The SIP address you want Twilio to route your calls to. This must be a `sip:` schema.
-         * `sips` is NOT supported.
-         */
+        /** Alias for calling [Builder.target] with `target.orElse(null)`. */
         fun target(target: Optional<String>) = target(target.getOrNull())
 
         /**
-         * The SIP address you want Twilio to route your calls to. This must be a `sip:` schema.
-         * `sips` is NOT supported.
+         * Sets [Builder.target] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.target] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun target(target: JsonField<String>) = apply { this.target = target }
 
         /** The absolute URL of the resource. */
         fun url(url: String?) = url(JsonField.ofNullable(url))
 
-        /** The absolute URL of the resource. */
+        /** Alias for calling [Builder.url] with `url.orElse(null)`. */
         fun url(url: Optional<String>) = url(url.getOrNull())
 
-        /** The absolute URL of the resource. */
+        /**
+         * Sets [Builder.url] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.url] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
         fun url(url: JsonField<String>) = apply { this.url = url }
 
         /**
@@ -390,10 +493,10 @@ private constructor(
         fun weight(weight: Long) = weight(JsonField.of(weight))
 
         /**
-         * The value that determines the relative share of the load the Target should receive
-         * compared to other Targets with the same priority. Can be an integer from 1 to 65535,
-         * inclusive, and the default is 10. Targets with higher values receive more load than those
-         * with lower ones with the same priority.
+         * Sets [Builder.weight] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.weight] with a well-typed [Long] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun weight(weight: JsonField<Long>) = apply { this.weight = weight }
 

@@ -14,6 +14,7 @@ import com.twilio_voice_openapi.api.core.NoAutoDetect
 import com.twilio_voice_openapi.api.core.checkKnown
 import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
+import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -29,12 +30,30 @@ private constructor(
     @JsonAnySetter private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
 ) {
 
+    /**
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun content(): Optional<List<Content>> = Optional.ofNullable(content.getNullable("content"))
 
+    /**
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun meta(): Optional<Meta> = Optional.ofNullable(meta.getNullable("meta"))
 
+    /**
+     * Returns the raw JSON value of [content].
+     *
+     * Unlike [content], this method doesn't throw if the JSON field has an unexpected type.
+     */
     @JsonProperty("content") @ExcludeMissing fun _content(): JsonField<List<Content>> = content
 
+    /**
+     * Returns the raw JSON value of [meta].
+     *
+     * Unlike [meta], this method doesn't throw if the JSON field has an unexpected type.
+     */
     @JsonProperty("meta") @ExcludeMissing fun _meta(): JsonField<Meta> = meta
 
     @JsonAnyGetter
@@ -83,10 +102,22 @@ private constructor(
 
         fun content(content: List<Content>) = content(JsonField.of(content))
 
+        /**
+         * Sets [Builder.content] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.content] with a well-typed `List<Content>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
         fun content(content: JsonField<List<Content>>) = apply {
             this.content = content.map { it.toMutableList() }
         }
 
+        /**
+         * Adds a single [Content] to [Builder.content].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
         fun addContent(content: Content) = apply {
             this.content =
                 (this.content ?: JsonField.of(mutableListOf())).also {
@@ -96,6 +127,12 @@ private constructor(
 
         fun meta(meta: Meta) = meta(JsonField.of(meta))
 
+        /**
+         * Sets [Builder.meta] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.meta] with a well-typed [Meta] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
         fun meta(meta: JsonField<Meta>) = apply { this.meta = meta }
 
         fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
@@ -141,14 +178,16 @@ private constructor(
          * E.164 assigned country code. For example, a North American Numbering Plan prefix like
          * `+1510720` written like `+1(510) 720` matches all numbers inclusive from `+1(510)
          * 720-0000` to `+1(510) 720-9999`.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun prefix(): Optional<String> = Optional.ofNullable(prefix.getNullable("prefix"))
 
         /**
-         * A prefix is a contiguous number range for a block of E.164 numbers that includes the
-         * E.164 assigned country code. For example, a North American Numbering Plan prefix like
-         * `+1510720` written like `+1(510) 720` matches all numbers inclusive from `+1(510)
-         * 720-0000` to `+1(510) 720-9999`.
+         * Returns the raw JSON value of [prefix].
+         *
+         * Unlike [prefix], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("prefix") @ExcludeMissing fun _prefix(): JsonField<String> = prefix
 
@@ -195,19 +234,15 @@ private constructor(
              */
             fun prefix(prefix: String?) = prefix(JsonField.ofNullable(prefix))
 
-            /**
-             * A prefix is a contiguous number range for a block of E.164 numbers that includes the
-             * E.164 assigned country code. For example, a North American Numbering Plan prefix like
-             * `+1510720` written like `+1(510) 720` matches all numbers inclusive from `+1(510)
-             * 720-0000` to `+1(510) 720-9999`.
-             */
+            /** Alias for calling [Builder.prefix] with `prefix.orElse(null)`. */
             fun prefix(prefix: Optional<String>) = prefix(prefix.getOrNull())
 
             /**
-             * A prefix is a contiguous number range for a block of E.164 numbers that includes the
-             * E.164 assigned country code. For example, a North American Numbering Plan prefix like
-             * `+1510720` written like `+1(510) 720` matches all numbers inclusive from `+1(510)
-             * 720-0000` to `+1(510) 720-9999`.
+             * Sets [Builder.prefix] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.prefix] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
             fun prefix(prefix: JsonField<String>) = apply { this.prefix = prefix }
 
@@ -274,41 +309,106 @@ private constructor(
         private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
     ) {
 
+        /**
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
         fun firstPageUrl(): Optional<String> =
             Optional.ofNullable(firstPageUrl.getNullable("first_page_url"))
 
+        /**
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
         fun key(): Optional<String> = Optional.ofNullable(key.getNullable("key"))
 
+        /**
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
         fun nextPageUrl(): Optional<String> =
             Optional.ofNullable(nextPageUrl.getNullable("next_page_url"))
 
+        /**
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
         fun page(): Optional<Long> = Optional.ofNullable(page.getNullable("page"))
 
+        /**
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
         fun pageSize(): Optional<Long> = Optional.ofNullable(pageSize.getNullable("page_size"))
 
+        /**
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
         fun previousPageUrl(): Optional<String> =
             Optional.ofNullable(previousPageUrl.getNullable("previous_page_url"))
 
+        /**
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
         fun url(): Optional<String> = Optional.ofNullable(url.getNullable("url"))
 
+        /**
+         * Returns the raw JSON value of [firstPageUrl].
+         *
+         * Unlike [firstPageUrl], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
         @JsonProperty("first_page_url")
         @ExcludeMissing
         fun _firstPageUrl(): JsonField<String> = firstPageUrl
 
+        /**
+         * Returns the raw JSON value of [key].
+         *
+         * Unlike [key], this method doesn't throw if the JSON field has an unexpected type.
+         */
         @JsonProperty("key") @ExcludeMissing fun _key(): JsonField<String> = key
 
+        /**
+         * Returns the raw JSON value of [nextPageUrl].
+         *
+         * Unlike [nextPageUrl], this method doesn't throw if the JSON field has an unexpected type.
+         */
         @JsonProperty("next_page_url")
         @ExcludeMissing
         fun _nextPageUrl(): JsonField<String> = nextPageUrl
 
+        /**
+         * Returns the raw JSON value of [page].
+         *
+         * Unlike [page], this method doesn't throw if the JSON field has an unexpected type.
+         */
         @JsonProperty("page") @ExcludeMissing fun _page(): JsonField<Long> = page
 
+        /**
+         * Returns the raw JSON value of [pageSize].
+         *
+         * Unlike [pageSize], this method doesn't throw if the JSON field has an unexpected type.
+         */
         @JsonProperty("page_size") @ExcludeMissing fun _pageSize(): JsonField<Long> = pageSize
 
+        /**
+         * Returns the raw JSON value of [previousPageUrl].
+         *
+         * Unlike [previousPageUrl], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
         @JsonProperty("previous_page_url")
         @ExcludeMissing
         fun _previousPageUrl(): JsonField<String> = previousPageUrl
 
+        /**
+         * Returns the raw JSON value of [url].
+         *
+         * Unlike [url], this method doesn't throw if the JSON field has an unexpected type.
+         */
         @JsonProperty("url") @ExcludeMissing fun _url(): JsonField<String> = url
 
         @JsonAnyGetter
@@ -366,42 +466,93 @@ private constructor(
 
             fun firstPageUrl(firstPageUrl: String) = firstPageUrl(JsonField.of(firstPageUrl))
 
+            /**
+             * Sets [Builder.firstPageUrl] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.firstPageUrl] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
             fun firstPageUrl(firstPageUrl: JsonField<String>) = apply {
                 this.firstPageUrl = firstPageUrl
             }
 
             fun key(key: String) = key(JsonField.of(key))
 
+            /**
+             * Sets [Builder.key] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.key] with a well-typed [String] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
             fun key(key: JsonField<String>) = apply { this.key = key }
 
             fun nextPageUrl(nextPageUrl: String?) = nextPageUrl(JsonField.ofNullable(nextPageUrl))
 
+            /** Alias for calling [Builder.nextPageUrl] with `nextPageUrl.orElse(null)`. */
             fun nextPageUrl(nextPageUrl: Optional<String>) = nextPageUrl(nextPageUrl.getOrNull())
 
+            /**
+             * Sets [Builder.nextPageUrl] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.nextPageUrl] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
             fun nextPageUrl(nextPageUrl: JsonField<String>) = apply {
                 this.nextPageUrl = nextPageUrl
             }
 
             fun page(page: Long) = page(JsonField.of(page))
 
+            /**
+             * Sets [Builder.page] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.page] with a well-typed [Long] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
             fun page(page: JsonField<Long>) = apply { this.page = page }
 
             fun pageSize(pageSize: Long) = pageSize(JsonField.of(pageSize))
 
+            /**
+             * Sets [Builder.pageSize] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.pageSize] with a well-typed [Long] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
             fun pageSize(pageSize: JsonField<Long>) = apply { this.pageSize = pageSize }
 
             fun previousPageUrl(previousPageUrl: String?) =
                 previousPageUrl(JsonField.ofNullable(previousPageUrl))
 
+            /** Alias for calling [Builder.previousPageUrl] with `previousPageUrl.orElse(null)`. */
             fun previousPageUrl(previousPageUrl: Optional<String>) =
                 previousPageUrl(previousPageUrl.getOrNull())
 
+            /**
+             * Sets [Builder.previousPageUrl] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.previousPageUrl] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
             fun previousPageUrl(previousPageUrl: JsonField<String>) = apply {
                 this.previousPageUrl = previousPageUrl
             }
 
             fun url(url: String) = url(JsonField.of(url))
 
+            /**
+             * Sets [Builder.url] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.url] with a well-typed [String] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
             fun url(url: JsonField<String>) = apply { this.url = url }
 
             fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {

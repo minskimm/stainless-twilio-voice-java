@@ -17,6 +17,7 @@ import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
 import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
+import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
 import java.util.Objects
 import java.util.Optional
 
@@ -33,21 +34,35 @@ private constructor(
     /**
      * The SIP address you want Twilio to route your calls to. This must be a `sip:` schema. `sips`
      * is NOT supported.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun target(): String = body.target()
 
-    /** Whether the Target is enabled. The default is `true`. */
+    /**
+     * Whether the Target is enabled. The default is `true`.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
     fun enabled(): Optional<Boolean> = body.enabled()
 
     /**
      * A descriptive string that you create to describe the resource. It is not unique and can be up
      * to 255 characters long.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun friendlyName(): Optional<String> = body.friendlyName()
 
     /**
      * The relative importance of the target. Can be an integer from 0 to 65535, inclusive, and the
      * default is 10. The lowest number represents the most important target.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun priority(): Optional<Long> = body.priority()
 
@@ -56,35 +71,44 @@ private constructor(
      * to other Targets with the same priority. Can be an integer from 1 to 65535, inclusive, and
      * the default is 10. Targets with higher values receive more load than those with lower ones
      * with the same priority.
+     *
+     * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun weight(): Optional<Long> = body.weight()
 
     /**
-     * The SIP address you want Twilio to route your calls to. This must be a `sip:` schema. `sips`
-     * is NOT supported.
+     * Returns the raw JSON value of [target].
+     *
+     * Unlike [target], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _target(): JsonField<String> = body._target()
 
-    /** Whether the Target is enabled. The default is `true`. */
+    /**
+     * Returns the raw JSON value of [enabled].
+     *
+     * Unlike [enabled], this method doesn't throw if the JSON field has an unexpected type.
+     */
     fun _enabled(): JsonField<Boolean> = body._enabled()
 
     /**
-     * A descriptive string that you create to describe the resource. It is not unique and can be up
-     * to 255 characters long.
+     * Returns the raw JSON value of [friendlyName].
+     *
+     * Unlike [friendlyName], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _friendlyName(): JsonField<String> = body._friendlyName()
 
     /**
-     * The relative importance of the target. Can be an integer from 0 to 65535, inclusive, and the
-     * default is 10. The lowest number represents the most important target.
+     * Returns the raw JSON value of [priority].
+     *
+     * Unlike [priority], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _priority(): JsonField<Long> = body._priority()
 
     /**
-     * The value that determines the relative share of the load the Target should receive compared
-     * to other Targets with the same priority. Can be an integer from 1 to 65535, inclusive, and
-     * the default is 10. Targets with higher values receive more load than those with lower ones
-     * with the same priority.
+     * Returns the raw JSON value of [weight].
+     *
+     * Unlike [weight], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _weight(): JsonField<Long> = body._weight()
 
@@ -133,15 +157,27 @@ private constructor(
         /**
          * The SIP address you want Twilio to route your calls to. This must be a `sip:` schema.
          * `sips` is NOT supported.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
         fun target(): String = target.getRequired("Target")
 
-        /** Whether the Target is enabled. The default is `true`. */
+        /**
+         * Whether the Target is enabled. The default is `true`.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
         fun enabled(): Optional<Boolean> = Optional.ofNullable(enabled.getNullable("Enabled"))
 
         /**
          * A descriptive string that you create to describe the resource. It is not unique and can
          * be up to 255 characters long.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun friendlyName(): Optional<String> =
             Optional.ofNullable(friendlyName.getNullable("FriendlyName"))
@@ -149,6 +185,9 @@ private constructor(
         /**
          * The relative importance of the target. Can be an integer from 0 to 65535, inclusive, and
          * the default is 10. The lowest number represents the most important target.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun priority(): Optional<Long> = Optional.ofNullable(priority.getNullable("Priority"))
 
@@ -157,37 +196,47 @@ private constructor(
          * compared to other Targets with the same priority. Can be an integer from 1 to 65535,
          * inclusive, and the default is 10. Targets with higher values receive more load than those
          * with lower ones with the same priority.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun weight(): Optional<Long> = Optional.ofNullable(weight.getNullable("Weight"))
 
         /**
-         * The SIP address you want Twilio to route your calls to. This must be a `sip:` schema.
-         * `sips` is NOT supported.
+         * Returns the raw JSON value of [target].
+         *
+         * Unlike [target], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("Target") @ExcludeMissing fun _target(): JsonField<String> = target
 
-        /** Whether the Target is enabled. The default is `true`. */
+        /**
+         * Returns the raw JSON value of [enabled].
+         *
+         * Unlike [enabled], this method doesn't throw if the JSON field has an unexpected type.
+         */
         @JsonProperty("Enabled") @ExcludeMissing fun _enabled(): JsonField<Boolean> = enabled
 
         /**
-         * A descriptive string that you create to describe the resource. It is not unique and can
-         * be up to 255 characters long.
+         * Returns the raw JSON value of [friendlyName].
+         *
+         * Unlike [friendlyName], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("FriendlyName")
         @ExcludeMissing
         fun _friendlyName(): JsonField<String> = friendlyName
 
         /**
-         * The relative importance of the target. Can be an integer from 0 to 65535, inclusive, and
-         * the default is 10. The lowest number represents the most important target.
+         * Returns the raw JSON value of [priority].
+         *
+         * Unlike [priority], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("Priority") @ExcludeMissing fun _priority(): JsonField<Long> = priority
 
         /**
-         * The value that determines the relative share of the load the Target should receive
-         * compared to other Targets with the same priority. Can be an integer from 1 to 65535,
-         * inclusive, and the default is 10. Targets with higher values receive more load than those
-         * with lower ones with the same priority.
+         * Returns the raw JSON value of [weight].
+         *
+         * Unlike [weight], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("Weight") @ExcludeMissing fun _weight(): JsonField<Long> = weight
 
@@ -252,15 +301,24 @@ private constructor(
             fun target(target: String) = target(JsonField.of(target))
 
             /**
-             * The SIP address you want Twilio to route your calls to. This must be a `sip:` schema.
-             * `sips` is NOT supported.
+             * Sets [Builder.target] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.target] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
             fun target(target: JsonField<String>) = apply { this.target = target }
 
             /** Whether the Target is enabled. The default is `true`. */
             fun enabled(enabled: Boolean) = enabled(JsonField.of(enabled))
 
-            /** Whether the Target is enabled. The default is `true`. */
+            /**
+             * Sets [Builder.enabled] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.enabled] with a well-typed [Boolean] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
             fun enabled(enabled: JsonField<Boolean>) = apply { this.enabled = enabled }
 
             /**
@@ -270,8 +328,11 @@ private constructor(
             fun friendlyName(friendlyName: String) = friendlyName(JsonField.of(friendlyName))
 
             /**
-             * A descriptive string that you create to describe the resource. It is not unique and
-             * can be up to 255 characters long.
+             * Sets [Builder.friendlyName] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.friendlyName] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
             fun friendlyName(friendlyName: JsonField<String>) = apply {
                 this.friendlyName = friendlyName
@@ -284,8 +345,11 @@ private constructor(
             fun priority(priority: Long) = priority(JsonField.of(priority))
 
             /**
-             * The relative importance of the target. Can be an integer from 0 to 65535, inclusive,
-             * and the default is 10. The lowest number represents the most important target.
+             * Sets [Builder.priority] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.priority] with a well-typed [Long] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
             fun priority(priority: JsonField<Long>) = apply { this.priority = priority }
 
@@ -298,10 +362,11 @@ private constructor(
             fun weight(weight: Long) = weight(JsonField.of(weight))
 
             /**
-             * The value that determines the relative share of the load the Target should receive
-             * compared to other Targets with the same priority. Can be an integer from 1 to 65535,
-             * inclusive, and the default is 10. Targets with higher values receive more load than
-             * those with lower ones with the same priority.
+             * Sets [Builder.weight] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.weight] with a well-typed [Long] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
             fun weight(weight: JsonField<Long>) = apply { this.weight = weight }
 
@@ -397,15 +462,22 @@ private constructor(
         fun target(target: String) = apply { body.target(target) }
 
         /**
-         * The SIP address you want Twilio to route your calls to. This must be a `sip:` schema.
-         * `sips` is NOT supported.
+         * Sets [Builder.target] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.target] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun target(target: JsonField<String>) = apply { body.target(target) }
 
         /** Whether the Target is enabled. The default is `true`. */
         fun enabled(enabled: Boolean) = apply { body.enabled(enabled) }
 
-        /** Whether the Target is enabled. The default is `true`. */
+        /**
+         * Sets [Builder.enabled] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.enabled] with a well-typed [Boolean] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
         fun enabled(enabled: JsonField<Boolean>) = apply { body.enabled(enabled) }
 
         /**
@@ -415,8 +487,11 @@ private constructor(
         fun friendlyName(friendlyName: String) = apply { body.friendlyName(friendlyName) }
 
         /**
-         * A descriptive string that you create to describe the resource. It is not unique and can
-         * be up to 255 characters long.
+         * Sets [Builder.friendlyName] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.friendlyName] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
         fun friendlyName(friendlyName: JsonField<String>) = apply {
             body.friendlyName(friendlyName)
@@ -429,8 +504,10 @@ private constructor(
         fun priority(priority: Long) = apply { body.priority(priority) }
 
         /**
-         * The relative importance of the target. Can be an integer from 0 to 65535, inclusive, and
-         * the default is 10. The lowest number represents the most important target.
+         * Sets [Builder.priority] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.priority] with a well-typed [Long] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun priority(priority: JsonField<Long>) = apply { body.priority(priority) }
 
@@ -443,10 +520,10 @@ private constructor(
         fun weight(weight: Long) = apply { body.weight(weight) }
 
         /**
-         * The value that determines the relative share of the load the Target should receive
-         * compared to other Targets with the same priority. Can be an integer from 1 to 65535,
-         * inclusive, and the default is 10. Targets with higher values receive more load than those
-         * with lower ones with the same priority.
+         * Sets [Builder.weight] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.weight] with a well-typed [Long] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun weight(weight: JsonField<Long>) = apply { body.weight(weight) }
 
