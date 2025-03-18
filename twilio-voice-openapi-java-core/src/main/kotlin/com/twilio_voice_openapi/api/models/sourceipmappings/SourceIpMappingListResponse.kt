@@ -156,6 +156,11 @@ private constructor(
             keys.forEach(::removeAdditionalProperty)
         }
 
+        /**
+         * Returns an immutable instance of [SourceIpMappingListResponse].
+         *
+         * Further updates to this [Builder] will not mutate the returned instance.
+         */
         fun build(): SourceIpMappingListResponse =
             SourceIpMappingListResponse(
                 meta,
@@ -452,6 +457,11 @@ private constructor(
                 keys.forEach(::removeAdditionalProperty)
             }
 
+            /**
+             * Returns an immutable instance of [Meta].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             */
             fun build(): Meta =
                 Meta(
                     firstPageUrl,

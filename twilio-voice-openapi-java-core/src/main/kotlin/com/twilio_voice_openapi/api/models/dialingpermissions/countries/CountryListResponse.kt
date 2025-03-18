@@ -148,6 +148,11 @@ private constructor(
             keys.forEach(::removeAdditionalProperty)
         }
 
+        /**
+         * Returns an immutable instance of [CountryListResponse].
+         *
+         * Further updates to this [Builder] will not mutate the returned instance.
+         */
         fun build(): CountryListResponse =
             CountryListResponse(
                 (content ?: JsonMissing.of()).map { it.toImmutable() },
@@ -620,6 +625,11 @@ private constructor(
                 keys.forEach(::removeAdditionalProperty)
             }
 
+            /**
+             * Returns an immutable instance of [Content].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             */
             fun build(): Content =
                 Content(
                     continent,
@@ -941,6 +951,11 @@ private constructor(
                 keys.forEach(::removeAdditionalProperty)
             }
 
+            /**
+             * Returns an immutable instance of [Meta].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             */
             fun build(): Meta =
                 Meta(
                     firstPageUrl,

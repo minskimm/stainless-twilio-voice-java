@@ -197,6 +197,18 @@ private constructor(
             keys.forEach(::removeAdditionalBodyProperty)
         }
 
+        /**
+         * Returns an immutable instance of [IpRecordDeleteParams].
+         *
+         * Further updates to this [Builder] will not mutate the returned instance.
+         *
+         * The following fields are required:
+         * ```java
+         * .sid()
+         * ```
+         *
+         * @throws IllegalStateException if any required field is unset.
+         */
         fun build(): IpRecordDeleteParams =
             IpRecordDeleteParams(
                 checkRequired("sid", sid),

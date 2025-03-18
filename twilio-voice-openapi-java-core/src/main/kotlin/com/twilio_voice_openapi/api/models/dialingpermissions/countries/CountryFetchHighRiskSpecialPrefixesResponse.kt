@@ -154,6 +154,11 @@ private constructor(
             keys.forEach(::removeAdditionalProperty)
         }
 
+        /**
+         * Returns an immutable instance of [CountryFetchHighRiskSpecialPrefixesResponse].
+         *
+         * Further updates to this [Builder] will not mutate the returned instance.
+         */
         fun build(): CountryFetchHighRiskSpecialPrefixesResponse =
             CountryFetchHighRiskSpecialPrefixesResponse(
                 (content ?: JsonMissing.of()).map { it.toImmutable() },
@@ -265,6 +270,11 @@ private constructor(
                 keys.forEach(::removeAdditionalProperty)
             }
 
+            /**
+             * Returns an immutable instance of [Content].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             */
             fun build(): Content = Content(prefix, additionalProperties.toImmutable())
         }
 
@@ -574,6 +584,11 @@ private constructor(
                 keys.forEach(::removeAdditionalProperty)
             }
 
+            /**
+             * Returns an immutable instance of [Meta].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             */
             fun build(): Meta =
                 Meta(
                     firstPageUrl,

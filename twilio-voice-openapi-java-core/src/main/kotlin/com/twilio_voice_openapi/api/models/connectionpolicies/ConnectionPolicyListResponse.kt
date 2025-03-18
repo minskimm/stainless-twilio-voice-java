@@ -156,6 +156,11 @@ private constructor(
             keys.forEach(::removeAdditionalProperty)
         }
 
+        /**
+         * Returns an immutable instance of [ConnectionPolicyListResponse].
+         *
+         * Further updates to this [Builder] will not mutate the returned instance.
+         */
         fun build(): ConnectionPolicyListResponse =
             ConnectionPolicyListResponse(
                 (connectionPolicies ?: JsonMissing.of()).map { it.toImmutable() },
@@ -452,6 +457,11 @@ private constructor(
                 keys.forEach(::removeAdditionalProperty)
             }
 
+            /**
+             * Returns an immutable instance of [Meta].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             */
             fun build(): Meta =
                 Meta(
                     firstPageUrl,

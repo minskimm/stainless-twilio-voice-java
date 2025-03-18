@@ -151,6 +151,11 @@ private constructor(
             keys.forEach(::removeAdditionalProperty)
         }
 
+        /**
+         * Returns an immutable instance of [IpRecordListResponse].
+         *
+         * Further updates to this [Builder] will not mutate the returned instance.
+         */
         fun build(): IpRecordListResponse =
             IpRecordListResponse(
                 (ipRecords ?: JsonMissing.of()).map { it.toImmutable() },
@@ -447,6 +452,11 @@ private constructor(
                 keys.forEach(::removeAdditionalProperty)
             }
 
+            /**
+             * Returns an immutable instance of [Meta].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             */
             fun build(): Meta =
                 Meta(
                     firstPageUrl,
