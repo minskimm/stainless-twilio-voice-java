@@ -6,7 +6,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
-class SourceIpMappingRetrieveParamsTest {
+internal class SourceIpMappingRetrieveParamsTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test

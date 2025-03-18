@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
 @ExtendWith(TestServerExtension::class)
-class ByocTrunkServiceTest {
+internal class ByocTrunkServiceTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
 @ExtendWith(TestServerExtension::class)
-class CountryServiceTest {
+internal class CountryServiceTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test

@@ -1,3 +1,5 @@
+// File generated from our OpenAPI spec by Stainless.
+
 package com.twilio_voice_openapi.api.core.http
 
 import com.twilio_voice_openapi.api.core.toImmutable
