@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
 @ExtendWith(TestServerExtension::class)
-class ConnectionPolicyServiceAsyncTest {
+internal class ConnectionPolicyServiceAsyncTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
