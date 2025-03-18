@@ -3,6 +3,7 @@
 package com.twilio_voice_openapi.api.models.byoctrunks
 
 import java.time.OffsetDateTime
+import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -46,7 +47,7 @@ internal class ByocTrunkListResponseTest {
                 )
                 .build()
         assertThat(byocTrunkListResponse).isNotNull
-        assertThat(byocTrunkListResponse.byocTrunks().get())
+        assertThat(byocTrunkListResponse.byocTrunks().getOrNull())
             .containsExactly(
                 ByocTrunk.builder()
                     .accountSid("ACE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")

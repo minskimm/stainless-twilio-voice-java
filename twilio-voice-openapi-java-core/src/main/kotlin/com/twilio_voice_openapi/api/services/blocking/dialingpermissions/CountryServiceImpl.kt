@@ -68,12 +68,7 @@ class CountryServiceImpl internal constructor(private val clientOptions: ClientO
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
-                    .addPathSegments(
-                        "v1",
-                        "DialingPermissions",
-                        "Countries",
-                        params.getPathParam(0),
-                    )
+                    .addPathSegments("v1", "DialingPermissions", "Countries", params._pathParam(0))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
@@ -132,7 +127,7 @@ class CountryServiceImpl internal constructor(private val clientOptions: ClientO
                         "v1",
                         "DialingPermissions",
                         "Countries",
-                        params.getPathParam(0),
+                        params._pathParam(0),
                         "HighRiskSpecialPrefixes",
                     )
                     .build()

@@ -50,9 +50,9 @@ class ArchiveServiceImpl internal constructor(private val clientOptions: ClientO
                     .addPathSegments(
                         "v1",
                         "Archives",
-                        params.getPathParam(0),
+                        params._pathParam(0),
                         "Calls",
-                        params.getPathParam(1),
+                        params._pathParam(1),
                     )
                     .apply { params._body().ifPresent { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

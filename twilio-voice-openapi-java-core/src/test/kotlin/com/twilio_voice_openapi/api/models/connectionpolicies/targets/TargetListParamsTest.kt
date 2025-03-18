@@ -22,6 +22,19 @@ internal class TargetListParamsTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
+    fun pathParams() {
+        val params =
+            TargetListParams.builder()
+                .connectionPolicySid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+                .build()
+
+        assertThat(params._pathParam(0)).isEqualTo("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+        // out-of-bound path param
+        assertThat(params._pathParam(1)).isEqualTo("")
+    }
+
+    @Disabled("skipped: tests are disabled for the time being")
+    @Test
     fun queryParams() {
         val params =
             TargetListParams.builder()
@@ -54,19 +67,5 @@ internal class TargetListParamsTest {
         val queryParams = params._queryParams()
 
         assertThat(queryParams).isEqualTo(QueryParams.builder().build())
-    }
-
-    @Disabled("skipped: tests are disabled for the time being")
-    @Test
-    fun getPathParam() {
-        val params =
-            TargetListParams.builder()
-                .connectionPolicySid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                .build()
-        assertThat(params).isNotNull
-        // path param "connectionPolicySid"
-        assertThat(params.getPathParam(0)).isEqualTo("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-        // out-of-bound path param
-        assertThat(params.getPathParam(1)).isEqualTo("")
     }
 }

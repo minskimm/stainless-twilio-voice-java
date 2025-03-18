@@ -20,6 +20,17 @@ internal class IpRecordUpdateParamsTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
+    fun pathParams() {
+        val params =
+            IpRecordUpdateParams.builder().sid("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
+
+        assertThat(params._pathParam(0)).isEqualTo("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+        // out-of-bound path param
+        assertThat(params._pathParam(1)).isEqualTo("")
+    }
+
+    @Disabled("skipped: tests are disabled for the time being")
+    @Test
     fun body() {
         val params =
             IpRecordUpdateParams.builder()
@@ -42,17 +53,5 @@ internal class IpRecordUpdateParamsTest {
         val body = params._body()
 
         assertNotNull(body)
-    }
-
-    @Disabled("skipped: tests are disabled for the time being")
-    @Test
-    fun getPathParam() {
-        val params =
-            IpRecordUpdateParams.builder().sid("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
-        assertThat(params).isNotNull
-        // path param "sid"
-        assertThat(params.getPathParam(0)).isEqualTo("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-        // out-of-bound path param
-        assertThat(params.getPathParam(1)).isEqualTo("")
     }
 }

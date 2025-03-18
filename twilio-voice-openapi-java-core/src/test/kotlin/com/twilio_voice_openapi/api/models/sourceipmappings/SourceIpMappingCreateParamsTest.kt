@@ -33,20 +33,4 @@ internal class SourceIpMappingCreateParamsTest {
         assertThat(body.ipRecordSid()).isEqualTo("ILaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         assertThat(body.sipDomainSid()).isEqualTo("SDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     }
-
-    @Disabled("skipped: tests are disabled for the time being")
-    @Test
-    fun bodyWithoutOptionalFields() {
-        val params =
-            SourceIpMappingCreateParams.builder()
-                .ipRecordSid("ILaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-                .sipDomainSid("SDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-                .build()
-
-        val body = params._body()
-
-        assertNotNull(body)
-        assertThat(body.ipRecordSid()).isEqualTo("ILaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-        assertThat(body.sipDomainSid()).isEqualTo("SDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-    }
 }

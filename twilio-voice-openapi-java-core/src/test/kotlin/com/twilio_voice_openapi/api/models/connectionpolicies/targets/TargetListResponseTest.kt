@@ -3,6 +3,7 @@
 package com.twilio_voice_openapi.api.models.connectionpolicies.targets
 
 import java.time.OffsetDateTime
+import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -54,7 +55,7 @@ internal class TargetListResponseTest {
                     .url("https://example.com")
                     .build()
             )
-        assertThat(targetListResponse.targets().get())
+        assertThat(targetListResponse.targets().getOrNull())
             .containsExactly(
                 ConnectionPolicyTarget.builder()
                     .accountSid("ACE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")

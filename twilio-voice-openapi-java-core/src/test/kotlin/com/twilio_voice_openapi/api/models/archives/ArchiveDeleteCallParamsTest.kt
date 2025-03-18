@@ -20,18 +20,16 @@ internal class ArchiveDeleteCallParamsTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun getPathParam() {
+    fun pathParams() {
         val params =
             ArchiveDeleteCallParams.builder()
                 .date(LocalDate.parse("2019-12-27"))
                 .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
                 .build()
-        assertThat(params).isNotNull
-        // path param "date"
-        assertThat(params.getPathParam(0)).isEqualTo("2019-12-27")
-        // path param "sid"
-        assertThat(params.getPathParam(1)).isEqualTo("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+
+        assertThat(params._pathParam(0)).isEqualTo("2019-12-27")
+        assertThat(params._pathParam(1)).isEqualTo("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
         // out-of-bound path param
-        assertThat(params.getPathParam(2)).isEqualTo("")
+        assertThat(params._pathParam(2)).isEqualTo("")
     }
 }

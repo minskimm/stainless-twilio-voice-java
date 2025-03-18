@@ -37,23 +37,4 @@ internal class DialingPermissionCreateBulkCountryUpdatesParamsTest {
                 "[ { \"iso_code\": \"GB\", \"low_risk_numbers\": \"Enabled\", \"high_risk_special_numbers\":\"Enabled\", \"high_risk_irsf_numbers\": \"Enabled\" } ]"
             )
     }
-
-    @Disabled("skipped: tests are disabled for the time being")
-    @Test
-    fun bodyWithoutOptionalFields() {
-        val params =
-            DialingPermissionCreateBulkCountryUpdatesParams.builder()
-                .updateRequest(
-                    "[ { \"iso_code\": \"GB\", \"low_risk_numbers\": \"Enabled\", \"high_risk_special_numbers\":\"Enabled\", \"high_risk_irsf_numbers\": \"Enabled\" } ]"
-                )
-                .build()
-
-        val body = params._body()
-
-        assertNotNull(body)
-        assertThat(body.updateRequest())
-            .isEqualTo(
-                "[ { \"iso_code\": \"GB\", \"low_risk_numbers\": \"Enabled\", \"high_risk_special_numbers\":\"Enabled\", \"high_risk_irsf_numbers\": \"Enabled\" } ]"
-            )
-    }
 }

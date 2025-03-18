@@ -24,6 +24,20 @@ internal class TargetCreateParamsTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
+    fun pathParams() {
+        val params =
+            TargetCreateParams.builder()
+                .connectionPolicySid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+                .target("sip:sip-box.com:1234")
+                .build()
+
+        assertThat(params._pathParam(0)).isEqualTo("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+        // out-of-bound path param
+        assertThat(params._pathParam(1)).isEqualTo("")
+    }
+
+    @Disabled("skipped: tests are disabled for the time being")
+    @Test
     fun body() {
         val params =
             TargetCreateParams.builder()
@@ -58,20 +72,5 @@ internal class TargetCreateParamsTest {
 
         assertNotNull(body)
         assertThat(body.target()).isEqualTo("sip:sip-box.com:1234")
-    }
-
-    @Disabled("skipped: tests are disabled for the time being")
-    @Test
-    fun getPathParam() {
-        val params =
-            TargetCreateParams.builder()
-                .connectionPolicySid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                .target("sip:sip-box.com:1234")
-                .build()
-        assertThat(params).isNotNull
-        // path param "connectionPolicySid"
-        assertThat(params.getPathParam(0)).isEqualTo("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-        // out-of-bound path param
-        assertThat(params.getPathParam(1)).isEqualTo("")
     }
 }
