@@ -79,26 +79,25 @@ private constructor(
 
     override fun _headers(): Headers = additionalHeaders
 
-    override fun _queryParams(): QueryParams {
-        val queryParams = QueryParams.builder()
-        this.continent?.let { queryParams.put("Continent", listOf(it.toString())) }
-        this.countryCode?.let { queryParams.put("CountryCode", listOf(it.toString())) }
-        this.highRiskSpecialNumbersEnabled?.let {
-            queryParams.put("HighRiskSpecialNumbersEnabled", listOf(it.toString()))
-        }
-        this.highRiskTollfraudNumbersEnabled?.let {
-            queryParams.put("HighRiskTollfraudNumbersEnabled", listOf(it.toString()))
-        }
-        this.isoCode?.let { queryParams.put("IsoCode", listOf(it.toString())) }
-        this.lowRiskNumbersEnabled?.let {
-            queryParams.put("LowRiskNumbersEnabled", listOf(it.toString()))
-        }
-        this.page?.let { queryParams.put("Page", listOf(it.toString())) }
-        this.pageSize?.let { queryParams.put("PageSize", listOf(it.toString())) }
-        this.pageToken?.let { queryParams.put("PageToken", listOf(it.toString())) }
-        queryParams.putAll(additionalQueryParams)
-        return queryParams.build()
-    }
+    override fun _queryParams(): QueryParams =
+        QueryParams.builder()
+            .apply {
+                continent?.let { put("Continent", it) }
+                countryCode?.let { put("CountryCode", it) }
+                highRiskSpecialNumbersEnabled?.let {
+                    put("HighRiskSpecialNumbersEnabled", it.toString())
+                }
+                highRiskTollfraudNumbersEnabled?.let {
+                    put("HighRiskTollfraudNumbersEnabled", it.toString())
+                }
+                isoCode?.let { put("IsoCode", it) }
+                lowRiskNumbersEnabled?.let { put("LowRiskNumbersEnabled", it.toString()) }
+                page?.let { put("Page", it.toString()) }
+                pageSize?.let { put("PageSize", it.toString()) }
+                pageToken?.let { put("PageToken", it) }
+                putAll(additionalQueryParams)
+            }
+            .build()
 
     fun toBuilder() = Builder().from(this)
 
