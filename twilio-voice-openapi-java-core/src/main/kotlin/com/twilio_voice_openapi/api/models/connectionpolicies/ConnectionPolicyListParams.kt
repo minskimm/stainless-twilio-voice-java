@@ -209,6 +209,11 @@ private constructor(
             additionalQueryParams.removeAll(keys)
         }
 
+        /**
+         * Returns an immutable instance of [ConnectionPolicyListParams].
+         *
+         * Further updates to this [Builder] will not mutate the returned instance.
+         */
         fun build(): ConnectionPolicyListParams =
             ConnectionPolicyListParams(
                 page,

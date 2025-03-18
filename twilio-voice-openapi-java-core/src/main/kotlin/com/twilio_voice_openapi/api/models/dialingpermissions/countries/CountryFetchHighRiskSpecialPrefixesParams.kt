@@ -236,6 +236,18 @@ private constructor(
             additionalQueryParams.removeAll(keys)
         }
 
+        /**
+         * Returns an immutable instance of [CountryFetchHighRiskSpecialPrefixesParams].
+         *
+         * Further updates to this [Builder] will not mutate the returned instance.
+         *
+         * The following fields are required:
+         * ```java
+         * .isoCode()
+         * ```
+         *
+         * @throws IllegalStateException if any required field is unset.
+         */
         fun build(): CountryFetchHighRiskSpecialPrefixesParams =
             CountryFetchHighRiskSpecialPrefixesParams(
                 checkRequired("isoCode", isoCode),
