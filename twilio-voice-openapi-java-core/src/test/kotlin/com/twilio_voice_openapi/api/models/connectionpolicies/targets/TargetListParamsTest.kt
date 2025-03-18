@@ -30,11 +30,17 @@ internal class TargetListParamsTest {
                 .pageSize(1L)
                 .pageToken("PageToken")
                 .build()
-        val expected = QueryParams.builder()
-        expected.put("Page", "0")
-        expected.put("PageSize", "1")
-        expected.put("PageToken", "PageToken")
-        assertThat(params._queryParams()).isEqualTo(expected.build())
+
+        val queryParams = params._queryParams()
+
+        assertThat(queryParams)
+            .isEqualTo(
+                QueryParams.builder()
+                    .put("Page", "0")
+                    .put("PageSize", "1")
+                    .put("PageToken", "PageToken")
+                    .build()
+            )
     }
 
     @Disabled("skipped: tests are disabled for the time being")
@@ -44,8 +50,10 @@ internal class TargetListParamsTest {
             TargetListParams.builder()
                 .connectionPolicySid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
                 .build()
-        val expected = QueryParams.builder()
-        assertThat(params._queryParams()).isEqualTo(expected.build())
+
+        val queryParams = params._queryParams()
+
+        assertThat(queryParams).isEqualTo(QueryParams.builder().build())
     }
 
     @Disabled("skipped: tests are disabled for the time being")

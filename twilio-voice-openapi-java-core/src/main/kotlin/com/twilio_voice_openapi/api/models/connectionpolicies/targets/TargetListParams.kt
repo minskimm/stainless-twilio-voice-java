@@ -40,14 +40,15 @@ private constructor(
 
     override fun _headers(): Headers = additionalHeaders
 
-    override fun _queryParams(): QueryParams {
-        val queryParams = QueryParams.builder()
-        this.page?.let { queryParams.put("Page", listOf(it.toString())) }
-        this.pageSize?.let { queryParams.put("PageSize", listOf(it.toString())) }
-        this.pageToken?.let { queryParams.put("PageToken", listOf(it.toString())) }
-        queryParams.putAll(additionalQueryParams)
-        return queryParams.build()
-    }
+    override fun _queryParams(): QueryParams =
+        QueryParams.builder()
+            .apply {
+                page?.let { put("Page", it.toString()) }
+                pageSize?.let { put("PageSize", it.toString()) }
+                pageToken?.let { put("PageToken", it) }
+                putAll(additionalQueryParams)
+            }
+            .build()
 
     fun getPathParam(index: Int): String {
         return when (index) {

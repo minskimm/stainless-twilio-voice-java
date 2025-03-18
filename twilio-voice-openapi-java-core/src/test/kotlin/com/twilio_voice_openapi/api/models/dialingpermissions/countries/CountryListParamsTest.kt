@@ -40,24 +40,32 @@ internal class CountryListParamsTest {
                 .pageSize(1L)
                 .pageToken("PageToken")
                 .build()
-        val expected = QueryParams.builder()
-        expected.put("Continent", "Continent")
-        expected.put("CountryCode", "CountryCode")
-        expected.put("HighRiskSpecialNumbersEnabled", "true")
-        expected.put("HighRiskTollfraudNumbersEnabled", "true")
-        expected.put("IsoCode", "IsoCode")
-        expected.put("LowRiskNumbersEnabled", "true")
-        expected.put("Page", "0")
-        expected.put("PageSize", "1")
-        expected.put("PageToken", "PageToken")
-        assertThat(params._queryParams()).isEqualTo(expected.build())
+
+        val queryParams = params._queryParams()
+
+        assertThat(queryParams)
+            .isEqualTo(
+                QueryParams.builder()
+                    .put("Continent", "Continent")
+                    .put("CountryCode", "CountryCode")
+                    .put("HighRiskSpecialNumbersEnabled", "true")
+                    .put("HighRiskTollfraudNumbersEnabled", "true")
+                    .put("IsoCode", "IsoCode")
+                    .put("LowRiskNumbersEnabled", "true")
+                    .put("Page", "0")
+                    .put("PageSize", "1")
+                    .put("PageToken", "PageToken")
+                    .build()
+            )
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun queryParamsWithoutOptionalFields() {
         val params = CountryListParams.builder().build()
-        val expected = QueryParams.builder()
-        assertThat(params._queryParams()).isEqualTo(expected.build())
+
+        val queryParams = params._queryParams()
+
+        assertThat(queryParams).isEqualTo(QueryParams.builder().build())
     }
 }
