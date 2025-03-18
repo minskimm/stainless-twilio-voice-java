@@ -71,12 +71,7 @@ class CountryServiceAsyncImpl internal constructor(private val clientOptions: Cl
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
-                    .addPathSegments(
-                        "v1",
-                        "DialingPermissions",
-                        "Countries",
-                        params.getPathParam(0),
-                    )
+                    .addPathSegments("v1", "DialingPermissions", "Countries", params._pathParam(0))
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
@@ -141,7 +136,7 @@ class CountryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                         "v1",
                         "DialingPermissions",
                         "Countries",
-                        params.getPathParam(0),
+                        params._pathParam(0),
                         "HighRiskSpecialPrefixes",
                     )
                     .build()

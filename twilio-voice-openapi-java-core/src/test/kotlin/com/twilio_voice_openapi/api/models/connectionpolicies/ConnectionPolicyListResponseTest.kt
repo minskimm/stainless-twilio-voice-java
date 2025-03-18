@@ -4,6 +4,7 @@ package com.twilio_voice_openapi.api.models.connectionpolicies
 
 import com.twilio_voice_openapi.api.core.JsonValue
 import java.time.OffsetDateTime
+import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -39,7 +40,7 @@ internal class ConnectionPolicyListResponseTest {
                 )
                 .build()
         assertThat(connectionPolicyListResponse).isNotNull
-        assertThat(connectionPolicyListResponse.connectionPolicies().get())
+        assertThat(connectionPolicyListResponse.connectionPolicies().getOrNull())
             .containsExactly(
                 ConnectionPolicy.builder()
                     .accountSid("ACE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")

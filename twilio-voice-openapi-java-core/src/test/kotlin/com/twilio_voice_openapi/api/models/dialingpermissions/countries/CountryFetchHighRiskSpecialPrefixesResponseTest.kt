@@ -2,6 +2,7 @@
 
 package com.twilio_voice_openapi.api.models.dialingpermissions.countries
 
+import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -31,7 +32,7 @@ internal class CountryFetchHighRiskSpecialPrefixesResponseTest {
                 )
                 .build()
         assertThat(countryFetchHighRiskSpecialPrefixesResponse).isNotNull
-        assertThat(countryFetchHighRiskSpecialPrefixesResponse.content().get())
+        assertThat(countryFetchHighRiskSpecialPrefixesResponse.content().getOrNull())
             .containsExactly(
                 CountryFetchHighRiskSpecialPrefixesResponse.Content.builder()
                     .prefix("prefix")

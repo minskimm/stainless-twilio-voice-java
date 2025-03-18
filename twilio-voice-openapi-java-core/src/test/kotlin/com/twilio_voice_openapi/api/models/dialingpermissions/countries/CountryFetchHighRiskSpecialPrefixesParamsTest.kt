@@ -22,6 +22,16 @@ internal class CountryFetchHighRiskSpecialPrefixesParamsTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
+    fun pathParams() {
+        val params = CountryFetchHighRiskSpecialPrefixesParams.builder().isoCode("IsoCode").build()
+
+        assertThat(params._pathParam(0)).isEqualTo("IsoCode")
+        // out-of-bound path param
+        assertThat(params._pathParam(1)).isEqualTo("")
+    }
+
+    @Disabled("skipped: tests are disabled for the time being")
+    @Test
     fun queryParams() {
         val params =
             CountryFetchHighRiskSpecialPrefixesParams.builder()
@@ -51,16 +61,5 @@ internal class CountryFetchHighRiskSpecialPrefixesParamsTest {
         val queryParams = params._queryParams()
 
         assertThat(queryParams).isEqualTo(QueryParams.builder().build())
-    }
-
-    @Disabled("skipped: tests are disabled for the time being")
-    @Test
-    fun getPathParam() {
-        val params = CountryFetchHighRiskSpecialPrefixesParams.builder().isoCode("IsoCode").build()
-        assertThat(params).isNotNull
-        // path param "isoCode"
-        assertThat(params.getPathParam(0)).isEqualTo("IsoCode")
-        // out-of-bound path param
-        assertThat(params.getPathParam(1)).isEqualTo("")
     }
 }

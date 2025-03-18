@@ -3,6 +3,7 @@
 package com.twilio_voice_openapi.api.models.iprecords
 
 import java.time.OffsetDateTime
+import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -39,7 +40,7 @@ internal class IpRecordListResponseTest {
                 )
                 .build()
         assertThat(ipRecordListResponse).isNotNull
-        assertThat(ipRecordListResponse.ipRecords().get())
+        assertThat(ipRecordListResponse.ipRecords().getOrNull())
             .containsExactly(
                 IpRecord.builder()
                     .accountSid("ACE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")

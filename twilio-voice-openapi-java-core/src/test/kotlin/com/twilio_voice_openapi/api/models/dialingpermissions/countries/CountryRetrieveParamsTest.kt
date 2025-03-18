@@ -16,12 +16,11 @@ internal class CountryRetrieveParamsTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun getPathParam() {
+    fun pathParams() {
         val params = CountryRetrieveParams.builder().isoCode("IsoCode").build()
-        assertThat(params).isNotNull
-        // path param "isoCode"
-        assertThat(params.getPathParam(0)).isEqualTo("IsoCode")
+
+        assertThat(params._pathParam(0)).isEqualTo("IsoCode")
         // out-of-bound path param
-        assertThat(params.getPathParam(1)).isEqualTo("")
+        assertThat(params._pathParam(1)).isEqualTo("")
     }
 }

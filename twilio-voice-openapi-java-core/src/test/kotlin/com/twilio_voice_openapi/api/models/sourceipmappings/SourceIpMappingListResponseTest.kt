@@ -3,6 +3,7 @@
 package com.twilio_voice_openapi.api.models.sourceipmappings
 
 import java.time.OffsetDateTime
+import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -49,7 +50,7 @@ internal class SourceIpMappingListResponseTest {
                     .url("https://example.com")
                     .build()
             )
-        assertThat(sourceIpMappingListResponse.sourceIpMappings().get())
+        assertThat(sourceIpMappingListResponse.sourceIpMappings().getOrNull())
             .containsExactly(
                 SourceIpMapping.builder()
                     .dateCreated(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))

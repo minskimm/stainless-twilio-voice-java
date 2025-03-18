@@ -3,6 +3,7 @@
 package com.twilio_voice_openapi.api.models.dialingpermissions.countries
 
 import com.twilio_voice_openapi.api.core.JsonValue
+import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -40,7 +41,7 @@ internal class CountryListResponseTest {
                 )
                 .build()
         assertThat(countryListResponse).isNotNull
-        assertThat(countryListResponse.content().get())
+        assertThat(countryListResponse.content().getOrNull())
             .containsExactly(
                 CountryListResponse.Content.builder()
                     .continent("continent")
