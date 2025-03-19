@@ -12,7 +12,7 @@ internal class ByocTrunkListResponseTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun createByocTrunkListResponse() {
+    fun create() {
         val byocTrunkListResponse =
             ByocTrunkListResponse.builder()
                 .addByocTrunk(
@@ -46,7 +46,7 @@ internal class ByocTrunkListResponseTest {
                         .build()
                 )
                 .build()
-        assertThat(byocTrunkListResponse).isNotNull
+
         assertThat(byocTrunkListResponse.byocTrunks().getOrNull())
             .containsExactly(
                 ByocTrunk.builder()

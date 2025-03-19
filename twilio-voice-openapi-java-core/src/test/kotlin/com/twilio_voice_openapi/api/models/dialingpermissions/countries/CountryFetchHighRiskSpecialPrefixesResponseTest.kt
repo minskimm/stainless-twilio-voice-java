@@ -11,7 +11,7 @@ internal class CountryFetchHighRiskSpecialPrefixesResponseTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun createCountryFetchHighRiskSpecialPrefixesResponse() {
+    fun create() {
         val countryFetchHighRiskSpecialPrefixesResponse =
             CountryFetchHighRiskSpecialPrefixesResponse.builder()
                 .addContent(
@@ -31,7 +31,7 @@ internal class CountryFetchHighRiskSpecialPrefixesResponseTest {
                         .build()
                 )
                 .build()
-        assertThat(countryFetchHighRiskSpecialPrefixesResponse).isNotNull
+
         assertThat(countryFetchHighRiskSpecialPrefixesResponse.content().getOrNull())
             .containsExactly(
                 CountryFetchHighRiskSpecialPrefixesResponse.Content.builder()

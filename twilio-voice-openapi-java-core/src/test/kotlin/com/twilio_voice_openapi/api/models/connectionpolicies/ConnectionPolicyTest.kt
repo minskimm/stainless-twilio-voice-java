@@ -12,7 +12,7 @@ internal class ConnectionPolicyTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun createConnectionPolicy() {
+    fun create() {
         val connectionPolicy =
             ConnectionPolicy.builder()
                 .accountSid("ACE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
@@ -23,7 +23,7 @@ internal class ConnectionPolicyTest {
                 .sid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
                 .url("https://example.com")
                 .build()
-        assertThat(connectionPolicy).isNotNull
+
         assertThat(connectionPolicy.accountSid()).contains("ACE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
         assertThat(connectionPolicy.dateCreated())
             .contains(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))

@@ -10,13 +10,13 @@ internal class VoiceDialingPermissionsTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun createVoiceDialingPermissions() {
+    fun create() {
         val voiceDialingPermissions =
             VoiceDialingPermissions.builder()
                 .dialingPermissionsInheritance(true)
                 .url("https://example.com")
                 .build()
-        assertThat(voiceDialingPermissions).isNotNull
+
         assertThat(voiceDialingPermissions.dialingPermissionsInheritance()).contains(true)
         assertThat(voiceDialingPermissions.url()).contains("https://example.com")
     }

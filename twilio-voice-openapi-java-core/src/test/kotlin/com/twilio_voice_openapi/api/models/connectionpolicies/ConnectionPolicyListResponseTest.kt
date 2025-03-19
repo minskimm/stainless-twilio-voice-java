@@ -13,7 +13,7 @@ internal class ConnectionPolicyListResponseTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun createConnectionPolicyListResponse() {
+    fun create() {
         val connectionPolicyListResponse =
             ConnectionPolicyListResponse.builder()
                 .addConnectionPolicy(
@@ -39,7 +39,7 @@ internal class ConnectionPolicyListResponseTest {
                         .build()
                 )
                 .build()
-        assertThat(connectionPolicyListResponse).isNotNull
+
         assertThat(connectionPolicyListResponse.connectionPolicies().getOrNull())
             .containsExactly(
                 ConnectionPolicy.builder()

@@ -12,7 +12,7 @@ internal class CountryListResponseTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun createCountryListResponse() {
+    fun create() {
         val countryListResponse =
             CountryListResponse.builder()
                 .addContent(
@@ -40,7 +40,7 @@ internal class CountryListResponseTest {
                         .build()
                 )
                 .build()
-        assertThat(countryListResponse).isNotNull
+
         assertThat(countryListResponse.content().getOrNull())
             .containsExactly(
                 CountryListResponse.Content.builder()

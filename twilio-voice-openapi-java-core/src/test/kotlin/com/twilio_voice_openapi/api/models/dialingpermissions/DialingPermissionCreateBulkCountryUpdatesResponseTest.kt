@@ -10,13 +10,13 @@ internal class DialingPermissionCreateBulkCountryUpdatesResponseTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun createDialingPermissionCreateBulkCountryUpdatesResponse() {
+    fun create() {
         val dialingPermissionCreateBulkCountryUpdatesResponse =
             DialingPermissionCreateBulkCountryUpdatesResponse.builder()
                 .updateCount(0L)
                 .updateRequest("update_request")
                 .build()
-        assertThat(dialingPermissionCreateBulkCountryUpdatesResponse).isNotNull
+
         assertThat(dialingPermissionCreateBulkCountryUpdatesResponse.updateCount()).contains(0L)
         assertThat(dialingPermissionCreateBulkCountryUpdatesResponse.updateRequest())
             .contains("update_request")

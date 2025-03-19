@@ -11,7 +11,7 @@ internal class ConnectionPolicyTargetTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun createConnectionPolicyTarget() {
+    fun create() {
         val connectionPolicyTarget =
             ConnectionPolicyTarget.builder()
                 .accountSid("ACE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
@@ -26,7 +26,7 @@ internal class ConnectionPolicyTargetTest {
                 .url("https://example.com")
                 .weight(0L)
                 .build()
-        assertThat(connectionPolicyTarget).isNotNull
+
         assertThat(connectionPolicyTarget.accountSid())
             .contains("ACE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
         assertThat(connectionPolicyTarget.connectionPolicySid())

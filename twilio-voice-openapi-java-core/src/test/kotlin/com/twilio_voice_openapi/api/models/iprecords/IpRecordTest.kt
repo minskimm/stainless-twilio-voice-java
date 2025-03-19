@@ -11,7 +11,7 @@ internal class IpRecordTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun createIpRecord() {
+    fun create() {
         val ipRecord =
             IpRecord.builder()
                 .accountSid("ACE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
@@ -23,7 +23,7 @@ internal class IpRecordTest {
                 .sid("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
                 .url("https://example.com")
                 .build()
-        assertThat(ipRecord).isNotNull
+
         assertThat(ipRecord.accountSid()).contains("ACE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
         assertThat(ipRecord.cidrPrefixLength()).contains(0L)
         assertThat(ipRecord.dateCreated())

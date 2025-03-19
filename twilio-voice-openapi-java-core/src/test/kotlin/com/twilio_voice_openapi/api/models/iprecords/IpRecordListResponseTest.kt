@@ -12,7 +12,7 @@ internal class IpRecordListResponseTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun createIpRecordListResponse() {
+    fun create() {
         val ipRecordListResponse =
             IpRecordListResponse.builder()
                 .addIpRecord(
@@ -39,7 +39,7 @@ internal class IpRecordListResponseTest {
                         .build()
                 )
                 .build()
-        assertThat(ipRecordListResponse).isNotNull
+
         assertThat(ipRecordListResponse.ipRecords().getOrNull())
             .containsExactly(
                 IpRecord.builder()

@@ -11,7 +11,7 @@ internal class ByocTrunkTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun createByocTrunk() {
+    fun create() {
         val byocTrunk =
             ByocTrunk.builder()
                 .accountSid("ACE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
@@ -30,7 +30,7 @@ internal class ByocTrunkTest {
                 .voiceMethod(ByocTrunk.VoiceMethod.GET)
                 .voiceUrl("https://example.com")
                 .build()
-        assertThat(byocTrunk).isNotNull
+
         assertThat(byocTrunk.accountSid()).contains("ACE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
         assertThat(byocTrunk.cnamLookupEnabled()).contains(true)
         assertThat(byocTrunk.connectionPolicySid()).contains("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
