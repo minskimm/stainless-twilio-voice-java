@@ -12,7 +12,7 @@ internal class TargetListResponseTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun createTargetListResponse() {
+    fun create() {
         val targetListResponse =
             TargetListResponse.builder()
                 .meta(
@@ -42,7 +42,7 @@ internal class TargetListResponseTest {
                         .build()
                 )
                 .build()
-        assertThat(targetListResponse).isNotNull
+
         assertThat(targetListResponse.meta())
             .contains(
                 TargetListResponse.Meta.builder()

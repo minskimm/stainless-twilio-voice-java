@@ -12,7 +12,7 @@ internal class SourceIpMappingListResponseTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun createSourceIpMappingListResponse() {
+    fun create() {
         val sourceIpMappingListResponse =
             SourceIpMappingListResponse.builder()
                 .meta(
@@ -37,7 +37,7 @@ internal class SourceIpMappingListResponseTest {
                         .build()
                 )
                 .build()
-        assertThat(sourceIpMappingListResponse).isNotNull
+
         assertThat(sourceIpMappingListResponse.meta())
             .contains(
                 SourceIpMappingListResponse.Meta.builder()

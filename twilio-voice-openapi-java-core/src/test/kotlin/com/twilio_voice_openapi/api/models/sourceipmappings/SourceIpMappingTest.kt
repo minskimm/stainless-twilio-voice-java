@@ -11,7 +11,7 @@ internal class SourceIpMappingTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun createSourceIpMapping() {
+    fun create() {
         val sourceIpMapping =
             SourceIpMapping.builder()
                 .dateCreated(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
@@ -21,7 +21,7 @@ internal class SourceIpMappingTest {
                 .sipDomainSid("SDE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
                 .url("https://example.com")
                 .build()
-        assertThat(sourceIpMapping).isNotNull
+
         assertThat(sourceIpMapping.dateCreated())
             .contains(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
         assertThat(sourceIpMapping.dateUpdated())

@@ -12,7 +12,7 @@ internal class CountryRetrieveResponseTest {
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
-    fun createCountryRetrieveResponse() {
+    fun create() {
         val countryRetrieveResponse =
             CountryRetrieveResponse.builder()
                 .continent("continent")
@@ -25,7 +25,7 @@ internal class CountryRetrieveResponseTest {
                 .name("name")
                 .url("https://example.com")
                 .build()
-        assertThat(countryRetrieveResponse).isNotNull
+
         assertThat(countryRetrieveResponse.continent()).contains("continent")
         assertThat(countryRetrieveResponse.countryCodes().getOrNull()).containsExactly("string")
         assertThat(countryRetrieveResponse.highRiskSpecialNumbersEnabled()).contains(true)
