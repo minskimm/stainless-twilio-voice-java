@@ -27,9 +27,9 @@ configure<PublishingExtension> {
                 }
 
                 scm {
-                    connection.set("scm:git:git://github.com/stainless-sdks/twilio-voice-openapi-java.git")
-                    developerConnection.set("scm:git:git://github.com/stainless-sdks/twilio-voice-openapi-java.git")
-                    url.set("https://github.com/stainless-sdks/twilio-voice-openapi-java")
+                    connection.set("scm:git:git://github.com/minskimm/stainless-twilio-voice-java.git")
+                    developerConnection.set("scm:git:git://github.com/minskimm/stainless-twilio-voice-java.git")
+                    url.set("https://github.com/minskimm/stainless-twilio-voice-java")
                 }
 
                 versionMapping {
