@@ -3,6 +3,7 @@
 package com.twilio_voice_openapi.api.services.blocking
 
 import com.twilio_voice_openapi.api.core.ClientOptions
+import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.RequestOptions
 import com.twilio_voice_openapi.api.core.handlers.emptyHandler
 import com.twilio_voice_openapi.api.core.handlers.errorHandler
@@ -16,7 +17,6 @@ import com.twilio_voice_openapi.api.core.http.HttpResponseFor
 import com.twilio_voice_openapi.api.core.http.json
 import com.twilio_voice_openapi.api.core.http.parseable
 import com.twilio_voice_openapi.api.core.prepare
-import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIError
 import com.twilio_voice_openapi.api.models.iprecords.IpRecord
 import com.twilio_voice_openapi.api.models.iprecords.IpRecordCreateParams
 import com.twilio_voice_openapi.api.models.iprecords.IpRecordDeleteParams
@@ -64,8 +64,7 @@ class IpRecordServiceImpl internal constructor(private val clientOptions: Client
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         IpRecordService.WithRawResponse {
 
-        private val errorHandler: Handler<TwilioVoiceOpenAPIError> =
-            errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
         private val createHandler: Handler<IpRecord> =
             jsonHandler<IpRecord>(clientOptions.jsonMapper).withErrorHandler(errorHandler)

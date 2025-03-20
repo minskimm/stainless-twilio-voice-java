@@ -3,6 +3,7 @@
 package com.twilio_voice_openapi.api.services.blocking.connectionpolicies
 
 import com.twilio_voice_openapi.api.core.ClientOptions
+import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.RequestOptions
 import com.twilio_voice_openapi.api.core.handlers.emptyHandler
 import com.twilio_voice_openapi.api.core.handlers.errorHandler
@@ -16,7 +17,6 @@ import com.twilio_voice_openapi.api.core.http.HttpResponseFor
 import com.twilio_voice_openapi.api.core.http.json
 import com.twilio_voice_openapi.api.core.http.parseable
 import com.twilio_voice_openapi.api.core.prepare
-import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIError
 import com.twilio_voice_openapi.api.models.connectionpolicies.targets.ConnectionPolicyTarget
 import com.twilio_voice_openapi.api.models.connectionpolicies.targets.TargetCreateParams
 import com.twilio_voice_openapi.api.models.connectionpolicies.targets.TargetDeleteParams
@@ -70,8 +70,7 @@ class TargetServiceImpl internal constructor(private val clientOptions: ClientOp
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         TargetService.WithRawResponse {
 
-        private val errorHandler: Handler<TwilioVoiceOpenAPIError> =
-            errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
         private val createHandler: Handler<ConnectionPolicyTarget> =
             jsonHandler<ConnectionPolicyTarget>(clientOptions.jsonMapper)

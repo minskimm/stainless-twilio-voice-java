@@ -3,6 +3,7 @@
 package com.twilio_voice_openapi.api.services.async.dialingpermissions
 
 import com.twilio_voice_openapi.api.core.ClientOptions
+import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.RequestOptions
 import com.twilio_voice_openapi.api.core.handlers.errorHandler
 import com.twilio_voice_openapi.api.core.handlers.jsonHandler
@@ -13,7 +14,6 @@ import com.twilio_voice_openapi.api.core.http.HttpResponse.Handler
 import com.twilio_voice_openapi.api.core.http.HttpResponseFor
 import com.twilio_voice_openapi.api.core.http.parseable
 import com.twilio_voice_openapi.api.core.prepareAsync
-import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIError
 import com.twilio_voice_openapi.api.models.dialingpermissions.countries.CountryFetchHighRiskSpecialPrefixesParams
 import com.twilio_voice_openapi.api.models.dialingpermissions.countries.CountryFetchHighRiskSpecialPrefixesResponse
 import com.twilio_voice_openapi.api.models.dialingpermissions.countries.CountryListParams
@@ -57,8 +57,7 @@ class CountryServiceAsyncImpl internal constructor(private val clientOptions: Cl
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         CountryServiceAsync.WithRawResponse {
 
-        private val errorHandler: Handler<TwilioVoiceOpenAPIError> =
-            errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
         private val retrieveHandler: Handler<CountryRetrieveResponse> =
             jsonHandler<CountryRetrieveResponse>(clientOptions.jsonMapper)

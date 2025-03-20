@@ -3,6 +3,7 @@
 package com.twilio_voice_openapi.api.services.blocking
 
 import com.twilio_voice_openapi.api.core.ClientOptions
+import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.RequestOptions
 import com.twilio_voice_openapi.api.core.handlers.errorHandler
 import com.twilio_voice_openapi.api.core.handlers.jsonHandler
@@ -14,7 +15,6 @@ import com.twilio_voice_openapi.api.core.http.HttpResponseFor
 import com.twilio_voice_openapi.api.core.http.json
 import com.twilio_voice_openapi.api.core.http.parseable
 import com.twilio_voice_openapi.api.core.prepare
-import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIError
 import com.twilio_voice_openapi.api.models.dialingpermissions.DialingPermissionCreateBulkCountryUpdatesParams
 import com.twilio_voice_openapi.api.models.dialingpermissions.DialingPermissionCreateBulkCountryUpdatesResponse
 import com.twilio_voice_openapi.api.services.blocking.dialingpermissions.CountryService
@@ -43,8 +43,7 @@ class DialingPermissionServiceImpl internal constructor(private val clientOption
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         DialingPermissionService.WithRawResponse {
 
-        private val errorHandler: Handler<TwilioVoiceOpenAPIError> =
-            errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
         private val countries: CountryService.WithRawResponse by lazy {
             CountryServiceImpl.WithRawResponseImpl(clientOptions)

@@ -3,6 +3,7 @@
 package com.twilio_voice_openapi.api.services.async
 
 import com.twilio_voice_openapi.api.core.ClientOptions
+import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.RequestOptions
 import com.twilio_voice_openapi.api.core.handlers.emptyHandler
 import com.twilio_voice_openapi.api.core.handlers.errorHandler
@@ -14,7 +15,6 @@ import com.twilio_voice_openapi.api.core.http.HttpResponse.Handler
 import com.twilio_voice_openapi.api.core.http.json
 import com.twilio_voice_openapi.api.core.http.parseable
 import com.twilio_voice_openapi.api.core.prepareAsync
-import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIError
 import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams
 import java.util.concurrent.CompletableFuture
 
@@ -37,8 +37,7 @@ class ArchiveServiceAsyncImpl internal constructor(private val clientOptions: Cl
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         ArchiveServiceAsync.WithRawResponse {
 
-        private val errorHandler: Handler<TwilioVoiceOpenAPIError> =
-            errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
         private val deleteCallHandler: Handler<Void?> =
             emptyHandler().withErrorHandler(errorHandler)
