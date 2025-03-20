@@ -3,6 +3,7 @@
 package com.twilio_voice_openapi.api.services.async
 
 import com.twilio_voice_openapi.api.core.ClientOptions
+import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.RequestOptions
 import com.twilio_voice_openapi.api.core.handlers.emptyHandler
 import com.twilio_voice_openapi.api.core.handlers.errorHandler
@@ -16,7 +17,6 @@ import com.twilio_voice_openapi.api.core.http.HttpResponseFor
 import com.twilio_voice_openapi.api.core.http.json
 import com.twilio_voice_openapi.api.core.http.parseable
 import com.twilio_voice_openapi.api.core.prepareAsync
-import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIError
 import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunk
 import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkCreateParams
 import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkDeleteParams
@@ -73,8 +73,7 @@ class ByocTrunkServiceAsyncImpl internal constructor(private val clientOptions: 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         ByocTrunkServiceAsync.WithRawResponse {
 
-        private val errorHandler: Handler<TwilioVoiceOpenAPIError> =
-            errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
         private val createHandler: Handler<ByocTrunk> =
             jsonHandler<ByocTrunk>(clientOptions.jsonMapper).withErrorHandler(errorHandler)

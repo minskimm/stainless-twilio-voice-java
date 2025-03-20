@@ -1,23 +1,17 @@
+// File generated from our OpenAPI spec by Stainless.
+
 package com.twilio_voice_openapi.api.errors
 
+import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.http.Headers
 
 abstract class TwilioVoiceOpenAPIServiceException
-@JvmOverloads
-constructor(
-    private val statusCode: Int,
-    private val headers: Headers,
-    private val body: String,
-    private val error: TwilioVoiceOpenAPIError,
-    message: String = "$statusCode: $error",
-    cause: Throwable? = null,
-) : TwilioVoiceOpenAPIException(message, cause) {
+protected constructor(message: String, cause: Throwable? = null) :
+    TwilioVoiceOpenAPIException(message, cause) {
 
-    fun statusCode(): Int = statusCode
+    abstract fun statusCode(): Int
 
-    fun headers(): Headers = headers
+    abstract fun headers(): Headers
 
-    fun body(): String = body
-
-    fun error(): TwilioVoiceOpenAPIError = error
+    abstract fun body(): JsonValue
 }
