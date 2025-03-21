@@ -2,7 +2,6 @@
 
 package com.twilio_voice_openapi.api.models.iprecords
 
-import kotlin.test.assertNotNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -31,7 +30,6 @@ internal class IpRecordCreateParamsTest {
 
         val body = params._body()
 
-        assertNotNull(body)
         assertThat(body.ipAddress()).isEqualTo("10.2.3.4")
         assertThat(body.cidrPrefixLength()).contains(30L)
         assertThat(body.friendlyName()).contains("friendly_name")
@@ -44,7 +42,6 @@ internal class IpRecordCreateParamsTest {
 
         val body = params._body()
 
-        assertNotNull(body)
         assertThat(body.ipAddress()).isEqualTo("10.2.3.4")
     }
 }

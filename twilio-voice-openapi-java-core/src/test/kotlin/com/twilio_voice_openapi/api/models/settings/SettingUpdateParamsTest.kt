@@ -2,7 +2,6 @@
 
 package com.twilio_voice_openapi.api.models.settings
 
-import kotlin.test.assertNotNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -22,7 +21,6 @@ internal class SettingUpdateParamsTest {
 
         val body = params._body()
 
-        assertNotNull(body)
         assertThat(body.dialingPermissionsInheritance()).contains(true)
     }
 
@@ -32,7 +30,5 @@ internal class SettingUpdateParamsTest {
         val params = SettingUpdateParams.builder().build()
 
         val body = params._body()
-
-        assertNotNull(body)
     }
 }

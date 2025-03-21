@@ -2,7 +2,6 @@
 
 package com.twilio_voice_openapi.api.models.dialingpermissions
 
-import kotlin.test.assertNotNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -31,7 +30,6 @@ internal class DialingPermissionCreateBulkCountryUpdatesParamsTest {
 
         val body = params._body()
 
-        assertNotNull(body)
         assertThat(body.updateRequest())
             .isEqualTo(
                 "[ { \"iso_code\": \"GB\", \"low_risk_numbers\": \"Enabled\", \"high_risk_special_numbers\":\"Enabled\", \"high_risk_irsf_numbers\": \"Enabled\" } ]"

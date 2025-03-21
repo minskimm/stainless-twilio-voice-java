@@ -2,7 +2,6 @@
 
 package com.twilio_voice_openapi.api.models.sourceipmappings
 
-import kotlin.test.assertNotNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -43,7 +42,6 @@ internal class SourceIpMappingUpdateParamsTest {
 
         val body = params._body()
 
-        assertNotNull(body)
         assertThat(body.sipDomainSid()).isEqualTo("SDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab")
     }
 }
