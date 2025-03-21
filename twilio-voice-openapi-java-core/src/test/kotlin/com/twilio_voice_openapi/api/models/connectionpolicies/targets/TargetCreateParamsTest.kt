@@ -2,7 +2,6 @@
 
 package com.twilio_voice_openapi.api.models.connectionpolicies.targets
 
-import kotlin.test.assertNotNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -51,7 +50,6 @@ internal class TargetCreateParamsTest {
 
         val body = params._body()
 
-        assertNotNull(body)
         assertThat(body.target()).isEqualTo("sip:sip-box.com:1234")
         assertThat(body.enabled()).contains(true)
         assertThat(body.friendlyName()).contains("friendly_name")
@@ -70,7 +68,6 @@ internal class TargetCreateParamsTest {
 
         val body = params._body()
 
-        assertNotNull(body)
         assertThat(body.target()).isEqualTo("sip:sip-box.com:1234")
     }
 }
