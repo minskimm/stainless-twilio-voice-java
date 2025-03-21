@@ -2,7 +2,6 @@
 
 package com.twilio_voice_openapi.api.models.byoctrunks
 
-import kotlin.test.assertNotNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -45,7 +44,6 @@ internal class ByocTrunkCreateParamsTest {
 
         val body = params._body()
 
-        assertNotNull(body)
         assertThat(body.cnamLookupEnabled()).contains(false)
         assertThat(body.connectionPolicySid()).contains("NYaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         assertThat(body.friendlyName()).contains("friendly_name")
@@ -67,7 +65,5 @@ internal class ByocTrunkCreateParamsTest {
         val params = ByocTrunkCreateParams.builder().build()
 
         val body = params._body()
-
-        assertNotNull(body)
     }
 }

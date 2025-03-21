@@ -2,7 +2,6 @@
 
 package com.twilio_voice_openapi.api.models.connectionpolicies
 
-import kotlin.test.assertNotNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -40,7 +39,6 @@ internal class ConnectionPolicyUpdateParamsTest {
 
         val body = params._body()
 
-        assertNotNull(body)
         assertThat(body.friendlyName()).contains("updated_name")
     }
 
@@ -51,7 +49,5 @@ internal class ConnectionPolicyUpdateParamsTest {
             ConnectionPolicyUpdateParams.builder().sid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
 
         val body = params._body()
-
-        assertNotNull(body)
     }
 }
