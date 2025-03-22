@@ -7,7 +7,7 @@
 
 <!-- x-release-please-end -->
 
-The Twilio Voice OpenAPI Java SDK provides convenient access to the Twilio Voice OpenAPI REST API from applications written in Java.
+The Twilio Voice OpenAPI Java SDK provides convenient access to the [Twilio Voice OpenAPI REST API](https://support.twilio.com) from applications written in Java.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -31,9 +31,9 @@ implementation("com.twilio_voice_openapi.api:twilio-voice-openapi-java:0.0.1-alp
 
 ```xml
 <dependency>
-    <groupId>com.twilio_voice_openapi.api</groupId>
-    <artifactId>twilio-voice-openapi-java</artifactId>
-    <version>0.0.1-alpha.0</version>
+  <groupId>com.twilio_voice_openapi.api</groupId>
+  <artifactId>twilio-voice-openapi-java</artifactId>
+  <version>0.0.1-alpha.0</version>
 </dependency>
 ```
 
