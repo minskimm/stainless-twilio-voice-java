@@ -193,16 +193,16 @@ The SDK throws custom unchecked exception types:
 
 - [`TwilioVoiceOpenAPIServiceException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/TwilioVoiceOpenAPIServiceException.kt): Base class for HTTP errors. See this table for which exception subclass is thrown for each HTTP status code:
 
-  | Status | Exception                       |
-  | ------ | ------------------------------- |
-  | 400    | `BadRequestException`           |
-  | 401    | `AuthenticationException`       |
-  | 403    | `PermissionDeniedException`     |
-  | 404    | `NotFoundException`             |
-  | 422    | `UnprocessableEntityException`  |
-  | 429    | `RateLimitException`            |
-  | 5xx    | `InternalServerException`       |
-  | others | `UnexpectedStatusCodeException` |
+  | Status | Exception                                                                                                                                              |
+  | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+  | 400    | [`BadRequestException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/BadRequestException.kt)                     |
+  | 401    | [`UnauthorizedException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/UnauthorizedException.kt)                 |
+  | 403    | [`PermissionDeniedException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/PermissionDeniedException.kt)         |
+  | 404    | [`NotFoundException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/NotFoundException.kt)                         |
+  | 422    | [`UnprocessableEntityException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/UnprocessableEntityException.kt)   |
+  | 429    | [`RateLimitException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/RateLimitException.kt)                       |
+  | 5xx    | [`InternalServerException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/InternalServerException.kt)             |
+  | others | [`UnexpectedStatusCodeException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/UnexpectedStatusCodeException.kt) |
 
 - [`TwilioVoiceOpenAPIIoException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/TwilioVoiceOpenAPIIoException.kt): I/O networking errors.
 
