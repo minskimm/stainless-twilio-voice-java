@@ -2,7 +2,6 @@
 
 package com.twilio_voice_openapi.api.models.dialingpermissions.countries
 
-import com.twilio_voice_openapi.api.core.NoAutoDetect
 import com.twilio_voice_openapi.api.core.Params
 import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
@@ -77,28 +76,6 @@ private constructor(
 
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
-    override fun _headers(): Headers = additionalHeaders
-
-    override fun _queryParams(): QueryParams =
-        QueryParams.builder()
-            .apply {
-                continent?.let { put("Continent", it) }
-                countryCode?.let { put("CountryCode", it) }
-                highRiskSpecialNumbersEnabled?.let {
-                    put("HighRiskSpecialNumbersEnabled", it.toString())
-                }
-                highRiskTollfraudNumbersEnabled?.let {
-                    put("HighRiskTollfraudNumbersEnabled", it.toString())
-                }
-                isoCode?.let { put("IsoCode", it) }
-                lowRiskNumbersEnabled?.let { put("LowRiskNumbersEnabled", it.toString()) }
-                page?.let { put("Page", it.toString()) }
-                pageSize?.let { put("PageSize", it.toString()) }
-                pageToken?.let { put("PageToken", it) }
-                putAll(additionalQueryParams)
-            }
-            .build()
-
     fun toBuilder() = Builder().from(this)
 
     companion object {
@@ -110,7 +87,6 @@ private constructor(
     }
 
     /** A builder for [CountryListParams]. */
-    @NoAutoDetect
     class Builder internal constructor() {
 
         private var continent: String? = null
@@ -387,6 +363,28 @@ private constructor(
                 additionalQueryParams.build(),
             )
     }
+
+    override fun _headers(): Headers = additionalHeaders
+
+    override fun _queryParams(): QueryParams =
+        QueryParams.builder()
+            .apply {
+                continent?.let { put("Continent", it) }
+                countryCode?.let { put("CountryCode", it) }
+                highRiskSpecialNumbersEnabled?.let {
+                    put("HighRiskSpecialNumbersEnabled", it.toString())
+                }
+                highRiskTollfraudNumbersEnabled?.let {
+                    put("HighRiskTollfraudNumbersEnabled", it.toString())
+                }
+                isoCode?.let { put("IsoCode", it) }
+                lowRiskNumbersEnabled?.let { put("LowRiskNumbersEnabled", it.toString()) }
+                page?.let { put("Page", it.toString()) }
+                pageSize?.let { put("PageSize", it.toString()) }
+                pageToken?.let { put("PageToken", it) }
+                putAll(additionalQueryParams)
+            }
+            .build()
 
     override fun equals(other: Any?): Boolean {
         if (this === other) {

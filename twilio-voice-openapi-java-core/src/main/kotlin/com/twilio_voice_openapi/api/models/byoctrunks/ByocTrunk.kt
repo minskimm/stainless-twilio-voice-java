@@ -11,62 +11,92 @@ import com.twilio_voice_openapi.api.core.ExcludeMissing
 import com.twilio_voice_openapi.api.core.JsonField
 import com.twilio_voice_openapi.api.core.JsonMissing
 import com.twilio_voice_openapi.api.core.JsonValue
-import com.twilio_voice_openapi.api.core.NoAutoDetect
-import com.twilio_voice_openapi.api.core.immutableEmptyMap
-import com.twilio_voice_openapi.api.core.toImmutable
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-@NoAutoDetect
 class ByocTrunk
-@JsonCreator
 private constructor(
-    @JsonProperty("account_sid")
-    @ExcludeMissing
-    private val accountSid: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("cnam_lookup_enabled")
-    @ExcludeMissing
-    private val cnamLookupEnabled: JsonField<Boolean> = JsonMissing.of(),
-    @JsonProperty("connection_policy_sid")
-    @ExcludeMissing
-    private val connectionPolicySid: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("date_created")
-    @ExcludeMissing
-    private val dateCreated: JsonField<OffsetDateTime> = JsonMissing.of(),
-    @JsonProperty("date_updated")
-    @ExcludeMissing
-    private val dateUpdated: JsonField<OffsetDateTime> = JsonMissing.of(),
-    @JsonProperty("friendly_name")
-    @ExcludeMissing
-    private val friendlyName: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("from_domain_sid")
-    @ExcludeMissing
-    private val fromDomainSid: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("sid") @ExcludeMissing private val sid: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("status_callback_method")
-    @ExcludeMissing
-    private val statusCallbackMethod: JsonField<StatusCallbackMethod> = JsonMissing.of(),
-    @JsonProperty("status_callback_url")
-    @ExcludeMissing
-    private val statusCallbackUrl: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("url") @ExcludeMissing private val url: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("voice_fallback_method")
-    @ExcludeMissing
-    private val voiceFallbackMethod: JsonField<VoiceFallbackMethod> = JsonMissing.of(),
-    @JsonProperty("voice_fallback_url")
-    @ExcludeMissing
-    private val voiceFallbackUrl: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("voice_method")
-    @ExcludeMissing
-    private val voiceMethod: JsonField<VoiceMethod> = JsonMissing.of(),
-    @JsonProperty("voice_url")
-    @ExcludeMissing
-    private val voiceUrl: JsonField<String> = JsonMissing.of(),
-    @JsonAnySetter private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
+    private val accountSid: JsonField<String>,
+    private val cnamLookupEnabled: JsonField<Boolean>,
+    private val connectionPolicySid: JsonField<String>,
+    private val dateCreated: JsonField<OffsetDateTime>,
+    private val dateUpdated: JsonField<OffsetDateTime>,
+    private val friendlyName: JsonField<String>,
+    private val fromDomainSid: JsonField<String>,
+    private val sid: JsonField<String>,
+    private val statusCallbackMethod: JsonField<StatusCallbackMethod>,
+    private val statusCallbackUrl: JsonField<String>,
+    private val url: JsonField<String>,
+    private val voiceFallbackMethod: JsonField<VoiceFallbackMethod>,
+    private val voiceFallbackUrl: JsonField<String>,
+    private val voiceMethod: JsonField<VoiceMethod>,
+    private val voiceUrl: JsonField<String>,
+    private val additionalProperties: MutableMap<String, JsonValue>,
 ) {
+
+    @JsonCreator
+    private constructor(
+        @JsonProperty("account_sid")
+        @ExcludeMissing
+        accountSid: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("cnam_lookup_enabled")
+        @ExcludeMissing
+        cnamLookupEnabled: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("connection_policy_sid")
+        @ExcludeMissing
+        connectionPolicySid: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("date_created")
+        @ExcludeMissing
+        dateCreated: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("date_updated")
+        @ExcludeMissing
+        dateUpdated: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("friendly_name")
+        @ExcludeMissing
+        friendlyName: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("from_domain_sid")
+        @ExcludeMissing
+        fromDomainSid: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("sid") @ExcludeMissing sid: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("status_callback_method")
+        @ExcludeMissing
+        statusCallbackMethod: JsonField<StatusCallbackMethod> = JsonMissing.of(),
+        @JsonProperty("status_callback_url")
+        @ExcludeMissing
+        statusCallbackUrl: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("url") @ExcludeMissing url: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("voice_fallback_method")
+        @ExcludeMissing
+        voiceFallbackMethod: JsonField<VoiceFallbackMethod> = JsonMissing.of(),
+        @JsonProperty("voice_fallback_url")
+        @ExcludeMissing
+        voiceFallbackUrl: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("voice_method")
+        @ExcludeMissing
+        voiceMethod: JsonField<VoiceMethod> = JsonMissing.of(),
+        @JsonProperty("voice_url") @ExcludeMissing voiceUrl: JsonField<String> = JsonMissing.of(),
+    ) : this(
+        accountSid,
+        cnamLookupEnabled,
+        connectionPolicySid,
+        dateCreated,
+        dateUpdated,
+        friendlyName,
+        fromDomainSid,
+        sid,
+        statusCallbackMethod,
+        statusCallbackUrl,
+        url,
+        voiceFallbackMethod,
+        voiceFallbackUrl,
+        voiceMethod,
+        voiceUrl,
+        mutableMapOf(),
+    )
 
     /**
      * The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the BYOC
@@ -344,34 +374,15 @@ private constructor(
      */
     @JsonProperty("voice_url") @ExcludeMissing fun _voiceUrl(): JsonField<String> = voiceUrl
 
+    @JsonAnySetter
+    private fun putAdditionalProperty(key: String, value: JsonValue) {
+        additionalProperties.put(key, value)
+    }
+
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
-
-    private var validated: Boolean = false
-
-    fun validate(): ByocTrunk = apply {
-        if (validated) {
-            return@apply
-        }
-
-        accountSid()
-        cnamLookupEnabled()
-        connectionPolicySid()
-        dateCreated()
-        dateUpdated()
-        friendlyName()
-        fromDomainSid()
-        sid()
-        statusCallbackMethod()
-        statusCallbackUrl()
-        url()
-        voiceFallbackMethod()
-        voiceFallbackUrl()
-        voiceMethod()
-        voiceUrl()
-        validated = true
-    }
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -767,8 +778,33 @@ private constructor(
                 voiceFallbackUrl,
                 voiceMethod,
                 voiceUrl,
-                additionalProperties.toImmutable(),
+                additionalProperties.toMutableMap(),
             )
+    }
+
+    private var validated: Boolean = false
+
+    fun validate(): ByocTrunk = apply {
+        if (validated) {
+            return@apply
+        }
+
+        accountSid()
+        cnamLookupEnabled()
+        connectionPolicySid()
+        dateCreated()
+        dateUpdated()
+        friendlyName()
+        fromDomainSid()
+        sid()
+        statusCallbackMethod()
+        statusCallbackUrl()
+        url()
+        voiceFallbackMethod()
+        voiceFallbackUrl()
+        voiceMethod()
+        voiceUrl()
+        validated = true
     }
 
     /** The HTTP method we use to call `status_callback_url`. Either `GET` or `POST`. */
