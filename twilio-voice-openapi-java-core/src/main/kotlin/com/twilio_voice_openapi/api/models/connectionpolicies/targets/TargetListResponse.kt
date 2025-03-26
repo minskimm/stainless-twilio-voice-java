@@ -10,25 +10,28 @@ import com.twilio_voice_openapi.api.core.ExcludeMissing
 import com.twilio_voice_openapi.api.core.JsonField
 import com.twilio_voice_openapi.api.core.JsonMissing
 import com.twilio_voice_openapi.api.core.JsonValue
-import com.twilio_voice_openapi.api.core.NoAutoDetect
 import com.twilio_voice_openapi.api.core.checkKnown
-import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-@NoAutoDetect
 class TargetListResponse
-@JsonCreator
 private constructor(
-    @JsonProperty("meta") @ExcludeMissing private val meta: JsonField<Meta> = JsonMissing.of(),
-    @JsonProperty("targets")
-    @ExcludeMissing
-    private val targets: JsonField<List<ConnectionPolicyTarget>> = JsonMissing.of(),
-    @JsonAnySetter private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
+    private val meta: JsonField<Meta>,
+    private val targets: JsonField<List<ConnectionPolicyTarget>>,
+    private val additionalProperties: MutableMap<String, JsonValue>,
 ) {
+
+    @JsonCreator
+    private constructor(
+        @JsonProperty("meta") @ExcludeMissing meta: JsonField<Meta> = JsonMissing.of(),
+        @JsonProperty("targets")
+        @ExcludeMissing
+        targets: JsonField<List<ConnectionPolicyTarget>> = JsonMissing.of(),
+    ) : this(meta, targets, mutableMapOf())
 
     /**
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
@@ -59,21 +62,15 @@ private constructor(
     @ExcludeMissing
     fun _targets(): JsonField<List<ConnectionPolicyTarget>> = targets
 
+    @JsonAnySetter
+    private fun putAdditionalProperty(key: String, value: JsonValue) {
+        additionalProperties.put(key, value)
+    }
+
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
-
-    private var validated: Boolean = false
-
-    fun validate(): TargetListResponse = apply {
-        if (validated) {
-            return@apply
-        }
-
-        meta().ifPresent { it.validate() }
-        targets().ifPresent { it.forEach { it.validate() } }
-        validated = true
-    }
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -160,32 +157,59 @@ private constructor(
             TargetListResponse(
                 meta,
                 (targets ?: JsonMissing.of()).map { it.toImmutable() },
-                additionalProperties.toImmutable(),
+                additionalProperties.toMutableMap(),
             )
     }
 
-    @NoAutoDetect
+    private var validated: Boolean = false
+
+    fun validate(): TargetListResponse = apply {
+        if (validated) {
+            return@apply
+        }
+
+        meta().ifPresent { it.validate() }
+        targets().ifPresent { it.forEach { it.validate() } }
+        validated = true
+    }
+
     class Meta
-    @JsonCreator
     private constructor(
-        @JsonProperty("first_page_url")
-        @ExcludeMissing
-        private val firstPageUrl: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("key") @ExcludeMissing private val key: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("next_page_url")
-        @ExcludeMissing
-        private val nextPageUrl: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("page") @ExcludeMissing private val page: JsonField<Long> = JsonMissing.of(),
-        @JsonProperty("page_size")
-        @ExcludeMissing
-        private val pageSize: JsonField<Long> = JsonMissing.of(),
-        @JsonProperty("previous_page_url")
-        @ExcludeMissing
-        private val previousPageUrl: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("url") @ExcludeMissing private val url: JsonField<String> = JsonMissing.of(),
-        @JsonAnySetter
-        private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
+        private val firstPageUrl: JsonField<String>,
+        private val key: JsonField<String>,
+        private val nextPageUrl: JsonField<String>,
+        private val page: JsonField<Long>,
+        private val pageSize: JsonField<Long>,
+        private val previousPageUrl: JsonField<String>,
+        private val url: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("first_page_url")
+            @ExcludeMissing
+            firstPageUrl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("key") @ExcludeMissing key: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("next_page_url")
+            @ExcludeMissing
+            nextPageUrl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("page") @ExcludeMissing page: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("page_size") @ExcludeMissing pageSize: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("previous_page_url")
+            @ExcludeMissing
+            previousPageUrl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("url") @ExcludeMissing url: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            firstPageUrl,
+            key,
+            nextPageUrl,
+            page,
+            pageSize,
+            previousPageUrl,
+            url,
+            mutableMapOf(),
+        )
 
         /**
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
@@ -289,26 +313,15 @@ private constructor(
          */
         @JsonProperty("url") @ExcludeMissing fun _url(): JsonField<String> = url
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
         @JsonAnyGetter
         @ExcludeMissing
-        fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
-
-        private var validated: Boolean = false
-
-        fun validate(): Meta = apply {
-            if (validated) {
-                return@apply
-            }
-
-            firstPageUrl()
-            key()
-            nextPageUrl()
-            page()
-            pageSize()
-            previousPageUrl()
-            url()
-            validated = true
-        }
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
 
         fun toBuilder() = Builder().from(this)
 
@@ -466,8 +479,25 @@ private constructor(
                     pageSize,
                     previousPageUrl,
                     url,
-                    additionalProperties.toImmutable(),
+                    additionalProperties.toMutableMap(),
                 )
+        }
+
+        private var validated: Boolean = false
+
+        fun validate(): Meta = apply {
+            if (validated) {
+                return@apply
+            }
+
+            firstPageUrl()
+            key()
+            nextPageUrl()
+            page()
+            pageSize()
+            previousPageUrl()
+            url()
+            validated = true
         }
 
         override fun equals(other: Any?): Boolean {

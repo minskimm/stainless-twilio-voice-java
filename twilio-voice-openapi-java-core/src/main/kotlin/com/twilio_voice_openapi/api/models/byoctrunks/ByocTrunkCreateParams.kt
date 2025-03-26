@@ -11,13 +11,11 @@ import com.twilio_voice_openapi.api.core.ExcludeMissing
 import com.twilio_voice_openapi.api.core.JsonField
 import com.twilio_voice_openapi.api.core.JsonMissing
 import com.twilio_voice_openapi.api.core.JsonValue
-import com.twilio_voice_openapi.api.core.NoAutoDetect
 import com.twilio_voice_openapi.api.core.Params
 import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
-import com.twilio_voice_openapi.api.core.immutableEmptyMap
-import com.twilio_voice_openapi.api.core.toImmutable
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 
@@ -201,538 +199,6 @@ private constructor(
 
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
-    @JvmSynthetic internal fun _body(): Body = body
-
-    override fun _headers(): Headers = additionalHeaders
-
-    override fun _queryParams(): QueryParams = additionalQueryParams
-
-    @NoAutoDetect
-    class Body
-    @JsonCreator
-    private constructor(
-        @JsonProperty("CnamLookupEnabled")
-        @ExcludeMissing
-        private val cnamLookupEnabled: JsonField<Boolean> = JsonMissing.of(),
-        @JsonProperty("ConnectionPolicySid")
-        @ExcludeMissing
-        private val connectionPolicySid: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("FriendlyName")
-        @ExcludeMissing
-        private val friendlyName: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("FromDomainSid")
-        @ExcludeMissing
-        private val fromDomainSid: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("StatusCallbackMethod")
-        @ExcludeMissing
-        private val statusCallbackMethod: JsonField<StatusCallbackMethod> = JsonMissing.of(),
-        @JsonProperty("StatusCallbackUrl")
-        @ExcludeMissing
-        private val statusCallbackUrl: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("VoiceFallbackMethod")
-        @ExcludeMissing
-        private val voiceFallbackMethod: JsonField<VoiceFallbackMethod> = JsonMissing.of(),
-        @JsonProperty("VoiceFallbackUrl")
-        @ExcludeMissing
-        private val voiceFallbackUrl: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("VoiceMethod")
-        @ExcludeMissing
-        private val voiceMethod: JsonField<VoiceMethod> = JsonMissing.of(),
-        @JsonProperty("VoiceUrl")
-        @ExcludeMissing
-        private val voiceUrl: JsonField<String> = JsonMissing.of(),
-        @JsonAnySetter
-        private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
-    ) {
-
-        /**
-         * Whether Caller ID Name (CNAM) lookup is enabled for the trunk. If enabled, all inbound
-         * calls to the BYOC Trunk from the United States and Canada automatically perform a CNAM
-         * Lookup and display Caller ID data on your phone. See
-         * [CNAM Lookups](https://www.twilio.com/docs/sip-trunking#CNAM) for more information.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun cnamLookupEnabled(): Optional<Boolean> =
-            Optional.ofNullable(cnamLookupEnabled.getNullable("CnamLookupEnabled"))
-
-        /**
-         * The SID of the Connection Policy that Twilio will use when routing traffic to your
-         * communications infrastructure.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun connectionPolicySid(): Optional<String> =
-            Optional.ofNullable(connectionPolicySid.getNullable("ConnectionPolicySid"))
-
-        /**
-         * A descriptive string that you create to describe the resource. It is not unique and can
-         * be up to 255 characters long.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun friendlyName(): Optional<String> =
-            Optional.ofNullable(friendlyName.getNullable("FriendlyName"))
-
-        /**
-         * The SID of the SIP Domain that should be used in the `From` header of originating calls
-         * sent to your SIP infrastructure. If your SIP infrastructure allows users to "call back"
-         * an incoming call, configure this with a
-         * [SIP Domain](https://www.twilio.com/docs/voice/api/sending-sip) to ensure proper routing.
-         * If not configured, the from domain will default to "sip.twilio.com".
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun fromDomainSid(): Optional<String> =
-            Optional.ofNullable(fromDomainSid.getNullable("FromDomainSid"))
-
-        /**
-         * The HTTP method we should use to call `status_callback_url`. Can be: `GET` or `POST`.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun statusCallbackMethod(): Optional<StatusCallbackMethod> =
-            Optional.ofNullable(statusCallbackMethod.getNullable("StatusCallbackMethod"))
-
-        /**
-         * The URL that we should call to pass status parameters (such as call ended) to your
-         * application.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun statusCallbackUrl(): Optional<String> =
-            Optional.ofNullable(statusCallbackUrl.getNullable("StatusCallbackUrl"))
-
-        /**
-         * The HTTP method we should use to call `voice_fallback_url`. Can be: `GET` or `POST`.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun voiceFallbackMethod(): Optional<VoiceFallbackMethod> =
-            Optional.ofNullable(voiceFallbackMethod.getNullable("VoiceFallbackMethod"))
-
-        /**
-         * The URL that we should call when an error occurs while retrieving or executing the TwiML
-         * from `voice_url`.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun voiceFallbackUrl(): Optional<String> =
-            Optional.ofNullable(voiceFallbackUrl.getNullable("VoiceFallbackUrl"))
-
-        /**
-         * The HTTP method we should use to call `voice_url`. Can be: `GET` or `POST`.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun voiceMethod(): Optional<VoiceMethod> =
-            Optional.ofNullable(voiceMethod.getNullable("VoiceMethod"))
-
-        /**
-         * The URL we should call when the BYOC Trunk receives a call.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun voiceUrl(): Optional<String> = Optional.ofNullable(voiceUrl.getNullable("VoiceUrl"))
-
-        /**
-         * Returns the raw JSON value of [cnamLookupEnabled].
-         *
-         * Unlike [cnamLookupEnabled], this method doesn't throw if the JSON field has an unexpected
-         * type.
-         */
-        @JsonProperty("CnamLookupEnabled")
-        @ExcludeMissing
-        fun _cnamLookupEnabled(): JsonField<Boolean> = cnamLookupEnabled
-
-        /**
-         * Returns the raw JSON value of [connectionPolicySid].
-         *
-         * Unlike [connectionPolicySid], this method doesn't throw if the JSON field has an
-         * unexpected type.
-         */
-        @JsonProperty("ConnectionPolicySid")
-        @ExcludeMissing
-        fun _connectionPolicySid(): JsonField<String> = connectionPolicySid
-
-        /**
-         * Returns the raw JSON value of [friendlyName].
-         *
-         * Unlike [friendlyName], this method doesn't throw if the JSON field has an unexpected
-         * type.
-         */
-        @JsonProperty("FriendlyName")
-        @ExcludeMissing
-        fun _friendlyName(): JsonField<String> = friendlyName
-
-        /**
-         * Returns the raw JSON value of [fromDomainSid].
-         *
-         * Unlike [fromDomainSid], this method doesn't throw if the JSON field has an unexpected
-         * type.
-         */
-        @JsonProperty("FromDomainSid")
-        @ExcludeMissing
-        fun _fromDomainSid(): JsonField<String> = fromDomainSid
-
-        /**
-         * Returns the raw JSON value of [statusCallbackMethod].
-         *
-         * Unlike [statusCallbackMethod], this method doesn't throw if the JSON field has an
-         * unexpected type.
-         */
-        @JsonProperty("StatusCallbackMethod")
-        @ExcludeMissing
-        fun _statusCallbackMethod(): JsonField<StatusCallbackMethod> = statusCallbackMethod
-
-        /**
-         * Returns the raw JSON value of [statusCallbackUrl].
-         *
-         * Unlike [statusCallbackUrl], this method doesn't throw if the JSON field has an unexpected
-         * type.
-         */
-        @JsonProperty("StatusCallbackUrl")
-        @ExcludeMissing
-        fun _statusCallbackUrl(): JsonField<String> = statusCallbackUrl
-
-        /**
-         * Returns the raw JSON value of [voiceFallbackMethod].
-         *
-         * Unlike [voiceFallbackMethod], this method doesn't throw if the JSON field has an
-         * unexpected type.
-         */
-        @JsonProperty("VoiceFallbackMethod")
-        @ExcludeMissing
-        fun _voiceFallbackMethod(): JsonField<VoiceFallbackMethod> = voiceFallbackMethod
-
-        /**
-         * Returns the raw JSON value of [voiceFallbackUrl].
-         *
-         * Unlike [voiceFallbackUrl], this method doesn't throw if the JSON field has an unexpected
-         * type.
-         */
-        @JsonProperty("VoiceFallbackUrl")
-        @ExcludeMissing
-        fun _voiceFallbackUrl(): JsonField<String> = voiceFallbackUrl
-
-        /**
-         * Returns the raw JSON value of [voiceMethod].
-         *
-         * Unlike [voiceMethod], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("VoiceMethod")
-        @ExcludeMissing
-        fun _voiceMethod(): JsonField<VoiceMethod> = voiceMethod
-
-        /**
-         * Returns the raw JSON value of [voiceUrl].
-         *
-         * Unlike [voiceUrl], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("VoiceUrl") @ExcludeMissing fun _voiceUrl(): JsonField<String> = voiceUrl
-
-        @JsonAnyGetter
-        @ExcludeMissing
-        fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
-
-        private var validated: Boolean = false
-
-        fun validate(): Body = apply {
-            if (validated) {
-                return@apply
-            }
-
-            cnamLookupEnabled()
-            connectionPolicySid()
-            friendlyName()
-            fromDomainSid()
-            statusCallbackMethod()
-            statusCallbackUrl()
-            voiceFallbackMethod()
-            voiceFallbackUrl()
-            voiceMethod()
-            voiceUrl()
-            validated = true
-        }
-
-        fun toBuilder() = Builder().from(this)
-
-        companion object {
-
-            /** Returns a mutable builder for constructing an instance of [Body]. */
-            @JvmStatic fun builder() = Builder()
-        }
-
-        /** A builder for [Body]. */
-        class Builder internal constructor() {
-
-            private var cnamLookupEnabled: JsonField<Boolean> = JsonMissing.of()
-            private var connectionPolicySid: JsonField<String> = JsonMissing.of()
-            private var friendlyName: JsonField<String> = JsonMissing.of()
-            private var fromDomainSid: JsonField<String> = JsonMissing.of()
-            private var statusCallbackMethod: JsonField<StatusCallbackMethod> = JsonMissing.of()
-            private var statusCallbackUrl: JsonField<String> = JsonMissing.of()
-            private var voiceFallbackMethod: JsonField<VoiceFallbackMethod> = JsonMissing.of()
-            private var voiceFallbackUrl: JsonField<String> = JsonMissing.of()
-            private var voiceMethod: JsonField<VoiceMethod> = JsonMissing.of()
-            private var voiceUrl: JsonField<String> = JsonMissing.of()
-            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
-
-            @JvmSynthetic
-            internal fun from(body: Body) = apply {
-                cnamLookupEnabled = body.cnamLookupEnabled
-                connectionPolicySid = body.connectionPolicySid
-                friendlyName = body.friendlyName
-                fromDomainSid = body.fromDomainSid
-                statusCallbackMethod = body.statusCallbackMethod
-                statusCallbackUrl = body.statusCallbackUrl
-                voiceFallbackMethod = body.voiceFallbackMethod
-                voiceFallbackUrl = body.voiceFallbackUrl
-                voiceMethod = body.voiceMethod
-                voiceUrl = body.voiceUrl
-                additionalProperties = body.additionalProperties.toMutableMap()
-            }
-
-            /**
-             * Whether Caller ID Name (CNAM) lookup is enabled for the trunk. If enabled, all
-             * inbound calls to the BYOC Trunk from the United States and Canada automatically
-             * perform a CNAM Lookup and display Caller ID data on your phone. See
-             * [CNAM Lookups](https://www.twilio.com/docs/sip-trunking#CNAM) for more information.
-             */
-            fun cnamLookupEnabled(cnamLookupEnabled: Boolean) =
-                cnamLookupEnabled(JsonField.of(cnamLookupEnabled))
-
-            /**
-             * Sets [Builder.cnamLookupEnabled] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.cnamLookupEnabled] with a well-typed [Boolean] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun cnamLookupEnabled(cnamLookupEnabled: JsonField<Boolean>) = apply {
-                this.cnamLookupEnabled = cnamLookupEnabled
-            }
-
-            /**
-             * The SID of the Connection Policy that Twilio will use when routing traffic to your
-             * communications infrastructure.
-             */
-            fun connectionPolicySid(connectionPolicySid: String) =
-                connectionPolicySid(JsonField.of(connectionPolicySid))
-
-            /**
-             * Sets [Builder.connectionPolicySid] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.connectionPolicySid] with a well-typed [String]
-             * value instead. This method is primarily for setting the field to an undocumented or
-             * not yet supported value.
-             */
-            fun connectionPolicySid(connectionPolicySid: JsonField<String>) = apply {
-                this.connectionPolicySid = connectionPolicySid
-            }
-
-            /**
-             * A descriptive string that you create to describe the resource. It is not unique and
-             * can be up to 255 characters long.
-             */
-            fun friendlyName(friendlyName: String) = friendlyName(JsonField.of(friendlyName))
-
-            /**
-             * Sets [Builder.friendlyName] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.friendlyName] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun friendlyName(friendlyName: JsonField<String>) = apply {
-                this.friendlyName = friendlyName
-            }
-
-            /**
-             * The SID of the SIP Domain that should be used in the `From` header of originating
-             * calls sent to your SIP infrastructure. If your SIP infrastructure allows users to
-             * "call back" an incoming call, configure this with a
-             * [SIP Domain](https://www.twilio.com/docs/voice/api/sending-sip) to ensure proper
-             * routing. If not configured, the from domain will default to "sip.twilio.com".
-             */
-            fun fromDomainSid(fromDomainSid: String) = fromDomainSid(JsonField.of(fromDomainSid))
-
-            /**
-             * Sets [Builder.fromDomainSid] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.fromDomainSid] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun fromDomainSid(fromDomainSid: JsonField<String>) = apply {
-                this.fromDomainSid = fromDomainSid
-            }
-
-            /**
-             * The HTTP method we should use to call `status_callback_url`. Can be: `GET` or `POST`.
-             */
-            fun statusCallbackMethod(statusCallbackMethod: StatusCallbackMethod) =
-                statusCallbackMethod(JsonField.of(statusCallbackMethod))
-
-            /**
-             * Sets [Builder.statusCallbackMethod] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.statusCallbackMethod] with a well-typed
-             * [StatusCallbackMethod] value instead. This method is primarily for setting the field
-             * to an undocumented or not yet supported value.
-             */
-            fun statusCallbackMethod(statusCallbackMethod: JsonField<StatusCallbackMethod>) =
-                apply {
-                    this.statusCallbackMethod = statusCallbackMethod
-                }
-
-            /**
-             * The URL that we should call to pass status parameters (such as call ended) to your
-             * application.
-             */
-            fun statusCallbackUrl(statusCallbackUrl: String) =
-                statusCallbackUrl(JsonField.of(statusCallbackUrl))
-
-            /**
-             * Sets [Builder.statusCallbackUrl] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.statusCallbackUrl] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun statusCallbackUrl(statusCallbackUrl: JsonField<String>) = apply {
-                this.statusCallbackUrl = statusCallbackUrl
-            }
-
-            /**
-             * The HTTP method we should use to call `voice_fallback_url`. Can be: `GET` or `POST`.
-             */
-            fun voiceFallbackMethod(voiceFallbackMethod: VoiceFallbackMethod) =
-                voiceFallbackMethod(JsonField.of(voiceFallbackMethod))
-
-            /**
-             * Sets [Builder.voiceFallbackMethod] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.voiceFallbackMethod] with a well-typed
-             * [VoiceFallbackMethod] value instead. This method is primarily for setting the field
-             * to an undocumented or not yet supported value.
-             */
-            fun voiceFallbackMethod(voiceFallbackMethod: JsonField<VoiceFallbackMethod>) = apply {
-                this.voiceFallbackMethod = voiceFallbackMethod
-            }
-
-            /**
-             * The URL that we should call when an error occurs while retrieving or executing the
-             * TwiML from `voice_url`.
-             */
-            fun voiceFallbackUrl(voiceFallbackUrl: String) =
-                voiceFallbackUrl(JsonField.of(voiceFallbackUrl))
-
-            /**
-             * Sets [Builder.voiceFallbackUrl] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.voiceFallbackUrl] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun voiceFallbackUrl(voiceFallbackUrl: JsonField<String>) = apply {
-                this.voiceFallbackUrl = voiceFallbackUrl
-            }
-
-            /** The HTTP method we should use to call `voice_url`. Can be: `GET` or `POST`. */
-            fun voiceMethod(voiceMethod: VoiceMethod) = voiceMethod(JsonField.of(voiceMethod))
-
-            /**
-             * Sets [Builder.voiceMethod] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.voiceMethod] with a well-typed [VoiceMethod] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun voiceMethod(voiceMethod: JsonField<VoiceMethod>) = apply {
-                this.voiceMethod = voiceMethod
-            }
-
-            /** The URL we should call when the BYOC Trunk receives a call. */
-            fun voiceUrl(voiceUrl: String) = voiceUrl(JsonField.of(voiceUrl))
-
-            /**
-             * Sets [Builder.voiceUrl] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.voiceUrl] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun voiceUrl(voiceUrl: JsonField<String>) = apply { this.voiceUrl = voiceUrl }
-
-            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
-
-            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-                additionalProperties.put(key, value)
-            }
-
-            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
-
-            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
-
-            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
-
-            /**
-             * Returns an immutable instance of [Body].
-             *
-             * Further updates to this [Builder] will not mutate the returned instance.
-             */
-            fun build(): Body =
-                Body(
-                    cnamLookupEnabled,
-                    connectionPolicySid,
-                    friendlyName,
-                    fromDomainSid,
-                    statusCallbackMethod,
-                    statusCallbackUrl,
-                    voiceFallbackMethod,
-                    voiceFallbackUrl,
-                    voiceMethod,
-                    voiceUrl,
-                    additionalProperties.toImmutable(),
-                )
-        }
-
-        override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
-
-            return /* spotless:off */ other is Body && cnamLookupEnabled == other.cnamLookupEnabled && connectionPolicySid == other.connectionPolicySid && friendlyName == other.friendlyName && fromDomainSid == other.fromDomainSid && statusCallbackMethod == other.statusCallbackMethod && statusCallbackUrl == other.statusCallbackUrl && voiceFallbackMethod == other.voiceFallbackMethod && voiceFallbackUrl == other.voiceFallbackUrl && voiceMethod == other.voiceMethod && voiceUrl == other.voiceUrl && additionalProperties == other.additionalProperties /* spotless:on */
-        }
-
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(cnamLookupEnabled, connectionPolicySid, friendlyName, fromDomainSid, statusCallbackMethod, statusCallbackUrl, voiceFallbackMethod, voiceFallbackUrl, voiceMethod, voiceUrl, additionalProperties) }
-        /* spotless:on */
-
-        override fun hashCode(): Int = hashCode
-
-        override fun toString() =
-            "Body{cnamLookupEnabled=$cnamLookupEnabled, connectionPolicySid=$connectionPolicySid, friendlyName=$friendlyName, fromDomainSid=$fromDomainSid, statusCallbackMethod=$statusCallbackMethod, statusCallbackUrl=$statusCallbackUrl, voiceFallbackMethod=$voiceFallbackMethod, voiceFallbackUrl=$voiceFallbackUrl, voiceMethod=$voiceMethod, voiceUrl=$voiceUrl, additionalProperties=$additionalProperties}"
-    }
-
     fun toBuilder() = Builder().from(this)
 
     companion object {
@@ -744,7 +210,6 @@ private constructor(
     }
 
     /** A builder for [ByocTrunkCreateParams]. */
-    @NoAutoDetect
     class Builder internal constructor() {
 
         private var body: Body.Builder = Body.builder()
@@ -1058,6 +523,565 @@ private constructor(
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
             )
+    }
+
+    @JvmSynthetic internal fun _body(): Body = body
+
+    override fun _headers(): Headers = additionalHeaders
+
+    override fun _queryParams(): QueryParams = additionalQueryParams
+
+    class Body
+    private constructor(
+        private val cnamLookupEnabled: JsonField<Boolean>,
+        private val connectionPolicySid: JsonField<String>,
+        private val friendlyName: JsonField<String>,
+        private val fromDomainSid: JsonField<String>,
+        private val statusCallbackMethod: JsonField<StatusCallbackMethod>,
+        private val statusCallbackUrl: JsonField<String>,
+        private val voiceFallbackMethod: JsonField<VoiceFallbackMethod>,
+        private val voiceFallbackUrl: JsonField<String>,
+        private val voiceMethod: JsonField<VoiceMethod>,
+        private val voiceUrl: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
+    ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("CnamLookupEnabled")
+            @ExcludeMissing
+            cnamLookupEnabled: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("ConnectionPolicySid")
+            @ExcludeMissing
+            connectionPolicySid: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("FriendlyName")
+            @ExcludeMissing
+            friendlyName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("FromDomainSid")
+            @ExcludeMissing
+            fromDomainSid: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("StatusCallbackMethod")
+            @ExcludeMissing
+            statusCallbackMethod: JsonField<StatusCallbackMethod> = JsonMissing.of(),
+            @JsonProperty("StatusCallbackUrl")
+            @ExcludeMissing
+            statusCallbackUrl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("VoiceFallbackMethod")
+            @ExcludeMissing
+            voiceFallbackMethod: JsonField<VoiceFallbackMethod> = JsonMissing.of(),
+            @JsonProperty("VoiceFallbackUrl")
+            @ExcludeMissing
+            voiceFallbackUrl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("VoiceMethod")
+            @ExcludeMissing
+            voiceMethod: JsonField<VoiceMethod> = JsonMissing.of(),
+            @JsonProperty("VoiceUrl") @ExcludeMissing voiceUrl: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            cnamLookupEnabled,
+            connectionPolicySid,
+            friendlyName,
+            fromDomainSid,
+            statusCallbackMethod,
+            statusCallbackUrl,
+            voiceFallbackMethod,
+            voiceFallbackUrl,
+            voiceMethod,
+            voiceUrl,
+            mutableMapOf(),
+        )
+
+        /**
+         * Whether Caller ID Name (CNAM) lookup is enabled for the trunk. If enabled, all inbound
+         * calls to the BYOC Trunk from the United States and Canada automatically perform a CNAM
+         * Lookup and display Caller ID data on your phone. See
+         * [CNAM Lookups](https://www.twilio.com/docs/sip-trunking#CNAM) for more information.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun cnamLookupEnabled(): Optional<Boolean> =
+            Optional.ofNullable(cnamLookupEnabled.getNullable("CnamLookupEnabled"))
+
+        /**
+         * The SID of the Connection Policy that Twilio will use when routing traffic to your
+         * communications infrastructure.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun connectionPolicySid(): Optional<String> =
+            Optional.ofNullable(connectionPolicySid.getNullable("ConnectionPolicySid"))
+
+        /**
+         * A descriptive string that you create to describe the resource. It is not unique and can
+         * be up to 255 characters long.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun friendlyName(): Optional<String> =
+            Optional.ofNullable(friendlyName.getNullable("FriendlyName"))
+
+        /**
+         * The SID of the SIP Domain that should be used in the `From` header of originating calls
+         * sent to your SIP infrastructure. If your SIP infrastructure allows users to "call back"
+         * an incoming call, configure this with a
+         * [SIP Domain](https://www.twilio.com/docs/voice/api/sending-sip) to ensure proper routing.
+         * If not configured, the from domain will default to "sip.twilio.com".
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun fromDomainSid(): Optional<String> =
+            Optional.ofNullable(fromDomainSid.getNullable("FromDomainSid"))
+
+        /**
+         * The HTTP method we should use to call `status_callback_url`. Can be: `GET` or `POST`.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun statusCallbackMethod(): Optional<StatusCallbackMethod> =
+            Optional.ofNullable(statusCallbackMethod.getNullable("StatusCallbackMethod"))
+
+        /**
+         * The URL that we should call to pass status parameters (such as call ended) to your
+         * application.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun statusCallbackUrl(): Optional<String> =
+            Optional.ofNullable(statusCallbackUrl.getNullable("StatusCallbackUrl"))
+
+        /**
+         * The HTTP method we should use to call `voice_fallback_url`. Can be: `GET` or `POST`.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun voiceFallbackMethod(): Optional<VoiceFallbackMethod> =
+            Optional.ofNullable(voiceFallbackMethod.getNullable("VoiceFallbackMethod"))
+
+        /**
+         * The URL that we should call when an error occurs while retrieving or executing the TwiML
+         * from `voice_url`.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun voiceFallbackUrl(): Optional<String> =
+            Optional.ofNullable(voiceFallbackUrl.getNullable("VoiceFallbackUrl"))
+
+        /**
+         * The HTTP method we should use to call `voice_url`. Can be: `GET` or `POST`.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun voiceMethod(): Optional<VoiceMethod> =
+            Optional.ofNullable(voiceMethod.getNullable("VoiceMethod"))
+
+        /**
+         * The URL we should call when the BYOC Trunk receives a call.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun voiceUrl(): Optional<String> = Optional.ofNullable(voiceUrl.getNullable("VoiceUrl"))
+
+        /**
+         * Returns the raw JSON value of [cnamLookupEnabled].
+         *
+         * Unlike [cnamLookupEnabled], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("CnamLookupEnabled")
+        @ExcludeMissing
+        fun _cnamLookupEnabled(): JsonField<Boolean> = cnamLookupEnabled
+
+        /**
+         * Returns the raw JSON value of [connectionPolicySid].
+         *
+         * Unlike [connectionPolicySid], this method doesn't throw if the JSON field has an
+         * unexpected type.
+         */
+        @JsonProperty("ConnectionPolicySid")
+        @ExcludeMissing
+        fun _connectionPolicySid(): JsonField<String> = connectionPolicySid
+
+        /**
+         * Returns the raw JSON value of [friendlyName].
+         *
+         * Unlike [friendlyName], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("FriendlyName")
+        @ExcludeMissing
+        fun _friendlyName(): JsonField<String> = friendlyName
+
+        /**
+         * Returns the raw JSON value of [fromDomainSid].
+         *
+         * Unlike [fromDomainSid], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("FromDomainSid")
+        @ExcludeMissing
+        fun _fromDomainSid(): JsonField<String> = fromDomainSid
+
+        /**
+         * Returns the raw JSON value of [statusCallbackMethod].
+         *
+         * Unlike [statusCallbackMethod], this method doesn't throw if the JSON field has an
+         * unexpected type.
+         */
+        @JsonProperty("StatusCallbackMethod")
+        @ExcludeMissing
+        fun _statusCallbackMethod(): JsonField<StatusCallbackMethod> = statusCallbackMethod
+
+        /**
+         * Returns the raw JSON value of [statusCallbackUrl].
+         *
+         * Unlike [statusCallbackUrl], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("StatusCallbackUrl")
+        @ExcludeMissing
+        fun _statusCallbackUrl(): JsonField<String> = statusCallbackUrl
+
+        /**
+         * Returns the raw JSON value of [voiceFallbackMethod].
+         *
+         * Unlike [voiceFallbackMethod], this method doesn't throw if the JSON field has an
+         * unexpected type.
+         */
+        @JsonProperty("VoiceFallbackMethod")
+        @ExcludeMissing
+        fun _voiceFallbackMethod(): JsonField<VoiceFallbackMethod> = voiceFallbackMethod
+
+        /**
+         * Returns the raw JSON value of [voiceFallbackUrl].
+         *
+         * Unlike [voiceFallbackUrl], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("VoiceFallbackUrl")
+        @ExcludeMissing
+        fun _voiceFallbackUrl(): JsonField<String> = voiceFallbackUrl
+
+        /**
+         * Returns the raw JSON value of [voiceMethod].
+         *
+         * Unlike [voiceMethod], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("VoiceMethod")
+        @ExcludeMissing
+        fun _voiceMethod(): JsonField<VoiceMethod> = voiceMethod
+
+        /**
+         * Returns the raw JSON value of [voiceUrl].
+         *
+         * Unlike [voiceUrl], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("VoiceUrl") @ExcludeMissing fun _voiceUrl(): JsonField<String> = voiceUrl
+
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
+        fun toBuilder() = Builder().from(this)
+
+        companion object {
+
+            /** Returns a mutable builder for constructing an instance of [Body]. */
+            @JvmStatic fun builder() = Builder()
+        }
+
+        /** A builder for [Body]. */
+        class Builder internal constructor() {
+
+            private var cnamLookupEnabled: JsonField<Boolean> = JsonMissing.of()
+            private var connectionPolicySid: JsonField<String> = JsonMissing.of()
+            private var friendlyName: JsonField<String> = JsonMissing.of()
+            private var fromDomainSid: JsonField<String> = JsonMissing.of()
+            private var statusCallbackMethod: JsonField<StatusCallbackMethod> = JsonMissing.of()
+            private var statusCallbackUrl: JsonField<String> = JsonMissing.of()
+            private var voiceFallbackMethod: JsonField<VoiceFallbackMethod> = JsonMissing.of()
+            private var voiceFallbackUrl: JsonField<String> = JsonMissing.of()
+            private var voiceMethod: JsonField<VoiceMethod> = JsonMissing.of()
+            private var voiceUrl: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+            @JvmSynthetic
+            internal fun from(body: Body) = apply {
+                cnamLookupEnabled = body.cnamLookupEnabled
+                connectionPolicySid = body.connectionPolicySid
+                friendlyName = body.friendlyName
+                fromDomainSid = body.fromDomainSid
+                statusCallbackMethod = body.statusCallbackMethod
+                statusCallbackUrl = body.statusCallbackUrl
+                voiceFallbackMethod = body.voiceFallbackMethod
+                voiceFallbackUrl = body.voiceFallbackUrl
+                voiceMethod = body.voiceMethod
+                voiceUrl = body.voiceUrl
+                additionalProperties = body.additionalProperties.toMutableMap()
+            }
+
+            /**
+             * Whether Caller ID Name (CNAM) lookup is enabled for the trunk. If enabled, all
+             * inbound calls to the BYOC Trunk from the United States and Canada automatically
+             * perform a CNAM Lookup and display Caller ID data on your phone. See
+             * [CNAM Lookups](https://www.twilio.com/docs/sip-trunking#CNAM) for more information.
+             */
+            fun cnamLookupEnabled(cnamLookupEnabled: Boolean) =
+                cnamLookupEnabled(JsonField.of(cnamLookupEnabled))
+
+            /**
+             * Sets [Builder.cnamLookupEnabled] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.cnamLookupEnabled] with a well-typed [Boolean] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun cnamLookupEnabled(cnamLookupEnabled: JsonField<Boolean>) = apply {
+                this.cnamLookupEnabled = cnamLookupEnabled
+            }
+
+            /**
+             * The SID of the Connection Policy that Twilio will use when routing traffic to your
+             * communications infrastructure.
+             */
+            fun connectionPolicySid(connectionPolicySid: String) =
+                connectionPolicySid(JsonField.of(connectionPolicySid))
+
+            /**
+             * Sets [Builder.connectionPolicySid] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.connectionPolicySid] with a well-typed [String]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun connectionPolicySid(connectionPolicySid: JsonField<String>) = apply {
+                this.connectionPolicySid = connectionPolicySid
+            }
+
+            /**
+             * A descriptive string that you create to describe the resource. It is not unique and
+             * can be up to 255 characters long.
+             */
+            fun friendlyName(friendlyName: String) = friendlyName(JsonField.of(friendlyName))
+
+            /**
+             * Sets [Builder.friendlyName] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.friendlyName] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun friendlyName(friendlyName: JsonField<String>) = apply {
+                this.friendlyName = friendlyName
+            }
+
+            /**
+             * The SID of the SIP Domain that should be used in the `From` header of originating
+             * calls sent to your SIP infrastructure. If your SIP infrastructure allows users to
+             * "call back" an incoming call, configure this with a
+             * [SIP Domain](https://www.twilio.com/docs/voice/api/sending-sip) to ensure proper
+             * routing. If not configured, the from domain will default to "sip.twilio.com".
+             */
+            fun fromDomainSid(fromDomainSid: String) = fromDomainSid(JsonField.of(fromDomainSid))
+
+            /**
+             * Sets [Builder.fromDomainSid] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.fromDomainSid] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun fromDomainSid(fromDomainSid: JsonField<String>) = apply {
+                this.fromDomainSid = fromDomainSid
+            }
+
+            /**
+             * The HTTP method we should use to call `status_callback_url`. Can be: `GET` or `POST`.
+             */
+            fun statusCallbackMethod(statusCallbackMethod: StatusCallbackMethod) =
+                statusCallbackMethod(JsonField.of(statusCallbackMethod))
+
+            /**
+             * Sets [Builder.statusCallbackMethod] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.statusCallbackMethod] with a well-typed
+             * [StatusCallbackMethod] value instead. This method is primarily for setting the field
+             * to an undocumented or not yet supported value.
+             */
+            fun statusCallbackMethod(statusCallbackMethod: JsonField<StatusCallbackMethod>) =
+                apply {
+                    this.statusCallbackMethod = statusCallbackMethod
+                }
+
+            /**
+             * The URL that we should call to pass status parameters (such as call ended) to your
+             * application.
+             */
+            fun statusCallbackUrl(statusCallbackUrl: String) =
+                statusCallbackUrl(JsonField.of(statusCallbackUrl))
+
+            /**
+             * Sets [Builder.statusCallbackUrl] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.statusCallbackUrl] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun statusCallbackUrl(statusCallbackUrl: JsonField<String>) = apply {
+                this.statusCallbackUrl = statusCallbackUrl
+            }
+
+            /**
+             * The HTTP method we should use to call `voice_fallback_url`. Can be: `GET` or `POST`.
+             */
+            fun voiceFallbackMethod(voiceFallbackMethod: VoiceFallbackMethod) =
+                voiceFallbackMethod(JsonField.of(voiceFallbackMethod))
+
+            /**
+             * Sets [Builder.voiceFallbackMethod] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.voiceFallbackMethod] with a well-typed
+             * [VoiceFallbackMethod] value instead. This method is primarily for setting the field
+             * to an undocumented or not yet supported value.
+             */
+            fun voiceFallbackMethod(voiceFallbackMethod: JsonField<VoiceFallbackMethod>) = apply {
+                this.voiceFallbackMethod = voiceFallbackMethod
+            }
+
+            /**
+             * The URL that we should call when an error occurs while retrieving or executing the
+             * TwiML from `voice_url`.
+             */
+            fun voiceFallbackUrl(voiceFallbackUrl: String) =
+                voiceFallbackUrl(JsonField.of(voiceFallbackUrl))
+
+            /**
+             * Sets [Builder.voiceFallbackUrl] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.voiceFallbackUrl] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun voiceFallbackUrl(voiceFallbackUrl: JsonField<String>) = apply {
+                this.voiceFallbackUrl = voiceFallbackUrl
+            }
+
+            /** The HTTP method we should use to call `voice_url`. Can be: `GET` or `POST`. */
+            fun voiceMethod(voiceMethod: VoiceMethod) = voiceMethod(JsonField.of(voiceMethod))
+
+            /**
+             * Sets [Builder.voiceMethod] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.voiceMethod] with a well-typed [VoiceMethod] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun voiceMethod(voiceMethod: JsonField<VoiceMethod>) = apply {
+                this.voiceMethod = voiceMethod
+            }
+
+            /** The URL we should call when the BYOC Trunk receives a call. */
+            fun voiceUrl(voiceUrl: String) = voiceUrl(JsonField.of(voiceUrl))
+
+            /**
+             * Sets [Builder.voiceUrl] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.voiceUrl] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun voiceUrl(voiceUrl: JsonField<String>) = apply { this.voiceUrl = voiceUrl }
+
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
+            /**
+             * Returns an immutable instance of [Body].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             */
+            fun build(): Body =
+                Body(
+                    cnamLookupEnabled,
+                    connectionPolicySid,
+                    friendlyName,
+                    fromDomainSid,
+                    statusCallbackMethod,
+                    statusCallbackUrl,
+                    voiceFallbackMethod,
+                    voiceFallbackUrl,
+                    voiceMethod,
+                    voiceUrl,
+                    additionalProperties.toMutableMap(),
+                )
+        }
+
+        private var validated: Boolean = false
+
+        fun validate(): Body = apply {
+            if (validated) {
+                return@apply
+            }
+
+            cnamLookupEnabled()
+            connectionPolicySid()
+            friendlyName()
+            fromDomainSid()
+            statusCallbackMethod()
+            statusCallbackUrl()
+            voiceFallbackMethod()
+            voiceFallbackUrl()
+            voiceMethod()
+            voiceUrl()
+            validated = true
+        }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return /* spotless:off */ other is Body && cnamLookupEnabled == other.cnamLookupEnabled && connectionPolicySid == other.connectionPolicySid && friendlyName == other.friendlyName && fromDomainSid == other.fromDomainSid && statusCallbackMethod == other.statusCallbackMethod && statusCallbackUrl == other.statusCallbackUrl && voiceFallbackMethod == other.voiceFallbackMethod && voiceFallbackUrl == other.voiceFallbackUrl && voiceMethod == other.voiceMethod && voiceUrl == other.voiceUrl && additionalProperties == other.additionalProperties /* spotless:on */
+        }
+
+        /* spotless:off */
+        private val hashCode: Int by lazy { Objects.hash(cnamLookupEnabled, connectionPolicySid, friendlyName, fromDomainSid, statusCallbackMethod, statusCallbackUrl, voiceFallbackMethod, voiceFallbackUrl, voiceMethod, voiceUrl, additionalProperties) }
+        /* spotless:on */
+
+        override fun hashCode(): Int = hashCode
+
+        override fun toString() =
+            "Body{cnamLookupEnabled=$cnamLookupEnabled, connectionPolicySid=$connectionPolicySid, friendlyName=$friendlyName, fromDomainSid=$fromDomainSid, statusCallbackMethod=$statusCallbackMethod, statusCallbackUrl=$statusCallbackUrl, voiceFallbackMethod=$voiceFallbackMethod, voiceFallbackUrl=$voiceFallbackUrl, voiceMethod=$voiceMethod, voiceUrl=$voiceUrl, additionalProperties=$additionalProperties}"
     }
 
     /** The HTTP method we should use to call `status_callback_url`. Can be: `GET` or `POST`. */

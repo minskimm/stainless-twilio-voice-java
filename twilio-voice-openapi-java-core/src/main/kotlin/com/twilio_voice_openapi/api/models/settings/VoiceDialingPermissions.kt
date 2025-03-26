@@ -10,24 +10,26 @@ import com.twilio_voice_openapi.api.core.ExcludeMissing
 import com.twilio_voice_openapi.api.core.JsonField
 import com.twilio_voice_openapi.api.core.JsonMissing
 import com.twilio_voice_openapi.api.core.JsonValue
-import com.twilio_voice_openapi.api.core.NoAutoDetect
-import com.twilio_voice_openapi.api.core.immutableEmptyMap
-import com.twilio_voice_openapi.api.core.toImmutable
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-@NoAutoDetect
 class VoiceDialingPermissions
-@JsonCreator
 private constructor(
-    @JsonProperty("dialing_permissions_inheritance")
-    @ExcludeMissing
-    private val dialingPermissionsInheritance: JsonField<Boolean> = JsonMissing.of(),
-    @JsonProperty("url") @ExcludeMissing private val url: JsonField<String> = JsonMissing.of(),
-    @JsonAnySetter private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
+    private val dialingPermissionsInheritance: JsonField<Boolean>,
+    private val url: JsonField<String>,
+    private val additionalProperties: MutableMap<String, JsonValue>,
 ) {
+
+    @JsonCreator
+    private constructor(
+        @JsonProperty("dialing_permissions_inheritance")
+        @ExcludeMissing
+        dialingPermissionsInheritance: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("url") @ExcludeMissing url: JsonField<String> = JsonMissing.of(),
+    ) : this(dialingPermissionsInheritance, url, mutableMapOf())
 
     /**
      * `true` if the sub-account will inherit voice dialing permissions from the Master Project;
@@ -66,21 +68,15 @@ private constructor(
      */
     @JsonProperty("url") @ExcludeMissing fun _url(): JsonField<String> = url
 
+    @JsonAnySetter
+    private fun putAdditionalProperty(key: String, value: JsonValue) {
+        additionalProperties.put(key, value)
+    }
+
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
-
-    private var validated: Boolean = false
-
-    fun validate(): VoiceDialingPermissions = apply {
-        if (validated) {
-            return@apply
-        }
-
-        dialingPermissionsInheritance()
-        url()
-        validated = true
-    }
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -180,8 +176,20 @@ private constructor(
             VoiceDialingPermissions(
                 dialingPermissionsInheritance,
                 url,
-                additionalProperties.toImmutable(),
+                additionalProperties.toMutableMap(),
             )
+    }
+
+    private var validated: Boolean = false
+
+    fun validate(): VoiceDialingPermissions = apply {
+        if (validated) {
+            return@apply
+        }
+
+        dialingPermissionsInheritance()
+        url()
+        validated = true
     }
 
     override fun equals(other: Any?): Boolean {
