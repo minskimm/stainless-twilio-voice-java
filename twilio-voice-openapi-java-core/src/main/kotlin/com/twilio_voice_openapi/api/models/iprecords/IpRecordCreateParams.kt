@@ -10,14 +10,12 @@ import com.twilio_voice_openapi.api.core.ExcludeMissing
 import com.twilio_voice_openapi.api.core.JsonField
 import com.twilio_voice_openapi.api.core.JsonMissing
 import com.twilio_voice_openapi.api.core.JsonValue
-import com.twilio_voice_openapi.api.core.NoAutoDetect
 import com.twilio_voice_openapi.api.core.Params
 import com.twilio_voice_openapi.api.core.checkRequired
 import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
-import com.twilio_voice_openapi.api.core.immutableEmptyMap
-import com.twilio_voice_openapi.api.core.toImmutable
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 
@@ -83,240 +81,6 @@ private constructor(
 
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
-    @JvmSynthetic internal fun _body(): Body = body
-
-    override fun _headers(): Headers = additionalHeaders
-
-    override fun _queryParams(): QueryParams = additionalQueryParams
-
-    @NoAutoDetect
-    class Body
-    @JsonCreator
-    private constructor(
-        @JsonProperty("IpAddress")
-        @ExcludeMissing
-        private val ipAddress: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("CidrPrefixLength")
-        @ExcludeMissing
-        private val cidrPrefixLength: JsonField<Long> = JsonMissing.of(),
-        @JsonProperty("FriendlyName")
-        @ExcludeMissing
-        private val friendlyName: JsonField<String> = JsonMissing.of(),
-        @JsonAnySetter
-        private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
-    ) {
-
-        /**
-         * An IP address in dotted decimal notation, IPv4 only.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
-         */
-        fun ipAddress(): String = ipAddress.getRequired("IpAddress")
-
-        /**
-         * An integer representing the length of the [CIDR](https://tools.ietf.org/html/rfc4632)
-         * prefix to use with this IP address. By default the entire IP address is used, which for
-         * IPv4 is value 32.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun cidrPrefixLength(): Optional<Long> =
-            Optional.ofNullable(cidrPrefixLength.getNullable("CidrPrefixLength"))
-
-        /**
-         * A descriptive string that you create to describe the resource. It is not unique and can
-         * be up to 255 characters long.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun friendlyName(): Optional<String> =
-            Optional.ofNullable(friendlyName.getNullable("FriendlyName"))
-
-        /**
-         * Returns the raw JSON value of [ipAddress].
-         *
-         * Unlike [ipAddress], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("IpAddress") @ExcludeMissing fun _ipAddress(): JsonField<String> = ipAddress
-
-        /**
-         * Returns the raw JSON value of [cidrPrefixLength].
-         *
-         * Unlike [cidrPrefixLength], this method doesn't throw if the JSON field has an unexpected
-         * type.
-         */
-        @JsonProperty("CidrPrefixLength")
-        @ExcludeMissing
-        fun _cidrPrefixLength(): JsonField<Long> = cidrPrefixLength
-
-        /**
-         * Returns the raw JSON value of [friendlyName].
-         *
-         * Unlike [friendlyName], this method doesn't throw if the JSON field has an unexpected
-         * type.
-         */
-        @JsonProperty("FriendlyName")
-        @ExcludeMissing
-        fun _friendlyName(): JsonField<String> = friendlyName
-
-        @JsonAnyGetter
-        @ExcludeMissing
-        fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
-
-        private var validated: Boolean = false
-
-        fun validate(): Body = apply {
-            if (validated) {
-                return@apply
-            }
-
-            ipAddress()
-            cidrPrefixLength()
-            friendlyName()
-            validated = true
-        }
-
-        fun toBuilder() = Builder().from(this)
-
-        companion object {
-
-            /**
-             * Returns a mutable builder for constructing an instance of [Body].
-             *
-             * The following fields are required:
-             * ```java
-             * .ipAddress()
-             * ```
-             */
-            @JvmStatic fun builder() = Builder()
-        }
-
-        /** A builder for [Body]. */
-        class Builder internal constructor() {
-
-            private var ipAddress: JsonField<String>? = null
-            private var cidrPrefixLength: JsonField<Long> = JsonMissing.of()
-            private var friendlyName: JsonField<String> = JsonMissing.of()
-            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
-
-            @JvmSynthetic
-            internal fun from(body: Body) = apply {
-                ipAddress = body.ipAddress
-                cidrPrefixLength = body.cidrPrefixLength
-                friendlyName = body.friendlyName
-                additionalProperties = body.additionalProperties.toMutableMap()
-            }
-
-            /** An IP address in dotted decimal notation, IPv4 only. */
-            fun ipAddress(ipAddress: String) = ipAddress(JsonField.of(ipAddress))
-
-            /**
-             * Sets [Builder.ipAddress] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.ipAddress] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun ipAddress(ipAddress: JsonField<String>) = apply { this.ipAddress = ipAddress }
-
-            /**
-             * An integer representing the length of the [CIDR](https://tools.ietf.org/html/rfc4632)
-             * prefix to use with this IP address. By default the entire IP address is used, which
-             * for IPv4 is value 32.
-             */
-            fun cidrPrefixLength(cidrPrefixLength: Long) =
-                cidrPrefixLength(JsonField.of(cidrPrefixLength))
-
-            /**
-             * Sets [Builder.cidrPrefixLength] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.cidrPrefixLength] with a well-typed [Long] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun cidrPrefixLength(cidrPrefixLength: JsonField<Long>) = apply {
-                this.cidrPrefixLength = cidrPrefixLength
-            }
-
-            /**
-             * A descriptive string that you create to describe the resource. It is not unique and
-             * can be up to 255 characters long.
-             */
-            fun friendlyName(friendlyName: String) = friendlyName(JsonField.of(friendlyName))
-
-            /**
-             * Sets [Builder.friendlyName] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.friendlyName] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun friendlyName(friendlyName: JsonField<String>) = apply {
-                this.friendlyName = friendlyName
-            }
-
-            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
-
-            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-                additionalProperties.put(key, value)
-            }
-
-            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
-
-            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
-
-            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
-
-            /**
-             * Returns an immutable instance of [Body].
-             *
-             * Further updates to this [Builder] will not mutate the returned instance.
-             *
-             * The following fields are required:
-             * ```java
-             * .ipAddress()
-             * ```
-             *
-             * @throws IllegalStateException if any required field is unset.
-             */
-            fun build(): Body =
-                Body(
-                    checkRequired("ipAddress", ipAddress),
-                    cidrPrefixLength,
-                    friendlyName,
-                    additionalProperties.toImmutable(),
-                )
-        }
-
-        override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
-
-            return /* spotless:off */ other is Body && ipAddress == other.ipAddress && cidrPrefixLength == other.cidrPrefixLength && friendlyName == other.friendlyName && additionalProperties == other.additionalProperties /* spotless:on */
-        }
-
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(ipAddress, cidrPrefixLength, friendlyName, additionalProperties) }
-        /* spotless:on */
-
-        override fun hashCode(): Int = hashCode
-
-        override fun toString() =
-            "Body{ipAddress=$ipAddress, cidrPrefixLength=$cidrPrefixLength, friendlyName=$friendlyName, additionalProperties=$additionalProperties}"
-    }
-
     fun toBuilder() = Builder().from(this)
 
     companion object {
@@ -333,7 +97,6 @@ private constructor(
     }
 
     /** A builder for [IpRecordCreateParams]. */
-    @NoAutoDetect
     class Builder internal constructor() {
 
         private var body: Body.Builder = Body.builder()
@@ -531,6 +294,250 @@ private constructor(
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
             )
+    }
+
+    @JvmSynthetic internal fun _body(): Body = body
+
+    override fun _headers(): Headers = additionalHeaders
+
+    override fun _queryParams(): QueryParams = additionalQueryParams
+
+    class Body
+    private constructor(
+        private val ipAddress: JsonField<String>,
+        private val cidrPrefixLength: JsonField<Long>,
+        private val friendlyName: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
+    ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("IpAddress")
+            @ExcludeMissing
+            ipAddress: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("CidrPrefixLength")
+            @ExcludeMissing
+            cidrPrefixLength: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("FriendlyName")
+            @ExcludeMissing
+            friendlyName: JsonField<String> = JsonMissing.of(),
+        ) : this(ipAddress, cidrPrefixLength, friendlyName, mutableMapOf())
+
+        /**
+         * An IP address in dotted decimal notation, IPv4 only.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
+         */
+        fun ipAddress(): String = ipAddress.getRequired("IpAddress")
+
+        /**
+         * An integer representing the length of the [CIDR](https://tools.ietf.org/html/rfc4632)
+         * prefix to use with this IP address. By default the entire IP address is used, which for
+         * IPv4 is value 32.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun cidrPrefixLength(): Optional<Long> =
+            Optional.ofNullable(cidrPrefixLength.getNullable("CidrPrefixLength"))
+
+        /**
+         * A descriptive string that you create to describe the resource. It is not unique and can
+         * be up to 255 characters long.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun friendlyName(): Optional<String> =
+            Optional.ofNullable(friendlyName.getNullable("FriendlyName"))
+
+        /**
+         * Returns the raw JSON value of [ipAddress].
+         *
+         * Unlike [ipAddress], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("IpAddress") @ExcludeMissing fun _ipAddress(): JsonField<String> = ipAddress
+
+        /**
+         * Returns the raw JSON value of [cidrPrefixLength].
+         *
+         * Unlike [cidrPrefixLength], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("CidrPrefixLength")
+        @ExcludeMissing
+        fun _cidrPrefixLength(): JsonField<Long> = cidrPrefixLength
+
+        /**
+         * Returns the raw JSON value of [friendlyName].
+         *
+         * Unlike [friendlyName], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("FriendlyName")
+        @ExcludeMissing
+        fun _friendlyName(): JsonField<String> = friendlyName
+
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
+        fun toBuilder() = Builder().from(this)
+
+        companion object {
+
+            /**
+             * Returns a mutable builder for constructing an instance of [Body].
+             *
+             * The following fields are required:
+             * ```java
+             * .ipAddress()
+             * ```
+             */
+            @JvmStatic fun builder() = Builder()
+        }
+
+        /** A builder for [Body]. */
+        class Builder internal constructor() {
+
+            private var ipAddress: JsonField<String>? = null
+            private var cidrPrefixLength: JsonField<Long> = JsonMissing.of()
+            private var friendlyName: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+            @JvmSynthetic
+            internal fun from(body: Body) = apply {
+                ipAddress = body.ipAddress
+                cidrPrefixLength = body.cidrPrefixLength
+                friendlyName = body.friendlyName
+                additionalProperties = body.additionalProperties.toMutableMap()
+            }
+
+            /** An IP address in dotted decimal notation, IPv4 only. */
+            fun ipAddress(ipAddress: String) = ipAddress(JsonField.of(ipAddress))
+
+            /**
+             * Sets [Builder.ipAddress] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.ipAddress] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun ipAddress(ipAddress: JsonField<String>) = apply { this.ipAddress = ipAddress }
+
+            /**
+             * An integer representing the length of the [CIDR](https://tools.ietf.org/html/rfc4632)
+             * prefix to use with this IP address. By default the entire IP address is used, which
+             * for IPv4 is value 32.
+             */
+            fun cidrPrefixLength(cidrPrefixLength: Long) =
+                cidrPrefixLength(JsonField.of(cidrPrefixLength))
+
+            /**
+             * Sets [Builder.cidrPrefixLength] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.cidrPrefixLength] with a well-typed [Long] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun cidrPrefixLength(cidrPrefixLength: JsonField<Long>) = apply {
+                this.cidrPrefixLength = cidrPrefixLength
+            }
+
+            /**
+             * A descriptive string that you create to describe the resource. It is not unique and
+             * can be up to 255 characters long.
+             */
+            fun friendlyName(friendlyName: String) = friendlyName(JsonField.of(friendlyName))
+
+            /**
+             * Sets [Builder.friendlyName] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.friendlyName] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun friendlyName(friendlyName: JsonField<String>) = apply {
+                this.friendlyName = friendlyName
+            }
+
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
+            /**
+             * Returns an immutable instance of [Body].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             *
+             * The following fields are required:
+             * ```java
+             * .ipAddress()
+             * ```
+             *
+             * @throws IllegalStateException if any required field is unset.
+             */
+            fun build(): Body =
+                Body(
+                    checkRequired("ipAddress", ipAddress),
+                    cidrPrefixLength,
+                    friendlyName,
+                    additionalProperties.toMutableMap(),
+                )
+        }
+
+        private var validated: Boolean = false
+
+        fun validate(): Body = apply {
+            if (validated) {
+                return@apply
+            }
+
+            ipAddress()
+            cidrPrefixLength()
+            friendlyName()
+            validated = true
+        }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return /* spotless:off */ other is Body && ipAddress == other.ipAddress && cidrPrefixLength == other.cidrPrefixLength && friendlyName == other.friendlyName && additionalProperties == other.additionalProperties /* spotless:on */
+        }
+
+        /* spotless:off */
+        private val hashCode: Int by lazy { Objects.hash(ipAddress, cidrPrefixLength, friendlyName, additionalProperties) }
+        /* spotless:on */
+
+        override fun hashCode(): Int = hashCode
+
+        override fun toString() =
+            "Body{ipAddress=$ipAddress, cidrPrefixLength=$cidrPrefixLength, friendlyName=$friendlyName, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

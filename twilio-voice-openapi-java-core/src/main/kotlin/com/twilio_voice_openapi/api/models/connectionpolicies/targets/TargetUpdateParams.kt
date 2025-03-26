@@ -10,14 +10,12 @@ import com.twilio_voice_openapi.api.core.ExcludeMissing
 import com.twilio_voice_openapi.api.core.JsonField
 import com.twilio_voice_openapi.api.core.JsonMissing
 import com.twilio_voice_openapi.api.core.JsonValue
-import com.twilio_voice_openapi.api.core.NoAutoDetect
 import com.twilio_voice_openapi.api.core.Params
 import com.twilio_voice_openapi.api.core.checkRequired
 import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
-import com.twilio_voice_openapi.api.core.immutableEmptyMap
-import com.twilio_voice_openapi.api.core.toImmutable
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 
@@ -121,303 +119,6 @@ private constructor(
 
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
-    @JvmSynthetic internal fun _body(): Body = body
-
-    fun _pathParam(index: Int): String =
-        when (index) {
-            0 -> connectionPolicySid
-            1 -> sid
-            else -> ""
-        }
-
-    override fun _headers(): Headers = additionalHeaders
-
-    override fun _queryParams(): QueryParams = additionalQueryParams
-
-    @NoAutoDetect
-    class Body
-    @JsonCreator
-    private constructor(
-        @JsonProperty("Enabled")
-        @ExcludeMissing
-        private val enabled: JsonField<Boolean> = JsonMissing.of(),
-        @JsonProperty("FriendlyName")
-        @ExcludeMissing
-        private val friendlyName: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("Priority")
-        @ExcludeMissing
-        private val priority: JsonField<Long> = JsonMissing.of(),
-        @JsonProperty("Target")
-        @ExcludeMissing
-        private val target: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("Weight")
-        @ExcludeMissing
-        private val weight: JsonField<Long> = JsonMissing.of(),
-        @JsonAnySetter
-        private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
-    ) {
-
-        /**
-         * Whether the Target is enabled.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun enabled(): Optional<Boolean> = Optional.ofNullable(enabled.getNullable("Enabled"))
-
-        /**
-         * A descriptive string that you create to describe the resource. It is not unique and can
-         * be up to 255 characters long.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun friendlyName(): Optional<String> =
-            Optional.ofNullable(friendlyName.getNullable("FriendlyName"))
-
-        /**
-         * The relative importance of the target. Can be an integer from 0 to 65535, inclusive. The
-         * lowest number represents the most important target.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun priority(): Optional<Long> = Optional.ofNullable(priority.getNullable("Priority"))
-
-        /**
-         * The SIP address you want Twilio to route your calls to. This must be a `sip:` schema.
-         * `sips` is NOT supported.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun target(): Optional<String> = Optional.ofNullable(target.getNullable("Target"))
-
-        /**
-         * The value that determines the relative share of the load the Target should receive
-         * compared to other Targets with the same priority. Can be an integer from 1 to 65535,
-         * inclusive. Targets with higher values receive more load than those with lower ones with
-         * the same priority.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun weight(): Optional<Long> = Optional.ofNullable(weight.getNullable("Weight"))
-
-        /**
-         * Returns the raw JSON value of [enabled].
-         *
-         * Unlike [enabled], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("Enabled") @ExcludeMissing fun _enabled(): JsonField<Boolean> = enabled
-
-        /**
-         * Returns the raw JSON value of [friendlyName].
-         *
-         * Unlike [friendlyName], this method doesn't throw if the JSON field has an unexpected
-         * type.
-         */
-        @JsonProperty("FriendlyName")
-        @ExcludeMissing
-        fun _friendlyName(): JsonField<String> = friendlyName
-
-        /**
-         * Returns the raw JSON value of [priority].
-         *
-         * Unlike [priority], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("Priority") @ExcludeMissing fun _priority(): JsonField<Long> = priority
-
-        /**
-         * Returns the raw JSON value of [target].
-         *
-         * Unlike [target], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("Target") @ExcludeMissing fun _target(): JsonField<String> = target
-
-        /**
-         * Returns the raw JSON value of [weight].
-         *
-         * Unlike [weight], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("Weight") @ExcludeMissing fun _weight(): JsonField<Long> = weight
-
-        @JsonAnyGetter
-        @ExcludeMissing
-        fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
-
-        private var validated: Boolean = false
-
-        fun validate(): Body = apply {
-            if (validated) {
-                return@apply
-            }
-
-            enabled()
-            friendlyName()
-            priority()
-            target()
-            weight()
-            validated = true
-        }
-
-        fun toBuilder() = Builder().from(this)
-
-        companion object {
-
-            /** Returns a mutable builder for constructing an instance of [Body]. */
-            @JvmStatic fun builder() = Builder()
-        }
-
-        /** A builder for [Body]. */
-        class Builder internal constructor() {
-
-            private var enabled: JsonField<Boolean> = JsonMissing.of()
-            private var friendlyName: JsonField<String> = JsonMissing.of()
-            private var priority: JsonField<Long> = JsonMissing.of()
-            private var target: JsonField<String> = JsonMissing.of()
-            private var weight: JsonField<Long> = JsonMissing.of()
-            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
-
-            @JvmSynthetic
-            internal fun from(body: Body) = apply {
-                enabled = body.enabled
-                friendlyName = body.friendlyName
-                priority = body.priority
-                target = body.target
-                weight = body.weight
-                additionalProperties = body.additionalProperties.toMutableMap()
-            }
-
-            /** Whether the Target is enabled. */
-            fun enabled(enabled: Boolean) = enabled(JsonField.of(enabled))
-
-            /**
-             * Sets [Builder.enabled] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.enabled] with a well-typed [Boolean] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun enabled(enabled: JsonField<Boolean>) = apply { this.enabled = enabled }
-
-            /**
-             * A descriptive string that you create to describe the resource. It is not unique and
-             * can be up to 255 characters long.
-             */
-            fun friendlyName(friendlyName: String) = friendlyName(JsonField.of(friendlyName))
-
-            /**
-             * Sets [Builder.friendlyName] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.friendlyName] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun friendlyName(friendlyName: JsonField<String>) = apply {
-                this.friendlyName = friendlyName
-            }
-
-            /**
-             * The relative importance of the target. Can be an integer from 0 to 65535, inclusive.
-             * The lowest number represents the most important target.
-             */
-            fun priority(priority: Long) = priority(JsonField.of(priority))
-
-            /**
-             * Sets [Builder.priority] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.priority] with a well-typed [Long] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun priority(priority: JsonField<Long>) = apply { this.priority = priority }
-
-            /**
-             * The SIP address you want Twilio to route your calls to. This must be a `sip:` schema.
-             * `sips` is NOT supported.
-             */
-            fun target(target: String) = target(JsonField.of(target))
-
-            /**
-             * Sets [Builder.target] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.target] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun target(target: JsonField<String>) = apply { this.target = target }
-
-            /**
-             * The value that determines the relative share of the load the Target should receive
-             * compared to other Targets with the same priority. Can be an integer from 1 to 65535,
-             * inclusive. Targets with higher values receive more load than those with lower ones
-             * with the same priority.
-             */
-            fun weight(weight: Long) = weight(JsonField.of(weight))
-
-            /**
-             * Sets [Builder.weight] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.weight] with a well-typed [Long] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
-             */
-            fun weight(weight: JsonField<Long>) = apply { this.weight = weight }
-
-            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
-
-            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-                additionalProperties.put(key, value)
-            }
-
-            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
-
-            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
-
-            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
-
-            /**
-             * Returns an immutable instance of [Body].
-             *
-             * Further updates to this [Builder] will not mutate the returned instance.
-             */
-            fun build(): Body =
-                Body(
-                    enabled,
-                    friendlyName,
-                    priority,
-                    target,
-                    weight,
-                    additionalProperties.toImmutable(),
-                )
-        }
-
-        override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
-
-            return /* spotless:off */ other is Body && enabled == other.enabled && friendlyName == other.friendlyName && priority == other.priority && target == other.target && weight == other.weight && additionalProperties == other.additionalProperties /* spotless:on */
-        }
-
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(enabled, friendlyName, priority, target, weight, additionalProperties) }
-        /* spotless:on */
-
-        override fun hashCode(): Int = hashCode
-
-        override fun toString() =
-            "Body{enabled=$enabled, friendlyName=$friendlyName, priority=$priority, target=$target, weight=$weight, additionalProperties=$additionalProperties}"
-    }
-
     fun toBuilder() = Builder().from(this)
 
     companion object {
@@ -435,7 +136,6 @@ private constructor(
     }
 
     /** A builder for [TargetUpdateParams]. */
-    @NoAutoDetect
     class Builder internal constructor() {
 
         private var connectionPolicySid: String? = null
@@ -669,6 +369,307 @@ private constructor(
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
             )
+    }
+
+    @JvmSynthetic internal fun _body(): Body = body
+
+    fun _pathParam(index: Int): String =
+        when (index) {
+            0 -> connectionPolicySid
+            1 -> sid
+            else -> ""
+        }
+
+    override fun _headers(): Headers = additionalHeaders
+
+    override fun _queryParams(): QueryParams = additionalQueryParams
+
+    class Body
+    private constructor(
+        private val enabled: JsonField<Boolean>,
+        private val friendlyName: JsonField<String>,
+        private val priority: JsonField<Long>,
+        private val target: JsonField<String>,
+        private val weight: JsonField<Long>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
+    ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("Enabled") @ExcludeMissing enabled: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("FriendlyName")
+            @ExcludeMissing
+            friendlyName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("Priority") @ExcludeMissing priority: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("Target") @ExcludeMissing target: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("Weight") @ExcludeMissing weight: JsonField<Long> = JsonMissing.of(),
+        ) : this(enabled, friendlyName, priority, target, weight, mutableMapOf())
+
+        /**
+         * Whether the Target is enabled.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun enabled(): Optional<Boolean> = Optional.ofNullable(enabled.getNullable("Enabled"))
+
+        /**
+         * A descriptive string that you create to describe the resource. It is not unique and can
+         * be up to 255 characters long.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun friendlyName(): Optional<String> =
+            Optional.ofNullable(friendlyName.getNullable("FriendlyName"))
+
+        /**
+         * The relative importance of the target. Can be an integer from 0 to 65535, inclusive. The
+         * lowest number represents the most important target.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun priority(): Optional<Long> = Optional.ofNullable(priority.getNullable("Priority"))
+
+        /**
+         * The SIP address you want Twilio to route your calls to. This must be a `sip:` schema.
+         * `sips` is NOT supported.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun target(): Optional<String> = Optional.ofNullable(target.getNullable("Target"))
+
+        /**
+         * The value that determines the relative share of the load the Target should receive
+         * compared to other Targets with the same priority. Can be an integer from 1 to 65535,
+         * inclusive. Targets with higher values receive more load than those with lower ones with
+         * the same priority.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun weight(): Optional<Long> = Optional.ofNullable(weight.getNullable("Weight"))
+
+        /**
+         * Returns the raw JSON value of [enabled].
+         *
+         * Unlike [enabled], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("Enabled") @ExcludeMissing fun _enabled(): JsonField<Boolean> = enabled
+
+        /**
+         * Returns the raw JSON value of [friendlyName].
+         *
+         * Unlike [friendlyName], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("FriendlyName")
+        @ExcludeMissing
+        fun _friendlyName(): JsonField<String> = friendlyName
+
+        /**
+         * Returns the raw JSON value of [priority].
+         *
+         * Unlike [priority], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("Priority") @ExcludeMissing fun _priority(): JsonField<Long> = priority
+
+        /**
+         * Returns the raw JSON value of [target].
+         *
+         * Unlike [target], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("Target") @ExcludeMissing fun _target(): JsonField<String> = target
+
+        /**
+         * Returns the raw JSON value of [weight].
+         *
+         * Unlike [weight], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("Weight") @ExcludeMissing fun _weight(): JsonField<Long> = weight
+
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
+        fun toBuilder() = Builder().from(this)
+
+        companion object {
+
+            /** Returns a mutable builder for constructing an instance of [Body]. */
+            @JvmStatic fun builder() = Builder()
+        }
+
+        /** A builder for [Body]. */
+        class Builder internal constructor() {
+
+            private var enabled: JsonField<Boolean> = JsonMissing.of()
+            private var friendlyName: JsonField<String> = JsonMissing.of()
+            private var priority: JsonField<Long> = JsonMissing.of()
+            private var target: JsonField<String> = JsonMissing.of()
+            private var weight: JsonField<Long> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+            @JvmSynthetic
+            internal fun from(body: Body) = apply {
+                enabled = body.enabled
+                friendlyName = body.friendlyName
+                priority = body.priority
+                target = body.target
+                weight = body.weight
+                additionalProperties = body.additionalProperties.toMutableMap()
+            }
+
+            /** Whether the Target is enabled. */
+            fun enabled(enabled: Boolean) = enabled(JsonField.of(enabled))
+
+            /**
+             * Sets [Builder.enabled] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.enabled] with a well-typed [Boolean] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun enabled(enabled: JsonField<Boolean>) = apply { this.enabled = enabled }
+
+            /**
+             * A descriptive string that you create to describe the resource. It is not unique and
+             * can be up to 255 characters long.
+             */
+            fun friendlyName(friendlyName: String) = friendlyName(JsonField.of(friendlyName))
+
+            /**
+             * Sets [Builder.friendlyName] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.friendlyName] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun friendlyName(friendlyName: JsonField<String>) = apply {
+                this.friendlyName = friendlyName
+            }
+
+            /**
+             * The relative importance of the target. Can be an integer from 0 to 65535, inclusive.
+             * The lowest number represents the most important target.
+             */
+            fun priority(priority: Long) = priority(JsonField.of(priority))
+
+            /**
+             * Sets [Builder.priority] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.priority] with a well-typed [Long] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun priority(priority: JsonField<Long>) = apply { this.priority = priority }
+
+            /**
+             * The SIP address you want Twilio to route your calls to. This must be a `sip:` schema.
+             * `sips` is NOT supported.
+             */
+            fun target(target: String) = target(JsonField.of(target))
+
+            /**
+             * Sets [Builder.target] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.target] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun target(target: JsonField<String>) = apply { this.target = target }
+
+            /**
+             * The value that determines the relative share of the load the Target should receive
+             * compared to other Targets with the same priority. Can be an integer from 1 to 65535,
+             * inclusive. Targets with higher values receive more load than those with lower ones
+             * with the same priority.
+             */
+            fun weight(weight: Long) = weight(JsonField.of(weight))
+
+            /**
+             * Sets [Builder.weight] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.weight] with a well-typed [Long] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
+            fun weight(weight: JsonField<Long>) = apply { this.weight = weight }
+
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
+            /**
+             * Returns an immutable instance of [Body].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             */
+            fun build(): Body =
+                Body(
+                    enabled,
+                    friendlyName,
+                    priority,
+                    target,
+                    weight,
+                    additionalProperties.toMutableMap(),
+                )
+        }
+
+        private var validated: Boolean = false
+
+        fun validate(): Body = apply {
+            if (validated) {
+                return@apply
+            }
+
+            enabled()
+            friendlyName()
+            priority()
+            target()
+            weight()
+            validated = true
+        }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return /* spotless:off */ other is Body && enabled == other.enabled && friendlyName == other.friendlyName && priority == other.priority && target == other.target && weight == other.weight && additionalProperties == other.additionalProperties /* spotless:on */
+        }
+
+        /* spotless:off */
+        private val hashCode: Int by lazy { Objects.hash(enabled, friendlyName, priority, target, weight, additionalProperties) }
+        /* spotless:on */
+
+        override fun hashCode(): Int = hashCode
+
+        override fun toString() =
+            "Body{enabled=$enabled, friendlyName=$friendlyName, priority=$priority, target=$target, weight=$weight, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

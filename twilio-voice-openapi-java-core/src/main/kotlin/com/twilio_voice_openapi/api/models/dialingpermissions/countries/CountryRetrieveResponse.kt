@@ -10,42 +10,59 @@ import com.twilio_voice_openapi.api.core.ExcludeMissing
 import com.twilio_voice_openapi.api.core.JsonField
 import com.twilio_voice_openapi.api.core.JsonMissing
 import com.twilio_voice_openapi.api.core.JsonValue
-import com.twilio_voice_openapi.api.core.NoAutoDetect
 import com.twilio_voice_openapi.api.core.checkKnown
-import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-@NoAutoDetect
 class CountryRetrieveResponse
-@JsonCreator
 private constructor(
-    @JsonProperty("continent")
-    @ExcludeMissing
-    private val continent: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("country_codes")
-    @ExcludeMissing
-    private val countryCodes: JsonField<List<String>> = JsonMissing.of(),
-    @JsonProperty("high_risk_special_numbers_enabled")
-    @ExcludeMissing
-    private val highRiskSpecialNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
-    @JsonProperty("high_risk_tollfraud_numbers_enabled")
-    @ExcludeMissing
-    private val highRiskTollfraudNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
-    @JsonProperty("iso_code")
-    @ExcludeMissing
-    private val isoCode: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("links") @ExcludeMissing private val links: JsonValue = JsonMissing.of(),
-    @JsonProperty("low_risk_numbers_enabled")
-    @ExcludeMissing
-    private val lowRiskNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
-    @JsonProperty("name") @ExcludeMissing private val name: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("url") @ExcludeMissing private val url: JsonField<String> = JsonMissing.of(),
-    @JsonAnySetter private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
+    private val continent: JsonField<String>,
+    private val countryCodes: JsonField<List<String>>,
+    private val highRiskSpecialNumbersEnabled: JsonField<Boolean>,
+    private val highRiskTollfraudNumbersEnabled: JsonField<Boolean>,
+    private val isoCode: JsonField<String>,
+    private val links: JsonValue,
+    private val lowRiskNumbersEnabled: JsonField<Boolean>,
+    private val name: JsonField<String>,
+    private val url: JsonField<String>,
+    private val additionalProperties: MutableMap<String, JsonValue>,
 ) {
+
+    @JsonCreator
+    private constructor(
+        @JsonProperty("continent") @ExcludeMissing continent: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("country_codes")
+        @ExcludeMissing
+        countryCodes: JsonField<List<String>> = JsonMissing.of(),
+        @JsonProperty("high_risk_special_numbers_enabled")
+        @ExcludeMissing
+        highRiskSpecialNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("high_risk_tollfraud_numbers_enabled")
+        @ExcludeMissing
+        highRiskTollfraudNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("iso_code") @ExcludeMissing isoCode: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("links") @ExcludeMissing links: JsonValue = JsonMissing.of(),
+        @JsonProperty("low_risk_numbers_enabled")
+        @ExcludeMissing
+        lowRiskNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("name") @ExcludeMissing name: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("url") @ExcludeMissing url: JsonField<String> = JsonMissing.of(),
+    ) : this(
+        continent,
+        countryCodes,
+        highRiskSpecialNumbersEnabled,
+        highRiskTollfraudNumbersEnabled,
+        isoCode,
+        links,
+        lowRiskNumbersEnabled,
+        name,
+        url,
+        mutableMapOf(),
+    )
 
     /**
      * The name of the continent in which the country is located.
@@ -198,27 +215,15 @@ private constructor(
      */
     @JsonProperty("url") @ExcludeMissing fun _url(): JsonField<String> = url
 
+    @JsonAnySetter
+    private fun putAdditionalProperty(key: String, value: JsonValue) {
+        additionalProperties.put(key, value)
+    }
+
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
-
-    private var validated: Boolean = false
-
-    fun validate(): CountryRetrieveResponse = apply {
-        if (validated) {
-            return@apply
-        }
-
-        continent()
-        countryCodes()
-        highRiskSpecialNumbersEnabled()
-        highRiskTollfraudNumbersEnabled()
-        isoCode()
-        lowRiskNumbersEnabled()
-        name()
-        url()
-        validated = true
-    }
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -490,8 +495,26 @@ private constructor(
                 lowRiskNumbersEnabled,
                 name,
                 url,
-                additionalProperties.toImmutable(),
+                additionalProperties.toMutableMap(),
             )
+    }
+
+    private var validated: Boolean = false
+
+    fun validate(): CountryRetrieveResponse = apply {
+        if (validated) {
+            return@apply
+        }
+
+        continent()
+        countryCodes()
+        highRiskSpecialNumbersEnabled()
+        highRiskTollfraudNumbersEnabled()
+        isoCode()
+        lowRiskNumbersEnabled()
+        name()
+        url()
+        validated = true
     }
 
     override fun equals(other: Any?): Boolean {

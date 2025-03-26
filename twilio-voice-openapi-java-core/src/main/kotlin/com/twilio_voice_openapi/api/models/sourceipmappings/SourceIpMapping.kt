@@ -10,35 +10,41 @@ import com.twilio_voice_openapi.api.core.ExcludeMissing
 import com.twilio_voice_openapi.api.core.JsonField
 import com.twilio_voice_openapi.api.core.JsonMissing
 import com.twilio_voice_openapi.api.core.JsonValue
-import com.twilio_voice_openapi.api.core.NoAutoDetect
-import com.twilio_voice_openapi.api.core.immutableEmptyMap
-import com.twilio_voice_openapi.api.core.toImmutable
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-@NoAutoDetect
 class SourceIpMapping
-@JsonCreator
 private constructor(
-    @JsonProperty("date_created")
-    @ExcludeMissing
-    private val dateCreated: JsonField<OffsetDateTime> = JsonMissing.of(),
-    @JsonProperty("date_updated")
-    @ExcludeMissing
-    private val dateUpdated: JsonField<OffsetDateTime> = JsonMissing.of(),
-    @JsonProperty("ip_record_sid")
-    @ExcludeMissing
-    private val ipRecordSid: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("sid") @ExcludeMissing private val sid: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("sip_domain_sid")
-    @ExcludeMissing
-    private val sipDomainSid: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("url") @ExcludeMissing private val url: JsonField<String> = JsonMissing.of(),
-    @JsonAnySetter private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
+    private val dateCreated: JsonField<OffsetDateTime>,
+    private val dateUpdated: JsonField<OffsetDateTime>,
+    private val ipRecordSid: JsonField<String>,
+    private val sid: JsonField<String>,
+    private val sipDomainSid: JsonField<String>,
+    private val url: JsonField<String>,
+    private val additionalProperties: MutableMap<String, JsonValue>,
 ) {
+
+    @JsonCreator
+    private constructor(
+        @JsonProperty("date_created")
+        @ExcludeMissing
+        dateCreated: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("date_updated")
+        @ExcludeMissing
+        dateUpdated: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("ip_record_sid")
+        @ExcludeMissing
+        ipRecordSid: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("sid") @ExcludeMissing sid: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("sip_domain_sid")
+        @ExcludeMissing
+        sipDomainSid: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("url") @ExcludeMissing url: JsonField<String> = JsonMissing.of(),
+    ) : this(dateCreated, dateUpdated, ipRecordSid, sid, sipDomainSid, url, mutableMapOf())
 
     /**
      * The date and time in GMT that the resource was created specified in
@@ -144,25 +150,15 @@ private constructor(
      */
     @JsonProperty("url") @ExcludeMissing fun _url(): JsonField<String> = url
 
+    @JsonAnySetter
+    private fun putAdditionalProperty(key: String, value: JsonValue) {
+        additionalProperties.put(key, value)
+    }
+
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
-
-    private var validated: Boolean = false
-
-    fun validate(): SourceIpMapping = apply {
-        if (validated) {
-            return@apply
-        }
-
-        dateCreated()
-        dateUpdated()
-        ipRecordSid()
-        sid()
-        sipDomainSid()
-        url()
-        validated = true
-    }
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -332,8 +328,24 @@ private constructor(
                 sid,
                 sipDomainSid,
                 url,
-                additionalProperties.toImmutable(),
+                additionalProperties.toMutableMap(),
             )
+    }
+
+    private var validated: Boolean = false
+
+    fun validate(): SourceIpMapping = apply {
+        if (validated) {
+            return@apply
+        }
+
+        dateCreated()
+        dateUpdated()
+        ipRecordSid()
+        sid()
+        sipDomainSid()
+        url()
+        validated = true
     }
 
     override fun equals(other: Any?): Boolean {
