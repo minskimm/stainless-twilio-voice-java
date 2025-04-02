@@ -2,7 +2,9 @@
 
 package com.twilio_voice_openapi.api.models.dialingpermissions.countries
 
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import com.twilio_voice_openapi.api.core.JsonValue
+import com.twilio_voice_openapi.api.core.jsonMapper
 import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
@@ -67,5 +69,46 @@ internal class CountryListResponseTest {
                     .url("https://example.com")
                     .build()
             )
+    }
+
+    @Disabled("skipped: tests are disabled for the time being")
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val countryListResponse =
+            CountryListResponse.builder()
+                .addContent(
+                    CountryListResponse.Content.builder()
+                        .continent("continent")
+                        .addCountryCode("string")
+                        .highRiskSpecialNumbersEnabled(true)
+                        .highRiskTollfraudNumbersEnabled(true)
+                        .isoCode("iso_code")
+                        .links(JsonValue.from(mapOf<String, Any>()))
+                        .lowRiskNumbersEnabled(true)
+                        .name("name")
+                        .url("https://example.com")
+                        .build()
+                )
+                .meta(
+                    CountryListResponse.Meta.builder()
+                        .firstPageUrl("https://example.com")
+                        .key("key")
+                        .nextPageUrl("https://example.com")
+                        .page(0L)
+                        .pageSize(0L)
+                        .previousPageUrl("https://example.com")
+                        .url("https://example.com")
+                        .build()
+                )
+                .build()
+
+        val roundtrippedCountryListResponse =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(countryListResponse),
+                jacksonTypeRef<CountryListResponse>(),
+            )
+
+        assertThat(roundtrippedCountryListResponse).isEqualTo(countryListResponse)
     }
 }

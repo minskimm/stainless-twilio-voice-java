@@ -2,6 +2,8 @@
 
 package com.twilio_voice_openapi.api.models.iprecords
 
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import com.twilio_voice_openapi.api.core.jsonMapper
 import java.time.OffsetDateTime
 import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
@@ -65,5 +67,45 @@ internal class IpRecordListResponseTest {
                     .url("https://example.com")
                     .build()
             )
+    }
+
+    @Disabled("skipped: tests are disabled for the time being")
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val ipRecordListResponse =
+            IpRecordListResponse.builder()
+                .addIpRecord(
+                    IpRecord.builder()
+                        .accountSid("ACE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+                        .cidrPrefixLength(0L)
+                        .dateCreated(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                        .dateUpdated(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                        .friendlyName("friendly_name")
+                        .ipAddress("ip_address")
+                        .sid("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+                        .url("https://example.com")
+                        .build()
+                )
+                .meta(
+                    IpRecordListResponse.Meta.builder()
+                        .firstPageUrl("https://example.com")
+                        .key("key")
+                        .nextPageUrl("https://example.com")
+                        .page(0L)
+                        .pageSize(0L)
+                        .previousPageUrl("https://example.com")
+                        .url("https://example.com")
+                        .build()
+                )
+                .build()
+
+        val roundtrippedIpRecordListResponse =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(ipRecordListResponse),
+                jacksonTypeRef<IpRecordListResponse>(),
+            )
+
+        assertThat(roundtrippedIpRecordListResponse).isEqualTo(ipRecordListResponse)
     }
 }
