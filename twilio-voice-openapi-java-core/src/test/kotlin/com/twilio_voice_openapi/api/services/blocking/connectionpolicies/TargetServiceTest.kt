@@ -102,7 +102,7 @@ internal class TargetServiceTest {
                 .build()
         val targetService = client.connectionPolicies().targets()
 
-        val target =
+        val targets =
             targetService.list(
                 TargetListParams.builder()
                     .connectionPolicySid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
@@ -112,7 +112,7 @@ internal class TargetServiceTest {
                     .build()
             )
 
-        target.validate()
+        targets.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")

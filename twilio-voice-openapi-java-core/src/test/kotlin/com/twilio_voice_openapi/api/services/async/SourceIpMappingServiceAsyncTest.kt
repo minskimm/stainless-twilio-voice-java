@@ -95,7 +95,7 @@ internal class SourceIpMappingServiceAsyncTest {
                 .build()
         val sourceIpMappingServiceAsync = client.sourceIpMappings()
 
-        val sourceIpMappingFuture =
+        val sourceIpMappingsFuture =
             sourceIpMappingServiceAsync.list(
                 SourceIpMappingListParams.builder()
                     .page(0L)
@@ -104,8 +104,8 @@ internal class SourceIpMappingServiceAsyncTest {
                     .build()
             )
 
-        val sourceIpMapping = sourceIpMappingFuture.get()
-        sourceIpMapping.validate()
+        val sourceIpMappings = sourceIpMappingsFuture.get()
+        sourceIpMappings.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")

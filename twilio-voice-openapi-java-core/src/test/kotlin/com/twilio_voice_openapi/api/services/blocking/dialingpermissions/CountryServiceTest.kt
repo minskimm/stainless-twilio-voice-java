@@ -42,7 +42,7 @@ internal class CountryServiceTest {
                 .build()
         val countryService = client.dialingPermissions().countries()
 
-        val country =
+        val countries =
             countryService.list(
                 CountryListParams.builder()
                     .continent("Continent")
@@ -57,7 +57,7 @@ internal class CountryServiceTest {
                     .build()
             )
 
-        country.validate()
+        countries.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")

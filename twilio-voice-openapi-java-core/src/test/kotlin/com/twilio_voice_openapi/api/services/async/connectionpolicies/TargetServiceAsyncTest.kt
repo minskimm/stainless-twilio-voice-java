@@ -105,7 +105,7 @@ internal class TargetServiceAsyncTest {
                 .build()
         val targetServiceAsync = client.connectionPolicies().targets()
 
-        val targetFuture =
+        val targetsFuture =
             targetServiceAsync.list(
                 TargetListParams.builder()
                     .connectionPolicySid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
@@ -115,8 +115,8 @@ internal class TargetServiceAsyncTest {
                     .build()
             )
 
-        val target = targetFuture.get()
-        target.validate()
+        val targets = targetsFuture.get()
+        targets.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")

@@ -43,7 +43,7 @@ internal class CountryServiceAsyncTest {
                 .build()
         val countryServiceAsync = client.dialingPermissions().countries()
 
-        val countryFuture =
+        val countriesFuture =
             countryServiceAsync.list(
                 CountryListParams.builder()
                     .continent("Continent")
@@ -58,8 +58,8 @@ internal class CountryServiceAsyncTest {
                     .build()
             )
 
-        val country = countryFuture.get()
-        country.validate()
+        val countries = countriesFuture.get()
+        countries.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
