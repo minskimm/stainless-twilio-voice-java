@@ -110,13 +110,13 @@ internal class ByocTrunkServiceAsyncTest {
                 .build()
         val byocTrunkServiceAsync = client.byocTrunks()
 
-        val byocTrunkFuture =
+        val byocTrunksFuture =
             byocTrunkServiceAsync.list(
                 ByocTrunkListParams.builder().page(0L).pageSize(1L).pageToken("PageToken").build()
             )
 
-        val byocTrunk = byocTrunkFuture.get()
-        byocTrunk.validate()
+        val byocTrunks = byocTrunksFuture.get()
+        byocTrunks.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")

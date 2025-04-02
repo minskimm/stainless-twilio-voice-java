@@ -92,7 +92,7 @@ internal class ConnectionPolicyServiceAsyncTest {
                 .build()
         val connectionPolicyServiceAsync = client.connectionPolicies()
 
-        val connectionPolicyFuture =
+        val connectionPoliciesFuture =
             connectionPolicyServiceAsync.list(
                 ConnectionPolicyListParams.builder()
                     .page(0L)
@@ -101,8 +101,8 @@ internal class ConnectionPolicyServiceAsyncTest {
                     .build()
             )
 
-        val connectionPolicy = connectionPolicyFuture.get()
-        connectionPolicy.validate()
+        val connectionPolicies = connectionPoliciesFuture.get()
+        connectionPolicies.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")

@@ -94,13 +94,13 @@ internal class IpRecordServiceAsyncTest {
                 .build()
         val ipRecordServiceAsync = client.ipRecords()
 
-        val ipRecordFuture =
+        val ipRecordsFuture =
             ipRecordServiceAsync.list(
                 IpRecordListParams.builder().page(0L).pageSize(1L).pageToken("PageToken").build()
             )
 
-        val ipRecord = ipRecordFuture.get()
-        ipRecord.validate()
+        val ipRecords = ipRecordsFuture.get()
+        ipRecords.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")

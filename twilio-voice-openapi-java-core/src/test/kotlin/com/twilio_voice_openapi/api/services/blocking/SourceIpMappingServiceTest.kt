@@ -92,7 +92,7 @@ internal class SourceIpMappingServiceTest {
                 .build()
         val sourceIpMappingService = client.sourceIpMappings()
 
-        val sourceIpMapping =
+        val sourceIpMappings =
             sourceIpMappingService.list(
                 SourceIpMappingListParams.builder()
                     .page(0L)
@@ -101,7 +101,7 @@ internal class SourceIpMappingServiceTest {
                     .build()
             )
 
-        sourceIpMapping.validate()
+        sourceIpMappings.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")

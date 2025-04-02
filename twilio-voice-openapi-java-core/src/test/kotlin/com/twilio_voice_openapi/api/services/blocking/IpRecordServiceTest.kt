@@ -91,12 +91,12 @@ internal class IpRecordServiceTest {
                 .build()
         val ipRecordService = client.ipRecords()
 
-        val ipRecord =
+        val ipRecords =
             ipRecordService.list(
                 IpRecordListParams.builder().page(0L).pageSize(1L).pageToken("PageToken").build()
             )
 
-        ipRecord.validate()
+        ipRecords.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")

@@ -89,7 +89,7 @@ internal class ConnectionPolicyServiceTest {
                 .build()
         val connectionPolicyService = client.connectionPolicies()
 
-        val connectionPolicy =
+        val connectionPolicies =
             connectionPolicyService.list(
                 ConnectionPolicyListParams.builder()
                     .page(0L)
@@ -98,7 +98,7 @@ internal class ConnectionPolicyServiceTest {
                     .build()
             )
 
-        connectionPolicy.validate()
+        connectionPolicies.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
