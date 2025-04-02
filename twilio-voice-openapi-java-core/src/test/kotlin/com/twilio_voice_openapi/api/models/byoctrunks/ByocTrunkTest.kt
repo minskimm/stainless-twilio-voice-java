@@ -2,6 +2,8 @@
 
 package com.twilio_voice_openapi.api.models.byoctrunks
 
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import com.twilio_voice_openapi.api.core.jsonMapper
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
@@ -48,5 +50,37 @@ internal class ByocTrunkTest {
         assertThat(byocTrunk.voiceFallbackUrl()).contains("https://example.com")
         assertThat(byocTrunk.voiceMethod()).contains(ByocTrunk.VoiceMethod.GET)
         assertThat(byocTrunk.voiceUrl()).contains("https://example.com")
+    }
+
+    @Disabled("skipped: tests are disabled for the time being")
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val byocTrunk =
+            ByocTrunk.builder()
+                .accountSid("ACE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+                .cnamLookupEnabled(true)
+                .connectionPolicySid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+                .dateCreated(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .dateUpdated(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .friendlyName("friendly_name")
+                .fromDomainSid("SDE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+                .sid("BYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+                .statusCallbackMethod(ByocTrunk.StatusCallbackMethod.GET)
+                .statusCallbackUrl("https://example.com")
+                .url("https://example.com")
+                .voiceFallbackMethod(ByocTrunk.VoiceFallbackMethod.GET)
+                .voiceFallbackUrl("https://example.com")
+                .voiceMethod(ByocTrunk.VoiceMethod.GET)
+                .voiceUrl("https://example.com")
+                .build()
+
+        val roundtrippedByocTrunk =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(byocTrunk),
+                jacksonTypeRef<ByocTrunk>(),
+            )
+
+        assertThat(roundtrippedByocTrunk).isEqualTo(byocTrunk)
     }
 }
