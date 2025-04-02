@@ -2,6 +2,8 @@
 
 package com.twilio_voice_openapi.api.models.iprecords
 
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import com.twilio_voice_openapi.api.core.jsonMapper
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
@@ -34,5 +36,30 @@ internal class IpRecordTest {
         assertThat(ipRecord.ipAddress()).contains("ip_address")
         assertThat(ipRecord.sid()).contains("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
         assertThat(ipRecord.url()).contains("https://example.com")
+    }
+
+    @Disabled("skipped: tests are disabled for the time being")
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val ipRecord =
+            IpRecord.builder()
+                .accountSid("ACE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+                .cidrPrefixLength(0L)
+                .dateCreated(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .dateUpdated(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .friendlyName("friendly_name")
+                .ipAddress("ip_address")
+                .sid("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
+                .url("https://example.com")
+                .build()
+
+        val roundtrippedIpRecord =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(ipRecord),
+                jacksonTypeRef<IpRecord>(),
+            )
+
+        assertThat(roundtrippedIpRecord).isEqualTo(ipRecord)
     }
 }

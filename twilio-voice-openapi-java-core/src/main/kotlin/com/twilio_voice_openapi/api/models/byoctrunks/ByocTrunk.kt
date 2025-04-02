@@ -797,15 +797,46 @@ private constructor(
         friendlyName()
         fromDomainSid()
         sid()
-        statusCallbackMethod()
+        statusCallbackMethod().ifPresent { it.validate() }
         statusCallbackUrl()
         url()
-        voiceFallbackMethod()
+        voiceFallbackMethod().ifPresent { it.validate() }
         voiceFallbackUrl()
-        voiceMethod()
+        voiceMethod().ifPresent { it.validate() }
         voiceUrl()
         validated = true
     }
+
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: TwilioVoiceOpenAPIInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    @JvmSynthetic
+    internal fun validity(): Int =
+        (if (accountSid.asKnown().isPresent) 1 else 0) +
+            (if (cnamLookupEnabled.asKnown().isPresent) 1 else 0) +
+            (if (connectionPolicySid.asKnown().isPresent) 1 else 0) +
+            (if (dateCreated.asKnown().isPresent) 1 else 0) +
+            (if (dateUpdated.asKnown().isPresent) 1 else 0) +
+            (if (friendlyName.asKnown().isPresent) 1 else 0) +
+            (if (fromDomainSid.asKnown().isPresent) 1 else 0) +
+            (if (sid.asKnown().isPresent) 1 else 0) +
+            (statusCallbackMethod.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (statusCallbackUrl.asKnown().isPresent) 1 else 0) +
+            (if (url.asKnown().isPresent) 1 else 0) +
+            (voiceFallbackMethod.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (voiceFallbackUrl.asKnown().isPresent) 1 else 0) +
+            (voiceMethod.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (voiceUrl.asKnown().isPresent) 1 else 0)
 
     /** The HTTP method we use to call `status_callback_url`. Either `GET` or `POST`. */
     class StatusCallbackMethod
@@ -903,6 +934,33 @@ private constructor(
             _value().asString().orElseThrow {
                 TwilioVoiceOpenAPIInvalidDataException("Value is not a String")
             }
+
+        private var validated: Boolean = false
+
+        fun validate(): StatusCallbackMethod = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: TwilioVoiceOpenAPIInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
             if (this === other) {
@@ -1013,6 +1071,33 @@ private constructor(
                 TwilioVoiceOpenAPIInvalidDataException("Value is not a String")
             }
 
+        private var validated: Boolean = false
+
+        fun validate(): VoiceFallbackMethod = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: TwilioVoiceOpenAPIInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
@@ -1116,6 +1201,33 @@ private constructor(
             _value().asString().orElseThrow {
                 TwilioVoiceOpenAPIInvalidDataException("Value is not a String")
             }
+
+        private var validated: Boolean = false
+
+        fun validate(): VoiceMethod = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: TwilioVoiceOpenAPIInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
             if (this === other) {

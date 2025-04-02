@@ -565,6 +565,33 @@ private constructor(
         validated = true
     }
 
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: TwilioVoiceOpenAPIInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    @JvmSynthetic
+    internal fun validity(): Int =
+        (if (accountSid.asKnown().isPresent) 1 else 0) +
+            (if (connectionPolicySid.asKnown().isPresent) 1 else 0) +
+            (if (dateCreated.asKnown().isPresent) 1 else 0) +
+            (if (dateUpdated.asKnown().isPresent) 1 else 0) +
+            (if (enabled.asKnown().isPresent) 1 else 0) +
+            (if (friendlyName.asKnown().isPresent) 1 else 0) +
+            (if (priority.asKnown().isPresent) 1 else 0) +
+            (if (sid.asKnown().isPresent) 1 else 0) +
+            (if (target.asKnown().isPresent) 1 else 0) +
+            (if (url.asKnown().isPresent) 1 else 0) +
+            (if (weight.asKnown().isPresent) 1 else 0)
+
     override fun equals(other: Any?): Boolean {
         if (this === other) {
             return true
