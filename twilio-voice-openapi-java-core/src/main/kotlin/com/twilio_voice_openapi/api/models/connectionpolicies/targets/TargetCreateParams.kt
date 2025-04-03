@@ -153,6 +153,20 @@ private constructor(
         }
 
         /**
+         * Sets the entire request body.
+         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
+         * - [target]
+         * - [enabled]
+         * - [friendlyName]
+         * - [priority]
+         * - [weight]
+         * - etc.
+         */
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
+
+        /**
          * The SIP address you want Twilio to route your calls to. This must be a `sip:` schema.
          * `sips` is NOT supported.
          */
@@ -363,7 +377,7 @@ private constructor(
             )
     }
 
-    @JvmSynthetic internal fun _body(): Body = body
+    fun _body(): Body = body
 
     fun _pathParam(index: Int): String =
         when (index) {
