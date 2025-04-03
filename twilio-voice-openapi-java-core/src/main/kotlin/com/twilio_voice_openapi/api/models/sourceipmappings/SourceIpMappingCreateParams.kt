@@ -92,6 +92,16 @@ private constructor(
         }
 
         /**
+         * Sets the entire request body.
+         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
+         * - [ipRecordSid]
+         * - [sipDomainSid]
+         */
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
+
+        /**
          * The Twilio-provided string that uniquely identifies the IP Record resource to map from.
          */
         fun ipRecordSid(ipRecordSid: String) = apply { body.ipRecordSid(ipRecordSid) }
@@ -257,7 +267,7 @@ private constructor(
             )
     }
 
-    @JvmSynthetic internal fun _body(): Body = body
+    fun _body(): Body = body
 
     override fun _headers(): Headers = additionalHeaders
 

@@ -238,6 +238,20 @@ private constructor(
         fun sid(sid: String) = apply { this.sid = sid }
 
         /**
+         * Sets the entire request body.
+         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
+         * - [cnamLookupEnabled]
+         * - [connectionPolicySid]
+         * - [friendlyName]
+         * - [fromDomainSid]
+         * - [statusCallbackMethod]
+         * - etc.
+         */
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
+
+        /**
          * Whether Caller ID Name (CNAM) lookup is enabled for the trunk. If enabled, all inbound
          * calls to the BYOC Trunk from the United States and Canada automatically perform a CNAM
          * Lookup and display Caller ID data on your phone. See
@@ -547,7 +561,7 @@ private constructor(
             )
     }
 
-    @JvmSynthetic internal fun _body(): Body = body
+    fun _body(): Body = body
 
     fun _pathParam(index: Int): String =
         when (index) {
