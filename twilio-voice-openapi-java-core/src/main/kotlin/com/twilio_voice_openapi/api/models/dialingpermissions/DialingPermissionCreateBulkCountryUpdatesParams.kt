@@ -89,6 +89,15 @@ private constructor(
         }
 
         /**
+         * Sets the entire request body.
+         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
+         * - [updateRequest]
+         */
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
+
+        /**
          * URL encoded JSON array of update objects. example : `[ { "iso_code": "GB",
          * "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true",
          * "high_risk_tollfraud_numbers_enabled": "false" } ]`
@@ -243,7 +252,7 @@ private constructor(
             )
     }
 
-    @JvmSynthetic internal fun _body(): Body = body
+    fun _body(): Body = body
 
     override fun _headers(): Headers = additionalHeaders
 
