@@ -426,7 +426,7 @@ private constructor(
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun enabled(): Optional<Boolean> = Optional.ofNullable(enabled.getNullable("Enabled"))
+        fun enabled(): Optional<Boolean> = enabled.getOptional("Enabled")
 
         /**
          * A descriptive string that you create to describe the resource. It is not unique and can
@@ -435,8 +435,7 @@ private constructor(
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun friendlyName(): Optional<String> =
-            Optional.ofNullable(friendlyName.getNullable("FriendlyName"))
+        fun friendlyName(): Optional<String> = friendlyName.getOptional("FriendlyName")
 
         /**
          * The relative importance of the target. Can be an integer from 0 to 65535, inclusive, and
@@ -445,7 +444,7 @@ private constructor(
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun priority(): Optional<Long> = Optional.ofNullable(priority.getNullable("Priority"))
+        fun priority(): Optional<Long> = priority.getOptional("Priority")
 
         /**
          * The value that determines the relative share of the load the Target should receive
@@ -456,7 +455,7 @@ private constructor(
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun weight(): Optional<Long> = Optional.ofNullable(weight.getNullable("Weight"))
+        fun weight(): Optional<Long> = weight.getOptional("Weight")
 
         /**
          * Returns the raw JSON value of [target].

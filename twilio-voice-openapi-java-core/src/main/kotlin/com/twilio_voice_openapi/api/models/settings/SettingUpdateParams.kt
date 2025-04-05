@@ -259,9 +259,7 @@ private constructor(
          *   (e.g. if the server responded with an unexpected value).
          */
         fun dialingPermissionsInheritance(): Optional<Boolean> =
-            Optional.ofNullable(
-                dialingPermissionsInheritance.getNullable("DialingPermissionsInheritance")
-            )
+            dialingPermissionsInheritance.getOptional("DialingPermissionsInheritance")
 
         /**
          * Returns the raw JSON value of [dialingPermissionsInheritance].

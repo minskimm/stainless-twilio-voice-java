@@ -55,7 +55,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun accountSid(): Optional<String> = Optional.ofNullable(accountSid.getNullable("account_sid"))
+    fun accountSid(): Optional<String> = accountSid.getOptional("account_sid")
 
     /**
      * The date and time in GMT when the resource was created specified in
@@ -64,8 +64,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun dateCreated(): Optional<OffsetDateTime> =
-        Optional.ofNullable(dateCreated.getNullable("date_created"))
+    fun dateCreated(): Optional<OffsetDateTime> = dateCreated.getOptional("date_created")
 
     /**
      * The date and time in GMT when the resource was last updated specified in
@@ -74,8 +73,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun dateUpdated(): Optional<OffsetDateTime> =
-        Optional.ofNullable(dateUpdated.getNullable("date_updated"))
+    fun dateUpdated(): Optional<OffsetDateTime> = dateUpdated.getOptional("date_updated")
 
     /**
      * The string that you assigned to describe the resource.
@@ -83,8 +81,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun friendlyName(): Optional<String> =
-        Optional.ofNullable(friendlyName.getNullable("friendly_name"))
+    fun friendlyName(): Optional<String> = friendlyName.getOptional("friendly_name")
 
     /** The URLs of related resources. */
     @JsonProperty("links") @ExcludeMissing fun _links(): JsonValue = links
@@ -95,7 +92,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun sid(): Optional<String> = Optional.ofNullable(sid.getNullable("sid"))
+    fun sid(): Optional<String> = sid.getOptional("sid")
 
     /**
      * The absolute URL of the resource.
@@ -103,7 +100,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun url(): Optional<String> = Optional.ofNullable(url.getNullable("url"))
+    fun url(): Optional<String> = url.getOptional("url")
 
     /**
      * Returns the raw JSON value of [accountSid].
