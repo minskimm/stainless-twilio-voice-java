@@ -53,8 +53,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun dateCreated(): Optional<OffsetDateTime> =
-        Optional.ofNullable(dateCreated.getNullable("date_created"))
+    fun dateCreated(): Optional<OffsetDateTime> = dateCreated.getOptional("date_created")
 
     /**
      * The date and time in GMT that the resource was last updated specified in
@@ -63,8 +62,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun dateUpdated(): Optional<OffsetDateTime> =
-        Optional.ofNullable(dateUpdated.getNullable("date_updated"))
+    fun dateUpdated(): Optional<OffsetDateTime> = dateUpdated.getOptional("date_updated")
 
     /**
      * The Twilio-provided string that uniquely identifies the IP Record resource to map from.
@@ -72,8 +70,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun ipRecordSid(): Optional<String> =
-        Optional.ofNullable(ipRecordSid.getNullable("ip_record_sid"))
+    fun ipRecordSid(): Optional<String> = ipRecordSid.getOptional("ip_record_sid")
 
     /**
      * The unique string that we created to identify the IP Record resource.
@@ -81,7 +78,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun sid(): Optional<String> = Optional.ofNullable(sid.getNullable("sid"))
+    fun sid(): Optional<String> = sid.getOptional("sid")
 
     /**
      * The SID of the SIP Domain that the IP Record is mapped to.
@@ -89,8 +86,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun sipDomainSid(): Optional<String> =
-        Optional.ofNullable(sipDomainSid.getNullable("sip_domain_sid"))
+    fun sipDomainSid(): Optional<String> = sipDomainSid.getOptional("sip_domain_sid")
 
     /**
      * The absolute URL of the resource.
@@ -98,7 +94,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun url(): Optional<String> = Optional.ofNullable(url.getNullable("url"))
+    fun url(): Optional<String> = url.getOptional("url")
 
     /**
      * Returns the raw JSON value of [dateCreated].

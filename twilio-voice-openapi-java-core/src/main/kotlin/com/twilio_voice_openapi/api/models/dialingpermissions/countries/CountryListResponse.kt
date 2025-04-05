@@ -37,13 +37,13 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun content(): Optional<List<Content>> = Optional.ofNullable(content.getNullable("content"))
+    fun content(): Optional<List<Content>> = content.getOptional("content")
 
     /**
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun meta(): Optional<Meta> = Optional.ofNullable(meta.getNullable("meta"))
+    fun meta(): Optional<Meta> = meta.getOptional("meta")
 
     /**
      * Returns the raw JSON value of [content].
@@ -242,7 +242,7 @@ private constructor(
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun continent(): Optional<String> = Optional.ofNullable(continent.getNullable("continent"))
+        fun continent(): Optional<String> = continent.getOptional("continent")
 
         /**
          * The E.164 assigned
@@ -251,8 +251,7 @@ private constructor(
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun countryCodes(): Optional<List<String>> =
-            Optional.ofNullable(countryCodes.getNullable("country_codes"))
+        fun countryCodes(): Optional<List<String>> = countryCodes.getOptional("country_codes")
 
         /**
          * Whether dialing to high-risk special services numbers is enabled. These prefixes include
@@ -263,9 +262,7 @@ private constructor(
          *   (e.g. if the server responded with an unexpected value).
          */
         fun highRiskSpecialNumbersEnabled(): Optional<Boolean> =
-            Optional.ofNullable(
-                highRiskSpecialNumbersEnabled.getNullable("high_risk_special_numbers_enabled")
-            )
+            highRiskSpecialNumbersEnabled.getOptional("high_risk_special_numbers_enabled")
 
         /**
          * Whether dialing to high-risk
@@ -280,9 +277,7 @@ private constructor(
          *   (e.g. if the server responded with an unexpected value).
          */
         fun highRiskTollfraudNumbersEnabled(): Optional<Boolean> =
-            Optional.ofNullable(
-                highRiskTollfraudNumbersEnabled.getNullable("high_risk_tollfraud_numbers_enabled")
-            )
+            highRiskTollfraudNumbersEnabled.getOptional("high_risk_tollfraud_numbers_enabled")
 
         /**
          * The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
@@ -290,7 +285,7 @@ private constructor(
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun isoCode(): Optional<String> = Optional.ofNullable(isoCode.getNullable("iso_code"))
+        fun isoCode(): Optional<String> = isoCode.getOptional("iso_code")
 
         /** A list of URLs related to this resource. */
         @JsonProperty("links") @ExcludeMissing fun _links(): JsonValue = links
@@ -302,7 +297,7 @@ private constructor(
          *   (e.g. if the server responded with an unexpected value).
          */
         fun lowRiskNumbersEnabled(): Optional<Boolean> =
-            Optional.ofNullable(lowRiskNumbersEnabled.getNullable("low_risk_numbers_enabled"))
+            lowRiskNumbersEnabled.getOptional("low_risk_numbers_enabled")
 
         /**
          * The name of the country.
@@ -310,7 +305,7 @@ private constructor(
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun name(): Optional<String> = Optional.ofNullable(name.getNullable("name"))
+        fun name(): Optional<String> = name.getOptional("name")
 
         /**
          * The absolute URL of this resource.
@@ -318,7 +313,7 @@ private constructor(
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun url(): Optional<String> = Optional.ofNullable(url.getNullable("url"))
+        fun url(): Optional<String> = url.getOptional("url")
 
         /**
          * Returns the raw JSON value of [continent].
@@ -780,46 +775,43 @@ private constructor(
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun firstPageUrl(): Optional<String> =
-            Optional.ofNullable(firstPageUrl.getNullable("first_page_url"))
+        fun firstPageUrl(): Optional<String> = firstPageUrl.getOptional("first_page_url")
 
         /**
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun key(): Optional<String> = Optional.ofNullable(key.getNullable("key"))
+        fun key(): Optional<String> = key.getOptional("key")
 
         /**
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun nextPageUrl(): Optional<String> =
-            Optional.ofNullable(nextPageUrl.getNullable("next_page_url"))
+        fun nextPageUrl(): Optional<String> = nextPageUrl.getOptional("next_page_url")
 
         /**
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun page(): Optional<Long> = Optional.ofNullable(page.getNullable("page"))
+        fun page(): Optional<Long> = page.getOptional("page")
 
         /**
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun pageSize(): Optional<Long> = Optional.ofNullable(pageSize.getNullable("page_size"))
+        fun pageSize(): Optional<Long> = pageSize.getOptional("page_size")
 
         /**
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun previousPageUrl(): Optional<String> =
-            Optional.ofNullable(previousPageUrl.getNullable("previous_page_url"))
+        fun previousPageUrl(): Optional<String> = previousPageUrl.getOptional("previous_page_url")
 
         /**
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun url(): Optional<String> = Optional.ofNullable(url.getNullable("url"))
+        fun url(): Optional<String> = url.getOptional("url")
 
         /**
          * Returns the raw JSON value of [firstPageUrl].

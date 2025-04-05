@@ -39,7 +39,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun updateCount(): Optional<Long> = Optional.ofNullable(updateCount.getNullable("update_count"))
+    fun updateCount(): Optional<Long> = updateCount.getOptional("update_count")
 
     /**
      * A bulk update request to change voice dialing country permissions stored as a URL-encoded,
@@ -50,8 +50,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun updateRequest(): Optional<String> =
-        Optional.ofNullable(updateRequest.getNullable("update_request"))
+    fun updateRequest(): Optional<String> = updateRequest.getOptional("update_request")
 
     /**
      * Returns the raw JSON value of [updateCount].
