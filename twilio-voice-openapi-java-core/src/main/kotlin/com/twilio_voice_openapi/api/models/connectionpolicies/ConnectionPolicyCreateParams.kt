@@ -255,8 +255,7 @@ private constructor(
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun friendlyName(): Optional<String> =
-            Optional.ofNullable(friendlyName.getNullable("FriendlyName"))
+        fun friendlyName(): Optional<String> = friendlyName.getOptional("FriendlyName")
 
         /**
          * Returns the raw JSON value of [friendlyName].

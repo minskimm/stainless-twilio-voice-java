@@ -70,7 +70,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun continent(): Optional<String> = Optional.ofNullable(continent.getNullable("continent"))
+    fun continent(): Optional<String> = continent.getOptional("continent")
 
     /**
      * The E.164 assigned
@@ -79,8 +79,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun countryCodes(): Optional<List<String>> =
-        Optional.ofNullable(countryCodes.getNullable("country_codes"))
+    fun countryCodes(): Optional<List<String>> = countryCodes.getOptional("country_codes")
 
     /**
      * Whether dialing to high-risk special services numbers is enabled. These prefixes include
@@ -91,9 +90,7 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun highRiskSpecialNumbersEnabled(): Optional<Boolean> =
-        Optional.ofNullable(
-            highRiskSpecialNumbersEnabled.getNullable("high_risk_special_numbers_enabled")
-        )
+        highRiskSpecialNumbersEnabled.getOptional("high_risk_special_numbers_enabled")
 
     /**
      * Whether dialing to high-risk
@@ -108,9 +105,7 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun highRiskTollfraudNumbersEnabled(): Optional<Boolean> =
-        Optional.ofNullable(
-            highRiskTollfraudNumbersEnabled.getNullable("high_risk_tollfraud_numbers_enabled")
-        )
+        highRiskTollfraudNumbersEnabled.getOptional("high_risk_tollfraud_numbers_enabled")
 
     /**
      * The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
@@ -118,7 +113,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun isoCode(): Optional<String> = Optional.ofNullable(isoCode.getNullable("iso_code"))
+    fun isoCode(): Optional<String> = isoCode.getOptional("iso_code")
 
     /** A list of URLs related to this resource. */
     @JsonProperty("links") @ExcludeMissing fun _links(): JsonValue = links
@@ -130,7 +125,7 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun lowRiskNumbersEnabled(): Optional<Boolean> =
-        Optional.ofNullable(lowRiskNumbersEnabled.getNullable("low_risk_numbers_enabled"))
+        lowRiskNumbersEnabled.getOptional("low_risk_numbers_enabled")
 
     /**
      * The name of the country.
@@ -138,7 +133,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun name(): Optional<String> = Optional.ofNullable(name.getNullable("name"))
+    fun name(): Optional<String> = name.getOptional("name")
 
     /**
      * The absolute URL of this resource.
@@ -146,7 +141,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun url(): Optional<String> = Optional.ofNullable(url.getNullable("url"))
+    fun url(): Optional<String> = url.getOptional("url")
 
     /**
      * Returns the raw JSON value of [continent].

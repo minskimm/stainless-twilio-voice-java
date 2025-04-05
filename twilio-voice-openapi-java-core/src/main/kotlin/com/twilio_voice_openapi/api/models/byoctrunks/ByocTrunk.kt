@@ -105,7 +105,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun accountSid(): Optional<String> = Optional.ofNullable(accountSid.getNullable("account_sid"))
+    fun accountSid(): Optional<String> = accountSid.getOptional("account_sid")
 
     /**
      * Whether Caller ID Name (CNAM) lookup is enabled for the trunk. If enabled, all inbound calls
@@ -117,7 +117,7 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun cnamLookupEnabled(): Optional<Boolean> =
-        Optional.ofNullable(cnamLookupEnabled.getNullable("cnam_lookup_enabled"))
+        cnamLookupEnabled.getOptional("cnam_lookup_enabled")
 
     /**
      * The SID of the Connection Policy that Twilio will use when routing traffic to your
@@ -127,7 +127,7 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun connectionPolicySid(): Optional<String> =
-        Optional.ofNullable(connectionPolicySid.getNullable("connection_policy_sid"))
+        connectionPolicySid.getOptional("connection_policy_sid")
 
     /**
      * The date and time in GMT that the resource was created specified in
@@ -136,8 +136,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun dateCreated(): Optional<OffsetDateTime> =
-        Optional.ofNullable(dateCreated.getNullable("date_created"))
+    fun dateCreated(): Optional<OffsetDateTime> = dateCreated.getOptional("date_created")
 
     /**
      * The date and time in GMT that the resource was last updated specified in
@@ -146,8 +145,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun dateUpdated(): Optional<OffsetDateTime> =
-        Optional.ofNullable(dateUpdated.getNullable("date_updated"))
+    fun dateUpdated(): Optional<OffsetDateTime> = dateUpdated.getOptional("date_updated")
 
     /**
      * The string that you assigned to describe the resource.
@@ -155,8 +153,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun friendlyName(): Optional<String> =
-        Optional.ofNullable(friendlyName.getNullable("friendly_name"))
+    fun friendlyName(): Optional<String> = friendlyName.getOptional("friendly_name")
 
     /**
      * The SID of the SIP Domain that should be used in the `From` header of originating calls sent
@@ -168,8 +165,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun fromDomainSid(): Optional<String> =
-        Optional.ofNullable(fromDomainSid.getNullable("from_domain_sid"))
+    fun fromDomainSid(): Optional<String> = fromDomainSid.getOptional("from_domain_sid")
 
     /**
      * The unique string that that we created to identify the BYOC Trunk resource.
@@ -177,7 +173,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun sid(): Optional<String> = Optional.ofNullable(sid.getNullable("sid"))
+    fun sid(): Optional<String> = sid.getOptional("sid")
 
     /**
      * The HTTP method we use to call `status_callback_url`. Either `GET` or `POST`.
@@ -186,7 +182,7 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun statusCallbackMethod(): Optional<StatusCallbackMethod> =
-        Optional.ofNullable(statusCallbackMethod.getNullable("status_callback_method"))
+        statusCallbackMethod.getOptional("status_callback_method")
 
     /**
      * The URL that we call to pass status parameters (such as call ended) to your application.
@@ -194,8 +190,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun statusCallbackUrl(): Optional<String> =
-        Optional.ofNullable(statusCallbackUrl.getNullable("status_callback_url"))
+    fun statusCallbackUrl(): Optional<String> = statusCallbackUrl.getOptional("status_callback_url")
 
     /**
      * The absolute URL of the resource.
@@ -203,7 +198,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun url(): Optional<String> = Optional.ofNullable(url.getNullable("url"))
+    fun url(): Optional<String> = url.getOptional("url")
 
     /**
      * The HTTP method we use to call `voice_fallback_url`. Can be: `GET` or `POST`.
@@ -212,7 +207,7 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun voiceFallbackMethod(): Optional<VoiceFallbackMethod> =
-        Optional.ofNullable(voiceFallbackMethod.getNullable("voice_fallback_method"))
+        voiceFallbackMethod.getOptional("voice_fallback_method")
 
     /**
      * The URL that we call when an error occurs while retrieving or executing the TwiML requested
@@ -221,8 +216,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun voiceFallbackUrl(): Optional<String> =
-        Optional.ofNullable(voiceFallbackUrl.getNullable("voice_fallback_url"))
+    fun voiceFallbackUrl(): Optional<String> = voiceFallbackUrl.getOptional("voice_fallback_url")
 
     /**
      * The HTTP method we use to call `voice_url`. Can be: `GET` or `POST`.
@@ -230,8 +224,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun voiceMethod(): Optional<VoiceMethod> =
-        Optional.ofNullable(voiceMethod.getNullable("voice_method"))
+    fun voiceMethod(): Optional<VoiceMethod> = voiceMethod.getOptional("voice_method")
 
     /**
      * The URL we call using the `voice_method` when the BYOC Trunk receives a call.
@@ -239,7 +232,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun voiceUrl(): Optional<String> = Optional.ofNullable(voiceUrl.getNullable("voice_url"))
+    fun voiceUrl(): Optional<String> = voiceUrl.getOptional("voice_url")
 
     /**
      * Returns the raw JSON value of [accountSid].

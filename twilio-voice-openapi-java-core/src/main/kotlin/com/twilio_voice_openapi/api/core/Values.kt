@@ -133,11 +133,11 @@ sealed class JsonField<out T : Any> {
         }
 
     @JvmSynthetic
-    internal fun getNullable(name: String): T? =
+    internal fun getOptional(name: String): Optional<@UnsafeVariance T> =
         when (this) {
-            is KnownValue -> value
-            is JsonMissing -> null
-            is JsonNull -> null
+            is KnownValue -> Optional.of(value)
+            is JsonMissing,
+            is JsonNull -> Optional.empty()
             else ->
                 throw TwilioVoiceOpenAPIInvalidDataException("`$name` is invalid, received $this")
         }
