@@ -191,7 +191,10 @@ private constructor(
 
         fun removeAllQueryParams(keys: Set<String>) = apply { queryParams.removeAll(keys) }
 
+        fun baseUrl(): String = baseUrl
+
         fun fromEnv() = apply {
+            System.getenv("TWILIO_VOICE_OPENAPI_BASE_URL")?.let { baseUrl(it) }
             System.getenv("TWILIO_VOICE_OPENAPI_USERNAME")?.let { username(it) }
             System.getenv("TWILIO_VOICE_OPENAPI_PASSWORD")?.let { password(it) }
         }
