@@ -51,7 +51,7 @@ import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient
 import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 import java.time.LocalDate;
 
-// Configures using the `TWILIO_VOICE_OPENAPI_USERNAME` and `TWILIO_VOICE_OPENAPI_PASSWORD` environment variables
+// Configures using the `TWILIO_VOICE_OPENAPI_USERNAME`, `TWILIO_VOICE_OPENAPI_PASSWORD` and `TWILIO_VOICE_OPENAPI_BASE_URL` environment variables
 TwilioVoiceOpenAPIClient client = TwilioVoiceOpenAPIOkHttpClient.fromEnv();
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
@@ -69,7 +69,7 @@ Configure the client using environment variables:
 import com.twilio_voice_openapi.api.client.TwilioVoiceOpenAPIClient;
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient;
 
-// Configures using the `TWILIO_VOICE_OPENAPI_USERNAME` and `TWILIO_VOICE_OPENAPI_PASSWORD` environment variables
+// Configures using the `TWILIO_VOICE_OPENAPI_USERNAME`, `TWILIO_VOICE_OPENAPI_PASSWORD` and `TWILIO_VOICE_OPENAPI_BASE_URL` environment variables
 TwilioVoiceOpenAPIClient client = TwilioVoiceOpenAPIOkHttpClient.fromEnv();
 ```
 
@@ -92,7 +92,7 @@ import com.twilio_voice_openapi.api.client.TwilioVoiceOpenAPIClient;
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient;
 
 TwilioVoiceOpenAPIClient client = TwilioVoiceOpenAPIOkHttpClient.builder()
-    // Configures using the `TWILIO_VOICE_OPENAPI_USERNAME` and `TWILIO_VOICE_OPENAPI_PASSWORD` environment variables
+    // Configures using the `TWILIO_VOICE_OPENAPI_USERNAME`, `TWILIO_VOICE_OPENAPI_PASSWORD` and `TWILIO_VOICE_OPENAPI_BASE_URL` environment variables
     .fromEnv()
     .username("My Username")
     .build();
@@ -100,10 +100,11 @@ TwilioVoiceOpenAPIClient client = TwilioVoiceOpenAPIOkHttpClient.builder()
 
 See this table for the available options:
 
-| Setter     | Environment variable            | Required | Default value |
-| ---------- | ------------------------------- | -------- | ------------- |
-| `username` | `TWILIO_VOICE_OPENAPI_USERNAME` | true     | -             |
-| `password` | `TWILIO_VOICE_OPENAPI_PASSWORD` | true     | -             |
+| Setter     | Environment variable            | Required | Default value                |
+| ---------- | ------------------------------- | -------- | ---------------------------- |
+| `username` | `TWILIO_VOICE_OPENAPI_USERNAME` | true     | -                            |
+| `password` | `TWILIO_VOICE_OPENAPI_PASSWORD` | true     | -                            |
+| `baseUrl`  | `TWILIO_VOICE_OPENAPI_BASE_URL` | true     | `"https://voice.twilio.com"` |
 
 > [!TIP]
 > Don't create more than one client in the same application. Each client has a connection pool and
@@ -134,7 +135,7 @@ import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 import java.time.LocalDate;
 import java.util.concurrent.CompletableFuture;
 
-// Configures using the `TWILIO_VOICE_OPENAPI_USERNAME` and `TWILIO_VOICE_OPENAPI_PASSWORD` environment variables
+// Configures using the `TWILIO_VOICE_OPENAPI_USERNAME`, `TWILIO_VOICE_OPENAPI_PASSWORD` and `TWILIO_VOICE_OPENAPI_BASE_URL` environment variables
 TwilioVoiceOpenAPIClient client = TwilioVoiceOpenAPIOkHttpClient.fromEnv();
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
@@ -153,7 +154,7 @@ import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 import java.time.LocalDate;
 import java.util.concurrent.CompletableFuture;
 
-// Configures using the `TWILIO_VOICE_OPENAPI_USERNAME` and `TWILIO_VOICE_OPENAPI_PASSWORD` environment variables
+// Configures using the `TWILIO_VOICE_OPENAPI_USERNAME`, `TWILIO_VOICE_OPENAPI_PASSWORD` and `TWILIO_VOICE_OPENAPI_BASE_URL` environment variables
 TwilioVoiceOpenAPIClientAsync client = TwilioVoiceOpenAPIOkHttpClientAsync.fromEnv();
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
