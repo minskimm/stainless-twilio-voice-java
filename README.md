@@ -314,6 +314,42 @@ TwilioVoiceOpenAPIClient client = TwilioVoiceOpenAPIOkHttpClient.builder()
     .build();
 ```
 
+### Custom HTTP client
+
+The SDK consists of three artifacts:
+
+- `twilio-voice-openapi-java-core`
+  - Contains core SDK logic
+  - Does not depend on [OkHttp](https://square.github.io/okhttp)
+  - Exposes [`TwilioVoiceOpenAPIClient`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClient.kt), [`TwilioVoiceOpenAPIClientAsync`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientAsync.kt), [`TwilioVoiceOpenAPIClientImpl`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientImpl.kt), and [`TwilioVoiceOpenAPIClientAsyncImpl`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientAsyncImpl.kt), all of which can work with any HTTP client
+- `twilio-voice-openapi-java-client-okhttp`
+  - Depends on [OkHttp](https://square.github.io/okhttp)
+  - Exposes [`TwilioVoiceOpenAPIOkHttpClient`](twilio-voice-openapi-java-client-okhttp/src/main/kotlin/com/twilio_voice_openapi/api/client/okhttp/TwilioVoiceOpenAPIOkHttpClient.kt) and [`TwilioVoiceOpenAPIOkHttpClientAsync`](twilio-voice-openapi-java-client-okhttp/src/main/kotlin/com/twilio_voice_openapi/api/client/okhttp/TwilioVoiceOpenAPIOkHttpClientAsync.kt), which provide a way to construct [`TwilioVoiceOpenAPIClientImpl`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientImpl.kt) and [`TwilioVoiceOpenAPIClientAsyncImpl`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientAsyncImpl.kt), respectively, using OkHttp
+- `twilio-voice-openapi-java`
+  - Depends on and exposes the APIs of both `twilio-voice-openapi-java-core` and `twilio-voice-openapi-java-client-okhttp`
+  - Does not have its own logic
+
+This structure allows replacing the SDK's default HTTP client without pulling in unnecessary dependencies.
+
+#### Customized [`OkHttpClient`](https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.html)
+
+> [!TIP]
+> Try the available [network options](#network-options) before replacing the default client.
+
+To use a customized `OkHttpClient`:
+
+1. Replace your [`twilio-voice-openapi-java` dependency](#installation) with `twilio-voice-openapi-java-core`
+2. Copy `twilio-voice-openapi-java-client-okhttp`'s [`OkHttpClient`](twilio-voice-openapi-java-client-okhttp/src/main/kotlin/com/twilio_voice_openapi/api/client/okhttp/OkHttpClient.kt) class into your code and customize it
+3. Construct [`TwilioVoiceOpenAPIClientImpl`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientImpl.kt) or [`TwilioVoiceOpenAPIClientAsyncImpl`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientAsyncImpl.kt), similarly to [`TwilioVoiceOpenAPIOkHttpClient`](twilio-voice-openapi-java-client-okhttp/src/main/kotlin/com/twilio_voice_openapi/api/client/okhttp/TwilioVoiceOpenAPIOkHttpClient.kt) or [`TwilioVoiceOpenAPIOkHttpClientAsync`](twilio-voice-openapi-java-client-okhttp/src/main/kotlin/com/twilio_voice_openapi/api/client/okhttp/TwilioVoiceOpenAPIOkHttpClientAsync.kt), using your customized client
+
+### Completely custom HTTP client
+
+To use a completely custom HTTP client:
+
+1. Replace your [`twilio-voice-openapi-java` dependency](#installation) with `twilio-voice-openapi-java-core`
+2. Write a class that implements the [`HttpClient`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/core/http/HttpClient.kt) interface
+3. Construct [`TwilioVoiceOpenAPIClientImpl`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientImpl.kt) or [`TwilioVoiceOpenAPIClientAsyncImpl`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientAsyncImpl.kt), similarly to [`TwilioVoiceOpenAPIOkHttpClient`](twilio-voice-openapi-java-client-okhttp/src/main/kotlin/com/twilio_voice_openapi/api/client/okhttp/TwilioVoiceOpenAPIOkHttpClient.kt) or [`TwilioVoiceOpenAPIOkHttpClientAsync`](twilio-voice-openapi-java-client-okhttp/src/main/kotlin/com/twilio_voice_openapi/api/client/okhttp/TwilioVoiceOpenAPIOkHttpClientAsync.kt), using your new client class
+
 ## Undocumented API functionality
 
 The SDK is typed for convenient usage of the documented API. However, it also supports working with undocumented or not yet supported parts of the API.
