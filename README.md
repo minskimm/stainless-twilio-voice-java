@@ -58,7 +58,7 @@ ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
     .date(LocalDate.parse("REPLACE_ME"))
     .sid("REPLACE_ME")
     .build();
-client.archives().deleteCall(params)
+client.archives().deleteCall(params);
 ```
 
 ## Client configuration
@@ -278,7 +278,7 @@ import java.time.LocalDate;
 
 client.archives().deleteCall(
   params, RequestOptions.builder().timeout(Duration.ofSeconds(30)).build()
-)
+);
 ```
 
 Or configure the default for all method calls at the client level:
@@ -512,7 +512,7 @@ import java.time.LocalDate;
 
 client.archives().deleteCall(
   params, RequestOptions.builder().responseValidation(true).build()
-)
+);
 ```
 
 Or configure the default for all method calls at the client level:
