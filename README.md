@@ -55,8 +55,8 @@ import java.time.LocalDate;
 TwilioVoiceOpenAPIClient client = TwilioVoiceOpenAPIOkHttpClient.fromEnv();
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
-    .date(LocalDate.parse("REPLACE_ME"))
-    .sid("REPLACE_ME")
+    .date(LocalDate.parse("2019-12-27"))
+    .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
     .build();
 client.archives().deleteCall(params);
 ```
@@ -139,8 +139,8 @@ import java.util.concurrent.CompletableFuture;
 TwilioVoiceOpenAPIClient client = TwilioVoiceOpenAPIOkHttpClient.fromEnv();
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
-    .date(LocalDate.parse("REPLACE_ME"))
-    .sid("REPLACE_ME")
+    .date(LocalDate.parse("2019-12-27"))
+    .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
     .build();
 CompletableFuture<Void?> future = client.async().archives().deleteCall(params);
 ```
@@ -158,8 +158,8 @@ import java.util.concurrent.CompletableFuture;
 TwilioVoiceOpenAPIClientAsync client = TwilioVoiceOpenAPIOkHttpClientAsync.fromEnv();
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
-    .date(LocalDate.parse("REPLACE_ME"))
-    .sid("REPLACE_ME")
+    .date(LocalDate.parse("2019-12-27"))
+    .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
     .build();
 CompletableFuture<Void?> future = client.archives().deleteCall(params);
 ```
@@ -179,8 +179,8 @@ import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 import java.time.LocalDate;
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
-    .date(LocalDate.parse("REPLACE_ME"))
-    .sid("REPLACE_ME")
+    .date(LocalDate.parse("2019-12-27"))
+    .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
     .build();
 HttpResponse response = client.archives().withRawResponse().deleteCall(params);
 
@@ -378,7 +378,7 @@ import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 import java.time.LocalDate;
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
-    .date(LocalDate.parse("REPLACE_ME"))
+    .date(LocalDate.parse("2019-12-27"))
     .build();
 ```
 
