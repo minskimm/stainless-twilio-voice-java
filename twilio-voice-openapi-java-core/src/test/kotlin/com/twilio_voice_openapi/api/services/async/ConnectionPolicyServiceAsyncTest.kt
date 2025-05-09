@@ -5,9 +5,7 @@ package com.twilio_voice_openapi.api.services.async
 import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClientAsync
 import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyCreateParams
-import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyDeleteParams
 import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyListParams
-import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyRetrieveParams
 import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -48,11 +46,7 @@ internal class ConnectionPolicyServiceAsyncTest {
         val connectionPolicyServiceAsync = client.connectionPolicies()
 
         val connectionPolicyFuture =
-            connectionPolicyServiceAsync.retrieve(
-                ConnectionPolicyRetrieveParams.builder()
-                    .sid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                    .build()
-            )
+            connectionPolicyServiceAsync.retrieve("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
 
         val connectionPolicy = connectionPolicyFuture.get()
         connectionPolicy.validate()
@@ -116,12 +110,7 @@ internal class ConnectionPolicyServiceAsyncTest {
                 .build()
         val connectionPolicyServiceAsync = client.connectionPolicies()
 
-        val future =
-            connectionPolicyServiceAsync.delete(
-                ConnectionPolicyDeleteParams.builder()
-                    .sid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                    .build()
-            )
+        val future = connectionPolicyServiceAsync.delete("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
 
         val response = future.get()
     }

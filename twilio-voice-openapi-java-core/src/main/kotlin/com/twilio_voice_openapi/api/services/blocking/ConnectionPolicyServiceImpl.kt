@@ -5,6 +5,7 @@ package com.twilio_voice_openapi.api.services.blocking
 import com.twilio_voice_openapi.api.core.ClientOptions
 import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.RequestOptions
+import com.twilio_voice_openapi.api.core.checkRequired
 import com.twilio_voice_openapi.api.core.handlers.emptyHandler
 import com.twilio_voice_openapi.api.core.handlers.errorHandler
 import com.twilio_voice_openapi.api.core.handlers.jsonHandler
@@ -26,6 +27,7 @@ import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyRe
 import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyUpdateParams
 import com.twilio_voice_openapi.api.services.blocking.connectionpolicies.TargetService
 import com.twilio_voice_openapi.api.services.blocking.connectionpolicies.TargetServiceImpl
+import kotlin.jvm.optionals.getOrNull
 
 class ConnectionPolicyServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     ConnectionPolicyService {
@@ -118,6 +120,9 @@ class ConnectionPolicyServiceImpl internal constructor(private val clientOptions
             params: ConnectionPolicyRetrieveParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<ConnectionPolicy> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -144,6 +149,9 @@ class ConnectionPolicyServiceImpl internal constructor(private val clientOptions
             params: ConnectionPolicyUpdateParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<ConnectionPolicy> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
@@ -197,6 +205,9 @@ class ConnectionPolicyServiceImpl internal constructor(private val clientOptions
             params: ConnectionPolicyDeleteParams,
             requestOptions: RequestOptions,
         ): HttpResponse {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)

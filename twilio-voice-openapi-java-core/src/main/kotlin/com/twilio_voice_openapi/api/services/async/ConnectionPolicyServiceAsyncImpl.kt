@@ -5,6 +5,7 @@ package com.twilio_voice_openapi.api.services.async
 import com.twilio_voice_openapi.api.core.ClientOptions
 import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.RequestOptions
+import com.twilio_voice_openapi.api.core.checkRequired
 import com.twilio_voice_openapi.api.core.handlers.emptyHandler
 import com.twilio_voice_openapi.api.core.handlers.errorHandler
 import com.twilio_voice_openapi.api.core.handlers.jsonHandler
@@ -27,6 +28,7 @@ import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyUp
 import com.twilio_voice_openapi.api.services.async.connectionpolicies.TargetServiceAsync
 import com.twilio_voice_openapi.api.services.async.connectionpolicies.TargetServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
+import kotlin.jvm.optionals.getOrNull
 
 class ConnectionPolicyServiceAsyncImpl
 internal constructor(private val clientOptions: ClientOptions) : ConnectionPolicyServiceAsync {
@@ -124,6 +126,9 @@ internal constructor(private val clientOptions: ClientOptions) : ConnectionPolic
             params: ConnectionPolicyRetrieveParams,
             requestOptions: RequestOptions,
         ): CompletableFuture<HttpResponseFor<ConnectionPolicy>> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -153,6 +158,9 @@ internal constructor(private val clientOptions: ClientOptions) : ConnectionPolic
             params: ConnectionPolicyUpdateParams,
             requestOptions: RequestOptions,
         ): CompletableFuture<HttpResponseFor<ConnectionPolicy>> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
@@ -212,6 +220,9 @@ internal constructor(private val clientOptions: ClientOptions) : ConnectionPolic
             params: ConnectionPolicyDeleteParams,
             requestOptions: RequestOptions,
         ): CompletableFuture<HttpResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)

@@ -5,6 +5,7 @@ package com.twilio_voice_openapi.api.services.async.connectionpolicies
 import com.twilio_voice_openapi.api.core.ClientOptions
 import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.RequestOptions
+import com.twilio_voice_openapi.api.core.checkRequired
 import com.twilio_voice_openapi.api.core.handlers.emptyHandler
 import com.twilio_voice_openapi.api.core.handlers.errorHandler
 import com.twilio_voice_openapi.api.core.handlers.jsonHandler
@@ -25,6 +26,7 @@ import com.twilio_voice_openapi.api.models.connectionpolicies.targets.TargetList
 import com.twilio_voice_openapi.api.models.connectionpolicies.targets.TargetRetrieveParams
 import com.twilio_voice_openapi.api.models.connectionpolicies.targets.TargetUpdateParams
 import java.util.concurrent.CompletableFuture
+import kotlin.jvm.optionals.getOrNull
 
 class TargetServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     TargetServiceAsync {
@@ -83,6 +85,9 @@ class TargetServiceAsyncImpl internal constructor(private val clientOptions: Cli
             params: TargetCreateParams,
             requestOptions: RequestOptions,
         ): CompletableFuture<HttpResponseFor<ConnectionPolicyTarget>> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("connectionPolicySid", params.connectionPolicySid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
@@ -114,6 +119,9 @@ class TargetServiceAsyncImpl internal constructor(private val clientOptions: Cli
             params: TargetRetrieveParams,
             requestOptions: RequestOptions,
         ): CompletableFuture<HttpResponseFor<ConnectionPolicyTarget>> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -150,6 +158,9 @@ class TargetServiceAsyncImpl internal constructor(private val clientOptions: Cli
             params: TargetUpdateParams,
             requestOptions: RequestOptions,
         ): CompletableFuture<HttpResponseFor<ConnectionPolicyTarget>> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
@@ -186,6 +197,9 @@ class TargetServiceAsyncImpl internal constructor(private val clientOptions: Cli
             params: TargetListParams,
             requestOptions: RequestOptions,
         ): CompletableFuture<HttpResponseFor<TargetListResponse>> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("connectionPolicySid", params.connectionPolicySid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -214,6 +228,9 @@ class TargetServiceAsyncImpl internal constructor(private val clientOptions: Cli
             params: TargetDeleteParams,
             requestOptions: RequestOptions,
         ): CompletableFuture<HttpResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)

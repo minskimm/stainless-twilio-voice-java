@@ -5,9 +5,7 @@ package com.twilio_voice_openapi.api.services.blocking
 import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient
 import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyCreateParams
-import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyDeleteParams
 import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyListParams
-import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyRetrieveParams
 import com.twilio_voice_openapi.api.models.connectionpolicies.ConnectionPolicyUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -47,11 +45,7 @@ internal class ConnectionPolicyServiceTest {
         val connectionPolicyService = client.connectionPolicies()
 
         val connectionPolicy =
-            connectionPolicyService.retrieve(
-                ConnectionPolicyRetrieveParams.builder()
-                    .sid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                    .build()
-            )
+            connectionPolicyService.retrieve("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
 
         connectionPolicy.validate()
     }
@@ -112,8 +106,6 @@ internal class ConnectionPolicyServiceTest {
                 .build()
         val connectionPolicyService = client.connectionPolicies()
 
-        connectionPolicyService.delete(
-            ConnectionPolicyDeleteParams.builder().sid("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
-        )
+        connectionPolicyService.delete("NYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
     }
 }

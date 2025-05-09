@@ -11,6 +11,7 @@ import com.twilio_voice_openapi.api.core.toImmutable
 import java.time.LocalDate
 import java.util.Objects
 import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 /**
  * Delete an archived call record from Bulk Export. Note: this does not also delete the record from
@@ -19,7 +20,7 @@ import java.util.Optional
 class ArchiveDeleteCallParams
 private constructor(
     private val date: LocalDate,
-    private val sid: String,
+    private val sid: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
     private val additionalBodyProperties: Map<String, JsonValue>,
@@ -27,7 +28,7 @@ private constructor(
 
     fun date(): LocalDate = date
 
-    fun sid(): String = sid
+    fun sid(): Optional<String> = Optional.ofNullable(sid)
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
@@ -45,7 +46,6 @@ private constructor(
          * The following fields are required:
          * ```java
          * .date()
-         * .sid()
          * ```
          */
         @JvmStatic fun builder() = Builder()
@@ -72,7 +72,10 @@ private constructor(
 
         fun date(date: LocalDate) = apply { this.date = date }
 
-        fun sid(sid: String) = apply { this.sid = sid }
+        fun sid(sid: String?) = apply { this.sid = sid }
+
+        /** Alias for calling [Builder.sid] with `sid.orElse(null)`. */
+        fun sid(sid: Optional<String>) = sid(sid.getOrNull())
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -202,7 +205,6 @@ private constructor(
          * The following fields are required:
          * ```java
          * .date()
-         * .sid()
          * ```
          *
          * @throws IllegalStateException if any required field is unset.
@@ -210,7 +212,7 @@ private constructor(
         fun build(): ArchiveDeleteCallParams =
             ArchiveDeleteCallParams(
                 checkRequired("date", date),
-                checkRequired("sid", sid),
+                sid,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
                 additionalBodyProperties.toImmutable(),
@@ -223,7 +225,7 @@ private constructor(
     fun _pathParam(index: Int): String =
         when (index) {
             0 -> date.toString()
-            1 -> sid
+            1 -> sid ?: ""
             else -> ""
         }
 

@@ -39,8 +39,21 @@ interface ByocTrunkServiceAsync {
     fun create(requestOptions: RequestOptions): CompletableFuture<ByocTrunk> =
         create(ByocTrunkCreateParams.none(), requestOptions)
 
-    fun retrieve(params: ByocTrunkRetrieveParams): CompletableFuture<ByocTrunk> =
-        retrieve(params, RequestOptions.none())
+    fun retrieve(sid: String): CompletableFuture<ByocTrunk> =
+        retrieve(sid, ByocTrunkRetrieveParams.none())
+
+    /** @see [retrieve] */
+    fun retrieve(
+        sid: String,
+        params: ByocTrunkRetrieveParams = ByocTrunkRetrieveParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<ByocTrunk> = retrieve(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [retrieve] */
+    fun retrieve(
+        sid: String,
+        params: ByocTrunkRetrieveParams = ByocTrunkRetrieveParams.none(),
+    ): CompletableFuture<ByocTrunk> = retrieve(sid, params, RequestOptions.none())
 
     /** @see [retrieve] */
     fun retrieve(
@@ -48,14 +61,43 @@ interface ByocTrunkServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<ByocTrunk>
 
-    fun update(params: ByocTrunkUpdateParams): CompletableFuture<ByocTrunk> =
-        update(params, RequestOptions.none())
+    /** @see [retrieve] */
+    fun retrieve(params: ByocTrunkRetrieveParams): CompletableFuture<ByocTrunk> =
+        retrieve(params, RequestOptions.none())
+
+    /** @see [retrieve] */
+    fun retrieve(sid: String, requestOptions: RequestOptions): CompletableFuture<ByocTrunk> =
+        retrieve(sid, ByocTrunkRetrieveParams.none(), requestOptions)
+
+    fun update(sid: String): CompletableFuture<ByocTrunk> =
+        update(sid, ByocTrunkUpdateParams.none())
+
+    /** @see [update] */
+    fun update(
+        sid: String,
+        params: ByocTrunkUpdateParams = ByocTrunkUpdateParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<ByocTrunk> = update(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [update] */
+    fun update(
+        sid: String,
+        params: ByocTrunkUpdateParams = ByocTrunkUpdateParams.none(),
+    ): CompletableFuture<ByocTrunk> = update(sid, params, RequestOptions.none())
 
     /** @see [update] */
     fun update(
         params: ByocTrunkUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<ByocTrunk>
+
+    /** @see [update] */
+    fun update(params: ByocTrunkUpdateParams): CompletableFuture<ByocTrunk> =
+        update(params, RequestOptions.none())
+
+    /** @see [update] */
+    fun update(sid: String, requestOptions: RequestOptions): CompletableFuture<ByocTrunk> =
+        update(sid, ByocTrunkUpdateParams.none(), requestOptions)
 
     fun list(): CompletableFuture<ByocTrunkListResponse> = list(ByocTrunkListParams.none())
 
@@ -74,14 +116,34 @@ interface ByocTrunkServiceAsync {
     fun list(requestOptions: RequestOptions): CompletableFuture<ByocTrunkListResponse> =
         list(ByocTrunkListParams.none(), requestOptions)
 
-    fun delete(params: ByocTrunkDeleteParams): CompletableFuture<Void?> =
-        delete(params, RequestOptions.none())
+    fun delete(sid: String): CompletableFuture<Void?> = delete(sid, ByocTrunkDeleteParams.none())
+
+    /** @see [delete] */
+    fun delete(
+        sid: String,
+        params: ByocTrunkDeleteParams = ByocTrunkDeleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> = delete(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [delete] */
+    fun delete(
+        sid: String,
+        params: ByocTrunkDeleteParams = ByocTrunkDeleteParams.none(),
+    ): CompletableFuture<Void?> = delete(sid, params, RequestOptions.none())
 
     /** @see [delete] */
     fun delete(
         params: ByocTrunkDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see [delete] */
+    fun delete(params: ByocTrunkDeleteParams): CompletableFuture<Void?> =
+        delete(params, RequestOptions.none())
+
+    /** @see [delete] */
+    fun delete(sid: String, requestOptions: RequestOptions): CompletableFuture<Void?> =
+        delete(sid, ByocTrunkDeleteParams.none(), requestOptions)
 
     /**
      * A view of [ByocTrunkServiceAsync] that provides access to raw HTTP responses for each method.
@@ -119,9 +181,25 @@ interface ByocTrunkServiceAsync {
          * [ByocTrunkServiceAsync.retrieve].
          */
         @MustBeClosed
+        fun retrieve(sid: String): CompletableFuture<HttpResponseFor<ByocTrunk>> =
+            retrieve(sid, ByocTrunkRetrieveParams.none())
+
+        /** @see [retrieve] */
+        @MustBeClosed
         fun retrieve(
-            params: ByocTrunkRetrieveParams
-        ): CompletableFuture<HttpResponseFor<ByocTrunk>> = retrieve(params, RequestOptions.none())
+            sid: String,
+            params: ByocTrunkRetrieveParams = ByocTrunkRetrieveParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<ByocTrunk>> =
+            retrieve(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            sid: String,
+            params: ByocTrunkRetrieveParams = ByocTrunkRetrieveParams.none(),
+        ): CompletableFuture<HttpResponseFor<ByocTrunk>> =
+            retrieve(sid, params, RequestOptions.none())
 
         /** @see [retrieve] */
         @MustBeClosed
@@ -130,13 +208,44 @@ interface ByocTrunkServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponseFor<ByocTrunk>>
 
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            params: ByocTrunkRetrieveParams
+        ): CompletableFuture<HttpResponseFor<ByocTrunk>> = retrieve(params, RequestOptions.none())
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            sid: String,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<ByocTrunk>> =
+            retrieve(sid, ByocTrunkRetrieveParams.none(), requestOptions)
+
         /**
          * Returns a raw HTTP response for `post /v1/ByocTrunks/{Sid}`, but is otherwise the same as
          * [ByocTrunkServiceAsync.update].
          */
         @MustBeClosed
-        fun update(params: ByocTrunkUpdateParams): CompletableFuture<HttpResponseFor<ByocTrunk>> =
-            update(params, RequestOptions.none())
+        fun update(sid: String): CompletableFuture<HttpResponseFor<ByocTrunk>> =
+            update(sid, ByocTrunkUpdateParams.none())
+
+        /** @see [update] */
+        @MustBeClosed
+        fun update(
+            sid: String,
+            params: ByocTrunkUpdateParams = ByocTrunkUpdateParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<ByocTrunk>> =
+            update(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [update] */
+        @MustBeClosed
+        fun update(
+            sid: String,
+            params: ByocTrunkUpdateParams = ByocTrunkUpdateParams.none(),
+        ): CompletableFuture<HttpResponseFor<ByocTrunk>> =
+            update(sid, params, RequestOptions.none())
 
         /** @see [update] */
         @MustBeClosed
@@ -144,6 +253,19 @@ interface ByocTrunkServiceAsync {
             params: ByocTrunkUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponseFor<ByocTrunk>>
+
+        /** @see [update] */
+        @MustBeClosed
+        fun update(params: ByocTrunkUpdateParams): CompletableFuture<HttpResponseFor<ByocTrunk>> =
+            update(params, RequestOptions.none())
+
+        /** @see [update] */
+        @MustBeClosed
+        fun update(
+            sid: String,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<ByocTrunk>> =
+            update(sid, ByocTrunkUpdateParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /v1/ByocTrunks`, but is otherwise the same as
@@ -179,8 +301,24 @@ interface ByocTrunkServiceAsync {
          * as [ByocTrunkServiceAsync.delete].
          */
         @MustBeClosed
-        fun delete(params: ByocTrunkDeleteParams): CompletableFuture<HttpResponse> =
-            delete(params, RequestOptions.none())
+        fun delete(sid: String): CompletableFuture<HttpResponse> =
+            delete(sid, ByocTrunkDeleteParams.none())
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(
+            sid: String,
+            params: ByocTrunkDeleteParams = ByocTrunkDeleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            delete(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(
+            sid: String,
+            params: ByocTrunkDeleteParams = ByocTrunkDeleteParams.none(),
+        ): CompletableFuture<HttpResponse> = delete(sid, params, RequestOptions.none())
 
         /** @see [delete] */
         @MustBeClosed
@@ -188,5 +326,15 @@ interface ByocTrunkServiceAsync {
             params: ByocTrunkDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(params: ByocTrunkDeleteParams): CompletableFuture<HttpResponse> =
+            delete(params, RequestOptions.none())
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(sid: String, requestOptions: RequestOptions): CompletableFuture<HttpResponse> =
+            delete(sid, ByocTrunkDeleteParams.none(), requestOptions)
     }
 }

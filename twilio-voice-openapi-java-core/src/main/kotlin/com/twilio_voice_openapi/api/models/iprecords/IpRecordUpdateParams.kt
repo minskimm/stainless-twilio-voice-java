@@ -11,23 +11,23 @@ import com.twilio_voice_openapi.api.core.JsonField
 import com.twilio_voice_openapi.api.core.JsonMissing
 import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.Params
-import com.twilio_voice_openapi.api.core.checkRequired
 import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
 import java.util.Collections
 import java.util.Objects
 import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 class IpRecordUpdateParams
 private constructor(
-    private val sid: String,
+    private val sid: String?,
     private val body: Body,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun sid(): String = sid
+    fun sid(): Optional<String> = Optional.ofNullable(sid)
 
     /**
      * A descriptive string that you create to describe the resource. It is not unique and can be up
@@ -55,14 +55,9 @@ private constructor(
 
     companion object {
 
-        /**
-         * Returns a mutable builder for constructing an instance of [IpRecordUpdateParams].
-         *
-         * The following fields are required:
-         * ```java
-         * .sid()
-         * ```
-         */
+        @JvmStatic fun none(): IpRecordUpdateParams = builder().build()
+
+        /** Returns a mutable builder for constructing an instance of [IpRecordUpdateParams]. */
         @JvmStatic fun builder() = Builder()
     }
 
@@ -82,7 +77,10 @@ private constructor(
             additionalQueryParams = ipRecordUpdateParams.additionalQueryParams.toBuilder()
         }
 
-        fun sid(sid: String) = apply { this.sid = sid }
+        fun sid(sid: String?) = apply { this.sid = sid }
+
+        /** Alias for calling [Builder.sid] with `sid.orElse(null)`. */
+        fun sid(sid: Optional<String>) = sid(sid.getOrNull())
 
         /**
          * Sets the entire request body.
@@ -231,17 +229,10 @@ private constructor(
          * Returns an immutable instance of [IpRecordUpdateParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```java
-         * .sid()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): IpRecordUpdateParams =
             IpRecordUpdateParams(
-                checkRequired("sid", sid),
+                sid,
                 body.build(),
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
@@ -252,7 +243,7 @@ private constructor(
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> sid
+            0 -> sid ?: ""
             else -> ""
         }
 

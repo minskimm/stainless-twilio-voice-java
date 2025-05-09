@@ -42,8 +42,22 @@ interface ConnectionPolicyServiceAsync {
     fun create(requestOptions: RequestOptions): CompletableFuture<ConnectionPolicy> =
         create(ConnectionPolicyCreateParams.none(), requestOptions)
 
-    fun retrieve(params: ConnectionPolicyRetrieveParams): CompletableFuture<ConnectionPolicy> =
-        retrieve(params, RequestOptions.none())
+    fun retrieve(sid: String): CompletableFuture<ConnectionPolicy> =
+        retrieve(sid, ConnectionPolicyRetrieveParams.none())
+
+    /** @see [retrieve] */
+    fun retrieve(
+        sid: String,
+        params: ConnectionPolicyRetrieveParams = ConnectionPolicyRetrieveParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<ConnectionPolicy> =
+        retrieve(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [retrieve] */
+    fun retrieve(
+        sid: String,
+        params: ConnectionPolicyRetrieveParams = ConnectionPolicyRetrieveParams.none(),
+    ): CompletableFuture<ConnectionPolicy> = retrieve(sid, params, RequestOptions.none())
 
     /** @see [retrieve] */
     fun retrieve(
@@ -51,14 +65,44 @@ interface ConnectionPolicyServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<ConnectionPolicy>
 
-    fun update(params: ConnectionPolicyUpdateParams): CompletableFuture<ConnectionPolicy> =
-        update(params, RequestOptions.none())
+    /** @see [retrieve] */
+    fun retrieve(params: ConnectionPolicyRetrieveParams): CompletableFuture<ConnectionPolicy> =
+        retrieve(params, RequestOptions.none())
+
+    /** @see [retrieve] */
+    fun retrieve(sid: String, requestOptions: RequestOptions): CompletableFuture<ConnectionPolicy> =
+        retrieve(sid, ConnectionPolicyRetrieveParams.none(), requestOptions)
+
+    fun update(sid: String): CompletableFuture<ConnectionPolicy> =
+        update(sid, ConnectionPolicyUpdateParams.none())
+
+    /** @see [update] */
+    fun update(
+        sid: String,
+        params: ConnectionPolicyUpdateParams = ConnectionPolicyUpdateParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<ConnectionPolicy> =
+        update(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [update] */
+    fun update(
+        sid: String,
+        params: ConnectionPolicyUpdateParams = ConnectionPolicyUpdateParams.none(),
+    ): CompletableFuture<ConnectionPolicy> = update(sid, params, RequestOptions.none())
 
     /** @see [update] */
     fun update(
         params: ConnectionPolicyUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<ConnectionPolicy>
+
+    /** @see [update] */
+    fun update(params: ConnectionPolicyUpdateParams): CompletableFuture<ConnectionPolicy> =
+        update(params, RequestOptions.none())
+
+    /** @see [update] */
+    fun update(sid: String, requestOptions: RequestOptions): CompletableFuture<ConnectionPolicy> =
+        update(sid, ConnectionPolicyUpdateParams.none(), requestOptions)
 
     fun list(): CompletableFuture<ConnectionPolicyListResponse> =
         list(ConnectionPolicyListParams.none())
@@ -78,14 +122,35 @@ interface ConnectionPolicyServiceAsync {
     fun list(requestOptions: RequestOptions): CompletableFuture<ConnectionPolicyListResponse> =
         list(ConnectionPolicyListParams.none(), requestOptions)
 
-    fun delete(params: ConnectionPolicyDeleteParams): CompletableFuture<Void?> =
-        delete(params, RequestOptions.none())
+    fun delete(sid: String): CompletableFuture<Void?> =
+        delete(sid, ConnectionPolicyDeleteParams.none())
+
+    /** @see [delete] */
+    fun delete(
+        sid: String,
+        params: ConnectionPolicyDeleteParams = ConnectionPolicyDeleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> = delete(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [delete] */
+    fun delete(
+        sid: String,
+        params: ConnectionPolicyDeleteParams = ConnectionPolicyDeleteParams.none(),
+    ): CompletableFuture<Void?> = delete(sid, params, RequestOptions.none())
 
     /** @see [delete] */
     fun delete(
         params: ConnectionPolicyDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see [delete] */
+    fun delete(params: ConnectionPolicyDeleteParams): CompletableFuture<Void?> =
+        delete(params, RequestOptions.none())
+
+    /** @see [delete] */
+    fun delete(sid: String, requestOptions: RequestOptions): CompletableFuture<Void?> =
+        delete(sid, ConnectionPolicyDeleteParams.none(), requestOptions)
 
     /**
      * A view of [ConnectionPolicyServiceAsync] that provides access to raw HTTP responses for each
@@ -129,10 +194,25 @@ interface ConnectionPolicyServiceAsync {
          * same as [ConnectionPolicyServiceAsync.retrieve].
          */
         @MustBeClosed
+        fun retrieve(sid: String): CompletableFuture<HttpResponseFor<ConnectionPolicy>> =
+            retrieve(sid, ConnectionPolicyRetrieveParams.none())
+
+        /** @see [retrieve] */
+        @MustBeClosed
         fun retrieve(
-            params: ConnectionPolicyRetrieveParams
+            sid: String,
+            params: ConnectionPolicyRetrieveParams = ConnectionPolicyRetrieveParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponseFor<ConnectionPolicy>> =
-            retrieve(params, RequestOptions.none())
+            retrieve(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            sid: String,
+            params: ConnectionPolicyRetrieveParams = ConnectionPolicyRetrieveParams.none(),
+        ): CompletableFuture<HttpResponseFor<ConnectionPolicy>> =
+            retrieve(sid, params, RequestOptions.none())
 
         /** @see [retrieve] */
         @MustBeClosed
@@ -141,10 +221,54 @@ interface ConnectionPolicyServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponseFor<ConnectionPolicy>>
 
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            params: ConnectionPolicyRetrieveParams
+        ): CompletableFuture<HttpResponseFor<ConnectionPolicy>> =
+            retrieve(params, RequestOptions.none())
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            sid: String,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<ConnectionPolicy>> =
+            retrieve(sid, ConnectionPolicyRetrieveParams.none(), requestOptions)
+
         /**
          * Returns a raw HTTP response for `post /v1/ConnectionPolicies/{Sid}`, but is otherwise the
          * same as [ConnectionPolicyServiceAsync.update].
          */
+        @MustBeClosed
+        fun update(sid: String): CompletableFuture<HttpResponseFor<ConnectionPolicy>> =
+            update(sid, ConnectionPolicyUpdateParams.none())
+
+        /** @see [update] */
+        @MustBeClosed
+        fun update(
+            sid: String,
+            params: ConnectionPolicyUpdateParams = ConnectionPolicyUpdateParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<ConnectionPolicy>> =
+            update(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [update] */
+        @MustBeClosed
+        fun update(
+            sid: String,
+            params: ConnectionPolicyUpdateParams = ConnectionPolicyUpdateParams.none(),
+        ): CompletableFuture<HttpResponseFor<ConnectionPolicy>> =
+            update(sid, params, RequestOptions.none())
+
+        /** @see [update] */
+        @MustBeClosed
+        fun update(
+            params: ConnectionPolicyUpdateParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<ConnectionPolicy>>
+
+        /** @see [update] */
         @MustBeClosed
         fun update(
             params: ConnectionPolicyUpdateParams
@@ -154,9 +278,10 @@ interface ConnectionPolicyServiceAsync {
         /** @see [update] */
         @MustBeClosed
         fun update(
-            params: ConnectionPolicyUpdateParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<ConnectionPolicy>>
+            sid: String,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<ConnectionPolicy>> =
+            update(sid, ConnectionPolicyUpdateParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /v1/ConnectionPolicies`, but is otherwise the same
@@ -192,8 +317,24 @@ interface ConnectionPolicyServiceAsync {
          * the same as [ConnectionPolicyServiceAsync.delete].
          */
         @MustBeClosed
-        fun delete(params: ConnectionPolicyDeleteParams): CompletableFuture<HttpResponse> =
-            delete(params, RequestOptions.none())
+        fun delete(sid: String): CompletableFuture<HttpResponse> =
+            delete(sid, ConnectionPolicyDeleteParams.none())
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(
+            sid: String,
+            params: ConnectionPolicyDeleteParams = ConnectionPolicyDeleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            delete(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(
+            sid: String,
+            params: ConnectionPolicyDeleteParams = ConnectionPolicyDeleteParams.none(),
+        ): CompletableFuture<HttpResponse> = delete(sid, params, RequestOptions.none())
 
         /** @see [delete] */
         @MustBeClosed
@@ -201,5 +342,15 @@ interface ConnectionPolicyServiceAsync {
             params: ConnectionPolicyDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(params: ConnectionPolicyDeleteParams): CompletableFuture<HttpResponse> =
+            delete(params, RequestOptions.none())
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(sid: String, requestOptions: RequestOptions): CompletableFuture<HttpResponse> =
+            delete(sid, ConnectionPolicyDeleteParams.none(), requestOptions)
     }
 }

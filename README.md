@@ -379,7 +379,6 @@ import java.time.LocalDate;
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
     .date(LocalDate.parse("REPLACE_ME"))
-    .sid("REPLACE_ME")
     .build();
 ```
 
@@ -431,7 +430,6 @@ import com.twilio_voice_openapi.api.core.JsonMissing;
 import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
-    .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
     .date(JsonMissing.of())
     .build();
 ```

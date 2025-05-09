@@ -5,9 +5,7 @@ package com.twilio_voice_openapi.api.services.blocking
 import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient
 import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingCreateParams
-import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingDeleteParams
 import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingListParams
-import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingRetrieveParams
 import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -49,12 +47,7 @@ internal class SourceIpMappingServiceTest {
                 .build()
         val sourceIpMappingService = client.sourceIpMappings()
 
-        val sourceIpMapping =
-            sourceIpMappingService.retrieve(
-                SourceIpMappingRetrieveParams.builder()
-                    .sid("IBE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                    .build()
-            )
+        val sourceIpMapping = sourceIpMappingService.retrieve("IBE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
 
         sourceIpMapping.validate()
     }
@@ -115,8 +108,6 @@ internal class SourceIpMappingServiceTest {
                 .build()
         val sourceIpMappingService = client.sourceIpMappings()
 
-        sourceIpMappingService.delete(
-            SourceIpMappingDeleteParams.builder().sid("IBE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
-        )
+        sourceIpMappingService.delete("IBE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
     }
 }

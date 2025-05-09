@@ -5,6 +5,7 @@ package com.twilio_voice_openapi.api.services.blocking
 import com.twilio_voice_openapi.api.core.ClientOptions
 import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.RequestOptions
+import com.twilio_voice_openapi.api.core.checkRequired
 import com.twilio_voice_openapi.api.core.handlers.emptyHandler
 import com.twilio_voice_openapi.api.core.handlers.errorHandler
 import com.twilio_voice_openapi.api.core.handlers.jsonHandler
@@ -24,6 +25,7 @@ import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingListP
 import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingListResponse
 import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingRetrieveParams
 import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingUpdateParams
+import kotlin.jvm.optionals.getOrNull
 
 class SourceIpMappingServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     SourceIpMappingService {
@@ -106,6 +108,9 @@ class SourceIpMappingServiceImpl internal constructor(private val clientOptions:
             params: SourceIpMappingRetrieveParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<SourceIpMapping> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -132,6 +137,9 @@ class SourceIpMappingServiceImpl internal constructor(private val clientOptions:
             params: SourceIpMappingUpdateParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<SourceIpMapping> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
@@ -185,6 +193,9 @@ class SourceIpMappingServiceImpl internal constructor(private val clientOptions:
             params: SourceIpMappingDeleteParams,
             requestOptions: RequestOptions,
         ): HttpResponse {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)

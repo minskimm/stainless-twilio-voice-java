@@ -5,9 +5,7 @@ package com.twilio_voice_openapi.api.services.async
 import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClientAsync
 import com.twilio_voice_openapi.api.models.iprecords.IpRecordCreateParams
-import com.twilio_voice_openapi.api.models.iprecords.IpRecordDeleteParams
 import com.twilio_voice_openapi.api.models.iprecords.IpRecordListParams
-import com.twilio_voice_openapi.api.models.iprecords.IpRecordRetrieveParams
 import com.twilio_voice_openapi.api.models.iprecords.IpRecordUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -51,10 +49,7 @@ internal class IpRecordServiceAsyncTest {
                 .build()
         val ipRecordServiceAsync = client.ipRecords()
 
-        val ipRecordFuture =
-            ipRecordServiceAsync.retrieve(
-                IpRecordRetrieveParams.builder().sid("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
-            )
+        val ipRecordFuture = ipRecordServiceAsync.retrieve("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
 
         val ipRecord = ipRecordFuture.get()
         ipRecord.validate()
@@ -114,10 +109,7 @@ internal class IpRecordServiceAsyncTest {
                 .build()
         val ipRecordServiceAsync = client.ipRecords()
 
-        val future =
-            ipRecordServiceAsync.delete(
-                IpRecordDeleteParams.builder().sid("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
-            )
+        val future = ipRecordServiceAsync.delete("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
 
         val response = future.get()
     }

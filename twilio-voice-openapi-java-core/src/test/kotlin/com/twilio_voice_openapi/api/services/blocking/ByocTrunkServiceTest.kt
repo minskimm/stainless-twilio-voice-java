@@ -5,9 +5,7 @@ package com.twilio_voice_openapi.api.services.blocking
 import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient
 import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkCreateParams
-import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkDeleteParams
 import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkListParams
-import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkRetrieveParams
 import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -57,10 +55,7 @@ internal class ByocTrunkServiceTest {
                 .build()
         val byocTrunkService = client.byocTrunks()
 
-        val byocTrunk =
-            byocTrunkService.retrieve(
-                ByocTrunkRetrieveParams.builder().sid("BYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
-            )
+        val byocTrunk = byocTrunkService.retrieve("BYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
 
         byocTrunk.validate()
     }
@@ -126,8 +121,6 @@ internal class ByocTrunkServiceTest {
                 .build()
         val byocTrunkService = client.byocTrunks()
 
-        byocTrunkService.delete(
-            ByocTrunkDeleteParams.builder().sid("BYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
-        )
+        byocTrunkService.delete("BYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
     }
 }

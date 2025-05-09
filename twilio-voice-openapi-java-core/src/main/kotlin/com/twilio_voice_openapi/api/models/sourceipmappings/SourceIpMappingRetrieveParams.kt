@@ -3,19 +3,20 @@
 package com.twilio_voice_openapi.api.models.sourceipmappings
 
 import com.twilio_voice_openapi.api.core.Params
-import com.twilio_voice_openapi.api.core.checkRequired
 import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
 import java.util.Objects
+import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 class SourceIpMappingRetrieveParams
 private constructor(
-    private val sid: String,
+    private val sid: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun sid(): String = sid
+    fun sid(): Optional<String> = Optional.ofNullable(sid)
 
     fun _additionalHeaders(): Headers = additionalHeaders
 
@@ -25,14 +26,11 @@ private constructor(
 
     companion object {
 
+        @JvmStatic fun none(): SourceIpMappingRetrieveParams = builder().build()
+
         /**
          * Returns a mutable builder for constructing an instance of
          * [SourceIpMappingRetrieveParams].
-         *
-         * The following fields are required:
-         * ```java
-         * .sid()
-         * ```
          */
         @JvmStatic fun builder() = Builder()
     }
@@ -51,7 +49,10 @@ private constructor(
             additionalQueryParams = sourceIpMappingRetrieveParams.additionalQueryParams.toBuilder()
         }
 
-        fun sid(sid: String) = apply { this.sid = sid }
+        fun sid(sid: String?) = apply { this.sid = sid }
+
+        /** Alias for calling [Builder.sid] with `sid.orElse(null)`. */
+        fun sid(sid: Optional<String>) = sid(sid.getOrNull())
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -155,17 +156,10 @@ private constructor(
          * Returns an immutable instance of [SourceIpMappingRetrieveParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```java
-         * .sid()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): SourceIpMappingRetrieveParams =
             SourceIpMappingRetrieveParams(
-                checkRequired("sid", sid),
+                sid,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
             )
@@ -173,7 +167,7 @@ private constructor(
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> sid
+            0 -> sid ?: ""
             else -> ""
         }
 

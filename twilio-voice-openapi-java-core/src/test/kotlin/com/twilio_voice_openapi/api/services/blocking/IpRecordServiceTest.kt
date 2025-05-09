@@ -5,9 +5,7 @@ package com.twilio_voice_openapi.api.services.blocking
 import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient
 import com.twilio_voice_openapi.api.models.iprecords.IpRecordCreateParams
-import com.twilio_voice_openapi.api.models.iprecords.IpRecordDeleteParams
 import com.twilio_voice_openapi.api.models.iprecords.IpRecordListParams
-import com.twilio_voice_openapi.api.models.iprecords.IpRecordRetrieveParams
 import com.twilio_voice_openapi.api.models.iprecords.IpRecordUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -50,10 +48,7 @@ internal class IpRecordServiceTest {
                 .build()
         val ipRecordService = client.ipRecords()
 
-        val ipRecord =
-            ipRecordService.retrieve(
-                IpRecordRetrieveParams.builder().sid("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
-            )
+        val ipRecord = ipRecordService.retrieve("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
 
         ipRecord.validate()
     }
@@ -110,8 +105,6 @@ internal class IpRecordServiceTest {
                 .build()
         val ipRecordService = client.ipRecords()
 
-        ipRecordService.delete(
-            IpRecordDeleteParams.builder().sid("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
-        )
+        ipRecordService.delete("ILE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
     }
 }

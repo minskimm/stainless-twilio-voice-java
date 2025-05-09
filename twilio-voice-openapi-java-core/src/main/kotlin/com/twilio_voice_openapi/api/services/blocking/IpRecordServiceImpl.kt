@@ -5,6 +5,7 @@ package com.twilio_voice_openapi.api.services.blocking
 import com.twilio_voice_openapi.api.core.ClientOptions
 import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.RequestOptions
+import com.twilio_voice_openapi.api.core.checkRequired
 import com.twilio_voice_openapi.api.core.handlers.emptyHandler
 import com.twilio_voice_openapi.api.core.handlers.errorHandler
 import com.twilio_voice_openapi.api.core.handlers.jsonHandler
@@ -24,6 +25,7 @@ import com.twilio_voice_openapi.api.models.iprecords.IpRecordListParams
 import com.twilio_voice_openapi.api.models.iprecords.IpRecordListResponse
 import com.twilio_voice_openapi.api.models.iprecords.IpRecordRetrieveParams
 import com.twilio_voice_openapi.api.models.iprecords.IpRecordUpdateParams
+import kotlin.jvm.optionals.getOrNull
 
 class IpRecordServiceImpl internal constructor(private val clientOptions: ClientOptions) :
     IpRecordService {
@@ -100,6 +102,9 @@ class IpRecordServiceImpl internal constructor(private val clientOptions: Client
             params: IpRecordRetrieveParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<IpRecord> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -126,6 +131,9 @@ class IpRecordServiceImpl internal constructor(private val clientOptions: Client
             params: IpRecordUpdateParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<IpRecord> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
@@ -179,6 +187,9 @@ class IpRecordServiceImpl internal constructor(private val clientOptions: Client
             params: IpRecordDeleteParams,
             requestOptions: RequestOptions,
         ): HttpResponse {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)

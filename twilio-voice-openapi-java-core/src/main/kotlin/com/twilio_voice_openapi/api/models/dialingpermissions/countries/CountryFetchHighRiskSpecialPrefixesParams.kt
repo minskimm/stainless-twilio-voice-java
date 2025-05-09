@@ -3,7 +3,6 @@
 package com.twilio_voice_openapi.api.models.dialingpermissions.countries
 
 import com.twilio_voice_openapi.api.core.Params
-import com.twilio_voice_openapi.api.core.checkRequired
 import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
 import java.util.Objects
@@ -16,7 +15,7 @@ import kotlin.jvm.optionals.getOrNull
  */
 class CountryFetchHighRiskSpecialPrefixesParams
 private constructor(
-    private val isoCode: String,
+    private val isoCode: String?,
     private val page: Long?,
     private val pageSize: Long?,
     private val pageToken: String?,
@@ -24,7 +23,7 @@ private constructor(
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun isoCode(): String = isoCode
+    fun isoCode(): Optional<String> = Optional.ofNullable(isoCode)
 
     /** The page index. This value is simply for client state. */
     fun page(): Optional<Long> = Optional.ofNullable(page)
@@ -45,14 +44,11 @@ private constructor(
 
     companion object {
 
+        @JvmStatic fun none(): CountryFetchHighRiskSpecialPrefixesParams = builder().build()
+
         /**
          * Returns a mutable builder for constructing an instance of
          * [CountryFetchHighRiskSpecialPrefixesParams].
-         *
-         * The following fields are required:
-         * ```java
-         * .isoCode()
-         * ```
          */
         @JvmStatic fun builder() = Builder()
     }
@@ -81,7 +77,10 @@ private constructor(
                 countryFetchHighRiskSpecialPrefixesParams.additionalQueryParams.toBuilder()
         }
 
-        fun isoCode(isoCode: String) = apply { this.isoCode = isoCode }
+        fun isoCode(isoCode: String?) = apply { this.isoCode = isoCode }
+
+        /** Alias for calling [Builder.isoCode] with `isoCode.orElse(null)`. */
+        fun isoCode(isoCode: Optional<String>) = isoCode(isoCode.getOrNull())
 
         /** The page index. This value is simply for client state. */
         fun page(page: Long?) = apply { this.page = page }
@@ -220,17 +219,10 @@ private constructor(
          * Returns an immutable instance of [CountryFetchHighRiskSpecialPrefixesParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```java
-         * .isoCode()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): CountryFetchHighRiskSpecialPrefixesParams =
             CountryFetchHighRiskSpecialPrefixesParams(
-                checkRequired("isoCode", isoCode),
+                isoCode,
                 page,
                 pageSize,
                 pageToken,
@@ -241,7 +233,7 @@ private constructor(
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> isoCode
+            0 -> isoCode ?: ""
             else -> ""
         }
 

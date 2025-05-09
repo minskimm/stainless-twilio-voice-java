@@ -3,7 +3,6 @@
 package com.twilio_voice_openapi.api.models.connectionpolicies.targets
 
 import com.twilio_voice_openapi.api.core.Params
-import com.twilio_voice_openapi.api.core.checkRequired
 import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
 import java.util.Objects
@@ -12,7 +11,7 @@ import kotlin.jvm.optionals.getOrNull
 
 class TargetListParams
 private constructor(
-    private val connectionPolicySid: String,
+    private val connectionPolicySid: String?,
     private val page: Long?,
     private val pageSize: Long?,
     private val pageToken: String?,
@@ -20,7 +19,7 @@ private constructor(
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun connectionPolicySid(): String = connectionPolicySid
+    fun connectionPolicySid(): Optional<String> = Optional.ofNullable(connectionPolicySid)
 
     /** The page index. This value is simply for client state. */
     fun page(): Optional<Long> = Optional.ofNullable(page)
@@ -41,14 +40,9 @@ private constructor(
 
     companion object {
 
-        /**
-         * Returns a mutable builder for constructing an instance of [TargetListParams].
-         *
-         * The following fields are required:
-         * ```java
-         * .connectionPolicySid()
-         * ```
-         */
+        @JvmStatic fun none(): TargetListParams = builder().build()
+
+        /** Returns a mutable builder for constructing an instance of [TargetListParams]. */
         @JvmStatic fun builder() = Builder()
     }
 
@@ -72,9 +66,15 @@ private constructor(
             additionalQueryParams = targetListParams.additionalQueryParams.toBuilder()
         }
 
-        fun connectionPolicySid(connectionPolicySid: String) = apply {
+        fun connectionPolicySid(connectionPolicySid: String?) = apply {
             this.connectionPolicySid = connectionPolicySid
         }
+
+        /**
+         * Alias for calling [Builder.connectionPolicySid] with `connectionPolicySid.orElse(null)`.
+         */
+        fun connectionPolicySid(connectionPolicySid: Optional<String>) =
+            connectionPolicySid(connectionPolicySid.getOrNull())
 
         /** The page index. This value is simply for client state. */
         fun page(page: Long?) = apply { this.page = page }
@@ -213,17 +213,10 @@ private constructor(
          * Returns an immutable instance of [TargetListParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```java
-         * .connectionPolicySid()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): TargetListParams =
             TargetListParams(
-                checkRequired("connectionPolicySid", connectionPolicySid),
+                connectionPolicySid,
                 page,
                 pageSize,
                 pageToken,
@@ -234,7 +227,7 @@ private constructor(
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> connectionPolicySid
+            0 -> connectionPolicySid ?: ""
             else -> ""
         }
 

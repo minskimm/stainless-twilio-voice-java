@@ -7,18 +7,20 @@ import com.twilio_voice_openapi.api.core.checkRequired
 import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
 import java.util.Objects
+import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 class TargetRetrieveParams
 private constructor(
     private val connectionPolicySid: String,
-    private val sid: String,
+    private val sid: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
     fun connectionPolicySid(): String = connectionPolicySid
 
-    fun sid(): String = sid
+    fun sid(): Optional<String> = Optional.ofNullable(sid)
 
     fun _additionalHeaders(): Headers = additionalHeaders
 
@@ -34,7 +36,6 @@ private constructor(
          * The following fields are required:
          * ```java
          * .connectionPolicySid()
-         * .sid()
          * ```
          */
         @JvmStatic fun builder() = Builder()
@@ -60,7 +61,10 @@ private constructor(
             this.connectionPolicySid = connectionPolicySid
         }
 
-        fun sid(sid: String) = apply { this.sid = sid }
+        fun sid(sid: String?) = apply { this.sid = sid }
+
+        /** Alias for calling [Builder.sid] with `sid.orElse(null)`. */
+        fun sid(sid: Optional<String>) = sid(sid.getOrNull())
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -168,7 +172,6 @@ private constructor(
          * The following fields are required:
          * ```java
          * .connectionPolicySid()
-         * .sid()
          * ```
          *
          * @throws IllegalStateException if any required field is unset.
@@ -176,7 +179,7 @@ private constructor(
         fun build(): TargetRetrieveParams =
             TargetRetrieveParams(
                 checkRequired("connectionPolicySid", connectionPolicySid),
-                checkRequired("sid", sid),
+                sid,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
             )
@@ -185,7 +188,7 @@ private constructor(
     fun _pathParam(index: Int): String =
         when (index) {
             0 -> connectionPolicySid
-            1 -> sid
+            1 -> sid ?: ""
             else -> ""
         }
 

@@ -18,11 +18,12 @@ import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataExceptio
 import java.util.Collections
 import java.util.Objects
 import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 class TargetUpdateParams
 private constructor(
     private val connectionPolicySid: String,
-    private val sid: String,
+    private val sid: String?,
     private val body: Body,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
@@ -30,7 +31,7 @@ private constructor(
 
     fun connectionPolicySid(): String = connectionPolicySid
 
-    fun sid(): String = sid
+    fun sid(): Optional<String> = Optional.ofNullable(sid)
 
     /**
      * Whether the Target is enabled.
@@ -129,7 +130,6 @@ private constructor(
          * The following fields are required:
          * ```java
          * .connectionPolicySid()
-         * .sid()
          * ```
          */
         @JvmStatic fun builder() = Builder()
@@ -157,7 +157,10 @@ private constructor(
             this.connectionPolicySid = connectionPolicySid
         }
 
-        fun sid(sid: String) = apply { this.sid = sid }
+        fun sid(sid: String?) = apply { this.sid = sid }
+
+        /** Alias for calling [Builder.sid] with `sid.orElse(null)`. */
+        fun sid(sid: Optional<String>) = sid(sid.getOrNull())
 
         /**
          * Sets the entire request body.
@@ -370,7 +373,6 @@ private constructor(
          * The following fields are required:
          * ```java
          * .connectionPolicySid()
-         * .sid()
          * ```
          *
          * @throws IllegalStateException if any required field is unset.
@@ -378,7 +380,7 @@ private constructor(
         fun build(): TargetUpdateParams =
             TargetUpdateParams(
                 checkRequired("connectionPolicySid", connectionPolicySid),
-                checkRequired("sid", sid),
+                sid,
                 body.build(),
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
@@ -390,7 +392,7 @@ private constructor(
     fun _pathParam(index: Int): String =
         when (index) {
             0 -> connectionPolicySid
-            1 -> sid
+            1 -> sid ?: ""
             else -> ""
         }
 
