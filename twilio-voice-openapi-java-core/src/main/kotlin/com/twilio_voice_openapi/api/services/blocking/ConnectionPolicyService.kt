@@ -41,8 +41,21 @@ interface ConnectionPolicyService {
     fun create(requestOptions: RequestOptions): ConnectionPolicy =
         create(ConnectionPolicyCreateParams.none(), requestOptions)
 
-    fun retrieve(params: ConnectionPolicyRetrieveParams): ConnectionPolicy =
-        retrieve(params, RequestOptions.none())
+    fun retrieve(sid: String): ConnectionPolicy =
+        retrieve(sid, ConnectionPolicyRetrieveParams.none())
+
+    /** @see [retrieve] */
+    fun retrieve(
+        sid: String,
+        params: ConnectionPolicyRetrieveParams = ConnectionPolicyRetrieveParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): ConnectionPolicy = retrieve(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [retrieve] */
+    fun retrieve(
+        sid: String,
+        params: ConnectionPolicyRetrieveParams = ConnectionPolicyRetrieveParams.none(),
+    ): ConnectionPolicy = retrieve(sid, params, RequestOptions.none())
 
     /** @see [retrieve] */
     fun retrieve(
@@ -50,14 +63,42 @@ interface ConnectionPolicyService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ConnectionPolicy
 
-    fun update(params: ConnectionPolicyUpdateParams): ConnectionPolicy =
-        update(params, RequestOptions.none())
+    /** @see [retrieve] */
+    fun retrieve(params: ConnectionPolicyRetrieveParams): ConnectionPolicy =
+        retrieve(params, RequestOptions.none())
+
+    /** @see [retrieve] */
+    fun retrieve(sid: String, requestOptions: RequestOptions): ConnectionPolicy =
+        retrieve(sid, ConnectionPolicyRetrieveParams.none(), requestOptions)
+
+    fun update(sid: String): ConnectionPolicy = update(sid, ConnectionPolicyUpdateParams.none())
+
+    /** @see [update] */
+    fun update(
+        sid: String,
+        params: ConnectionPolicyUpdateParams = ConnectionPolicyUpdateParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): ConnectionPolicy = update(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [update] */
+    fun update(
+        sid: String,
+        params: ConnectionPolicyUpdateParams = ConnectionPolicyUpdateParams.none(),
+    ): ConnectionPolicy = update(sid, params, RequestOptions.none())
 
     /** @see [update] */
     fun update(
         params: ConnectionPolicyUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ConnectionPolicy
+
+    /** @see [update] */
+    fun update(params: ConnectionPolicyUpdateParams): ConnectionPolicy =
+        update(params, RequestOptions.none())
+
+    /** @see [update] */
+    fun update(sid: String, requestOptions: RequestOptions): ConnectionPolicy =
+        update(sid, ConnectionPolicyUpdateParams.none(), requestOptions)
 
     fun list(): ConnectionPolicyListResponse = list(ConnectionPolicyListParams.none())
 
@@ -76,13 +117,33 @@ interface ConnectionPolicyService {
     fun list(requestOptions: RequestOptions): ConnectionPolicyListResponse =
         list(ConnectionPolicyListParams.none(), requestOptions)
 
-    fun delete(params: ConnectionPolicyDeleteParams) = delete(params, RequestOptions.none())
+    fun delete(sid: String) = delete(sid, ConnectionPolicyDeleteParams.none())
+
+    /** @see [delete] */
+    fun delete(
+        sid: String,
+        params: ConnectionPolicyDeleteParams = ConnectionPolicyDeleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = delete(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [delete] */
+    fun delete(
+        sid: String,
+        params: ConnectionPolicyDeleteParams = ConnectionPolicyDeleteParams.none(),
+    ) = delete(sid, params, RequestOptions.none())
 
     /** @see [delete] */
     fun delete(
         params: ConnectionPolicyDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see [delete] */
+    fun delete(params: ConnectionPolicyDeleteParams) = delete(params, RequestOptions.none())
+
+    /** @see [delete] */
+    fun delete(sid: String, requestOptions: RequestOptions) =
+        delete(sid, ConnectionPolicyDeleteParams.none(), requestOptions)
 
     /**
      * A view of [ConnectionPolicyService] that provides access to raw HTTP responses for each
@@ -123,8 +184,24 @@ interface ConnectionPolicyService {
          * same as [ConnectionPolicyService.retrieve].
          */
         @MustBeClosed
-        fun retrieve(params: ConnectionPolicyRetrieveParams): HttpResponseFor<ConnectionPolicy> =
-            retrieve(params, RequestOptions.none())
+        fun retrieve(sid: String): HttpResponseFor<ConnectionPolicy> =
+            retrieve(sid, ConnectionPolicyRetrieveParams.none())
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            sid: String,
+            params: ConnectionPolicyRetrieveParams = ConnectionPolicyRetrieveParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<ConnectionPolicy> =
+            retrieve(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            sid: String,
+            params: ConnectionPolicyRetrieveParams = ConnectionPolicyRetrieveParams.none(),
+        ): HttpResponseFor<ConnectionPolicy> = retrieve(sid, params, RequestOptions.none())
 
         /** @see [retrieve] */
         @MustBeClosed
@@ -133,13 +210,42 @@ interface ConnectionPolicyService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ConnectionPolicy>
 
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(params: ConnectionPolicyRetrieveParams): HttpResponseFor<ConnectionPolicy> =
+            retrieve(params, RequestOptions.none())
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            sid: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<ConnectionPolicy> =
+            retrieve(sid, ConnectionPolicyRetrieveParams.none(), requestOptions)
+
         /**
          * Returns a raw HTTP response for `post /v1/ConnectionPolicies/{Sid}`, but is otherwise the
          * same as [ConnectionPolicyService.update].
          */
         @MustBeClosed
-        fun update(params: ConnectionPolicyUpdateParams): HttpResponseFor<ConnectionPolicy> =
-            update(params, RequestOptions.none())
+        fun update(sid: String): HttpResponseFor<ConnectionPolicy> =
+            update(sid, ConnectionPolicyUpdateParams.none())
+
+        /** @see [update] */
+        @MustBeClosed
+        fun update(
+            sid: String,
+            params: ConnectionPolicyUpdateParams = ConnectionPolicyUpdateParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<ConnectionPolicy> =
+            update(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [update] */
+        @MustBeClosed
+        fun update(
+            sid: String,
+            params: ConnectionPolicyUpdateParams = ConnectionPolicyUpdateParams.none(),
+        ): HttpResponseFor<ConnectionPolicy> = update(sid, params, RequestOptions.none())
 
         /** @see [update] */
         @MustBeClosed
@@ -147,6 +253,16 @@ interface ConnectionPolicyService {
             params: ConnectionPolicyUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ConnectionPolicy>
+
+        /** @see [update] */
+        @MustBeClosed
+        fun update(params: ConnectionPolicyUpdateParams): HttpResponseFor<ConnectionPolicy> =
+            update(params, RequestOptions.none())
+
+        /** @see [update] */
+        @MustBeClosed
+        fun update(sid: String, requestOptions: RequestOptions): HttpResponseFor<ConnectionPolicy> =
+            update(sid, ConnectionPolicyUpdateParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /v1/ConnectionPolicies`, but is otherwise the same
@@ -179,8 +295,22 @@ interface ConnectionPolicyService {
          * the same as [ConnectionPolicyService.delete].
          */
         @MustBeClosed
-        fun delete(params: ConnectionPolicyDeleteParams): HttpResponse =
-            delete(params, RequestOptions.none())
+        fun delete(sid: String): HttpResponse = delete(sid, ConnectionPolicyDeleteParams.none())
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(
+            sid: String,
+            params: ConnectionPolicyDeleteParams = ConnectionPolicyDeleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse = delete(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(
+            sid: String,
+            params: ConnectionPolicyDeleteParams = ConnectionPolicyDeleteParams.none(),
+        ): HttpResponse = delete(sid, params, RequestOptions.none())
 
         /** @see [delete] */
         @MustBeClosed
@@ -188,5 +318,15 @@ interface ConnectionPolicyService {
             params: ConnectionPolicyDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(params: ConnectionPolicyDeleteParams): HttpResponse =
+            delete(params, RequestOptions.none())
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(sid: String, requestOptions: RequestOptions): HttpResponse =
+            delete(sid, ConnectionPolicyDeleteParams.none(), requestOptions)
     }
 }

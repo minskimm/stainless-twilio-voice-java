@@ -18,16 +18,17 @@ import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataExceptio
 import java.util.Collections
 import java.util.Objects
 import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 class TargetCreateParams
 private constructor(
-    private val connectionPolicySid: String,
+    private val connectionPolicySid: String?,
     private val body: Body,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun connectionPolicySid(): String = connectionPolicySid
+    fun connectionPolicySid(): Optional<String> = Optional.ofNullable(connectionPolicySid)
 
     /**
      * The SIP address you want Twilio to route your calls to. This must be a `sip:` schema. `sips`
@@ -125,7 +126,6 @@ private constructor(
          *
          * The following fields are required:
          * ```java
-         * .connectionPolicySid()
          * .target()
          * ```
          */
@@ -148,9 +148,15 @@ private constructor(
             additionalQueryParams = targetCreateParams.additionalQueryParams.toBuilder()
         }
 
-        fun connectionPolicySid(connectionPolicySid: String) = apply {
+        fun connectionPolicySid(connectionPolicySid: String?) = apply {
             this.connectionPolicySid = connectionPolicySid
         }
+
+        /**
+         * Alias for calling [Builder.connectionPolicySid] with `connectionPolicySid.orElse(null)`.
+         */
+        fun connectionPolicySid(connectionPolicySid: Optional<String>) =
+            connectionPolicySid(connectionPolicySid.getOrNull())
 
         /**
          * Sets the entire request body.
@@ -362,7 +368,6 @@ private constructor(
          *
          * The following fields are required:
          * ```java
-         * .connectionPolicySid()
          * .target()
          * ```
          *
@@ -370,7 +375,7 @@ private constructor(
          */
         fun build(): TargetCreateParams =
             TargetCreateParams(
-                checkRequired("connectionPolicySid", connectionPolicySid),
+                connectionPolicySid,
                 body.build(),
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
@@ -381,7 +386,7 @@ private constructor(
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> connectionPolicySid
+            0 -> connectionPolicySid ?: ""
             else -> ""
         }
 

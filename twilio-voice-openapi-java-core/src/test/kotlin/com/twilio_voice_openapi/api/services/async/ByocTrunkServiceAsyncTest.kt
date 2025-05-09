@@ -5,9 +5,7 @@ package com.twilio_voice_openapi.api.services.async
 import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClientAsync
 import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkCreateParams
-import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkDeleteParams
 import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkListParams
-import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkRetrieveParams
 import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -58,10 +56,7 @@ internal class ByocTrunkServiceAsyncTest {
                 .build()
         val byocTrunkServiceAsync = client.byocTrunks()
 
-        val byocTrunkFuture =
-            byocTrunkServiceAsync.retrieve(
-                ByocTrunkRetrieveParams.builder().sid("BYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
-            )
+        val byocTrunkFuture = byocTrunkServiceAsync.retrieve("BYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
 
         val byocTrunk = byocTrunkFuture.get()
         byocTrunk.validate()
@@ -130,10 +125,7 @@ internal class ByocTrunkServiceAsyncTest {
                 .build()
         val byocTrunkServiceAsync = client.byocTrunks()
 
-        val future =
-            byocTrunkServiceAsync.delete(
-                ByocTrunkDeleteParams.builder().sid("BYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
-            )
+        val future = byocTrunkServiceAsync.delete("BYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
 
         val response = future.get()
     }

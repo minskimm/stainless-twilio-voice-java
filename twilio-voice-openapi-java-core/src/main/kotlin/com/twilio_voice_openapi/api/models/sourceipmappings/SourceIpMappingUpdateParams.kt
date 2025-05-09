@@ -17,16 +17,18 @@ import com.twilio_voice_openapi.api.core.http.QueryParams
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
 import java.util.Collections
 import java.util.Objects
+import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 class SourceIpMappingUpdateParams
 private constructor(
-    private val sid: String,
+    private val sid: String?,
     private val body: Body,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun sid(): String = sid
+    fun sid(): Optional<String> = Optional.ofNullable(sid)
 
     /**
      * The SID of the SIP Domain that the IP Record should be mapped to.
@@ -58,7 +60,6 @@ private constructor(
          *
          * The following fields are required:
          * ```java
-         * .sid()
          * .sipDomainSid()
          * ```
          */
@@ -81,7 +82,10 @@ private constructor(
             additionalQueryParams = sourceIpMappingUpdateParams.additionalQueryParams.toBuilder()
         }
 
-        fun sid(sid: String) = apply { this.sid = sid }
+        fun sid(sid: String?) = apply { this.sid = sid }
+
+        /** Alias for calling [Builder.sid] with `sid.orElse(null)`. */
+        fun sid(sid: Optional<String>) = sid(sid.getOrNull())
 
         /**
          * Sets the entire request body.
@@ -230,7 +234,6 @@ private constructor(
          *
          * The following fields are required:
          * ```java
-         * .sid()
          * .sipDomainSid()
          * ```
          *
@@ -238,7 +241,7 @@ private constructor(
          */
         fun build(): SourceIpMappingUpdateParams =
             SourceIpMappingUpdateParams(
-                checkRequired("sid", sid),
+                sid,
                 body.build(),
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
@@ -249,7 +252,7 @@ private constructor(
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> sid
+            0 -> sid ?: ""
             else -> ""
         }
 

@@ -19,6 +19,17 @@ interface ArchiveServiceAsync {
      * Delete an archived call record from Bulk Export. Note: this does not also delete the record
      * from the Voice API.
      */
+    fun deleteCall(sid: String, params: ArchiveDeleteCallParams): CompletableFuture<Void?> =
+        deleteCall(sid, params, RequestOptions.none())
+
+    /** @see [deleteCall] */
+    fun deleteCall(
+        sid: String,
+        params: ArchiveDeleteCallParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> = deleteCall(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [deleteCall] */
     fun deleteCall(params: ArchiveDeleteCallParams): CompletableFuture<Void?> =
         deleteCall(params, RequestOptions.none())
 
@@ -37,6 +48,22 @@ interface ArchiveServiceAsync {
          * Returns a raw HTTP response for `delete /v1/Archives/{Date}/Calls/{Sid}`, but is
          * otherwise the same as [ArchiveServiceAsync.deleteCall].
          */
+        @MustBeClosed
+        fun deleteCall(
+            sid: String,
+            params: ArchiveDeleteCallParams,
+        ): CompletableFuture<HttpResponse> = deleteCall(sid, params, RequestOptions.none())
+
+        /** @see [deleteCall] */
+        @MustBeClosed
+        fun deleteCall(
+            sid: String,
+            params: ArchiveDeleteCallParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            deleteCall(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [deleteCall] */
         @MustBeClosed
         fun deleteCall(params: ArchiveDeleteCallParams): CompletableFuture<HttpResponse> =
             deleteCall(params, RequestOptions.none())

@@ -6,7 +6,6 @@ import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClientAsync
 import com.twilio_voice_openapi.api.models.dialingpermissions.countries.CountryFetchHighRiskSpecialPrefixesParams
 import com.twilio_voice_openapi.api.models.dialingpermissions.countries.CountryListParams
-import com.twilio_voice_openapi.api.models.dialingpermissions.countries.CountryRetrieveParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -25,8 +24,7 @@ internal class CountryServiceAsyncTest {
                 .build()
         val countryServiceAsync = client.dialingPermissions().countries()
 
-        val countryFuture =
-            countryServiceAsync.retrieve(CountryRetrieveParams.builder().isoCode("IsoCode").build())
+        val countryFuture = countryServiceAsync.retrieve("IsoCode")
 
         val country = countryFuture.get()
         country.validate()
