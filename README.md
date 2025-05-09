@@ -273,9 +273,6 @@ Requests time out after 1 minute by default.
 To set a custom timeout, configure the method call using the `timeout` method:
 
 ```java
-import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
-import java.time.LocalDate;
-
 client.archives().deleteCall(
   params, RequestOptions.builder().timeout(Duration.ofSeconds(30)).build()
 );
@@ -505,9 +502,6 @@ ByocTrunk byocTrunk = client.byocTrunks().create(params).validate();
 Or configure the method call to validate the response using the `responseValidation` method:
 
 ```java
-import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
-import java.time.LocalDate;
-
 client.archives().deleteCall(
   params, RequestOptions.builder().responseValidation(true).build()
 );
