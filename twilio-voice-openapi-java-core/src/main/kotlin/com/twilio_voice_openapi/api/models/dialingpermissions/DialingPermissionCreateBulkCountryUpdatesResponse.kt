@@ -10,26 +10,28 @@ import com.twilio_voice_openapi.api.core.ExcludeMissing
 import com.twilio_voice_openapi.api.core.JsonField
 import com.twilio_voice_openapi.api.core.JsonMissing
 import com.twilio_voice_openapi.api.core.JsonValue
-import com.twilio_voice_openapi.api.core.NoAutoDetect
-import com.twilio_voice_openapi.api.core.immutableEmptyMap
-import com.twilio_voice_openapi.api.core.toImmutable
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-@NoAutoDetect
 class DialingPermissionCreateBulkCountryUpdatesResponse
-@JsonCreator
 private constructor(
-    @JsonProperty("update_count")
-    @ExcludeMissing
-    private val updateCount: JsonField<Long> = JsonMissing.of(),
-    @JsonProperty("update_request")
-    @ExcludeMissing
-    private val updateRequest: JsonField<String> = JsonMissing.of(),
-    @JsonAnySetter private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
+    private val updateCount: JsonField<Long>,
+    private val updateRequest: JsonField<String>,
+    private val additionalProperties: MutableMap<String, JsonValue>,
 ) {
+
+    @JsonCreator
+    private constructor(
+        @JsonProperty("update_count")
+        @ExcludeMissing
+        updateCount: JsonField<Long> = JsonMissing.of(),
+        @JsonProperty("update_request")
+        @ExcludeMissing
+        updateRequest: JsonField<String> = JsonMissing.of(),
+    ) : this(updateCount, updateRequest, mutableMapOf())
 
     /**
      * The number of countries updated
@@ -37,7 +39,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun updateCount(): Optional<Long> = Optional.ofNullable(updateCount.getNullable("update_count"))
+    fun updateCount(): Optional<Long> = updateCount.getOptional("update_count")
 
     /**
      * A bulk update request to change voice dialing country permissions stored as a URL-encoded,
@@ -48,8 +50,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun updateRequest(): Optional<String> =
-        Optional.ofNullable(updateRequest.getNullable("update_request"))
+    fun updateRequest(): Optional<String> = updateRequest.getOptional("update_request")
 
     /**
      * Returns the raw JSON value of [updateCount].
@@ -67,21 +68,15 @@ private constructor(
     @ExcludeMissing
     fun _updateRequest(): JsonField<String> = updateRequest
 
+    @JsonAnySetter
+    private fun putAdditionalProperty(key: String, value: JsonValue) {
+        additionalProperties.put(key, value)
+    }
+
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
-
-    private var validated: Boolean = false
-
-    fun validate(): DialingPermissionCreateBulkCountryUpdatesResponse = apply {
-        if (validated) {
-            return@apply
-        }
-
-        updateCount()
-        updateRequest()
-        validated = true
-    }
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -177,9 +172,39 @@ private constructor(
             DialingPermissionCreateBulkCountryUpdatesResponse(
                 updateCount,
                 updateRequest,
-                additionalProperties.toImmutable(),
+                additionalProperties.toMutableMap(),
             )
     }
+
+    private var validated: Boolean = false
+
+    fun validate(): DialingPermissionCreateBulkCountryUpdatesResponse = apply {
+        if (validated) {
+            return@apply
+        }
+
+        updateCount()
+        updateRequest()
+        validated = true
+    }
+
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: TwilioVoiceOpenAPIInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    @JvmSynthetic
+    internal fun validity(): Int =
+        (if (updateCount.asKnown().isPresent) 1 else 0) +
+            (if (updateRequest.asKnown().isPresent) 1 else 0)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) {

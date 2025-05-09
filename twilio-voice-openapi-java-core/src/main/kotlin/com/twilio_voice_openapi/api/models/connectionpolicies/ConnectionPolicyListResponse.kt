@@ -10,38 +10,41 @@ import com.twilio_voice_openapi.api.core.ExcludeMissing
 import com.twilio_voice_openapi.api.core.JsonField
 import com.twilio_voice_openapi.api.core.JsonMissing
 import com.twilio_voice_openapi.api.core.JsonValue
-import com.twilio_voice_openapi.api.core.NoAutoDetect
 import com.twilio_voice_openapi.api.core.checkKnown
-import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-@NoAutoDetect
 class ConnectionPolicyListResponse
-@JsonCreator
 private constructor(
-    @JsonProperty("connection_policies")
-    @ExcludeMissing
-    private val connectionPolicies: JsonField<List<ConnectionPolicy>> = JsonMissing.of(),
-    @JsonProperty("meta") @ExcludeMissing private val meta: JsonField<Meta> = JsonMissing.of(),
-    @JsonAnySetter private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
+    private val connectionPolicies: JsonField<List<ConnectionPolicy>>,
+    private val meta: JsonField<Meta>,
+    private val additionalProperties: MutableMap<String, JsonValue>,
 ) {
+
+    @JsonCreator
+    private constructor(
+        @JsonProperty("connection_policies")
+        @ExcludeMissing
+        connectionPolicies: JsonField<List<ConnectionPolicy>> = JsonMissing.of(),
+        @JsonProperty("meta") @ExcludeMissing meta: JsonField<Meta> = JsonMissing.of(),
+    ) : this(connectionPolicies, meta, mutableMapOf())
 
     /**
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun connectionPolicies(): Optional<List<ConnectionPolicy>> =
-        Optional.ofNullable(connectionPolicies.getNullable("connection_policies"))
+        connectionPolicies.getOptional("connection_policies")
 
     /**
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun meta(): Optional<Meta> = Optional.ofNullable(meta.getNullable("meta"))
+    fun meta(): Optional<Meta> = meta.getOptional("meta")
 
     /**
      * Returns the raw JSON value of [connectionPolicies].
@@ -60,21 +63,15 @@ private constructor(
      */
     @JsonProperty("meta") @ExcludeMissing fun _meta(): JsonField<Meta> = meta
 
+    @JsonAnySetter
+    private fun putAdditionalProperty(key: String, value: JsonValue) {
+        additionalProperties.put(key, value)
+    }
+
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
-
-    private var validated: Boolean = false
-
-    fun validate(): ConnectionPolicyListResponse = apply {
-        if (validated) {
-            return@apply
-        }
-
-        connectionPolicies().ifPresent { it.forEach { it.validate() } }
-        meta().ifPresent { it.validate() }
-        validated = true
-    }
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -165,77 +162,119 @@ private constructor(
             ConnectionPolicyListResponse(
                 (connectionPolicies ?: JsonMissing.of()).map { it.toImmutable() },
                 meta,
-                additionalProperties.toImmutable(),
+                additionalProperties.toMutableMap(),
             )
     }
 
-    @NoAutoDetect
+    private var validated: Boolean = false
+
+    fun validate(): ConnectionPolicyListResponse = apply {
+        if (validated) {
+            return@apply
+        }
+
+        connectionPolicies().ifPresent { it.forEach { it.validate() } }
+        meta().ifPresent { it.validate() }
+        validated = true
+    }
+
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: TwilioVoiceOpenAPIInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    @JvmSynthetic
+    internal fun validity(): Int =
+        (connectionPolicies.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
+            (meta.asKnown().getOrNull()?.validity() ?: 0)
+
     class Meta
-    @JsonCreator
     private constructor(
-        @JsonProperty("first_page_url")
-        @ExcludeMissing
-        private val firstPageUrl: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("key") @ExcludeMissing private val key: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("next_page_url")
-        @ExcludeMissing
-        private val nextPageUrl: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("page") @ExcludeMissing private val page: JsonField<Long> = JsonMissing.of(),
-        @JsonProperty("page_size")
-        @ExcludeMissing
-        private val pageSize: JsonField<Long> = JsonMissing.of(),
-        @JsonProperty("previous_page_url")
-        @ExcludeMissing
-        private val previousPageUrl: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("url") @ExcludeMissing private val url: JsonField<String> = JsonMissing.of(),
-        @JsonAnySetter
-        private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
+        private val firstPageUrl: JsonField<String>,
+        private val key: JsonField<String>,
+        private val nextPageUrl: JsonField<String>,
+        private val page: JsonField<Long>,
+        private val pageSize: JsonField<Long>,
+        private val previousPageUrl: JsonField<String>,
+        private val url: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
 
-        /**
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun firstPageUrl(): Optional<String> =
-            Optional.ofNullable(firstPageUrl.getNullable("first_page_url"))
+        @JsonCreator
+        private constructor(
+            @JsonProperty("first_page_url")
+            @ExcludeMissing
+            firstPageUrl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("key") @ExcludeMissing key: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("next_page_url")
+            @ExcludeMissing
+            nextPageUrl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("page") @ExcludeMissing page: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("page_size") @ExcludeMissing pageSize: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("previous_page_url")
+            @ExcludeMissing
+            previousPageUrl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("url") @ExcludeMissing url: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            firstPageUrl,
+            key,
+            nextPageUrl,
+            page,
+            pageSize,
+            previousPageUrl,
+            url,
+            mutableMapOf(),
+        )
 
         /**
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun key(): Optional<String> = Optional.ofNullable(key.getNullable("key"))
+        fun firstPageUrl(): Optional<String> = firstPageUrl.getOptional("first_page_url")
 
         /**
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun nextPageUrl(): Optional<String> =
-            Optional.ofNullable(nextPageUrl.getNullable("next_page_url"))
+        fun key(): Optional<String> = key.getOptional("key")
 
         /**
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun page(): Optional<Long> = Optional.ofNullable(page.getNullable("page"))
+        fun nextPageUrl(): Optional<String> = nextPageUrl.getOptional("next_page_url")
 
         /**
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun pageSize(): Optional<Long> = Optional.ofNullable(pageSize.getNullable("page_size"))
+        fun page(): Optional<Long> = page.getOptional("page")
 
         /**
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun previousPageUrl(): Optional<String> =
-            Optional.ofNullable(previousPageUrl.getNullable("previous_page_url"))
+        fun pageSize(): Optional<Long> = pageSize.getOptional("page_size")
 
         /**
          * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun url(): Optional<String> = Optional.ofNullable(url.getNullable("url"))
+        fun previousPageUrl(): Optional<String> = previousPageUrl.getOptional("previous_page_url")
+
+        /**
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun url(): Optional<String> = url.getOptional("url")
 
         /**
          * Returns the raw JSON value of [firstPageUrl].
@@ -294,26 +333,15 @@ private constructor(
          */
         @JsonProperty("url") @ExcludeMissing fun _url(): JsonField<String> = url
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
         @JsonAnyGetter
         @ExcludeMissing
-        fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
-
-        private var validated: Boolean = false
-
-        fun validate(): Meta = apply {
-            if (validated) {
-                return@apply
-            }
-
-            firstPageUrl()
-            key()
-            nextPageUrl()
-            page()
-            pageSize()
-            previousPageUrl()
-            url()
-            validated = true
-        }
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
 
         fun toBuilder() = Builder().from(this)
 
@@ -471,9 +499,50 @@ private constructor(
                     pageSize,
                     previousPageUrl,
                     url,
-                    additionalProperties.toImmutable(),
+                    additionalProperties.toMutableMap(),
                 )
         }
+
+        private var validated: Boolean = false
+
+        fun validate(): Meta = apply {
+            if (validated) {
+                return@apply
+            }
+
+            firstPageUrl()
+            key()
+            nextPageUrl()
+            page()
+            pageSize()
+            previousPageUrl()
+            url()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: TwilioVoiceOpenAPIInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic
+        internal fun validity(): Int =
+            (if (firstPageUrl.asKnown().isPresent) 1 else 0) +
+                (if (key.asKnown().isPresent) 1 else 0) +
+                (if (nextPageUrl.asKnown().isPresent) 1 else 0) +
+                (if (page.asKnown().isPresent) 1 else 0) +
+                (if (pageSize.asKnown().isPresent) 1 else 0) +
+                (if (previousPageUrl.asKnown().isPresent) 1 else 0) +
+                (if (url.asKnown().isPresent) 1 else 0)
 
         override fun equals(other: Any?): Boolean {
             if (this === other) {

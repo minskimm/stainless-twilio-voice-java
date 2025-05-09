@@ -5,6 +5,7 @@ package com.twilio_voice_openapi.api.services.async.dialingpermissions
 import com.twilio_voice_openapi.api.core.ClientOptions
 import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.RequestOptions
+import com.twilio_voice_openapi.api.core.checkRequired
 import com.twilio_voice_openapi.api.core.handlers.errorHandler
 import com.twilio_voice_openapi.api.core.handlers.jsonHandler
 import com.twilio_voice_openapi.api.core.handlers.withErrorHandler
@@ -21,6 +22,7 @@ import com.twilio_voice_openapi.api.models.dialingpermissions.countries.CountryL
 import com.twilio_voice_openapi.api.models.dialingpermissions.countries.CountryRetrieveParams
 import com.twilio_voice_openapi.api.models.dialingpermissions.countries.CountryRetrieveResponse
 import java.util.concurrent.CompletableFuture
+import kotlin.jvm.optionals.getOrNull
 
 class CountryServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     CountryServiceAsync {
@@ -67,6 +69,9 @@ class CountryServiceAsyncImpl internal constructor(private val clientOptions: Cl
             params: CountryRetrieveParams,
             requestOptions: RequestOptions,
         ): CompletableFuture<HttpResponseFor<CountryRetrieveResponse>> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("isoCode", params.isoCode().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -128,6 +133,9 @@ class CountryServiceAsyncImpl internal constructor(private val clientOptions: Cl
             params: CountryFetchHighRiskSpecialPrefixesParams,
             requestOptions: RequestOptions,
         ): CompletableFuture<HttpResponseFor<CountryFetchHighRiskSpecialPrefixesResponse>> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("isoCode", params.isoCode().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)

@@ -18,6 +18,17 @@ interface ArchiveService {
      * Delete an archived call record from Bulk Export. Note: this does not also delete the record
      * from the Voice API.
      */
+    fun deleteCall(sid: String, params: ArchiveDeleteCallParams) =
+        deleteCall(sid, params, RequestOptions.none())
+
+    /** @see [deleteCall] */
+    fun deleteCall(
+        sid: String,
+        params: ArchiveDeleteCallParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = deleteCall(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [deleteCall] */
     fun deleteCall(params: ArchiveDeleteCallParams) = deleteCall(params, RequestOptions.none())
 
     /** @see [deleteCall] */
@@ -33,6 +44,19 @@ interface ArchiveService {
          * Returns a raw HTTP response for `delete /v1/Archives/{Date}/Calls/{Sid}`, but is
          * otherwise the same as [ArchiveService.deleteCall].
          */
+        @MustBeClosed
+        fun deleteCall(sid: String, params: ArchiveDeleteCallParams): HttpResponse =
+            deleteCall(sid, params, RequestOptions.none())
+
+        /** @see [deleteCall] */
+        @MustBeClosed
+        fun deleteCall(
+            sid: String,
+            params: ArchiveDeleteCallParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse = deleteCall(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [deleteCall] */
         @MustBeClosed
         fun deleteCall(params: ArchiveDeleteCallParams): HttpResponse =
             deleteCall(params, RequestOptions.none())

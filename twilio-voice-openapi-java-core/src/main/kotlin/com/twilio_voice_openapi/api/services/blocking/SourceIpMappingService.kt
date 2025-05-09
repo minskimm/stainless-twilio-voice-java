@@ -30,8 +30,20 @@ interface SourceIpMappingService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): SourceIpMapping
 
-    fun retrieve(params: SourceIpMappingRetrieveParams): SourceIpMapping =
-        retrieve(params, RequestOptions.none())
+    fun retrieve(sid: String): SourceIpMapping = retrieve(sid, SourceIpMappingRetrieveParams.none())
+
+    /** @see [retrieve] */
+    fun retrieve(
+        sid: String,
+        params: SourceIpMappingRetrieveParams = SourceIpMappingRetrieveParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): SourceIpMapping = retrieve(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [retrieve] */
+    fun retrieve(
+        sid: String,
+        params: SourceIpMappingRetrieveParams = SourceIpMappingRetrieveParams.none(),
+    ): SourceIpMapping = retrieve(sid, params, RequestOptions.none())
 
     /** @see [retrieve] */
     fun retrieve(
@@ -39,6 +51,25 @@ interface SourceIpMappingService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): SourceIpMapping
 
+    /** @see [retrieve] */
+    fun retrieve(params: SourceIpMappingRetrieveParams): SourceIpMapping =
+        retrieve(params, RequestOptions.none())
+
+    /** @see [retrieve] */
+    fun retrieve(sid: String, requestOptions: RequestOptions): SourceIpMapping =
+        retrieve(sid, SourceIpMappingRetrieveParams.none(), requestOptions)
+
+    fun update(sid: String, params: SourceIpMappingUpdateParams): SourceIpMapping =
+        update(sid, params, RequestOptions.none())
+
+    /** @see [update] */
+    fun update(
+        sid: String,
+        params: SourceIpMappingUpdateParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): SourceIpMapping = update(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [update] */
     fun update(params: SourceIpMappingUpdateParams): SourceIpMapping =
         update(params, RequestOptions.none())
 
@@ -65,13 +96,33 @@ interface SourceIpMappingService {
     fun list(requestOptions: RequestOptions): SourceIpMappingListResponse =
         list(SourceIpMappingListParams.none(), requestOptions)
 
-    fun delete(params: SourceIpMappingDeleteParams) = delete(params, RequestOptions.none())
+    fun delete(sid: String) = delete(sid, SourceIpMappingDeleteParams.none())
+
+    /** @see [delete] */
+    fun delete(
+        sid: String,
+        params: SourceIpMappingDeleteParams = SourceIpMappingDeleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = delete(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [delete] */
+    fun delete(
+        sid: String,
+        params: SourceIpMappingDeleteParams = SourceIpMappingDeleteParams.none(),
+    ) = delete(sid, params, RequestOptions.none())
 
     /** @see [delete] */
     fun delete(
         params: SourceIpMappingDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see [delete] */
+    fun delete(params: SourceIpMappingDeleteParams) = delete(params, RequestOptions.none())
+
+    /** @see [delete] */
+    fun delete(sid: String, requestOptions: RequestOptions) =
+        delete(sid, SourceIpMappingDeleteParams.none(), requestOptions)
 
     /**
      * A view of [SourceIpMappingService] that provides access to raw HTTP responses for each
@@ -99,8 +150,24 @@ interface SourceIpMappingService {
          * same as [SourceIpMappingService.retrieve].
          */
         @MustBeClosed
-        fun retrieve(params: SourceIpMappingRetrieveParams): HttpResponseFor<SourceIpMapping> =
-            retrieve(params, RequestOptions.none())
+        fun retrieve(sid: String): HttpResponseFor<SourceIpMapping> =
+            retrieve(sid, SourceIpMappingRetrieveParams.none())
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            sid: String,
+            params: SourceIpMappingRetrieveParams = SourceIpMappingRetrieveParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<SourceIpMapping> =
+            retrieve(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            sid: String,
+            params: SourceIpMappingRetrieveParams = SourceIpMappingRetrieveParams.none(),
+        ): HttpResponseFor<SourceIpMapping> = retrieve(sid, params, RequestOptions.none())
 
         /** @see [retrieve] */
         @MustBeClosed
@@ -109,10 +176,39 @@ interface SourceIpMappingService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<SourceIpMapping>
 
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(params: SourceIpMappingRetrieveParams): HttpResponseFor<SourceIpMapping> =
+            retrieve(params, RequestOptions.none())
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            sid: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<SourceIpMapping> =
+            retrieve(sid, SourceIpMappingRetrieveParams.none(), requestOptions)
+
         /**
          * Returns a raw HTTP response for `post /v1/SourceIpMappings/{Sid}`, but is otherwise the
          * same as [SourceIpMappingService.update].
          */
+        @MustBeClosed
+        fun update(
+            sid: String,
+            params: SourceIpMappingUpdateParams,
+        ): HttpResponseFor<SourceIpMapping> = update(sid, params, RequestOptions.none())
+
+        /** @see [update] */
+        @MustBeClosed
+        fun update(
+            sid: String,
+            params: SourceIpMappingUpdateParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<SourceIpMapping> =
+            update(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [update] */
         @MustBeClosed
         fun update(params: SourceIpMappingUpdateParams): HttpResponseFor<SourceIpMapping> =
             update(params, RequestOptions.none())
@@ -155,8 +251,22 @@ interface SourceIpMappingService {
          * same as [SourceIpMappingService.delete].
          */
         @MustBeClosed
-        fun delete(params: SourceIpMappingDeleteParams): HttpResponse =
-            delete(params, RequestOptions.none())
+        fun delete(sid: String): HttpResponse = delete(sid, SourceIpMappingDeleteParams.none())
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(
+            sid: String,
+            params: SourceIpMappingDeleteParams = SourceIpMappingDeleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse = delete(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(
+            sid: String,
+            params: SourceIpMappingDeleteParams = SourceIpMappingDeleteParams.none(),
+        ): HttpResponse = delete(sid, params, RequestOptions.none())
 
         /** @see [delete] */
         @MustBeClosed
@@ -164,5 +274,15 @@ interface SourceIpMappingService {
             params: SourceIpMappingDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(params: SourceIpMappingDeleteParams): HttpResponse =
+            delete(params, RequestOptions.none())
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(sid: String, requestOptions: RequestOptions): HttpResponse =
+            delete(sid, SourceIpMappingDeleteParams.none(), requestOptions)
     }
 }

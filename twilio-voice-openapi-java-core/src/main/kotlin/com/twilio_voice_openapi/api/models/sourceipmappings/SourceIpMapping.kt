@@ -10,35 +10,41 @@ import com.twilio_voice_openapi.api.core.ExcludeMissing
 import com.twilio_voice_openapi.api.core.JsonField
 import com.twilio_voice_openapi.api.core.JsonMissing
 import com.twilio_voice_openapi.api.core.JsonValue
-import com.twilio_voice_openapi.api.core.NoAutoDetect
-import com.twilio_voice_openapi.api.core.immutableEmptyMap
-import com.twilio_voice_openapi.api.core.toImmutable
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-@NoAutoDetect
 class SourceIpMapping
-@JsonCreator
 private constructor(
-    @JsonProperty("date_created")
-    @ExcludeMissing
-    private val dateCreated: JsonField<OffsetDateTime> = JsonMissing.of(),
-    @JsonProperty("date_updated")
-    @ExcludeMissing
-    private val dateUpdated: JsonField<OffsetDateTime> = JsonMissing.of(),
-    @JsonProperty("ip_record_sid")
-    @ExcludeMissing
-    private val ipRecordSid: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("sid") @ExcludeMissing private val sid: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("sip_domain_sid")
-    @ExcludeMissing
-    private val sipDomainSid: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("url") @ExcludeMissing private val url: JsonField<String> = JsonMissing.of(),
-    @JsonAnySetter private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
+    private val dateCreated: JsonField<OffsetDateTime>,
+    private val dateUpdated: JsonField<OffsetDateTime>,
+    private val ipRecordSid: JsonField<String>,
+    private val sid: JsonField<String>,
+    private val sipDomainSid: JsonField<String>,
+    private val url: JsonField<String>,
+    private val additionalProperties: MutableMap<String, JsonValue>,
 ) {
+
+    @JsonCreator
+    private constructor(
+        @JsonProperty("date_created")
+        @ExcludeMissing
+        dateCreated: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("date_updated")
+        @ExcludeMissing
+        dateUpdated: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("ip_record_sid")
+        @ExcludeMissing
+        ipRecordSid: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("sid") @ExcludeMissing sid: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("sip_domain_sid")
+        @ExcludeMissing
+        sipDomainSid: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("url") @ExcludeMissing url: JsonField<String> = JsonMissing.of(),
+    ) : this(dateCreated, dateUpdated, ipRecordSid, sid, sipDomainSid, url, mutableMapOf())
 
     /**
      * The date and time in GMT that the resource was created specified in
@@ -47,8 +53,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun dateCreated(): Optional<OffsetDateTime> =
-        Optional.ofNullable(dateCreated.getNullable("date_created"))
+    fun dateCreated(): Optional<OffsetDateTime> = dateCreated.getOptional("date_created")
 
     /**
      * The date and time in GMT that the resource was last updated specified in
@@ -57,8 +62,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun dateUpdated(): Optional<OffsetDateTime> =
-        Optional.ofNullable(dateUpdated.getNullable("date_updated"))
+    fun dateUpdated(): Optional<OffsetDateTime> = dateUpdated.getOptional("date_updated")
 
     /**
      * The Twilio-provided string that uniquely identifies the IP Record resource to map from.
@@ -66,8 +70,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun ipRecordSid(): Optional<String> =
-        Optional.ofNullable(ipRecordSid.getNullable("ip_record_sid"))
+    fun ipRecordSid(): Optional<String> = ipRecordSid.getOptional("ip_record_sid")
 
     /**
      * The unique string that we created to identify the IP Record resource.
@@ -75,7 +78,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun sid(): Optional<String> = Optional.ofNullable(sid.getNullable("sid"))
+    fun sid(): Optional<String> = sid.getOptional("sid")
 
     /**
      * The SID of the SIP Domain that the IP Record is mapped to.
@@ -83,8 +86,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun sipDomainSid(): Optional<String> =
-        Optional.ofNullable(sipDomainSid.getNullable("sip_domain_sid"))
+    fun sipDomainSid(): Optional<String> = sipDomainSid.getOptional("sip_domain_sid")
 
     /**
      * The absolute URL of the resource.
@@ -92,7 +94,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun url(): Optional<String> = Optional.ofNullable(url.getNullable("url"))
+    fun url(): Optional<String> = url.getOptional("url")
 
     /**
      * Returns the raw JSON value of [dateCreated].
@@ -144,25 +146,15 @@ private constructor(
      */
     @JsonProperty("url") @ExcludeMissing fun _url(): JsonField<String> = url
 
+    @JsonAnySetter
+    private fun putAdditionalProperty(key: String, value: JsonValue) {
+        additionalProperties.put(key, value)
+    }
+
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
-
-    private var validated: Boolean = false
-
-    fun validate(): SourceIpMapping = apply {
-        if (validated) {
-            return@apply
-        }
-
-        dateCreated()
-        dateUpdated()
-        ipRecordSid()
-        sid()
-        sipDomainSid()
-        url()
-        validated = true
-    }
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -332,9 +324,47 @@ private constructor(
                 sid,
                 sipDomainSid,
                 url,
-                additionalProperties.toImmutable(),
+                additionalProperties.toMutableMap(),
             )
     }
+
+    private var validated: Boolean = false
+
+    fun validate(): SourceIpMapping = apply {
+        if (validated) {
+            return@apply
+        }
+
+        dateCreated()
+        dateUpdated()
+        ipRecordSid()
+        sid()
+        sipDomainSid()
+        url()
+        validated = true
+    }
+
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: TwilioVoiceOpenAPIInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    @JvmSynthetic
+    internal fun validity(): Int =
+        (if (dateCreated.asKnown().isPresent) 1 else 0) +
+            (if (dateUpdated.asKnown().isPresent) 1 else 0) +
+            (if (ipRecordSid.asKnown().isPresent) 1 else 0) +
+            (if (sid.asKnown().isPresent) 1 else 0) +
+            (if (sipDomainSid.asKnown().isPresent) 1 else 0) +
+            (if (url.asKnown().isPresent) 1 else 0)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) {

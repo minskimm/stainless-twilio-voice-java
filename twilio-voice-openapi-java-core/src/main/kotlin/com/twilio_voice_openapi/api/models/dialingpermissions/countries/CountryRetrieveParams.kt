@@ -2,54 +2,38 @@
 
 package com.twilio_voice_openapi.api.models.dialingpermissions.countries
 
-import com.twilio_voice_openapi.api.core.NoAutoDetect
 import com.twilio_voice_openapi.api.core.Params
-import com.twilio_voice_openapi.api.core.checkRequired
 import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
 import java.util.Objects
+import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 /** Retrieve voice dialing country permissions identified by the given ISO country code */
 class CountryRetrieveParams
 private constructor(
-    private val isoCode: String,
+    private val isoCode: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun isoCode(): String = isoCode
+    fun isoCode(): Optional<String> = Optional.ofNullable(isoCode)
 
     fun _additionalHeaders(): Headers = additionalHeaders
 
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
-    fun _pathParam(index: Int): String =
-        when (index) {
-            0 -> isoCode
-            else -> ""
-        }
-
-    override fun _headers(): Headers = additionalHeaders
-
-    override fun _queryParams(): QueryParams = additionalQueryParams
-
     fun toBuilder() = Builder().from(this)
 
     companion object {
 
-        /**
-         * Returns a mutable builder for constructing an instance of [CountryRetrieveParams].
-         *
-         * The following fields are required:
-         * ```java
-         * .isoCode()
-         * ```
-         */
+        @JvmStatic fun none(): CountryRetrieveParams = builder().build()
+
+        /** Returns a mutable builder for constructing an instance of [CountryRetrieveParams]. */
         @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [CountryRetrieveParams]. */
-    @NoAutoDetect
     class Builder internal constructor() {
 
         private var isoCode: String? = null
@@ -63,7 +47,10 @@ private constructor(
             additionalQueryParams = countryRetrieveParams.additionalQueryParams.toBuilder()
         }
 
-        fun isoCode(isoCode: String) = apply { this.isoCode = isoCode }
+        fun isoCode(isoCode: String?) = apply { this.isoCode = isoCode }
+
+        /** Alias for calling [Builder.isoCode] with `isoCode.orElse(null)`. */
+        fun isoCode(isoCode: Optional<String>) = isoCode(isoCode.getOrNull())
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -167,21 +154,20 @@ private constructor(
          * Returns an immutable instance of [CountryRetrieveParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```java
-         * .isoCode()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): CountryRetrieveParams =
-            CountryRetrieveParams(
-                checkRequired("isoCode", isoCode),
-                additionalHeaders.build(),
-                additionalQueryParams.build(),
-            )
+            CountryRetrieveParams(isoCode, additionalHeaders.build(), additionalQueryParams.build())
     }
+
+    fun _pathParam(index: Int): String =
+        when (index) {
+            0 -> isoCode ?: ""
+            else -> ""
+        }
+
+    override fun _headers(): Headers = additionalHeaders
+
+    override fun _queryParams(): QueryParams = additionalQueryParams
 
     override fun equals(other: Any?): Boolean {
         if (this === other) {

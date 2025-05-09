@@ -5,9 +5,7 @@ package com.twilio_voice_openapi.api.services.blocking
 import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient
 import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkCreateParams
-import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkDeleteParams
 import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkListParams
-import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkRetrieveParams
 import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -34,11 +32,11 @@ internal class ByocTrunkServiceTest {
                     .connectionPolicySid("NYaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
                     .friendlyName("friendly_name")
                     .fromDomainSid("SDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-                    .statusCallbackMethod(ByocTrunkCreateParams.StatusCallbackMethod.GET)
+                    .statusCallbackMethod(ByocTrunkCreateParams.StatusCallbackMethod.POST)
                     .statusCallbackUrl("https://byoc.example.com/twilio/status_callback")
-                    .voiceFallbackMethod(ByocTrunkCreateParams.VoiceFallbackMethod.GET)
+                    .voiceFallbackMethod(ByocTrunkCreateParams.VoiceFallbackMethod.POST)
                     .voiceFallbackUrl("https://byoc.example.com/twilio/fallback")
-                    .voiceMethod(ByocTrunkCreateParams.VoiceMethod.GET)
+                    .voiceMethod(ByocTrunkCreateParams.VoiceMethod.POST)
                     .voiceUrl("https://byoc.example.com/twilio/app")
                     .build()
             )
@@ -57,10 +55,7 @@ internal class ByocTrunkServiceTest {
                 .build()
         val byocTrunkService = client.byocTrunks()
 
-        val byocTrunk =
-            byocTrunkService.retrieve(
-                ByocTrunkRetrieveParams.builder().sid("BYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
-            )
+        val byocTrunk = byocTrunkService.retrieve("BYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
 
         byocTrunk.validate()
     }
@@ -107,12 +102,12 @@ internal class ByocTrunkServiceTest {
                 .build()
         val byocTrunkService = client.byocTrunks()
 
-        val byocTrunk =
+        val byocTrunks =
             byocTrunkService.list(
                 ByocTrunkListParams.builder().page(0L).pageSize(1L).pageToken("PageToken").build()
             )
 
-        byocTrunk.validate()
+        byocTrunks.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
@@ -126,8 +121,6 @@ internal class ByocTrunkServiceTest {
                 .build()
         val byocTrunkService = client.byocTrunks()
 
-        byocTrunkService.delete(
-            ByocTrunkDeleteParams.builder().sid("BYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
-        )
+        byocTrunkService.delete("BYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
     }
 }

@@ -3,7 +3,6 @@
 package com.twilio_voice_openapi.api.models.connectionpolicies.targets
 
 import com.twilio_voice_openapi.api.core.JsonValue
-import com.twilio_voice_openapi.api.core.NoAutoDetect
 import com.twilio_voice_openapi.api.core.Params
 import com.twilio_voice_openapi.api.core.checkRequired
 import com.twilio_voice_openapi.api.core.http.Headers
@@ -11,11 +10,12 @@ import com.twilio_voice_openapi.api.core.http.QueryParams
 import com.twilio_voice_openapi.api.core.toImmutable
 import java.util.Objects
 import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 class TargetDeleteParams
 private constructor(
     private val connectionPolicySid: String,
-    private val sid: String,
+    private val sid: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
     private val additionalBodyProperties: Map<String, JsonValue>,
@@ -23,28 +23,13 @@ private constructor(
 
     fun connectionPolicySid(): String = connectionPolicySid
 
-    fun sid(): String = sid
+    fun sid(): Optional<String> = Optional.ofNullable(sid)
+
+    fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
     fun _additionalHeaders(): Headers = additionalHeaders
 
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
-
-    fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
-
-    @JvmSynthetic
-    internal fun _body(): Optional<Map<String, JsonValue>> =
-        Optional.ofNullable(additionalBodyProperties.ifEmpty { null })
-
-    fun _pathParam(index: Int): String =
-        when (index) {
-            0 -> connectionPolicySid
-            1 -> sid
-            else -> ""
-        }
-
-    override fun _headers(): Headers = additionalHeaders
-
-    override fun _queryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
 
@@ -56,14 +41,12 @@ private constructor(
          * The following fields are required:
          * ```java
          * .connectionPolicySid()
-         * .sid()
          * ```
          */
         @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [TargetDeleteParams]. */
-    @NoAutoDetect
     class Builder internal constructor() {
 
         private var connectionPolicySid: String? = null
@@ -85,7 +68,10 @@ private constructor(
             this.connectionPolicySid = connectionPolicySid
         }
 
-        fun sid(sid: String) = apply { this.sid = sid }
+        fun sid(sid: String?) = apply { this.sid = sid }
+
+        /** Alias for calling [Builder.sid] with `sid.orElse(null)`. */
+        fun sid(sid: Optional<String>) = sid(sid.getOrNull())
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -215,7 +201,6 @@ private constructor(
          * The following fields are required:
          * ```java
          * .connectionPolicySid()
-         * .sid()
          * ```
          *
          * @throws IllegalStateException if any required field is unset.
@@ -223,12 +208,26 @@ private constructor(
         fun build(): TargetDeleteParams =
             TargetDeleteParams(
                 checkRequired("connectionPolicySid", connectionPolicySid),
-                checkRequired("sid", sid),
+                sid,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
                 additionalBodyProperties.toImmutable(),
             )
     }
+
+    fun _body(): Optional<Map<String, JsonValue>> =
+        Optional.ofNullable(additionalBodyProperties.ifEmpty { null })
+
+    fun _pathParam(index: Int): String =
+        when (index) {
+            0 -> connectionPolicySid
+            1 -> sid ?: ""
+            else -> ""
+        }
+
+    override fun _headers(): Headers = additionalHeaders
+
+    override fun _queryParams(): QueryParams = additionalQueryParams
 
     override fun equals(other: Any?): Boolean {
         if (this === other) {

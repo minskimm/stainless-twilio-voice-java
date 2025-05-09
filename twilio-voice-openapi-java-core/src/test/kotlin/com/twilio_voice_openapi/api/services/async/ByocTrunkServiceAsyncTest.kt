@@ -5,9 +5,7 @@ package com.twilio_voice_openapi.api.services.async
 import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClientAsync
 import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkCreateParams
-import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkDeleteParams
 import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkListParams
-import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkRetrieveParams
 import com.twilio_voice_openapi.api.models.byoctrunks.ByocTrunkUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -34,11 +32,11 @@ internal class ByocTrunkServiceAsyncTest {
                     .connectionPolicySid("NYaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
                     .friendlyName("friendly_name")
                     .fromDomainSid("SDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-                    .statusCallbackMethod(ByocTrunkCreateParams.StatusCallbackMethod.GET)
+                    .statusCallbackMethod(ByocTrunkCreateParams.StatusCallbackMethod.POST)
                     .statusCallbackUrl("https://byoc.example.com/twilio/status_callback")
-                    .voiceFallbackMethod(ByocTrunkCreateParams.VoiceFallbackMethod.GET)
+                    .voiceFallbackMethod(ByocTrunkCreateParams.VoiceFallbackMethod.POST)
                     .voiceFallbackUrl("https://byoc.example.com/twilio/fallback")
-                    .voiceMethod(ByocTrunkCreateParams.VoiceMethod.GET)
+                    .voiceMethod(ByocTrunkCreateParams.VoiceMethod.POST)
                     .voiceUrl("https://byoc.example.com/twilio/app")
                     .build()
             )
@@ -58,10 +56,7 @@ internal class ByocTrunkServiceAsyncTest {
                 .build()
         val byocTrunkServiceAsync = client.byocTrunks()
 
-        val byocTrunkFuture =
-            byocTrunkServiceAsync.retrieve(
-                ByocTrunkRetrieveParams.builder().sid("BYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
-            )
+        val byocTrunkFuture = byocTrunkServiceAsync.retrieve("BYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
 
         val byocTrunk = byocTrunkFuture.get()
         byocTrunk.validate()
@@ -110,13 +105,13 @@ internal class ByocTrunkServiceAsyncTest {
                 .build()
         val byocTrunkServiceAsync = client.byocTrunks()
 
-        val byocTrunkFuture =
+        val byocTrunksFuture =
             byocTrunkServiceAsync.list(
                 ByocTrunkListParams.builder().page(0L).pageSize(1L).pageToken("PageToken").build()
             )
 
-        val byocTrunk = byocTrunkFuture.get()
-        byocTrunk.validate()
+        val byocTrunks = byocTrunksFuture.get()
+        byocTrunks.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
@@ -130,10 +125,7 @@ internal class ByocTrunkServiceAsyncTest {
                 .build()
         val byocTrunkServiceAsync = client.byocTrunks()
 
-        val future =
-            byocTrunkServiceAsync.delete(
-                ByocTrunkDeleteParams.builder().sid("BYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD").build()
-            )
+        val future = byocTrunkServiceAsync.delete("BYE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
 
         val response = future.get()
     }

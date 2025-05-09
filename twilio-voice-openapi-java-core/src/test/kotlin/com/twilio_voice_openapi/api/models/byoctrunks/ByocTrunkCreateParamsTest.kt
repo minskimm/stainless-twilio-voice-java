@@ -2,7 +2,6 @@
 
 package com.twilio_voice_openapi.api.models.byoctrunks
 
-import kotlin.test.assertNotNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -17,11 +16,11 @@ internal class ByocTrunkCreateParamsTest {
             .connectionPolicySid("NYaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
             .friendlyName("friendly_name")
             .fromDomainSid("SDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-            .statusCallbackMethod(ByocTrunkCreateParams.StatusCallbackMethod.GET)
+            .statusCallbackMethod(ByocTrunkCreateParams.StatusCallbackMethod.POST)
             .statusCallbackUrl("https://byoc.example.com/twilio/status_callback")
-            .voiceFallbackMethod(ByocTrunkCreateParams.VoiceFallbackMethod.GET)
+            .voiceFallbackMethod(ByocTrunkCreateParams.VoiceFallbackMethod.POST)
             .voiceFallbackUrl("https://byoc.example.com/twilio/fallback")
-            .voiceMethod(ByocTrunkCreateParams.VoiceMethod.GET)
+            .voiceMethod(ByocTrunkCreateParams.VoiceMethod.POST)
             .voiceUrl("https://byoc.example.com/twilio/app")
             .build()
     }
@@ -35,29 +34,28 @@ internal class ByocTrunkCreateParamsTest {
                 .connectionPolicySid("NYaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
                 .friendlyName("friendly_name")
                 .fromDomainSid("SDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-                .statusCallbackMethod(ByocTrunkCreateParams.StatusCallbackMethod.GET)
+                .statusCallbackMethod(ByocTrunkCreateParams.StatusCallbackMethod.POST)
                 .statusCallbackUrl("https://byoc.example.com/twilio/status_callback")
-                .voiceFallbackMethod(ByocTrunkCreateParams.VoiceFallbackMethod.GET)
+                .voiceFallbackMethod(ByocTrunkCreateParams.VoiceFallbackMethod.POST)
                 .voiceFallbackUrl("https://byoc.example.com/twilio/fallback")
-                .voiceMethod(ByocTrunkCreateParams.VoiceMethod.GET)
+                .voiceMethod(ByocTrunkCreateParams.VoiceMethod.POST)
                 .voiceUrl("https://byoc.example.com/twilio/app")
                 .build()
 
         val body = params._body()
 
-        assertNotNull(body)
         assertThat(body.cnamLookupEnabled()).contains(false)
         assertThat(body.connectionPolicySid()).contains("NYaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         assertThat(body.friendlyName()).contains("friendly_name")
         assertThat(body.fromDomainSid()).contains("SDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         assertThat(body.statusCallbackMethod())
-            .contains(ByocTrunkCreateParams.StatusCallbackMethod.GET)
+            .contains(ByocTrunkCreateParams.StatusCallbackMethod.POST)
         assertThat(body.statusCallbackUrl())
             .contains("https://byoc.example.com/twilio/status_callback")
         assertThat(body.voiceFallbackMethod())
-            .contains(ByocTrunkCreateParams.VoiceFallbackMethod.GET)
+            .contains(ByocTrunkCreateParams.VoiceFallbackMethod.POST)
         assertThat(body.voiceFallbackUrl()).contains("https://byoc.example.com/twilio/fallback")
-        assertThat(body.voiceMethod()).contains(ByocTrunkCreateParams.VoiceMethod.GET)
+        assertThat(body.voiceMethod()).contains(ByocTrunkCreateParams.VoiceMethod.POST)
         assertThat(body.voiceUrl()).contains("https://byoc.example.com/twilio/app")
     }
 
@@ -67,7 +65,5 @@ internal class ByocTrunkCreateParamsTest {
         val params = ByocTrunkCreateParams.builder().build()
 
         val body = params._body()
-
-        assertNotNull(body)
     }
 }

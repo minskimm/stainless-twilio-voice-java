@@ -29,7 +29,20 @@ interface IpRecordService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): IpRecord
 
-    fun retrieve(params: IpRecordRetrieveParams): IpRecord = retrieve(params, RequestOptions.none())
+    fun retrieve(sid: String): IpRecord = retrieve(sid, IpRecordRetrieveParams.none())
+
+    /** @see [retrieve] */
+    fun retrieve(
+        sid: String,
+        params: IpRecordRetrieveParams = IpRecordRetrieveParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): IpRecord = retrieve(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [retrieve] */
+    fun retrieve(
+        sid: String,
+        params: IpRecordRetrieveParams = IpRecordRetrieveParams.none(),
+    ): IpRecord = retrieve(sid, params, RequestOptions.none())
 
     /** @see [retrieve] */
     fun retrieve(
@@ -37,13 +50,38 @@ interface IpRecordService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): IpRecord
 
-    fun update(params: IpRecordUpdateParams): IpRecord = update(params, RequestOptions.none())
+    /** @see [retrieve] */
+    fun retrieve(params: IpRecordRetrieveParams): IpRecord = retrieve(params, RequestOptions.none())
+
+    /** @see [retrieve] */
+    fun retrieve(sid: String, requestOptions: RequestOptions): IpRecord =
+        retrieve(sid, IpRecordRetrieveParams.none(), requestOptions)
+
+    fun update(sid: String): IpRecord = update(sid, IpRecordUpdateParams.none())
+
+    /** @see [update] */
+    fun update(
+        sid: String,
+        params: IpRecordUpdateParams = IpRecordUpdateParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): IpRecord = update(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [update] */
+    fun update(sid: String, params: IpRecordUpdateParams = IpRecordUpdateParams.none()): IpRecord =
+        update(sid, params, RequestOptions.none())
 
     /** @see [update] */
     fun update(
         params: IpRecordUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): IpRecord
+
+    /** @see [update] */
+    fun update(params: IpRecordUpdateParams): IpRecord = update(params, RequestOptions.none())
+
+    /** @see [update] */
+    fun update(sid: String, requestOptions: RequestOptions): IpRecord =
+        update(sid, IpRecordUpdateParams.none(), requestOptions)
 
     fun list(): IpRecordListResponse = list(IpRecordListParams.none())
 
@@ -61,10 +99,28 @@ interface IpRecordService {
     fun list(requestOptions: RequestOptions): IpRecordListResponse =
         list(IpRecordListParams.none(), requestOptions)
 
-    fun delete(params: IpRecordDeleteParams) = delete(params, RequestOptions.none())
+    fun delete(sid: String) = delete(sid, IpRecordDeleteParams.none())
+
+    /** @see [delete] */
+    fun delete(
+        sid: String,
+        params: IpRecordDeleteParams = IpRecordDeleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = delete(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [delete] */
+    fun delete(sid: String, params: IpRecordDeleteParams = IpRecordDeleteParams.none()) =
+        delete(sid, params, RequestOptions.none())
 
     /** @see [delete] */
     fun delete(params: IpRecordDeleteParams, requestOptions: RequestOptions = RequestOptions.none())
+
+    /** @see [delete] */
+    fun delete(params: IpRecordDeleteParams) = delete(params, RequestOptions.none())
+
+    /** @see [delete] */
+    fun delete(sid: String, requestOptions: RequestOptions) =
+        delete(sid, IpRecordDeleteParams.none(), requestOptions)
 
     /** A view of [IpRecordService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -89,8 +145,23 @@ interface IpRecordService {
          * [IpRecordService.retrieve].
          */
         @MustBeClosed
-        fun retrieve(params: IpRecordRetrieveParams): HttpResponseFor<IpRecord> =
-            retrieve(params, RequestOptions.none())
+        fun retrieve(sid: String): HttpResponseFor<IpRecord> =
+            retrieve(sid, IpRecordRetrieveParams.none())
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            sid: String,
+            params: IpRecordRetrieveParams = IpRecordRetrieveParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<IpRecord> = retrieve(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            sid: String,
+            params: IpRecordRetrieveParams = IpRecordRetrieveParams.none(),
+        ): HttpResponseFor<IpRecord> = retrieve(sid, params, RequestOptions.none())
 
         /** @see [retrieve] */
         @MustBeClosed
@@ -99,13 +170,38 @@ interface IpRecordService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<IpRecord>
 
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(params: IpRecordRetrieveParams): HttpResponseFor<IpRecord> =
+            retrieve(params, RequestOptions.none())
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(sid: String, requestOptions: RequestOptions): HttpResponseFor<IpRecord> =
+            retrieve(sid, IpRecordRetrieveParams.none(), requestOptions)
+
         /**
          * Returns a raw HTTP response for `post /v1/IpRecords/{Sid}`, but is otherwise the same as
          * [IpRecordService.update].
          */
         @MustBeClosed
-        fun update(params: IpRecordUpdateParams): HttpResponseFor<IpRecord> =
-            update(params, RequestOptions.none())
+        fun update(sid: String): HttpResponseFor<IpRecord> =
+            update(sid, IpRecordUpdateParams.none())
+
+        /** @see [update] */
+        @MustBeClosed
+        fun update(
+            sid: String,
+            params: IpRecordUpdateParams = IpRecordUpdateParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<IpRecord> = update(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [update] */
+        @MustBeClosed
+        fun update(
+            sid: String,
+            params: IpRecordUpdateParams = IpRecordUpdateParams.none(),
+        ): HttpResponseFor<IpRecord> = update(sid, params, RequestOptions.none())
 
         /** @see [update] */
         @MustBeClosed
@@ -113,6 +209,16 @@ interface IpRecordService {
             params: IpRecordUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<IpRecord>
+
+        /** @see [update] */
+        @MustBeClosed
+        fun update(params: IpRecordUpdateParams): HttpResponseFor<IpRecord> =
+            update(params, RequestOptions.none())
+
+        /** @see [update] */
+        @MustBeClosed
+        fun update(sid: String, requestOptions: RequestOptions): HttpResponseFor<IpRecord> =
+            update(sid, IpRecordUpdateParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /v1/IpRecords`, but is otherwise the same as
@@ -144,8 +250,22 @@ interface IpRecordService {
          * as [IpRecordService.delete].
          */
         @MustBeClosed
-        fun delete(params: IpRecordDeleteParams): HttpResponse =
-            delete(params, RequestOptions.none())
+        fun delete(sid: String): HttpResponse = delete(sid, IpRecordDeleteParams.none())
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(
+            sid: String,
+            params: IpRecordDeleteParams = IpRecordDeleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse = delete(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(
+            sid: String,
+            params: IpRecordDeleteParams = IpRecordDeleteParams.none(),
+        ): HttpResponse = delete(sid, params, RequestOptions.none())
 
         /** @see [delete] */
         @MustBeClosed
@@ -153,5 +273,15 @@ interface IpRecordService {
             params: IpRecordDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(params: IpRecordDeleteParams): HttpResponse =
+            delete(params, RequestOptions.none())
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(sid: String, requestOptions: RequestOptions): HttpResponse =
+            delete(sid, IpRecordDeleteParams.none(), requestOptions)
     }
 }

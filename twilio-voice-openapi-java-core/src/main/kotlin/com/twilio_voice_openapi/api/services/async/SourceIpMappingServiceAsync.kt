@@ -31,8 +31,22 @@ interface SourceIpMappingServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<SourceIpMapping>
 
-    fun retrieve(params: SourceIpMappingRetrieveParams): CompletableFuture<SourceIpMapping> =
-        retrieve(params, RequestOptions.none())
+    fun retrieve(sid: String): CompletableFuture<SourceIpMapping> =
+        retrieve(sid, SourceIpMappingRetrieveParams.none())
+
+    /** @see [retrieve] */
+    fun retrieve(
+        sid: String,
+        params: SourceIpMappingRetrieveParams = SourceIpMappingRetrieveParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<SourceIpMapping> =
+        retrieve(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [retrieve] */
+    fun retrieve(
+        sid: String,
+        params: SourceIpMappingRetrieveParams = SourceIpMappingRetrieveParams.none(),
+    ): CompletableFuture<SourceIpMapping> = retrieve(sid, params, RequestOptions.none())
 
     /** @see [retrieve] */
     fun retrieve(
@@ -40,6 +54,28 @@ interface SourceIpMappingServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<SourceIpMapping>
 
+    /** @see [retrieve] */
+    fun retrieve(params: SourceIpMappingRetrieveParams): CompletableFuture<SourceIpMapping> =
+        retrieve(params, RequestOptions.none())
+
+    /** @see [retrieve] */
+    fun retrieve(sid: String, requestOptions: RequestOptions): CompletableFuture<SourceIpMapping> =
+        retrieve(sid, SourceIpMappingRetrieveParams.none(), requestOptions)
+
+    fun update(
+        sid: String,
+        params: SourceIpMappingUpdateParams,
+    ): CompletableFuture<SourceIpMapping> = update(sid, params, RequestOptions.none())
+
+    /** @see [update] */
+    fun update(
+        sid: String,
+        params: SourceIpMappingUpdateParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<SourceIpMapping> =
+        update(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [update] */
     fun update(params: SourceIpMappingUpdateParams): CompletableFuture<SourceIpMapping> =
         update(params, RequestOptions.none())
 
@@ -67,14 +103,35 @@ interface SourceIpMappingServiceAsync {
     fun list(requestOptions: RequestOptions): CompletableFuture<SourceIpMappingListResponse> =
         list(SourceIpMappingListParams.none(), requestOptions)
 
-    fun delete(params: SourceIpMappingDeleteParams): CompletableFuture<Void?> =
-        delete(params, RequestOptions.none())
+    fun delete(sid: String): CompletableFuture<Void?> =
+        delete(sid, SourceIpMappingDeleteParams.none())
+
+    /** @see [delete] */
+    fun delete(
+        sid: String,
+        params: SourceIpMappingDeleteParams = SourceIpMappingDeleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> = delete(params.toBuilder().sid(sid).build(), requestOptions)
+
+    /** @see [delete] */
+    fun delete(
+        sid: String,
+        params: SourceIpMappingDeleteParams = SourceIpMappingDeleteParams.none(),
+    ): CompletableFuture<Void?> = delete(sid, params, RequestOptions.none())
 
     /** @see [delete] */
     fun delete(
         params: SourceIpMappingDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see [delete] */
+    fun delete(params: SourceIpMappingDeleteParams): CompletableFuture<Void?> =
+        delete(params, RequestOptions.none())
+
+    /** @see [delete] */
+    fun delete(sid: String, requestOptions: RequestOptions): CompletableFuture<Void?> =
+        delete(sid, SourceIpMappingDeleteParams.none(), requestOptions)
 
     /**
      * A view of [SourceIpMappingServiceAsync] that provides access to raw HTTP responses for each
@@ -104,10 +161,25 @@ interface SourceIpMappingServiceAsync {
          * same as [SourceIpMappingServiceAsync.retrieve].
          */
         @MustBeClosed
+        fun retrieve(sid: String): CompletableFuture<HttpResponseFor<SourceIpMapping>> =
+            retrieve(sid, SourceIpMappingRetrieveParams.none())
+
+        /** @see [retrieve] */
+        @MustBeClosed
         fun retrieve(
-            params: SourceIpMappingRetrieveParams
+            sid: String,
+            params: SourceIpMappingRetrieveParams = SourceIpMappingRetrieveParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponseFor<SourceIpMapping>> =
-            retrieve(params, RequestOptions.none())
+            retrieve(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            sid: String,
+            params: SourceIpMappingRetrieveParams = SourceIpMappingRetrieveParams.none(),
+        ): CompletableFuture<HttpResponseFor<SourceIpMapping>> =
+            retrieve(sid, params, RequestOptions.none())
 
         /** @see [retrieve] */
         @MustBeClosed
@@ -116,10 +188,42 @@ interface SourceIpMappingServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponseFor<SourceIpMapping>>
 
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            params: SourceIpMappingRetrieveParams
+        ): CompletableFuture<HttpResponseFor<SourceIpMapping>> =
+            retrieve(params, RequestOptions.none())
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            sid: String,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<SourceIpMapping>> =
+            retrieve(sid, SourceIpMappingRetrieveParams.none(), requestOptions)
+
         /**
          * Returns a raw HTTP response for `post /v1/SourceIpMappings/{Sid}`, but is otherwise the
          * same as [SourceIpMappingServiceAsync.update].
          */
+        @MustBeClosed
+        fun update(
+            sid: String,
+            params: SourceIpMappingUpdateParams,
+        ): CompletableFuture<HttpResponseFor<SourceIpMapping>> =
+            update(sid, params, RequestOptions.none())
+
+        /** @see [update] */
+        @MustBeClosed
+        fun update(
+            sid: String,
+            params: SourceIpMappingUpdateParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<SourceIpMapping>> =
+            update(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [update] */
         @MustBeClosed
         fun update(
             params: SourceIpMappingUpdateParams
@@ -167,8 +271,24 @@ interface SourceIpMappingServiceAsync {
          * same as [SourceIpMappingServiceAsync.delete].
          */
         @MustBeClosed
-        fun delete(params: SourceIpMappingDeleteParams): CompletableFuture<HttpResponse> =
-            delete(params, RequestOptions.none())
+        fun delete(sid: String): CompletableFuture<HttpResponse> =
+            delete(sid, SourceIpMappingDeleteParams.none())
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(
+            sid: String,
+            params: SourceIpMappingDeleteParams = SourceIpMappingDeleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            delete(params.toBuilder().sid(sid).build(), requestOptions)
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(
+            sid: String,
+            params: SourceIpMappingDeleteParams = SourceIpMappingDeleteParams.none(),
+        ): CompletableFuture<HttpResponse> = delete(sid, params, RequestOptions.none())
 
         /** @see [delete] */
         @MustBeClosed
@@ -176,5 +296,15 @@ interface SourceIpMappingServiceAsync {
             params: SourceIpMappingDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(params: SourceIpMappingDeleteParams): CompletableFuture<HttpResponse> =
+            delete(params, RequestOptions.none())
+
+        /** @see [delete] */
+        @MustBeClosed
+        fun delete(sid: String, requestOptions: RequestOptions): CompletableFuture<HttpResponse> =
+            delete(sid, SourceIpMappingDeleteParams.none(), requestOptions)
     }
 }

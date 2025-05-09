@@ -11,62 +11,92 @@ import com.twilio_voice_openapi.api.core.ExcludeMissing
 import com.twilio_voice_openapi.api.core.JsonField
 import com.twilio_voice_openapi.api.core.JsonMissing
 import com.twilio_voice_openapi.api.core.JsonValue
-import com.twilio_voice_openapi.api.core.NoAutoDetect
-import com.twilio_voice_openapi.api.core.immutableEmptyMap
-import com.twilio_voice_openapi.api.core.toImmutable
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-@NoAutoDetect
 class ByocTrunk
-@JsonCreator
 private constructor(
-    @JsonProperty("account_sid")
-    @ExcludeMissing
-    private val accountSid: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("cnam_lookup_enabled")
-    @ExcludeMissing
-    private val cnamLookupEnabled: JsonField<Boolean> = JsonMissing.of(),
-    @JsonProperty("connection_policy_sid")
-    @ExcludeMissing
-    private val connectionPolicySid: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("date_created")
-    @ExcludeMissing
-    private val dateCreated: JsonField<OffsetDateTime> = JsonMissing.of(),
-    @JsonProperty("date_updated")
-    @ExcludeMissing
-    private val dateUpdated: JsonField<OffsetDateTime> = JsonMissing.of(),
-    @JsonProperty("friendly_name")
-    @ExcludeMissing
-    private val friendlyName: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("from_domain_sid")
-    @ExcludeMissing
-    private val fromDomainSid: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("sid") @ExcludeMissing private val sid: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("status_callback_method")
-    @ExcludeMissing
-    private val statusCallbackMethod: JsonField<StatusCallbackMethod> = JsonMissing.of(),
-    @JsonProperty("status_callback_url")
-    @ExcludeMissing
-    private val statusCallbackUrl: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("url") @ExcludeMissing private val url: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("voice_fallback_method")
-    @ExcludeMissing
-    private val voiceFallbackMethod: JsonField<VoiceFallbackMethod> = JsonMissing.of(),
-    @JsonProperty("voice_fallback_url")
-    @ExcludeMissing
-    private val voiceFallbackUrl: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("voice_method")
-    @ExcludeMissing
-    private val voiceMethod: JsonField<VoiceMethod> = JsonMissing.of(),
-    @JsonProperty("voice_url")
-    @ExcludeMissing
-    private val voiceUrl: JsonField<String> = JsonMissing.of(),
-    @JsonAnySetter private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
+    private val accountSid: JsonField<String>,
+    private val cnamLookupEnabled: JsonField<Boolean>,
+    private val connectionPolicySid: JsonField<String>,
+    private val dateCreated: JsonField<OffsetDateTime>,
+    private val dateUpdated: JsonField<OffsetDateTime>,
+    private val friendlyName: JsonField<String>,
+    private val fromDomainSid: JsonField<String>,
+    private val sid: JsonField<String>,
+    private val statusCallbackMethod: JsonField<StatusCallbackMethod>,
+    private val statusCallbackUrl: JsonField<String>,
+    private val url: JsonField<String>,
+    private val voiceFallbackMethod: JsonField<VoiceFallbackMethod>,
+    private val voiceFallbackUrl: JsonField<String>,
+    private val voiceMethod: JsonField<VoiceMethod>,
+    private val voiceUrl: JsonField<String>,
+    private val additionalProperties: MutableMap<String, JsonValue>,
 ) {
+
+    @JsonCreator
+    private constructor(
+        @JsonProperty("account_sid")
+        @ExcludeMissing
+        accountSid: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("cnam_lookup_enabled")
+        @ExcludeMissing
+        cnamLookupEnabled: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("connection_policy_sid")
+        @ExcludeMissing
+        connectionPolicySid: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("date_created")
+        @ExcludeMissing
+        dateCreated: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("date_updated")
+        @ExcludeMissing
+        dateUpdated: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("friendly_name")
+        @ExcludeMissing
+        friendlyName: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("from_domain_sid")
+        @ExcludeMissing
+        fromDomainSid: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("sid") @ExcludeMissing sid: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("status_callback_method")
+        @ExcludeMissing
+        statusCallbackMethod: JsonField<StatusCallbackMethod> = JsonMissing.of(),
+        @JsonProperty("status_callback_url")
+        @ExcludeMissing
+        statusCallbackUrl: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("url") @ExcludeMissing url: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("voice_fallback_method")
+        @ExcludeMissing
+        voiceFallbackMethod: JsonField<VoiceFallbackMethod> = JsonMissing.of(),
+        @JsonProperty("voice_fallback_url")
+        @ExcludeMissing
+        voiceFallbackUrl: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("voice_method")
+        @ExcludeMissing
+        voiceMethod: JsonField<VoiceMethod> = JsonMissing.of(),
+        @JsonProperty("voice_url") @ExcludeMissing voiceUrl: JsonField<String> = JsonMissing.of(),
+    ) : this(
+        accountSid,
+        cnamLookupEnabled,
+        connectionPolicySid,
+        dateCreated,
+        dateUpdated,
+        friendlyName,
+        fromDomainSid,
+        sid,
+        statusCallbackMethod,
+        statusCallbackUrl,
+        url,
+        voiceFallbackMethod,
+        voiceFallbackUrl,
+        voiceMethod,
+        voiceUrl,
+        mutableMapOf(),
+    )
 
     /**
      * The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the BYOC
@@ -75,7 +105,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun accountSid(): Optional<String> = Optional.ofNullable(accountSid.getNullable("account_sid"))
+    fun accountSid(): Optional<String> = accountSid.getOptional("account_sid")
 
     /**
      * Whether Caller ID Name (CNAM) lookup is enabled for the trunk. If enabled, all inbound calls
@@ -87,7 +117,7 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun cnamLookupEnabled(): Optional<Boolean> =
-        Optional.ofNullable(cnamLookupEnabled.getNullable("cnam_lookup_enabled"))
+        cnamLookupEnabled.getOptional("cnam_lookup_enabled")
 
     /**
      * The SID of the Connection Policy that Twilio will use when routing traffic to your
@@ -97,7 +127,7 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun connectionPolicySid(): Optional<String> =
-        Optional.ofNullable(connectionPolicySid.getNullable("connection_policy_sid"))
+        connectionPolicySid.getOptional("connection_policy_sid")
 
     /**
      * The date and time in GMT that the resource was created specified in
@@ -106,8 +136,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun dateCreated(): Optional<OffsetDateTime> =
-        Optional.ofNullable(dateCreated.getNullable("date_created"))
+    fun dateCreated(): Optional<OffsetDateTime> = dateCreated.getOptional("date_created")
 
     /**
      * The date and time in GMT that the resource was last updated specified in
@@ -116,8 +145,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun dateUpdated(): Optional<OffsetDateTime> =
-        Optional.ofNullable(dateUpdated.getNullable("date_updated"))
+    fun dateUpdated(): Optional<OffsetDateTime> = dateUpdated.getOptional("date_updated")
 
     /**
      * The string that you assigned to describe the resource.
@@ -125,8 +153,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun friendlyName(): Optional<String> =
-        Optional.ofNullable(friendlyName.getNullable("friendly_name"))
+    fun friendlyName(): Optional<String> = friendlyName.getOptional("friendly_name")
 
     /**
      * The SID of the SIP Domain that should be used in the `From` header of originating calls sent
@@ -138,8 +165,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun fromDomainSid(): Optional<String> =
-        Optional.ofNullable(fromDomainSid.getNullable("from_domain_sid"))
+    fun fromDomainSid(): Optional<String> = fromDomainSid.getOptional("from_domain_sid")
 
     /**
      * The unique string that that we created to identify the BYOC Trunk resource.
@@ -147,7 +173,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun sid(): Optional<String> = Optional.ofNullable(sid.getNullable("sid"))
+    fun sid(): Optional<String> = sid.getOptional("sid")
 
     /**
      * The HTTP method we use to call `status_callback_url`. Either `GET` or `POST`.
@@ -156,7 +182,7 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun statusCallbackMethod(): Optional<StatusCallbackMethod> =
-        Optional.ofNullable(statusCallbackMethod.getNullable("status_callback_method"))
+        statusCallbackMethod.getOptional("status_callback_method")
 
     /**
      * The URL that we call to pass status parameters (such as call ended) to your application.
@@ -164,8 +190,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun statusCallbackUrl(): Optional<String> =
-        Optional.ofNullable(statusCallbackUrl.getNullable("status_callback_url"))
+    fun statusCallbackUrl(): Optional<String> = statusCallbackUrl.getOptional("status_callback_url")
 
     /**
      * The absolute URL of the resource.
@@ -173,7 +198,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun url(): Optional<String> = Optional.ofNullable(url.getNullable("url"))
+    fun url(): Optional<String> = url.getOptional("url")
 
     /**
      * The HTTP method we use to call `voice_fallback_url`. Can be: `GET` or `POST`.
@@ -182,7 +207,7 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun voiceFallbackMethod(): Optional<VoiceFallbackMethod> =
-        Optional.ofNullable(voiceFallbackMethod.getNullable("voice_fallback_method"))
+        voiceFallbackMethod.getOptional("voice_fallback_method")
 
     /**
      * The URL that we call when an error occurs while retrieving or executing the TwiML requested
@@ -191,8 +216,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun voiceFallbackUrl(): Optional<String> =
-        Optional.ofNullable(voiceFallbackUrl.getNullable("voice_fallback_url"))
+    fun voiceFallbackUrl(): Optional<String> = voiceFallbackUrl.getOptional("voice_fallback_url")
 
     /**
      * The HTTP method we use to call `voice_url`. Can be: `GET` or `POST`.
@@ -200,8 +224,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun voiceMethod(): Optional<VoiceMethod> =
-        Optional.ofNullable(voiceMethod.getNullable("voice_method"))
+    fun voiceMethod(): Optional<VoiceMethod> = voiceMethod.getOptional("voice_method")
 
     /**
      * The URL we call using the `voice_method` when the BYOC Trunk receives a call.
@@ -209,7 +232,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun voiceUrl(): Optional<String> = Optional.ofNullable(voiceUrl.getNullable("voice_url"))
+    fun voiceUrl(): Optional<String> = voiceUrl.getOptional("voice_url")
 
     /**
      * Returns the raw JSON value of [accountSid].
@@ -344,34 +367,15 @@ private constructor(
      */
     @JsonProperty("voice_url") @ExcludeMissing fun _voiceUrl(): JsonField<String> = voiceUrl
 
+    @JsonAnySetter
+    private fun putAdditionalProperty(key: String, value: JsonValue) {
+        additionalProperties.put(key, value)
+    }
+
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
-
-    private var validated: Boolean = false
-
-    fun validate(): ByocTrunk = apply {
-        if (validated) {
-            return@apply
-        }
-
-        accountSid()
-        cnamLookupEnabled()
-        connectionPolicySid()
-        dateCreated()
-        dateUpdated()
-        friendlyName()
-        fromDomainSid()
-        sid()
-        statusCallbackMethod()
-        statusCallbackUrl()
-        url()
-        voiceFallbackMethod()
-        voiceFallbackUrl()
-        voiceMethod()
-        voiceUrl()
-        validated = true
-    }
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -767,9 +771,65 @@ private constructor(
                 voiceFallbackUrl,
                 voiceMethod,
                 voiceUrl,
-                additionalProperties.toImmutable(),
+                additionalProperties.toMutableMap(),
             )
     }
+
+    private var validated: Boolean = false
+
+    fun validate(): ByocTrunk = apply {
+        if (validated) {
+            return@apply
+        }
+
+        accountSid()
+        cnamLookupEnabled()
+        connectionPolicySid()
+        dateCreated()
+        dateUpdated()
+        friendlyName()
+        fromDomainSid()
+        sid()
+        statusCallbackMethod().ifPresent { it.validate() }
+        statusCallbackUrl()
+        url()
+        voiceFallbackMethod().ifPresent { it.validate() }
+        voiceFallbackUrl()
+        voiceMethod().ifPresent { it.validate() }
+        voiceUrl()
+        validated = true
+    }
+
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: TwilioVoiceOpenAPIInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    @JvmSynthetic
+    internal fun validity(): Int =
+        (if (accountSid.asKnown().isPresent) 1 else 0) +
+            (if (cnamLookupEnabled.asKnown().isPresent) 1 else 0) +
+            (if (connectionPolicySid.asKnown().isPresent) 1 else 0) +
+            (if (dateCreated.asKnown().isPresent) 1 else 0) +
+            (if (dateUpdated.asKnown().isPresent) 1 else 0) +
+            (if (friendlyName.asKnown().isPresent) 1 else 0) +
+            (if (fromDomainSid.asKnown().isPresent) 1 else 0) +
+            (if (sid.asKnown().isPresent) 1 else 0) +
+            (statusCallbackMethod.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (statusCallbackUrl.asKnown().isPresent) 1 else 0) +
+            (if (url.asKnown().isPresent) 1 else 0) +
+            (voiceFallbackMethod.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (voiceFallbackUrl.asKnown().isPresent) 1 else 0) +
+            (voiceMethod.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (voiceUrl.asKnown().isPresent) 1 else 0)
 
     /** The HTTP method we use to call `status_callback_url`. Either `GET` or `POST`. */
     class StatusCallbackMethod
@@ -867,6 +927,33 @@ private constructor(
             _value().asString().orElseThrow {
                 TwilioVoiceOpenAPIInvalidDataException("Value is not a String")
             }
+
+        private var validated: Boolean = false
+
+        fun validate(): StatusCallbackMethod = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: TwilioVoiceOpenAPIInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
             if (this === other) {
@@ -977,6 +1064,33 @@ private constructor(
                 TwilioVoiceOpenAPIInvalidDataException("Value is not a String")
             }
 
+        private var validated: Boolean = false
+
+        fun validate(): VoiceFallbackMethod = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: TwilioVoiceOpenAPIInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
@@ -1080,6 +1194,33 @@ private constructor(
             _value().asString().orElseThrow {
                 TwilioVoiceOpenAPIInvalidDataException("Value is not a String")
             }
+
+        private var validated: Boolean = false
+
+        fun validate(): VoiceMethod = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: TwilioVoiceOpenAPIInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
             if (this === other) {

@@ -1,31 +1,43 @@
 # Twilio Voice OpenAPI Java API Library
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.twilio_voice_openapi.api/twilio-voice-openapi-java)](https://central.sonatype.com/artifact/com.twilio_voice_openapi.api/twilio-voice-openapi-java/0.0.1-alpha.0)
-[![javadoc](https://javadoc.io/badge2/com.twilio_voice_openapi.api/twilio-voice-openapi-java/0.0.1-alpha.0/javadoc.svg)](https://javadoc.io/doc/com.twilio_voice_openapi.api/twilio-voice-openapi-java/0.0.1-alpha.0)
+<!-- x-release-please-start-version -->
 
-The Twilio Voice OpenAPI Java SDK provides convenient access to the Twilio Voice OpenAPI REST API from applications written in Java.
+[![Maven Central](https://img.shields.io/maven-central/v/com.twilio_voice_openapi.api/twilio-voice-openapi-java)](https://central.sonatype.com/artifact/com.twilio_voice_openapi.api/twilio-voice-openapi-java/0.1.0-alpha.1)
+[![javadoc](https://javadoc.io/badge2/com.twilio_voice_openapi.api/twilio-voice-openapi-java/0.1.0-alpha.1/javadoc.svg)](https://javadoc.io/doc/com.twilio_voice_openapi.api/twilio-voice-openapi-java/0.1.0-alpha.1)
+
+<!-- x-release-please-end -->
+
+The Twilio Voice OpenAPI Java SDK provides convenient access to the [Twilio Voice OpenAPI REST API](https://support.twilio.com) from applications written in Java.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
-The REST API documentation can be found on [support.twilio.com](https://support.twilio.com). Javadocs are also available on [javadoc.io](https://javadoc.io/doc/com.twilio_voice_openapi.api/twilio-voice-openapi-java/0.0.1-alpha.0).
+<!-- x-release-please-start-version -->
+
+The REST API documentation can be found on [support.twilio.com](https://support.twilio.com). Javadocs are available on [javadoc.io](https://javadoc.io/doc/com.twilio_voice_openapi.api/twilio-voice-openapi-java/0.1.0-alpha.1).
+
+<!-- x-release-please-end -->
 
 ## Installation
+
+<!-- x-release-please-start-version -->
 
 ### Gradle
 
 ```kotlin
-implementation("com.twilio_voice_openapi.api:twilio-voice-openapi-java:0.0.1-alpha.0")
+implementation("com.twilio_voice_openapi.api:twilio-voice-openapi-java:0.1.0-alpha.1")
 ```
 
 ### Maven
 
 ```xml
 <dependency>
-    <groupId>com.twilio_voice_openapi.api</groupId>
-    <artifactId>twilio-voice-openapi-java</artifactId>
-    <version>0.0.1-alpha.0</version>
+  <groupId>com.twilio_voice_openapi.api</groupId>
+  <artifactId>twilio-voice-openapi-java</artifactId>
+  <version>0.1.0-alpha.1</version>
 </dependency>
 ```
+
+<!-- x-release-please-end -->
 
 ## Requirements
 
@@ -39,14 +51,14 @@ import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient
 import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 import java.time.LocalDate;
 
-// Configures using the `TWILIO_VOICE_OPENAPI_USERNAME` and `TWILIO_VOICE_OPENAPI_PASSWORD` environment variables
+// Configures using the `TWILIO_VOICE_OPENAPI_USERNAME`, `TWILIO_VOICE_OPENAPI_PASSWORD` and `TWILIO_VOICE_OPENAPI_BASE_URL` environment variables
 TwilioVoiceOpenAPIClient client = TwilioVoiceOpenAPIOkHttpClient.fromEnv();
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
-    .date(LocalDate.parse("REPLACE_ME"))
-    .sid("REPLACE_ME")
+    .date(LocalDate.parse("2019-12-27"))
+    .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
     .build();
-client.archives().deleteCall(params)
+client.archives().deleteCall(params);
 ```
 
 ## Client configuration
@@ -57,7 +69,7 @@ Configure the client using environment variables:
 import com.twilio_voice_openapi.api.client.TwilioVoiceOpenAPIClient;
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient;
 
-// Configures using the `TWILIO_VOICE_OPENAPI_USERNAME` and `TWILIO_VOICE_OPENAPI_PASSWORD` environment variables
+// Configures using the `TWILIO_VOICE_OPENAPI_USERNAME`, `TWILIO_VOICE_OPENAPI_PASSWORD` and `TWILIO_VOICE_OPENAPI_BASE_URL` environment variables
 TwilioVoiceOpenAPIClient client = TwilioVoiceOpenAPIOkHttpClient.fromEnv();
 ```
 
@@ -80,7 +92,7 @@ import com.twilio_voice_openapi.api.client.TwilioVoiceOpenAPIClient;
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient;
 
 TwilioVoiceOpenAPIClient client = TwilioVoiceOpenAPIOkHttpClient.builder()
-    // Configures using the `TWILIO_VOICE_OPENAPI_USERNAME` and `TWILIO_VOICE_OPENAPI_PASSWORD` environment variables
+    // Configures using the `TWILIO_VOICE_OPENAPI_USERNAME`, `TWILIO_VOICE_OPENAPI_PASSWORD` and `TWILIO_VOICE_OPENAPI_BASE_URL` environment variables
     .fromEnv()
     .username("My Username")
     .build();
@@ -88,10 +100,11 @@ TwilioVoiceOpenAPIClient client = TwilioVoiceOpenAPIOkHttpClient.builder()
 
 See this table for the available options:
 
-| Setter     | Environment variable            | Required | Default value |
-| ---------- | ------------------------------- | -------- | ------------- |
-| `username` | `TWILIO_VOICE_OPENAPI_USERNAME` | true     | -             |
-| `password` | `TWILIO_VOICE_OPENAPI_PASSWORD` | true     | -             |
+| Setter     | Environment variable            | Required | Default value                |
+| ---------- | ------------------------------- | -------- | ---------------------------- |
+| `username` | `TWILIO_VOICE_OPENAPI_USERNAME` | true     | -                            |
+| `password` | `TWILIO_VOICE_OPENAPI_PASSWORD` | true     | -                            |
+| `baseUrl`  | `TWILIO_VOICE_OPENAPI_BASE_URL` | true     | `"https://voice.twilio.com"` |
 
 > [!TIP]
 > Don't create more than one client in the same application. Each client has a connection pool and
@@ -122,12 +135,12 @@ import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 import java.time.LocalDate;
 import java.util.concurrent.CompletableFuture;
 
-// Configures using the `TWILIO_VOICE_OPENAPI_USERNAME` and `TWILIO_VOICE_OPENAPI_PASSWORD` environment variables
+// Configures using the `TWILIO_VOICE_OPENAPI_USERNAME`, `TWILIO_VOICE_OPENAPI_PASSWORD` and `TWILIO_VOICE_OPENAPI_BASE_URL` environment variables
 TwilioVoiceOpenAPIClient client = TwilioVoiceOpenAPIOkHttpClient.fromEnv();
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
-    .date(LocalDate.parse("REPLACE_ME"))
-    .sid("REPLACE_ME")
+    .date(LocalDate.parse("2019-12-27"))
+    .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
     .build();
 CompletableFuture<Void?> future = client.async().archives().deleteCall(params);
 ```
@@ -141,12 +154,12 @@ import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 import java.time.LocalDate;
 import java.util.concurrent.CompletableFuture;
 
-// Configures using the `TWILIO_VOICE_OPENAPI_USERNAME` and `TWILIO_VOICE_OPENAPI_PASSWORD` environment variables
+// Configures using the `TWILIO_VOICE_OPENAPI_USERNAME`, `TWILIO_VOICE_OPENAPI_PASSWORD` and `TWILIO_VOICE_OPENAPI_BASE_URL` environment variables
 TwilioVoiceOpenAPIClientAsync client = TwilioVoiceOpenAPIOkHttpClientAsync.fromEnv();
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
-    .date(LocalDate.parse("REPLACE_ME"))
-    .sid("REPLACE_ME")
+    .date(LocalDate.parse("2019-12-27"))
+    .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
     .build();
 CompletableFuture<Void?> future = client.archives().deleteCall(params);
 ```
@@ -166,8 +179,8 @@ import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 import java.time.LocalDate;
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
-    .date(LocalDate.parse("REPLACE_ME"))
-    .sid("REPLACE_ME")
+    .date(LocalDate.parse("2019-12-27"))
+    .sid("CAE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
     .build();
 HttpResponse response = client.archives().withRawResponse().deleteCall(params);
 
@@ -181,16 +194,16 @@ The SDK throws custom unchecked exception types:
 
 - [`TwilioVoiceOpenAPIServiceException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/TwilioVoiceOpenAPIServiceException.kt): Base class for HTTP errors. See this table for which exception subclass is thrown for each HTTP status code:
 
-  | Status | Exception                       |
-  | ------ | ------------------------------- |
-  | 400    | `BadRequestException`           |
-  | 401    | `AuthenticationException`       |
-  | 403    | `PermissionDeniedException`     |
-  | 404    | `NotFoundException`             |
-  | 422    | `UnprocessableEntityException`  |
-  | 429    | `RateLimitException`            |
-  | 5xx    | `InternalServerException`       |
-  | others | `UnexpectedStatusCodeException` |
+  | Status | Exception                                                                                                                                              |
+  | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+  | 400    | [`BadRequestException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/BadRequestException.kt)                     |
+  | 401    | [`UnauthorizedException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/UnauthorizedException.kt)                 |
+  | 403    | [`PermissionDeniedException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/PermissionDeniedException.kt)         |
+  | 404    | [`NotFoundException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/NotFoundException.kt)                         |
+  | 422    | [`UnprocessableEntityException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/UnprocessableEntityException.kt)   |
+  | 429    | [`RateLimitException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/RateLimitException.kt)                       |
+  | 5xx    | [`InternalServerException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/InternalServerException.kt)             |
+  | others | [`UnexpectedStatusCodeException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/UnexpectedStatusCodeException.kt) |
 
 - [`TwilioVoiceOpenAPIIoException`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/errors/TwilioVoiceOpenAPIIoException.kt): I/O networking errors.
 
@@ -213,6 +226,17 @@ Or to `debug` for more verbose logging:
 ```sh
 $ export TWILIO_VOICE_OPENAPI_LOG=debug
 ```
+
+## Jackson
+
+The SDK depends on [Jackson](https://github.com/FasterXML/jackson) for JSON serialization/deserialization. It is compatible with version 2.13.4 or higher, but depends on version 2.18.2 by default.
+
+The SDK throws an exception if it detects an incompatible Jackson version at runtime (e.g. if the default version was overridden in your Maven or Gradle config).
+
+If the SDK threw an exception, but you're _certain_ the version is compatible, then disable the version check using the `checkJacksonVersionCompatibility` on [`TwilioVoiceOpenAPIOkHttpClient`](twilio-voice-openapi-java-client-okhttp/src/main/kotlin/com/twilio_voice_openapi/api/client/okhttp/TwilioVoiceOpenAPIOkHttpClient.kt) or [`TwilioVoiceOpenAPIOkHttpClientAsync`](twilio-voice-openapi-java-client-okhttp/src/main/kotlin/com/twilio_voice_openapi/api/client/okhttp/TwilioVoiceOpenAPIOkHttpClientAsync.kt).
+
+> [!CAUTION]
+> We make no guarantee that the SDK works correctly when the Jackson version check is disabled.
 
 ## Network options
 
@@ -249,12 +273,9 @@ Requests time out after 1 minute by default.
 To set a custom timeout, configure the method call using the `timeout` method:
 
 ```java
-import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
-import java.time.LocalDate;
-
 client.archives().deleteCall(
   params, RequestOptions.builder().timeout(Duration.ofSeconds(30)).build()
-)
+);
 ```
 
 Or configure the default for all method calls at the client level:
@@ -290,6 +311,42 @@ TwilioVoiceOpenAPIClient client = TwilioVoiceOpenAPIOkHttpClient.builder()
     .build();
 ```
 
+### Custom HTTP client
+
+The SDK consists of three artifacts:
+
+- `twilio-voice-openapi-java-core`
+  - Contains core SDK logic
+  - Does not depend on [OkHttp](https://square.github.io/okhttp)
+  - Exposes [`TwilioVoiceOpenAPIClient`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClient.kt), [`TwilioVoiceOpenAPIClientAsync`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientAsync.kt), [`TwilioVoiceOpenAPIClientImpl`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientImpl.kt), and [`TwilioVoiceOpenAPIClientAsyncImpl`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientAsyncImpl.kt), all of which can work with any HTTP client
+- `twilio-voice-openapi-java-client-okhttp`
+  - Depends on [OkHttp](https://square.github.io/okhttp)
+  - Exposes [`TwilioVoiceOpenAPIOkHttpClient`](twilio-voice-openapi-java-client-okhttp/src/main/kotlin/com/twilio_voice_openapi/api/client/okhttp/TwilioVoiceOpenAPIOkHttpClient.kt) and [`TwilioVoiceOpenAPIOkHttpClientAsync`](twilio-voice-openapi-java-client-okhttp/src/main/kotlin/com/twilio_voice_openapi/api/client/okhttp/TwilioVoiceOpenAPIOkHttpClientAsync.kt), which provide a way to construct [`TwilioVoiceOpenAPIClientImpl`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientImpl.kt) and [`TwilioVoiceOpenAPIClientAsyncImpl`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientAsyncImpl.kt), respectively, using OkHttp
+- `twilio-voice-openapi-java`
+  - Depends on and exposes the APIs of both `twilio-voice-openapi-java-core` and `twilio-voice-openapi-java-client-okhttp`
+  - Does not have its own logic
+
+This structure allows replacing the SDK's default HTTP client without pulling in unnecessary dependencies.
+
+#### Customized [`OkHttpClient`](https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.html)
+
+> [!TIP]
+> Try the available [network options](#network-options) before replacing the default client.
+
+To use a customized `OkHttpClient`:
+
+1. Replace your [`twilio-voice-openapi-java` dependency](#installation) with `twilio-voice-openapi-java-core`
+2. Copy `twilio-voice-openapi-java-client-okhttp`'s [`OkHttpClient`](twilio-voice-openapi-java-client-okhttp/src/main/kotlin/com/twilio_voice_openapi/api/client/okhttp/OkHttpClient.kt) class into your code and customize it
+3. Construct [`TwilioVoiceOpenAPIClientImpl`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientImpl.kt) or [`TwilioVoiceOpenAPIClientAsyncImpl`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientAsyncImpl.kt), similarly to [`TwilioVoiceOpenAPIOkHttpClient`](twilio-voice-openapi-java-client-okhttp/src/main/kotlin/com/twilio_voice_openapi/api/client/okhttp/TwilioVoiceOpenAPIOkHttpClient.kt) or [`TwilioVoiceOpenAPIOkHttpClientAsync`](twilio-voice-openapi-java-client-okhttp/src/main/kotlin/com/twilio_voice_openapi/api/client/okhttp/TwilioVoiceOpenAPIOkHttpClientAsync.kt), using your customized client
+
+### Completely custom HTTP client
+
+To use a completely custom HTTP client:
+
+1. Replace your [`twilio-voice-openapi-java` dependency](#installation) with `twilio-voice-openapi-java-core`
+2. Write a class that implements the [`HttpClient`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/core/http/HttpClient.kt) interface
+3. Construct [`TwilioVoiceOpenAPIClientImpl`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientImpl.kt) or [`TwilioVoiceOpenAPIClientAsyncImpl`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/client/TwilioVoiceOpenAPIClientAsyncImpl.kt), similarly to [`TwilioVoiceOpenAPIOkHttpClient`](twilio-voice-openapi-java-client-okhttp/src/main/kotlin/com/twilio_voice_openapi/api/client/okhttp/TwilioVoiceOpenAPIOkHttpClient.kt) or [`TwilioVoiceOpenAPIOkHttpClientAsync`](twilio-voice-openapi-java-client-okhttp/src/main/kotlin/com/twilio_voice_openapi/api/client/okhttp/TwilioVoiceOpenAPIOkHttpClientAsync.kt), using your new client class
+
 ## Undocumented API functionality
 
 The SDK is typed for convenient usage of the documented API. However, it also supports working with undocumented or not yet supported parts of the API.
@@ -318,8 +375,7 @@ import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
 import java.time.LocalDate;
 
 ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
-    .date(LocalDate.parse("REPLACE_ME"))
-    .sid("REPLACE_ME")
+    .date(LocalDate.parse("2019-12-27"))
     .build();
 ```
 
@@ -360,6 +416,19 @@ JsonValue complexValue = JsonValue.from(Map.of(
     3, 4
   )
 ));
+```
+
+Normally a `Builder` class's `build` method will throw [`IllegalStateException`](https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalStateException.html) if any required parameter or property is unset.
+
+To forcibly omit a required parameter or property, pass [`JsonMissing`](twilio-voice-openapi-java-core/src/main/kotlin/com/twilio_voice_openapi/api/core/Values.kt):
+
+```java
+import com.twilio_voice_openapi.api.core.JsonMissing;
+import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
+
+ArchiveDeleteCallParams params = ArchiveDeleteCallParams.builder()
+    .date(JsonMissing.of())
+    .build();
 ```
 
 ### Response properties
@@ -433,12 +502,9 @@ ByocTrunk byocTrunk = client.byocTrunks().create(params).validate();
 Or configure the method call to validate the response using the `responseValidation` method:
 
 ```java
-import com.twilio_voice_openapi.api.models.archives.ArchiveDeleteCallParams;
-import java.time.LocalDate;
-
 client.archives().deleteCall(
   params, RequestOptions.builder().responseValidation(true).build()
-)
+);
 ```
 
 Or configure the default for all method calls at the client level:
@@ -491,4 +557,4 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/twilio-voice-openapi-java/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/minskimm/stainless-twilio-voice-java/issues) with questions, bugs, or suggestions.

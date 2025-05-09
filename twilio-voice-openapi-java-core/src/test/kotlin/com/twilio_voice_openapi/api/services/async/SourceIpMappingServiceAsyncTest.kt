@@ -5,9 +5,7 @@ package com.twilio_voice_openapi.api.services.async
 import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClientAsync
 import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingCreateParams
-import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingDeleteParams
 import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingListParams
-import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingRetrieveParams
 import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -51,11 +49,7 @@ internal class SourceIpMappingServiceAsyncTest {
         val sourceIpMappingServiceAsync = client.sourceIpMappings()
 
         val sourceIpMappingFuture =
-            sourceIpMappingServiceAsync.retrieve(
-                SourceIpMappingRetrieveParams.builder()
-                    .sid("IBE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                    .build()
-            )
+            sourceIpMappingServiceAsync.retrieve("IBE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
 
         val sourceIpMapping = sourceIpMappingFuture.get()
         sourceIpMapping.validate()
@@ -95,7 +89,7 @@ internal class SourceIpMappingServiceAsyncTest {
                 .build()
         val sourceIpMappingServiceAsync = client.sourceIpMappings()
 
-        val sourceIpMappingFuture =
+        val sourceIpMappingsFuture =
             sourceIpMappingServiceAsync.list(
                 SourceIpMappingListParams.builder()
                     .page(0L)
@@ -104,8 +98,8 @@ internal class SourceIpMappingServiceAsyncTest {
                     .build()
             )
 
-        val sourceIpMapping = sourceIpMappingFuture.get()
-        sourceIpMapping.validate()
+        val sourceIpMappings = sourceIpMappingsFuture.get()
+        sourceIpMappings.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
@@ -119,12 +113,7 @@ internal class SourceIpMappingServiceAsyncTest {
                 .build()
         val sourceIpMappingServiceAsync = client.sourceIpMappings()
 
-        val future =
-            sourceIpMappingServiceAsync.delete(
-                SourceIpMappingDeleteParams.builder()
-                    .sid("IBE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
-                    .build()
-            )
+        val future = sourceIpMappingServiceAsync.delete("IBE1CB97d8EBbDbaAae6d9B1ca0D1cFaAD")
 
         val response = future.get()
     }

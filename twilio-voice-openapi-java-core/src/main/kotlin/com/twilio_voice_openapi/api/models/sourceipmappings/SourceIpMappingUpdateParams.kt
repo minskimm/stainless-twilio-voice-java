@@ -10,25 +10,25 @@ import com.twilio_voice_openapi.api.core.ExcludeMissing
 import com.twilio_voice_openapi.api.core.JsonField
 import com.twilio_voice_openapi.api.core.JsonMissing
 import com.twilio_voice_openapi.api.core.JsonValue
-import com.twilio_voice_openapi.api.core.NoAutoDetect
 import com.twilio_voice_openapi.api.core.Params
 import com.twilio_voice_openapi.api.core.checkRequired
 import com.twilio_voice_openapi.api.core.http.Headers
 import com.twilio_voice_openapi.api.core.http.QueryParams
-import com.twilio_voice_openapi.api.core.immutableEmptyMap
-import com.twilio_voice_openapi.api.core.toImmutable
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
+import java.util.Collections
 import java.util.Objects
+import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 class SourceIpMappingUpdateParams
 private constructor(
-    private val sid: String,
+    private val sid: String?,
     private val body: Body,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun sid(): String = sid
+    fun sid(): Optional<String> = Optional.ofNullable(sid)
 
     /**
      * The SID of the SIP Domain that the IP Record should be mapped to.
@@ -51,160 +51,6 @@ private constructor(
 
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
-    @JvmSynthetic internal fun _body(): Body = body
-
-    fun _pathParam(index: Int): String =
-        when (index) {
-            0 -> sid
-            else -> ""
-        }
-
-    override fun _headers(): Headers = additionalHeaders
-
-    override fun _queryParams(): QueryParams = additionalQueryParams
-
-    @NoAutoDetect
-    class Body
-    @JsonCreator
-    private constructor(
-        @JsonProperty("SipDomainSid")
-        @ExcludeMissing
-        private val sipDomainSid: JsonField<String> = JsonMissing.of(),
-        @JsonAnySetter
-        private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
-    ) {
-
-        /**
-         * The SID of the SIP Domain that the IP Record should be mapped to.
-         *
-         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
-         */
-        fun sipDomainSid(): String = sipDomainSid.getRequired("SipDomainSid")
-
-        /**
-         * Returns the raw JSON value of [sipDomainSid].
-         *
-         * Unlike [sipDomainSid], this method doesn't throw if the JSON field has an unexpected
-         * type.
-         */
-        @JsonProperty("SipDomainSid")
-        @ExcludeMissing
-        fun _sipDomainSid(): JsonField<String> = sipDomainSid
-
-        @JsonAnyGetter
-        @ExcludeMissing
-        fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
-
-        private var validated: Boolean = false
-
-        fun validate(): Body = apply {
-            if (validated) {
-                return@apply
-            }
-
-            sipDomainSid()
-            validated = true
-        }
-
-        fun toBuilder() = Builder().from(this)
-
-        companion object {
-
-            /**
-             * Returns a mutable builder for constructing an instance of [Body].
-             *
-             * The following fields are required:
-             * ```java
-             * .sipDomainSid()
-             * ```
-             */
-            @JvmStatic fun builder() = Builder()
-        }
-
-        /** A builder for [Body]. */
-        class Builder internal constructor() {
-
-            private var sipDomainSid: JsonField<String>? = null
-            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
-
-            @JvmSynthetic
-            internal fun from(body: Body) = apply {
-                sipDomainSid = body.sipDomainSid
-                additionalProperties = body.additionalProperties.toMutableMap()
-            }
-
-            /** The SID of the SIP Domain that the IP Record should be mapped to. */
-            fun sipDomainSid(sipDomainSid: String) = sipDomainSid(JsonField.of(sipDomainSid))
-
-            /**
-             * Sets [Builder.sipDomainSid] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.sipDomainSid] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun sipDomainSid(sipDomainSid: JsonField<String>) = apply {
-                this.sipDomainSid = sipDomainSid
-            }
-
-            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
-
-            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-                additionalProperties.put(key, value)
-            }
-
-            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
-
-            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
-
-            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
-
-            /**
-             * Returns an immutable instance of [Body].
-             *
-             * Further updates to this [Builder] will not mutate the returned instance.
-             *
-             * The following fields are required:
-             * ```java
-             * .sipDomainSid()
-             * ```
-             *
-             * @throws IllegalStateException if any required field is unset.
-             */
-            fun build(): Body =
-                Body(
-                    checkRequired("sipDomainSid", sipDomainSid),
-                    additionalProperties.toImmutable(),
-                )
-        }
-
-        override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
-
-            return /* spotless:off */ other is Body && sipDomainSid == other.sipDomainSid && additionalProperties == other.additionalProperties /* spotless:on */
-        }
-
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(sipDomainSid, additionalProperties) }
-        /* spotless:on */
-
-        override fun hashCode(): Int = hashCode
-
-        override fun toString() =
-            "Body{sipDomainSid=$sipDomainSid, additionalProperties=$additionalProperties}"
-    }
-
     fun toBuilder() = Builder().from(this)
 
     companion object {
@@ -214,7 +60,6 @@ private constructor(
          *
          * The following fields are required:
          * ```java
-         * .sid()
          * .sipDomainSid()
          * ```
          */
@@ -222,7 +67,6 @@ private constructor(
     }
 
     /** A builder for [SourceIpMappingUpdateParams]. */
-    @NoAutoDetect
     class Builder internal constructor() {
 
         private var sid: String? = null
@@ -238,7 +82,19 @@ private constructor(
             additionalQueryParams = sourceIpMappingUpdateParams.additionalQueryParams.toBuilder()
         }
 
-        fun sid(sid: String) = apply { this.sid = sid }
+        fun sid(sid: String?) = apply { this.sid = sid }
+
+        /** Alias for calling [Builder.sid] with `sid.orElse(null)`. */
+        fun sid(sid: Optional<String>) = sid(sid.getOrNull())
+
+        /**
+         * Sets the entire request body.
+         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
+         * - [sipDomainSid]
+         */
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
 
         /** The SID of the SIP Domain that the IP Record should be mapped to. */
         fun sipDomainSid(sipDomainSid: String) = apply { body.sipDomainSid(sipDomainSid) }
@@ -378,7 +234,6 @@ private constructor(
          *
          * The following fields are required:
          * ```java
-         * .sid()
          * .sipDomainSid()
          * ```
          *
@@ -386,11 +241,190 @@ private constructor(
          */
         fun build(): SourceIpMappingUpdateParams =
             SourceIpMappingUpdateParams(
-                checkRequired("sid", sid),
+                sid,
                 body.build(),
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
             )
+    }
+
+    fun _body(): Body = body
+
+    fun _pathParam(index: Int): String =
+        when (index) {
+            0 -> sid ?: ""
+            else -> ""
+        }
+
+    override fun _headers(): Headers = additionalHeaders
+
+    override fun _queryParams(): QueryParams = additionalQueryParams
+
+    class Body
+    private constructor(
+        private val sipDomainSid: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
+    ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("SipDomainSid")
+            @ExcludeMissing
+            sipDomainSid: JsonField<String> = JsonMissing.of()
+        ) : this(sipDomainSid, mutableMapOf())
+
+        /**
+         * The SID of the SIP Domain that the IP Record should be mapped to.
+         *
+         * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
+         */
+        fun sipDomainSid(): String = sipDomainSid.getRequired("SipDomainSid")
+
+        /**
+         * Returns the raw JSON value of [sipDomainSid].
+         *
+         * Unlike [sipDomainSid], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("SipDomainSid")
+        @ExcludeMissing
+        fun _sipDomainSid(): JsonField<String> = sipDomainSid
+
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
+        fun toBuilder() = Builder().from(this)
+
+        companion object {
+
+            /**
+             * Returns a mutable builder for constructing an instance of [Body].
+             *
+             * The following fields are required:
+             * ```java
+             * .sipDomainSid()
+             * ```
+             */
+            @JvmStatic fun builder() = Builder()
+        }
+
+        /** A builder for [Body]. */
+        class Builder internal constructor() {
+
+            private var sipDomainSid: JsonField<String>? = null
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+            @JvmSynthetic
+            internal fun from(body: Body) = apply {
+                sipDomainSid = body.sipDomainSid
+                additionalProperties = body.additionalProperties.toMutableMap()
+            }
+
+            /** The SID of the SIP Domain that the IP Record should be mapped to. */
+            fun sipDomainSid(sipDomainSid: String) = sipDomainSid(JsonField.of(sipDomainSid))
+
+            /**
+             * Sets [Builder.sipDomainSid] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.sipDomainSid] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun sipDomainSid(sipDomainSid: JsonField<String>) = apply {
+                this.sipDomainSid = sipDomainSid
+            }
+
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
+            /**
+             * Returns an immutable instance of [Body].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             *
+             * The following fields are required:
+             * ```java
+             * .sipDomainSid()
+             * ```
+             *
+             * @throws IllegalStateException if any required field is unset.
+             */
+            fun build(): Body =
+                Body(
+                    checkRequired("sipDomainSid", sipDomainSid),
+                    additionalProperties.toMutableMap(),
+                )
+        }
+
+        private var validated: Boolean = false
+
+        fun validate(): Body = apply {
+            if (validated) {
+                return@apply
+            }
+
+            sipDomainSid()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: TwilioVoiceOpenAPIInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic
+        internal fun validity(): Int = (if (sipDomainSid.asKnown().isPresent) 1 else 0)
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return /* spotless:off */ other is Body && sipDomainSid == other.sipDomainSid && additionalProperties == other.additionalProperties /* spotless:on */
+        }
+
+        /* spotless:off */
+        private val hashCode: Int by lazy { Objects.hash(sipDomainSid, additionalProperties) }
+        /* spotless:on */
+
+        override fun hashCode(): Int = hashCode
+
+        override fun toString() =
+            "Body{sipDomainSid=$sipDomainSid, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

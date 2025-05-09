@@ -6,7 +6,6 @@ import com.twilio_voice_openapi.api.TestServerExtension
 import com.twilio_voice_openapi.api.client.okhttp.TwilioVoiceOpenAPIOkHttpClient
 import com.twilio_voice_openapi.api.models.dialingpermissions.countries.CountryFetchHighRiskSpecialPrefixesParams
 import com.twilio_voice_openapi.api.models.dialingpermissions.countries.CountryListParams
-import com.twilio_voice_openapi.api.models.dialingpermissions.countries.CountryRetrieveParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -25,8 +24,7 @@ internal class CountryServiceTest {
                 .build()
         val countryService = client.dialingPermissions().countries()
 
-        val country =
-            countryService.retrieve(CountryRetrieveParams.builder().isoCode("IsoCode").build())
+        val country = countryService.retrieve("IsoCode")
 
         country.validate()
     }
@@ -42,7 +40,7 @@ internal class CountryServiceTest {
                 .build()
         val countryService = client.dialingPermissions().countries()
 
-        val country =
+        val countries =
             countryService.list(
                 CountryListParams.builder()
                     .continent("Continent")
@@ -57,7 +55,7 @@ internal class CountryServiceTest {
                     .build()
             )
 
-        country.validate()
+        countries.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")

@@ -5,6 +5,7 @@ package com.twilio_voice_openapi.api.services.async
 import com.twilio_voice_openapi.api.core.ClientOptions
 import com.twilio_voice_openapi.api.core.JsonValue
 import com.twilio_voice_openapi.api.core.RequestOptions
+import com.twilio_voice_openapi.api.core.checkRequired
 import com.twilio_voice_openapi.api.core.handlers.emptyHandler
 import com.twilio_voice_openapi.api.core.handlers.errorHandler
 import com.twilio_voice_openapi.api.core.handlers.jsonHandler
@@ -25,6 +26,7 @@ import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingListR
 import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingRetrieveParams
 import com.twilio_voice_openapi.api.models.sourceipmappings.SourceIpMappingUpdateParams
 import java.util.concurrent.CompletableFuture
+import kotlin.jvm.optionals.getOrNull
 
 class SourceIpMappingServiceAsyncImpl
 internal constructor(private val clientOptions: ClientOptions) : SourceIpMappingServiceAsync {
@@ -112,6 +114,9 @@ internal constructor(private val clientOptions: ClientOptions) : SourceIpMapping
             params: SourceIpMappingRetrieveParams,
             requestOptions: RequestOptions,
         ): CompletableFuture<HttpResponseFor<SourceIpMapping>> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -141,6 +146,9 @@ internal constructor(private val clientOptions: ClientOptions) : SourceIpMapping
             params: SourceIpMappingUpdateParams,
             requestOptions: RequestOptions,
         ): CompletableFuture<HttpResponseFor<SourceIpMapping>> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
@@ -200,6 +208,9 @@ internal constructor(private val clientOptions: ClientOptions) : SourceIpMapping
             params: SourceIpMappingDeleteParams,
             requestOptions: RequestOptions,
         ): CompletableFuture<HttpResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("sid", params.sid().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)

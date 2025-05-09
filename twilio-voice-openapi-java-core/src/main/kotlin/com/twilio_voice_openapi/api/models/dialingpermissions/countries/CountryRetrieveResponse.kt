@@ -10,42 +10,59 @@ import com.twilio_voice_openapi.api.core.ExcludeMissing
 import com.twilio_voice_openapi.api.core.JsonField
 import com.twilio_voice_openapi.api.core.JsonMissing
 import com.twilio_voice_openapi.api.core.JsonValue
-import com.twilio_voice_openapi.api.core.NoAutoDetect
 import com.twilio_voice_openapi.api.core.checkKnown
-import com.twilio_voice_openapi.api.core.immutableEmptyMap
 import com.twilio_voice_openapi.api.core.toImmutable
 import com.twilio_voice_openapi.api.errors.TwilioVoiceOpenAPIInvalidDataException
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-@NoAutoDetect
 class CountryRetrieveResponse
-@JsonCreator
 private constructor(
-    @JsonProperty("continent")
-    @ExcludeMissing
-    private val continent: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("country_codes")
-    @ExcludeMissing
-    private val countryCodes: JsonField<List<String>> = JsonMissing.of(),
-    @JsonProperty("high_risk_special_numbers_enabled")
-    @ExcludeMissing
-    private val highRiskSpecialNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
-    @JsonProperty("high_risk_tollfraud_numbers_enabled")
-    @ExcludeMissing
-    private val highRiskTollfraudNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
-    @JsonProperty("iso_code")
-    @ExcludeMissing
-    private val isoCode: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("links") @ExcludeMissing private val links: JsonValue = JsonMissing.of(),
-    @JsonProperty("low_risk_numbers_enabled")
-    @ExcludeMissing
-    private val lowRiskNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
-    @JsonProperty("name") @ExcludeMissing private val name: JsonField<String> = JsonMissing.of(),
-    @JsonProperty("url") @ExcludeMissing private val url: JsonField<String> = JsonMissing.of(),
-    @JsonAnySetter private val additionalProperties: Map<String, JsonValue> = immutableEmptyMap(),
+    private val continent: JsonField<String>,
+    private val countryCodes: JsonField<List<String>>,
+    private val highRiskSpecialNumbersEnabled: JsonField<Boolean>,
+    private val highRiskTollfraudNumbersEnabled: JsonField<Boolean>,
+    private val isoCode: JsonField<String>,
+    private val links: JsonValue,
+    private val lowRiskNumbersEnabled: JsonField<Boolean>,
+    private val name: JsonField<String>,
+    private val url: JsonField<String>,
+    private val additionalProperties: MutableMap<String, JsonValue>,
 ) {
+
+    @JsonCreator
+    private constructor(
+        @JsonProperty("continent") @ExcludeMissing continent: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("country_codes")
+        @ExcludeMissing
+        countryCodes: JsonField<List<String>> = JsonMissing.of(),
+        @JsonProperty("high_risk_special_numbers_enabled")
+        @ExcludeMissing
+        highRiskSpecialNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("high_risk_tollfraud_numbers_enabled")
+        @ExcludeMissing
+        highRiskTollfraudNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("iso_code") @ExcludeMissing isoCode: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("links") @ExcludeMissing links: JsonValue = JsonMissing.of(),
+        @JsonProperty("low_risk_numbers_enabled")
+        @ExcludeMissing
+        lowRiskNumbersEnabled: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("name") @ExcludeMissing name: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("url") @ExcludeMissing url: JsonField<String> = JsonMissing.of(),
+    ) : this(
+        continent,
+        countryCodes,
+        highRiskSpecialNumbersEnabled,
+        highRiskTollfraudNumbersEnabled,
+        isoCode,
+        links,
+        lowRiskNumbersEnabled,
+        name,
+        url,
+        mutableMapOf(),
+    )
 
     /**
      * The name of the continent in which the country is located.
@@ -53,7 +70,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun continent(): Optional<String> = Optional.ofNullable(continent.getNullable("continent"))
+    fun continent(): Optional<String> = continent.getOptional("continent")
 
     /**
      * The E.164 assigned
@@ -62,8 +79,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun countryCodes(): Optional<List<String>> =
-        Optional.ofNullable(countryCodes.getNullable("country_codes"))
+    fun countryCodes(): Optional<List<String>> = countryCodes.getOptional("country_codes")
 
     /**
      * Whether dialing to high-risk special services numbers is enabled. These prefixes include
@@ -74,9 +90,7 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun highRiskSpecialNumbersEnabled(): Optional<Boolean> =
-        Optional.ofNullable(
-            highRiskSpecialNumbersEnabled.getNullable("high_risk_special_numbers_enabled")
-        )
+        highRiskSpecialNumbersEnabled.getOptional("high_risk_special_numbers_enabled")
 
     /**
      * Whether dialing to high-risk
@@ -91,9 +105,7 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun highRiskTollfraudNumbersEnabled(): Optional<Boolean> =
-        Optional.ofNullable(
-            highRiskTollfraudNumbersEnabled.getNullable("high_risk_tollfraud_numbers_enabled")
-        )
+        highRiskTollfraudNumbersEnabled.getOptional("high_risk_tollfraud_numbers_enabled")
 
     /**
      * The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
@@ -101,7 +113,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun isoCode(): Optional<String> = Optional.ofNullable(isoCode.getNullable("iso_code"))
+    fun isoCode(): Optional<String> = isoCode.getOptional("iso_code")
 
     /** A list of URLs related to this resource. */
     @JsonProperty("links") @ExcludeMissing fun _links(): JsonValue = links
@@ -113,7 +125,7 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun lowRiskNumbersEnabled(): Optional<Boolean> =
-        Optional.ofNullable(lowRiskNumbersEnabled.getNullable("low_risk_numbers_enabled"))
+        lowRiskNumbersEnabled.getOptional("low_risk_numbers_enabled")
 
     /**
      * The name of the country.
@@ -121,7 +133,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun name(): Optional<String> = Optional.ofNullable(name.getNullable("name"))
+    fun name(): Optional<String> = name.getOptional("name")
 
     /**
      * The absolute URL of this resource.
@@ -129,7 +141,7 @@ private constructor(
      * @throws TwilioVoiceOpenAPIInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun url(): Optional<String> = Optional.ofNullable(url.getNullable("url"))
+    fun url(): Optional<String> = url.getOptional("url")
 
     /**
      * Returns the raw JSON value of [continent].
@@ -198,27 +210,15 @@ private constructor(
      */
     @JsonProperty("url") @ExcludeMissing fun _url(): JsonField<String> = url
 
+    @JsonAnySetter
+    private fun putAdditionalProperty(key: String, value: JsonValue) {
+        additionalProperties.put(key, value)
+    }
+
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
-
-    private var validated: Boolean = false
-
-    fun validate(): CountryRetrieveResponse = apply {
-        if (validated) {
-            return@apply
-        }
-
-        continent()
-        countryCodes()
-        highRiskSpecialNumbersEnabled()
-        highRiskTollfraudNumbersEnabled()
-        isoCode()
-        lowRiskNumbersEnabled()
-        name()
-        url()
-        validated = true
-    }
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -490,9 +490,51 @@ private constructor(
                 lowRiskNumbersEnabled,
                 name,
                 url,
-                additionalProperties.toImmutable(),
+                additionalProperties.toMutableMap(),
             )
     }
+
+    private var validated: Boolean = false
+
+    fun validate(): CountryRetrieveResponse = apply {
+        if (validated) {
+            return@apply
+        }
+
+        continent()
+        countryCodes()
+        highRiskSpecialNumbersEnabled()
+        highRiskTollfraudNumbersEnabled()
+        isoCode()
+        lowRiskNumbersEnabled()
+        name()
+        url()
+        validated = true
+    }
+
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: TwilioVoiceOpenAPIInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    @JvmSynthetic
+    internal fun validity(): Int =
+        (if (continent.asKnown().isPresent) 1 else 0) +
+            (countryCodes.asKnown().getOrNull()?.size ?: 0) +
+            (if (highRiskSpecialNumbersEnabled.asKnown().isPresent) 1 else 0) +
+            (if (highRiskTollfraudNumbersEnabled.asKnown().isPresent) 1 else 0) +
+            (if (isoCode.asKnown().isPresent) 1 else 0) +
+            (if (lowRiskNumbersEnabled.asKnown().isPresent) 1 else 0) +
+            (if (name.asKnown().isPresent) 1 else 0) +
+            (if (url.asKnown().isPresent) 1 else 0)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) {
